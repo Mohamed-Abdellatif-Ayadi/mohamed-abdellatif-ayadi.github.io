@@ -40,9 +40,9 @@ const CVPage = () => {
       <div className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">My Curriculum Vitae</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">Mein Lebenslauf</h1>
             <p className="text-lg opacity-90 mb-6">
-              A comprehensive overview of my professional background and skills.
+              Ein umfassender Überblick über meinen akademischen Werdegang, berufliche Erfahrungen und technische Fähigkeiten.
             </p>
             <Button 
               onClick={handlePrint} 

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
+import { useLanguage } from "@/lib/languageContext";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
 
 const Navbar = () => {
   const [location] = useLocation();
@@ -25,12 +27,14 @@ const Navbar = () => {
     };
   }, []);
 
+  const { t } = useLanguage();
+  
   const navLinks = [
-    { title: "Startseite", path: "/" },
-    { title: "Blog", path: "/blog" },
-    { title: "Lebenslauf", path: "/cv" },
-    { title: "Über Mich", path: "/about" },
-    { title: "Kontakt", path: "/contact" }
+    { title: t('nav.home'), path: "/" },
+    { title: t('nav.blog'), path: "/blog" },
+    { title: t('nav.cv'), path: "/cv" },
+    { title: t('nav.about'), path: "/about" },
+    { title: t('nav.contact'), path: "/contact" }
   ];
 
   return (
@@ -45,7 +49,7 @@ const Navbar = () => {
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -57,6 +61,7 @@ const Navbar = () => {
               {link.title}
             </Link>
           ))}
+          <LanguageSwitcher />
         </nav>
         
         {/* Mobile menu button */}
@@ -99,6 +104,9 @@ const Navbar = () => {
               {link.title}
             </Link>
           ))}
+          <div className="px-3 py-2">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     </header>

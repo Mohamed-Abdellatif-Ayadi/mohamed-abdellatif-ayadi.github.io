@@ -11,6 +11,7 @@ import BlogPost from "@/pages/BlogPost";
 import CVPage from "@/pages/CVPage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import { LanguageProvider } from "@/lib/languageContext";
 
 function Router() {
   return (
@@ -29,14 +30,16 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <Router />
-        </main>
-        <Footer />
-      </div>
-      <Toaster />
+      <LanguageProvider>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Router />
+          </main>
+          <Footer />
+        </div>
+        <Toaster />
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
