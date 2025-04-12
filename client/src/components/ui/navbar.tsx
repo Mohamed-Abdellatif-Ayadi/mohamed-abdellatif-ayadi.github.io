@@ -36,7 +36,7 @@ const Navbar = () => {
             />
           </div>
           <span className="text-xl font-bold">
-            <span className="text-primary">Mohamed</span>
+            <span className="text-primary">Mohamed Abdellatif</span>
             <span className="text-slate-700"> Ayadi</span>
           </span>
         </Link>

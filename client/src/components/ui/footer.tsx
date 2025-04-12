@@ -18,7 +18,7 @@ const Footer = () => {
                 />
               </div>
               <span className="text-xl font-bold">
-                <span className="text-primary">Mohamed</span>
+                <span className="text-primary">Mohamed Abdellatif</span>
                 <span className="text-white"> Ayadi</span>
               </span>
             </Link>
