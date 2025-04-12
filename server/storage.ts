@@ -51,7 +51,7 @@ export class MemStorage implements IStorage {
     this.cv = {
       name: "MOHAMED ABDELLATIF AYADI",
       title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
-      photoUrl: "/images/mohamed-ayadi-profile.svg", // Using an SVG placeholder with initials
+      photoUrl: "/images/mohamed-ayadi-photo.png", // Using the professional photo
       email: "mohamed.ayadi.data@gmail.com",
       phone: "015252301739",
       location: "Dortmund, Germany",

@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Mohamed Abdellatif Ayadi - Personal Blog & CV</title>
-        <meta name="description" content="Personal blog and professional portfolio of Mohamed Abdellatif Ayadi. Read articles and view CV." />
+        <title>Mohamed Abdellatif Ayadi - Portfolio & Lebenslauf</title>
+        <meta name="description" content="Persönliches Portfolio und Lebenslauf von Mohamed Abdellatif Ayadi. Informatik-Student an der TU Dortmund mit Erfahrung in Programmierung und Datenanalyse." />
         <meta name="keywords" content="blog, cv, resume, articles, professional, portfolio" />
       </Helmet>
       <Hero />

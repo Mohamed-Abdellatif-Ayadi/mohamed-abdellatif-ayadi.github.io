@@ -26,18 +26,22 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { title: "Home", path: "/" },
+    { title: "Startseite", path: "/" },
     { title: "Blog", path: "/blog" },
-    { title: "CV", path: "/cv" },
-    { title: "About", path: "/about" },
-    { title: "Contact", path: "/contact" }
+    { title: "Lebenslauf", path: "/cv" },
+    { title: "Über Mich", path: "/about" },
+    { title: "Kontakt", path: "/contact" }
   ];
 
   return (
     <header className={`bg-white sticky top-0 z-50 ${scrolled ? "shadow-sm" : ""}`}>
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-primary">
-          John<span className="text-slate-700">Doe</span>
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/images/ma-logo.svg" alt="Mohamed Ayadi Logo" className="h-10" />
+          <span className="text-xl font-bold">
+            <span className="text-primary">Mohamed Abdellatif</span>
+            <span className="text-slate-700"> Ayadi</span>
+          </span>
         </Link>
         
         {/* Desktop Navigation */}
