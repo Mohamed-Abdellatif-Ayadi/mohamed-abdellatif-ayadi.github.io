@@ -17,8 +17,8 @@ const CVPage = () => {
   return (
     <>
       <Helmet>
-        <title>CV - John Doe</title>
-        <meta name="description" content="Professional CV and resume of John Doe. View my skills, experience, and qualifications." />
+        <title>CV - Mohamed Abdellatif Ayadi</title>
+        <meta name="description" content="Professional CV and resume of Mohamed Abdellatif Ayadi. View my skills, experience, and qualifications." />
         <style type="text/css">
           {`
             @media print {
@@ -149,7 +149,7 @@ const CVPage = () => {
             I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
           </p>
           <Button variant="secondary" asChild>
-            <a href="mailto:john@example.com">
+            <a href="mailto:mohamed.ayadi.data@gmail.com">
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 className="h-5 w-5 mr-2" 
