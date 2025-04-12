@@ -202,8 +202,8 @@ export class MemStorage implements IStorage {
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">SQL window functions are powerful features that allow you to perform calculations across a set of rows related to the current row. In this comprehensive guide, we'll explore how to use window functions effectively for data analysis.</p>
             
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8">
-              <p class="text-blue-700 font-medium">Window functions allow you to access other rows related to the current row without using self-joins or subqueries.</p>
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
+              <p class="text-indigo-800 font-medium">Window functions allow you to access other rows related to the current row without using self-joins or subqueries.</p>
             </div>
 
             <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">What Are Window Functions?</h2>
@@ -221,11 +221,11 @@ export class MemStorage implements IStorage {
             <p>Here's a simple example that calculates the average salary per department alongside each employee's salary:</p>
             
             <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
                 <span>SQL</span>
                 <span>Window Function Example</span>
               </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   employee_name,
   department,
   salary,
@@ -244,11 +244,11 @@ FROM employees;</code></pre>
             <p>These include familiar aggregate functions like SUM, AVG, COUNT, MIN, and MAX that can be used as window functions:</p>
             
             <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
                 <span>SQL</span>
                 <span>Aggregate Window Function</span>
               </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   product_name,
   category,
   price,
@@ -271,7 +271,7 @@ FROM products;</code></pre>
             </ul>
             
             <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
                 <span>SQL</span>
                 <span>Ranking Functions</span>
               </div>
@@ -483,9 +483,9 @@ FROM sales;</code></pre>
 
             <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Best Practices and Optimization</h2>
             
-            <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 my-8">
-              <h3 class="text-lg font-semibold mb-4 text-slate-900">Performance Tips</h3>
-              <ul class="list-disc pl-5 space-y-3">
+            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
+              <h3 class="text-lg font-semibold mb-4 text-purple-900">Performance Tips</h3>
+              <ul class="list-disc pl-5 space-y-3 text-purple-800">
                 <li>Always specify ORDER BY in window functions when results order matters</li>
                 <li>Use appropriate frame clauses for moving calculations</li>
                 <li>Consider performance implications with large datasets</li>
