@@ -199,62 +199,210 @@ export class MemStorage implements IStorage {
         title: "Mastering SQL Window Functions: A Comprehensive Guide",
         excerpt: "Learn how to leverage SQL window functions to perform complex data analysis efficiently. From basic aggregations to advanced ranking and partitioning.",
         content: `
-          <div class="prose max-w-none">
-            <p class="lead">SQL window functions are powerful features that allow you to perform calculations across a set of rows related to the current row. In this comprehensive guide, we'll explore how to use window functions effectively for data analysis.</p>
+          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
+            <p class="text-xl leading-relaxed mb-8">SQL window functions are powerful features that allow you to perform calculations across a set of rows related to the current row. In this comprehensive guide, we'll explore how to use window functions effectively for data analysis.</p>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8">
+              <p class="text-blue-700 font-medium">Window functions allow you to access other rows related to the current row without using self-joins or subqueries.</p>
+            </div>
 
-            <h2>Understanding Window Functions</h2>
-            <p>Window functions perform calculations across a specific "window" or set of rows that are somehow related to the current row. Unlike regular aggregate functions, window functions don't collapse the result into a single row.</p>
-
-            <pre><code class="language-sql">SELECT 
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">What Are Window Functions?</h2>
+            
+            <p>Window functions perform calculations across a specific "window" or set of rows that are somehow related to the current row. Unlike regular aggregate functions which collapse multiple rows into a single result row, window functions return a result for each row in the result set.</p>
+            
+            <p>The general syntax looks like this:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden bg-slate-50 border border-slate-200">
+              <div class="bg-slate-100 px-4 py-2 font-mono text-sm text-slate-600">
+                FUNCTION_NAME() OVER ([PARTITION BY column] [ORDER BY column] [frame_clause])
+              </div>
+            </div>
+            
+            <p>Here's a simple example that calculates the average salary per department alongside each employee's salary:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>Window Function Example</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   employee_name,
   department,
   salary,
-  AVG(salary) OVER (PARTITION BY department) as dept_avg
+  AVG(salary) OVER (PARTITION BY department) as dept_avg_salary
 FROM employees;</code></pre>
-
-            <h2>Basic Window Function Types</h2>
+            </div>
             
-            <h3>1. Aggregate Functions</h3>
-            <p>These include familiar functions like SUM, AVG, COUNT, MIN, and MAX:</p>
-            <pre><code class="language-sql">SELECT 
+            <p>This query returns each employee's name, department, their individual salary, and the average salary for their department - all in one result set without needing a GROUP BY clause or a join.</p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Types of Window Functions</h2>
+            
+            <p>SQL offers several types of window functions for different analytical needs:</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">1. Aggregate Window Functions</h3>
+            
+            <p>These include familiar aggregate functions like SUM, AVG, COUNT, MIN, and MAX that can be used as window functions:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>Aggregate Window Function</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   product_name,
   category,
   price,
-  AVG(price) OVER (PARTITION BY category) as category_avg_price
+  AVG(price) OVER (PARTITION BY category) as category_avg_price,
+  price - AVG(price) OVER (PARTITION BY category) as diff_from_avg
 FROM products;</code></pre>
-
-            <h3>2. Ranking Functions</h3>
-            <p>Functions that assign ranks to rows based on specified criteria:</p>
-            <ul>
-              <li>ROW_NUMBER(): Assigns unique sequential numbers</li>
-              <li>RANK(): Assigns ranks with gaps for ties</li>
-              <li>DENSE_RANK(): Assigns ranks without gaps</li>
+            </div>
+            
+            <p>This query shows each product's price alongside the average price for its category, as well as how much each product's price differs from the category average.</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">2. Ranking Window Functions</h3>
+            
+            <p>Ranking functions assign a rank to each row within a partition. The most common ranking functions are:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li><strong>ROW_NUMBER()</strong>: Assigns unique sequential numbers starting from 1</li>
+              <li><strong>RANK()</strong>: Assigns ranks with gaps for ties (e.g., 1, 2, 2, 4)</li>
+              <li><strong>DENSE_RANK()</strong>: Assigns ranks without gaps for ties (e.g., 1, 2, 2, 3)</li>
+              <li><strong>NTILE(n)</strong>: Divides rows into n approximately equal groups</li>
             </ul>
-
-            <pre><code class="language-sql">SELECT 
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>Ranking Functions</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   student_name,
   score,
+  ROW_NUMBER() OVER (ORDER BY score DESC) as row_num,
   RANK() OVER (ORDER BY score DESC) as rank,
   DENSE_RANK() OVER (ORDER BY score DESC) as dense_rank
 FROM exam_results;</code></pre>
+            </div>
+            
+            <p>This example shows the different ranking behaviors for student exam scores.</p>
 
-            <h2>Advanced Concepts</h2>
-
-            <h3>PARTITION BY Clause</h3>
-            <p>The PARTITION BY clause divides rows into groups for processing:</p>
-            <pre><code class="language-sql">SELECT 
-  sales_date,
-  product_id,
-  sales_amount,
-  SUM(sales_amount) OVER (
-    PARTITION BY product_id 
-    ORDER BY sales_date
-  ) as running_total
-FROM sales;</code></pre>
-
-            <h3>Frame Clauses</h3>
-            <p>Frame clauses define the exact set of rows in the window:</p>
-            <pre><code class="language-sql">SELECT 
+            <div class="overflow-x-auto my-8">
+              <table class="min-w-full border-collapse">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border border-slate-300 px-4 py-2 text-left">student_name</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">score</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">row_num</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">rank</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">dense_rank</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">Alice</td>
+                    <td class="border border-slate-300 px-4 py-2">95</td>
+                    <td class="border border-slate-300 px-4 py-2">1</td>
+                    <td class="border border-slate-300 px-4 py-2">1</td>
+                    <td class="border border-slate-300 px-4 py-2">1</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">Bob</td>
+                    <td class="border border-slate-300 px-4 py-2">95</td>
+                    <td class="border border-slate-300 px-4 py-2">2</td>
+                    <td class="border border-slate-300 px-4 py-2">1</td>
+                    <td class="border border-slate-300 px-4 py-2">1</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">Charlie</td>
+                    <td class="border border-slate-300 px-4 py-2">88</td>
+                    <td class="border border-slate-300 px-4 py-2">3</td>
+                    <td class="border border-slate-300 px-4 py-2">3</td>
+                    <td class="border border-slate-300 px-4 py-2">2</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">David</td>
+                    <td class="border border-slate-300 px-4 py-2">85</td>
+                    <td class="border border-slate-300 px-4 py-2">4</td>
+                    <td class="border border-slate-300 px-4 py-2">4</td>
+                    <td class="border border-slate-300 px-4 py-2">3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <p>Notice how Alice and Bob both have the same score (95), resulting in different behaviors across the ranking functions.</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">3. Value Window Functions</h3>
+            
+            <p>Value functions can access values from different rows within the window:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li><strong>LAG(column, offset)</strong>: Returns a value from a previous row</li>
+              <li><strong>LEAD(column, offset)</strong>: Returns a value from a subsequent row</li>
+              <li><strong>FIRST_VALUE(column)</strong>: Returns the first value in the window</li>
+              <li><strong>LAST_VALUE(column)</strong>: Returns the last value in the window</li>
+            </ul>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>LAG and LEAD Functions</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
+  date,
+  stock_price,
+  LAG(stock_price, 1) OVER (ORDER BY date) as previous_day_price,
+  stock_price - LAG(stock_price, 1) OVER (ORDER BY date) as price_change
+FROM stock_prices;</code></pre>
+            </div>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Advanced Window Function Components</h2>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">PARTITION BY Clause</h3>
+            
+            <p>The PARTITION BY clause divides the result set into partitions (groups) to which the window function is applied separately:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>PARTITION BY Example</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
+  customer_id,
+  order_date,
+  order_amount,
+  ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) as order_number
+FROM orders;</code></pre>
+            </div>
+            
+            <p>This query assigns an order number to each order, numbering starts over for each customer.</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">ORDER BY Clause</h3>
+            
+            <p>The ORDER BY clause determines the order in which rows are processed by the window function:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>ORDER BY Example</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
+  order_date,
+  order_amount,
+  SUM(order_amount) OVER (ORDER BY order_date) as running_total
+FROM orders;</code></pre>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Frame Clauses</h3>
+            
+            <p>Frame clauses define exactly which rows constitute the current window frame for each row:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>Frame Clause Example</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   transaction_date,
   amount,
   AVG(amount) OVER (
@@ -262,45 +410,111 @@ FROM sales;</code></pre>
     ROWS BETWEEN 3 PRECEDING AND CURRENT ROW
   ) as moving_average
 FROM transactions;</code></pre>
+            </div>
+            
+            <p>Common frame specifications include:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li><strong>ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</strong>: From the first row to current row</li>
+              <li><strong>ROWS BETWEEN n PRECEDING AND CURRENT ROW</strong>: From n rows before to current row</li>
+              <li><strong>ROWS BETWEEN CURRENT ROW AND n FOLLOWING</strong>: From current row to n rows after</li>
+              <li><strong>ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</strong>: All rows in the partition</li>
+            </ul>
 
-            <h2>Practical Examples</h2>
-
-            <h3>Moving Averages</h3>
-            <pre><code class="language-sql">SELECT 
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Practical Applications</h2>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Moving Averages</h3>
+            
+            <p>Calculating moving (rolling) averages is a common use case for window functions:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>7-Day Moving Average</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   date,
   stock_price,
   AVG(stock_price) OVER (
     ORDER BY date
-    ROWS BETWEEN 7 PRECEDING AND CURRENT ROW
-  ) as seven_day_avg
+    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+  ) as seven_day_moving_avg
 FROM stock_prices;</code></pre>
-
-            <h3>Year-over-Year Growth</h3>
-            <pre><code class="language-sql">SELECT 
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Year-over-Year Comparison</h3>
+            
+            <p>Comparing current values with previous periods' values:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>Year-over-Year Growth</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
   year,
   revenue,
   LAG(revenue) OVER (ORDER BY year) as prev_year_revenue,
-  ((revenue - LAG(revenue) OVER (ORDER BY year)) / 
-    LAG(revenue) OVER (ORDER BY year)) * 100 as yoy_growth
+  (revenue - LAG(revenue) OVER (ORDER BY year)) / 
+    LAG(revenue) OVER (ORDER BY year) * 100 as yoy_growth_pct
 FROM yearly_revenue;</code></pre>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Cumulative Totals</h3>
+            
+            <p>Calculating running totals within groups:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
+                <span>SQL</span>
+                <span>Cumulative Sales by Product</span>
+              </div>
+              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
+  sales_date,
+  product_id,
+  sales_amount,
+  SUM(sales_amount) OVER (
+    PARTITION BY product_id 
+    ORDER BY sales_date
+    ROWS UNBOUNDED PRECEDING
+  ) as running_total
+FROM sales;</code></pre>
+            </div>
 
-            <h2>Best Practices</h2>
-            <ul>
-              <li>Always specify ORDER BY in window functions when results order matters</li>
-              <li>Use appropriate frame clauses for moving calculations</li>
-              <li>Consider performance implications with large datasets</li>
-              <li>Test window functions with small datasets first</li>
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Best Practices and Optimization</h2>
+            
+            <div class="bg-slate-50 p-6 rounded-lg border border-slate-200 my-8">
+              <h3 class="text-lg font-semibold mb-4 text-slate-900">Performance Tips</h3>
+              <ul class="list-disc pl-5 space-y-3">
+                <li>Always specify ORDER BY in window functions when results order matters</li>
+                <li>Use appropriate frame clauses for moving calculations</li>
+                <li>Consider performance implications with large datasets</li>
+                <li>Reuse window specifications with the WINDOW clause for multiple functions that use the same window</li>
+                <li>Test window functions with small datasets first</li>
+              </ul>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Common Pitfalls</h3>
+            
+            <ul class="list-disc pl-5 my-4 space-y-3">
+              <li><strong>Execution order confusion</strong>: Window functions execute after WHERE, GROUP BY, and HAVING but before ORDER BY in the query processing sequence</li>
+              <li><strong>NULL handling</strong>: Be careful about NULL values in calculations, especially when using LAG/LEAD functions</li>
+              <li><strong>Frame clause neglect</strong>: Default frame clauses might not match your analytical needs</li>
+              <li><strong>Subquery reuse</strong>: You can't reference a window function result in a WHERE clause directly</li>
             </ul>
 
-            <h2>Common Pitfalls</h2>
-            <ul>
-              <li>Forgetting that window functions execute after WHERE but before ORDER BY</li>
-              <li>Not considering NULL values in calculations</li>
-              <li>Using inappropriate frame clauses for the intended analysis</li>
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
+            
+            <p class="mb-4">SQL window functions are powerful tools that enable sophisticated data analysis directly in your database queries. By using window functions effectively, you can:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li>Eliminate complex self-joins and subqueries</li>
+              <li>Improve query readability and maintainability</li>
+              <li>Perform advanced analytics like moving averages and year-over-year comparisons</li>
+              <li>Enhance reporting capabilities with rank and cumulative calculations</li>
             </ul>
-
-            <h2>Conclusion</h2>
-            <p>Window functions are essential tools for data analysis in SQL. They allow you to perform complex calculations while maintaining the granularity of your data. As you become more comfortable with these functions, you'll find they can replace many complex self-joins and subqueries, making your SQL more readable and efficient.</p>
+            
+            <p>As you become more comfortable with window functions, you'll find they can replace many complex SQL patterns, making your queries more efficient and easier to understand.</p>
           </div>
         `,
         coverImage: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=800&h=500",
