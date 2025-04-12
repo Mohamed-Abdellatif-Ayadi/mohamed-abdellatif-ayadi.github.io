@@ -196,6 +196,435 @@ export class MemStorage implements IStorage {
   private addSampleArticles(): void {
     const articles: Omit<Article, "id">[] = [
       {
+        title: "Setting Up a Custom Domain for Your Website",
+        excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
+        content: `
+          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
+            <p class="text-xl leading-relaxed mb-8">A custom domain is essential for establishing your professional online identity. This comprehensive guide walks you through the process of setting up, configuring, and troubleshooting a custom domain for your website.</p>
+            
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
+              <p class="text-indigo-800 font-medium">This article builds on concepts from our <a href="/blog/1" class="text-indigo-700 underline">GitHub Pages guide</a>, focusing specifically on custom domain setup and management across different hosting providers.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Why Use a Custom Domain?</h2>
+            
+            <p>Using a custom domain (like yourname.com instead of yourname.github.io) offers several important benefits:</p>
+            
+            <ul class="list-disc pl-5 my-6 space-y-2">
+              <li><strong>Professional brand image</strong> - Creates a more polished and credible impression</li>
+              <li><strong>Better memorability</strong> - Easier for users to remember and type</li>
+              <li><strong>Platform independence</strong> - Freedom to change hosting providers without changing your web address</li>
+              <li><strong>Email consistency</strong> - Ability to create professional email addresses (you@yourdomain.com)</li>
+              <li><strong>SEO advantages</strong> - May help with search engine optimization and ranking</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Understanding Domain Name Basics</h2>
+            
+            <p>Before diving into the setup process, it's helpful to understand some key concepts:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h3 class="font-semibold text-lg mb-3 text-slate-900">Domain Name System (DNS)</h3>
+                <p class="text-slate-700">The global system that translates human-readable domain names (like example.com) into IP addresses (like 192.0.2.1) that computers use to identify each other.</p>
+              </div>
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h3 class="font-semibold text-lg mb-3 text-slate-900">Domain Registrar</h3>
+                <p class="text-slate-700">A company accredited by ICANN that sells domain name registrations (like Namecheap, GoDaddy, Google Domains).</p>
+              </div>
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h3 class="font-semibold text-lg mb-3 text-slate-900">DNS Records</h3>
+                <p class="text-slate-700">Instructions that tell the DNS system where to find your website and other services (like email). Common types include A, CNAME, MX, and TXT records.</p>
+              </div>
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h3 class="font-semibold text-lg mb-3 text-slate-900">Propagation</h3>
+                <p class="text-slate-700">The time it takes for DNS changes to spread across the internet. Can range from minutes to 48 hours.</p>
+              </div>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 1: Choose and Purchase a Domain</h2>
+            
+            <p>The first step is selecting and purchasing a domain name from a domain registrar:</p>
+            
+            <ol class="list-decimal pl-5 my-6 space-y-3">
+              <li><strong>Research available domains</strong> - Use your registrar's search tool to find available options.</li>
+              <li><strong>Select your TLD</strong> - Choose a top-level domain (TLD) like .com, .org, .io, etc. While .com is most common, other TLDs can be more available or better suited to your purpose.</li>
+              <li><strong>Consider additional services</strong> - Many registrars offer privacy protection, which hides your personal information from the public WHOIS database.</li>
+              <li><strong>Complete your purchase</strong> - Domains typically cost $10-15 per year, with discounts for multi-year registrations.</li>
+            </ol>
+            
+            <p>Popular domain registrars include:</p>
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li>Namecheap</li>
+              <li>Google Domains</li>
+              <li>GoDaddy</li>
+              <li>Cloudflare Registrar</li>
+              <li>Porkbun</li>
+            </ul>
+            
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
+              <p class="text-amber-800 font-medium">💡 Pro tip: When choosing a domain name, prioritize simplicity, memorability, and relevance to your brand or purpose. Avoid hyphens, numbers, and unusual spellings when possible.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 2: Configure DNS Settings</h2>
+            
+            <p>Once you've purchased your domain, you'll need to configure its DNS settings to point to your web host. The specific steps vary by hosting platform:</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For GitHub Pages</h3>
+            
+            <ol class="list-decimal pl-5 my-4 space-y-2">
+              <li>In your GitHub repository, go to Settings > Pages.</li>
+              <li>Under "Custom domain," enter your domain and save.</li>
+              <li>At your domain registrar, create these DNS records:</li>
+            </ol>
+            
+            <div class="overflow-x-auto my-8">
+              <table class="min-w-full border-collapse">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.108.153</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.109.153</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.110.153</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.111.153</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">CNAME</td>
+                    <td class="border border-slate-300 px-4 py-2">www</td>
+                    <td class="border border-slate-300 px-4 py-2">username.github.io</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For Netlify</h3>
+            
+            <ol class="list-decimal pl-5 my-4 space-y-2">
+              <li>In your Netlify site dashboard, go to Settings > Domain management > Add custom domain.</li>
+              <li>Enter your domain name and follow the verification steps.</li>
+              <li>At your domain registrar, set up these DNS records:</li>
+            </ol>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>DNS</span>
+                <span>Netlify DNS Records</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># Option 1: Use Netlify DNS (recommended)
+# Simply change your nameservers to Netlify's:
+dns1.p01.nsone.net
+dns2.p01.nsone.net
+dns3.p01.nsone.net
+dns4.p01.nsone.net
+
+# Option 2: Keep your current DNS provider
+# Add these records:
+CNAME  www    example.netlify.app
+A      @      104.198.14.52</code></pre>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For Vercel</h3>
+            
+            <ol class="list-decimal pl-5 my-4 space-y-2">
+              <li>In your Vercel project, go to Settings > Domains.</li>
+              <li>Add your domain and verify ownership.</li>
+              <li>At your domain registrar, add these records:</li>
+            </ol>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>DNS</span>
+                <span>Vercel DNS Records</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># For the root domain (yourdomain.com):
+A      @      76.76.21.21
+
+# For the www subdomain:
+CNAME  www    cname.vercel-dns.com.</code></pre>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 3: Set Up SSL/HTTPS</h2>
+            
+            <p>Secure your website with SSL/HTTPS to protect user data and improve search rankings:</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Automatic SSL with Hosting Providers</h3>
+            
+            <p>Many hosting providers offer automatic SSL certificate provisioning:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li><strong>GitHub Pages</strong> - Automatically enables HTTPS once your custom domain is verified.</li>
+              <li><strong>Netlify</strong> - Provides free SSL certificates through Let's Encrypt automatically.</li>
+              <li><strong>Vercel</strong> - Automatically issues and renews SSL certificates for all domains.</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Manual SSL Configuration</h3>
+            
+            <p>If your host doesn't provide automatic SSL, you can use Cloudflare or Let's Encrypt:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h4 class="font-semibold text-lg mb-3 text-slate-900">Cloudflare Method</h4>
+                <ol class="list-decimal pl-5 my-4 space-y-2 text-sm">
+                  <li>Create a Cloudflare account</li>
+                  <li>Add your site to Cloudflare</li>
+                  <li>Update your nameservers to Cloudflare's</li>
+                  <li>Enable SSL/TLS in your Cloudflare dashboard</li>
+                </ol>
+              </div>
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h4 class="font-semibold text-lg mb-3 text-slate-900">Let's Encrypt Method</h4>
+                <ol class="list-decimal pl-5 my-4 space-y-2 text-sm">
+                  <li>SSH into your server</li>
+                  <li>Install certbot: <code>apt-get install certbot</code></li>
+                  <li>Generate certificate: <code>certbot --apache</code></li>
+                  <li>Follow prompts to complete setup</li>
+                </ol>
+              </div>
+            </div>
+            
+            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
+              <h3 class="text-lg font-semibold mb-4 text-purple-900">SSL Certificate Types</h3>
+              <ul class="list-disc pl-5 space-y-3 text-purple-800">
+                <li><strong>Domain Validated (DV):</strong> Basic verification of domain ownership (most common and what Let's Encrypt provides)</li>
+                <li><strong>Organization Validated (OV):</strong> Verifies business registration information</li>
+                <li><strong>Extended Validation (EV):</strong> Most rigorous verification, previously showed green address bar in browsers</li>
+                <li><strong>Wildcard:</strong> Covers all subdomains (*.yourdomain.com)</li>
+                <li><strong>Multi-domain (SAN):</strong> Covers multiple specified domains in one certificate</li>
+              </ul>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 4: Verify and Test Your Setup</h2>
+            
+            <p>After configuring your domain and SSL, verify that everything is working properly:</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">DNS Propagation Check</h3>
+            
+            <p>Use DNS lookup tools to check if your DNS records are correctly propagated:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>Terminal</span>
+                <span>DNS Lookup Commands</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># Check A records
+dig yourdomain.com A
+
+# Check CNAME records
+dig www.yourdomain.com CNAME
+
+# Check for valid DNS propagation
+host yourdomain.com</code></pre>
+            </div>
+            
+            <p>You can also use online tools like <a href="https://dnschecker.org" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">DNSChecker.org</a> or <a href="https://whatsmydns.net" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">WhatsMyDNS.net</a> to check DNS propagation globally.</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Website Accessibility Check</h3>
+            
+            <p>Verify that your website is accessible through various URLs:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li>Root domain: <code>https://yourdomain.com</code></li>
+              <li>www subdomain: <code>https://www.yourdomain.com</code></li>
+              <li>HTTPS security: Verify the padlock icon appears in the browser address bar</li>
+            </ul>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">SSL Certificate Check</h3>
+            
+            <p>Verify your SSL certificate is properly installed:</p>
+            
+            <ol class="list-decimal pl-5 my-4 space-y-2">
+              <li>Click the padlock icon in your browser's address bar</li>
+              <li>Verify the certificate is valid and issued to your domain</li>
+              <li>Use online tools like <a href="https://www.ssllabs.com/ssltest/" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">SSL Labs</a> for a comprehensive certificate check</li>
+            </ol>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Advanced Domain Configuration</h2>
+            
+            <p>Beyond the basic setup, consider these advanced configurations:</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Domain Redirects</h3>
+            
+            <p>Ensure users find your site regardless of which URL variant they use:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>www → non-www Redirect (.htaccess)</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.yourdomain\.com [NC]
+RewriteRule ^(.*)$ https://yourdomain.com/$1 [L,R=301]</code></pre>
+            </div>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>non-www → www Redirect (.htaccess)</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>RewriteEngine On
+RewriteCond %{HTTP_HOST} ^yourdomain\.com [NC]
+RewriteRule ^(.*)$ https://www.yourdomain.com/$1 [L,R=301]</code></pre>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Email Configuration</h3>
+            
+            <p>Set up email for your domain using services like Google Workspace, Zoho Mail, or ProtonMail:</p>
+            
+            <div class="overflow-x-auto my-8">
+              <table class="min-w-full border-collapse">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">Priority</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">MX</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">aspmx.l.google.com</td>
+                    <td class="border border-slate-300 px-4 py-2">1</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">MX</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">alt1.aspmx.l.google.com</td>
+                    <td class="border border-slate-300 px-4 py-2">5</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">TXT</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">v=spf1 include:_spf.google.com ~all</td>
+                    <td class="border border-slate-300 px-4 py-2">-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Security Enhancements</h3>
+            
+            <p>Add these DNS records to improve your domain's security:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>DNS</span>
+                <span>Security Records</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># DMARC Record (helps prevent email spoofing)
+TXT  _dmarc  "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;"
+
+# HSTS Preload (forces HTTPS connections)
+# Add this header to your server response:
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</code></pre>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Troubleshooting Common Issues</h2>
+            
+            <div class="bg-slate-50 p-6 rounded-lg my-8">
+              <h3 class="font-semibold text-lg mb-4 text-slate-900">DNS Not Resolving</h3>
+              <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                <li><strong>Issue:</strong> Your domain doesn't point to your website.</li>
+                <li><strong>Solution:</strong> Verify DNS records are correct and wait for propagation (up to 48 hours).</li>
+                <li><strong>Check:</strong> Use <code>dig</code> or <code>nslookup</code> to confirm DNS records are correct.</li>
+              </ul>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-lg my-8">
+              <h3 class="font-semibold text-lg mb-4 text-slate-900">Certificate Errors</h3>
+              <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                <li><strong>Issue:</strong> Browser shows "Your connection is not private" warnings.</li>
+                <li><strong>Solution:</strong> Verify SSL certificate is properly installed and domain ownership is confirmed.</li>
+                <li><strong>Check:</strong> Confirm your site uses HTTPS and the certificate matches your domain name exactly.</li>
+              </ul>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-lg my-8">
+              <h3 class="font-semibold text-lg mb-4 text-slate-900">Mixed Content Warnings</h3>
+              <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                <li><strong>Issue:</strong> Some resources loading over HTTP instead of HTTPS.</li>
+                <li><strong>Solution:</strong> Update all resource URLs to use HTTPS or relative paths.</li>
+                <li><strong>Check:</strong> Use browser developer tools to identify mixed content issues.</li>
+              </ul>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-lg my-8">
+              <h3 class="font-semibold text-lg mb-4 text-slate-900">Redirect Loops</h3>
+              <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                <li><strong>Issue:</strong> Browser shows "too many redirects" error.</li>
+                <li><strong>Solution:</strong> Check for conflicting redirect rules in your hosting configuration.</li>
+                <li><strong>Check:</strong> Verify .htaccess files, hosting provider settings, and Cloudflare redirect rules.</li>
+              </ul>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Domain Management Best Practices</h2>
+            
+            <ol class="list-decimal pl-5 my-6 space-y-4">
+              <li>
+                <strong>Keep contact information updated</strong>
+                <p>Ensure your domain registrar has your current email address to send renewal notices and security alerts.</p>
+              </li>
+              <li>
+                <strong>Enable auto-renewal</strong>
+                <p>Prevent accidental expiration by setting your domains to renew automatically.</p>
+              </li>
+              <li>
+                <strong>Use domain privacy protection</strong>
+                <p>Shield your personal information from the public WHOIS database to reduce spam and identity theft risks.</p>
+              </li>
+              <li>
+                <strong>Implement registrar locking</strong>
+                <p>Protect against unauthorized domain transfers with registrar lock and two-factor authentication.</p>
+              </li>
+              <li>
+                <strong>Document your configuration</strong>
+                <p>Keep records of all DNS settings, hosting information, and authentication details in a secure location.</p>
+              </li>
+            </ol>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
+            
+            <p>Setting up a custom domain is a crucial step in establishing your professional online presence. By following this guide, you've learned how to:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li>Choose and purchase an appropriate domain name</li>
+              <li>Configure DNS settings for various hosting providers</li>
+              <li>Set up SSL/HTTPS for secure connections</li>
+              <li>Verify and test your domain configuration</li>
+              <li>Implement advanced domain features and security</li>
+              <li>Troubleshoot common domain and SSL issues</li>
+            </ul>
+            
+            <p>With your custom domain properly configured, your website now benefits from improved branding, professionalism, and flexibility as your online presence grows.</p>
+            
+            <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-100 my-8">
+              <p class="text-indigo-900 italic">Remember that domain management is an ongoing responsibility. Regularly check your domain status, keep your contact information updated, and ensure timely renewals to maintain ownership of your domain name.</p>
+            </div>
+          </div>
+        `,
+        coverImage: "/images/custom-domain.svg",
+        category: "Technology",
+        publishedAt: new Date("2025-03-15")
+      },
+      {
         title: "How to Deploy Your Website to GitHub Pages",
         excerpt: "A step-by-step guide to deploying your static website to GitHub Pages with workflow automation, custom domains, and best practices.",
         content: `
