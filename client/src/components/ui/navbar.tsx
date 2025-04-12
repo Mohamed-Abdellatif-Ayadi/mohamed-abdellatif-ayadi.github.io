@@ -31,9 +31,9 @@ const Navbar = () => {
   
   const navLinks = [
     { title: t('nav.home'), path: "/" },
-    { title: t('nav.articles'), path: "/blog" },
     { title: t('nav.cv'), path: "/cv" },
-    { title: t('nav.about'), path: "/about" },
+    { title: t('nav.articles'), path: "/blog" },
+    { title: t('nav.projects'), path: "/projects" },
     { title: t('nav.contact'), path: "/contact" }
   ];
 
@@ -61,7 +61,25 @@ const Navbar = () => {
               {link.title}
             </Link>
           ))}
-          <LanguageSwitcher />
+          <div className="flex items-center gap-4">
+            <a 
+              href="https://linkedin.com/in/mohamed-abdellatif-ayadi" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-slate-600 hover:text-primary transition-colors"
+            >
+              <span role="img" aria-label="LinkedIn">👔</span>
+            </a>
+            <a 
+              href="https://github.com/ayadi1" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-slate-600 hover:text-primary transition-colors"
+            >
+              <span role="img" aria-label="GitHub">💻</span>
+            </a>
+            <LanguageSwitcher />
+          </div>
         </nav>
         
         {/* Mobile menu button */}
