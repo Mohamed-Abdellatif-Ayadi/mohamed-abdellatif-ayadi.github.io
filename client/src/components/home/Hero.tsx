@@ -16,7 +16,7 @@ const Hero = () => {
               href="/blog" 
               className="px-6 py-3 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600 transition-all shadow-lg hover:shadow-xl"
             >
-              {t('hero.blog')}
+              {t('hero.articles')}
             </Link>
             <Link 
               href="/cv" 

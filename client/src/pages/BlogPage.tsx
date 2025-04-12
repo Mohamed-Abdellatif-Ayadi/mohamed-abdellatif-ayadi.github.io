@@ -38,7 +38,7 @@ const BlogPage = () => {
       <div className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Blog</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">Articles</h1>
             <p className="text-lg opacity-90 mb-0">
               Thoughts, stories and ideas on technology, design, and professional growth.
             </p>
