@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
+import { simulateEmailSending } from "@/lib/emailUtils";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -36,7 +37,13 @@ const Contact = () => {
 
   const mutation = useMutation({
     mutationFn: async (values: ContactFormValues) => {
-      return apiRequest('POST', '/api/contact', values);
+      // Save contact message
+      const response = await apiRequest('POST', '/api/contact', values);
+      
+      // Simulate sending email notifications (to owner and confirmation to sender)
+      await simulateEmailSending('contact', values);
+      
+      return response;
     },
     onSuccess: () => {
       toast({
@@ -44,6 +51,7 @@ const Contact = () => {
         description: "Thank you for your message. I'll get back to you as soon as possible.",
       });
       setIsSubmitted(true);
+      form.reset();
     },
     onError: (error) => {
       toast({
