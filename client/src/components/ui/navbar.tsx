@@ -71,7 +71,7 @@ const Navbar = () => {
               </svg>
             </a>
             <a 
-              href="https://github.com/ayadi1" 
+              href="https://github.com/Mayedi007" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-slate-600 hover:text-primary transition-colors"
@@ -138,7 +138,7 @@ const Navbar = () => {
               </svg>
             </a>
             <a 
-              href="https://github.com/ayadi1" 
+              href="https://github.com/Mayedi007" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-slate-600 hover:text-primary transition-colors"

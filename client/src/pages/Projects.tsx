@@ -25,7 +25,7 @@ const Projects = () => {
       description: "Personal portfolio website and blog built with React, Express, and multilingual support.",
       techStack: ["React", "TypeScript", "TailwindCSS", "Express"],
       imageUrl: "/images/placeholder-project.jpg",
-      githubUrl: "https://github.com/ayadi1",
+      githubUrl: "https://github.com/Mayedi007",
       liveUrl: "/",
       category: "web"
     },
@@ -35,7 +35,7 @@ const Projects = () => {
       description: "Project analyzing time series data with forecasting algorithms.",
       techStack: ["Python", "Pandas", "Scikit-learn", "Matplotlib"],
       imageUrl: "/images/placeholder-project.jpg",
-      githubUrl: "https://github.com/ayadi1",
+      githubUrl: "https://github.com/Mayedi007",
       category: "ai"
     },
     {
@@ -44,7 +44,7 @@ const Projects = () => {
       description: "Tool to optimize inventory and order management in SAP.",
       techStack: ["SAP", "S/4HANA", "JavaScript"],
       imageUrl: "/images/placeholder-project.jpg",
-      githubUrl: "https://github.com/ayadi1",
+      githubUrl: "https://github.com/Mayedi007",
       category: "other"
     }
   ];
