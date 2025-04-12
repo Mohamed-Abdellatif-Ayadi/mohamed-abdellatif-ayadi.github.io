@@ -47,79 +47,91 @@ export class MemStorage implements IStorage {
     this.currentId = 1;
     this.currentArticleId = 1;
     
-    // Initialize with sample CV data
+    // Initialize with Mohamed Ayadi's CV data
     this.cv = {
-      name: "John Doe",
-      title: "Full Stack Developer",
-      photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&h=300",
-      email: "john@example.com",
-      phone: "+1 (555) 123-4567",
-      location: "San Francisco, CA",
-      summary: "Experienced Full Stack Developer with over 5 years of expertise in building modern web applications. Passionate about clean code and user-centered design.",
+      name: "MOHAMED ABDELLATIF AYADI",
+      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
+      photoUrl: "/mohamed-ayadi-profile.jpg", // This will be updated with the proper path once we upload the image
+      email: "mohamed.ayadi.data@gmail.com",
+      phone: "015252301739",
+      location: "Dortmund, Germany",
+      summary: "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb als Verkaufsberater. Mit großer Leidenschaft für Vertrieb, Programmierung, Innovation und die Tech-Industrie bin ich neugierig, zielstrebig und ehrgeizig. Ich suche stets nach Möglichkeiten, zu lernen und mich in den Bereichen Softwareentwicklung oder IT-Consulting weiterzuentwickeln. Mein Ziel ist es, an Projekten zu arbeiten, die einen Unterschied machen, und Teil der Innovationen der Zukunft zu sein.",
       skills: [
-        "JavaScript", 
-        "React", 
-        "Node.js", 
-        "TypeScript", 
-        "MongoDB", 
-        "HTML/CSS", 
-        "UI/UX Design",
-        "Express",
-        "PostgreSQL",
-        "GraphQL",
-        "AWS",
-        "Git"
+        "GitLab", 
+        "C-Programmierung", 
+        "Java", 
+        "Python", 
+        "Eclipse", 
+        "Microsoft Visual Studio", 
+        "Docker",
+        "Objektorientierte Programmierung (OOP)",
+        "Unified Modeling Language (UML)",
+        "Software Design Patterns",
+        "Code Review",
+        "Software Testing",
+        "Datenstrukturen",
+        "Time Series and Forecasting",
+        "Data Augmentation",
+        "Deep Learning",
+        "Generative KI",
+        "Relationale Datenbanken",
+        "Data Warehousing",
+        "SAP",
+        "SAP S/4HANA"
       ],
       experience: [
         {
-          position: "Senior Developer",
-          company: "TechCorp",
-          startDate: "2020",
-          endDate: "Present",
-          description: "Lead developer for client projects, focusing on React-based web applications."
+          position: "Werkstudent",
+          company: "Iperceramica Deutschland GmbH",
+          startDate: "April 2024",
+          endDate: "Heute",
+          description: "Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Aufträgen, Lieferprozessen und der Bearbeitung von Reklamationen. Vertrieb: Aktive Kundengewinnung im B2B- und B2C-Bereich durch gezielte Akquise und Aufbau langfristiger Kundenbeziehungen. Verkauf und Beratung von hochwertigen Fliesen, Parkett, Sanitär und Badezimmermöbeln. Pflege von Kundendaten und Partnerbeziehungen in CRM und PRM-Systemen, zur Verbesserung der Kommunikation und Zusammenarbeit."
         },
         {
-          position: "Web Developer",
-          company: "StartupXYZ",
-          startDate: "2018",
-          endDate: "2020",
-          description: "Developed and maintained various client websites and web applications."
-        },
-        {
-          position: "Junior Developer",
-          company: "CodeAgency",
-          startDate: "2016",
-          endDate: "2018",
-          description: "Worked on front-end development using HTML, CSS, and JavaScript."
+          position: "Studentische Hilfskraft",
+          company: "Technische Universität Dortmund",
+          startDate: "Oktober 2023",
+          endDate: "April 2024",
+          description: "Übernahme der Position eines studentischen Tutors für den Kurs 'Datenstrukturen, Algorithmen und Programmierung 1' als Minijob. Organisation und Durchführung von Tutorien für Erstsemester-Studierende mit Fokus auf objektorientierte Programmierung in Java. Aufgaben umfassten praktische Programmierübungen, Vertiefung und Erweiterung der Vorlesungsinhalte, Hausaufgabenbetreuung sowie gezielte Vorbereitung auf Prüfungen und Strategieplanung. Teilnahme an einem Workshop zur akademischen Lehre vor Beginn der Tätigkeit, in dem ich Präsentations- und Gruppentechniken, Tutoriumsplanung und Motivationsmethoden erlernte und praktizierte."
         }
       ],
       education: [
         {
-          degree: "B.S. in Computer Science",
-          institution: "University of Technology",
-          location: "San Francisco, CA",
-          startDate: "2012",
-          endDate: "2016"
-        }
-      ],
-      certifications: [
-        {
-          name: "AWS Certified Developer",
-          year: "2021"
+          degree: "Bachelor Informatik",
+          institution: "Technische Universität Dortmund",
+          location: "Dortmund, Germany",
+          startDate: "April 2022",
+          endDate: "April 2026"
         },
         {
-          name: "MongoDB Certified Developer",
-          year: "2020"
+          degree: "Abitur im Fach Mathematik",
+          institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
+          location: "Sfax, Tunesien",
+          startDate: "2017",
+          endDate: "Juli 2021"
         }
       ],
+      certifications: [],
       languages: [
         {
-          name: "English",
-          proficiency: "Native"
+          name: "Deutsch",
+          proficiency: "Fließend bis verhandlungssicher"
         },
         {
-          name: "Spanish",
-          proficiency: "Intermediate"
+          name: "Englisch",
+          proficiency: "Fließend bis verhandlungssicher"
+        },
+        {
+          name: "Französisch",
+          proficiency: "Muttersprache"
+        },
+        {
+          name: "Arabisch",
+          proficiency: "Muttersprache"
+        },
+        {
+          name: "Italienisch",
+          proficiency: "Basiskenntnisse"
         }
       ]
     };
@@ -225,7 +237,7 @@ export class MemStorage implements IStorage {
         `,
         coverImage: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=800&h=500",
         category: "Technology",
-        publishedAt: new Date("2023-06-12").toISOString()
+        publishedAt: new Date("2023-06-12")
       },
       {
         title: "How to Thrive in a Remote Work Environment",
@@ -260,7 +272,7 @@ export class MemStorage implements IStorage {
         `,
         coverImage: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=800&h=500",
         category: "Career",
-        publishedAt: new Date("2023-05-28").toISOString()
+        publishedAt: new Date("2023-05-28")
       },
       {
         title: "A Deep Dive into My UX Design Process",
@@ -321,7 +333,7 @@ export class MemStorage implements IStorage {
         `,
         coverImage: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&h=500",
         category: "Design",
-        publishedAt: new Date("2023-05-15").toISOString()
+        publishedAt: new Date("2023-05-15")
       },
       {
         title: "Building Scalable React Applications: Lessons Learned",
@@ -381,7 +393,7 @@ export class MemStorage implements IStorage {
         `,
         coverImage: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?auto=format&fit=crop&w=800&h=500",
         category: "Technology",
-        publishedAt: new Date("2023-04-10").toISOString()
+        publishedAt: new Date("2023-04-10")
       },
       {
         title: "Creating an Effective Personal Brand as a Developer",
@@ -450,7 +462,7 @@ export class MemStorage implements IStorage {
         `,
         coverImage: "https://images.unsplash.com/photo-1622151284478-2b5b3f79d268?auto=format&fit=crop&w=800&h=500",
         category: "Career",
-        publishedAt: new Date("2023-03-22").toISOString()
+        publishedAt: new Date("2023-03-22")
       },
       {
         title: "Designing for Accessibility: A Practical Guide",
@@ -531,7 +543,7 @@ export class MemStorage implements IStorage {
         `,
         coverImage: "https://images.unsplash.com/photo-1617791160505-6f00504e3519?auto=format&fit=crop&w=800&h=500",
         category: "Design",
-        publishedAt: new Date("2023-03-05").toISOString()
+        publishedAt: new Date("2023-03-05")
       }
     ];
     
