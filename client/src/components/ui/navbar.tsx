@@ -30,9 +30,8 @@ const Navbar = () => {
   const { t } = useLanguage();
   
   const navLinks = [
-    { title: t('nav.home'), path: "/" },
     { title: t('nav.cv'), path: "/cv" },
-    { title: t('nav.articles'), path: "/blog" },
+    { title: t('nav.posts'), path: "/blog" },
     { title: t('nav.projects'), path: "/projects" },
     { title: t('nav.contact'), path: "/contact" }
   ];
@@ -48,39 +47,25 @@ const Navbar = () => {
           </span>
         </Link>
         
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              href={link.path}
-              className={`nav-link ${
-                location === link.path ? "active text-primary" : "text-slate-600 hover:text-primary"
-              } transition-colors`}
-            >
-              {link.title}
-            </Link>
-          ))}
-          <div className="flex items-center gap-4">
-            <a 
-              href="https://linkedin.com/in/mohamed-abdellatif-ayadi" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-slate-600 hover:text-primary transition-colors"
-            >
-              <span role="img" aria-label="LinkedIn">👔</span>
-            </a>
-            <a 
-              href="https://github.com/ayadi1" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-slate-600 hover:text-primary transition-colors"
-            >
-              <span role="img" aria-label="GitHub">💻</span>
-            </a>
-            <LanguageSwitcher />
-          </div>
-        </nav>
+        <div className="flex items-center gap-4">
+          <a 
+            href="https://linkedin.com/in/mohamed-abdellatif-ayadi" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-slate-600 hover:text-primary transition-colors"
+          >
+            <span role="img" aria-label="LinkedIn">👔</span>
+          </a>
+          <a 
+            href="https://github.com/ayadi1" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-slate-600 hover:text-primary transition-colors"
+          >
+            <span role="img" aria-label="GitHub">💻</span>
+          </a>
+          <LanguageSwitcher />
+        </div>
         
         {/* Mobile menu button */}
         <button
