@@ -77,11 +77,11 @@ const Footer = () => {
           <div className="col-span-1">
             <h3 className="text-white font-semibold text-lg mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <li className="flex items-start gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:mohamed.ayadi.data@gmail.com" className="hover:text-primary transition-colors">
+                <a href="mailto:mohamed.ayadi.data@gmail.com" className="hover:text-primary transition-colors break-all">
                   mohamed.ayadi.data@gmail.com
                 </a>
               </li>
