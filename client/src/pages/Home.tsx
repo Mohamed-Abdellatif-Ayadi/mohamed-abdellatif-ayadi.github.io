@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>John Doe - Personal Blog & CV</title>
-        <meta name="description" content="Personal blog and professional portfolio of John Doe. Read articles and view CV." />
+        <title>Mohamed Abdellatif Ayadi - Personal Blog & CV</title>
+        <meta name="description" content="Personal blog and professional portfolio of Mohamed Abdellatif Ayadi. Read articles and view CV." />
         <meta name="keywords" content="blog, cv, resume, articles, professional, portfolio" />
       </Helmet>
       <Hero />

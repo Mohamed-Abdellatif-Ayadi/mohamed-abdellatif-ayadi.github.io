@@ -49,14 +49,14 @@ const AboutMe = () => {
               <div className="md:w-2/3">
                 <h3 className="text-xl font-bold text-slate-900 mb-4">Hi, I'm {cv.name}</h3>
                 <div className="space-y-4 text-slate-600 article-content">
-                  <p>I'm a {cv.title} with a passion for building beautiful, functional web applications. With experience in the tech industry, I've worked on a variety of projects, from small business websites to complex enterprise applications.</p>
-                  <p>When I'm not coding, I enjoy sharing my knowledge and experiences through writing. This blog is my platform for discussing the latest trends in web development, sharing tutorials, and reflecting on my professional journey.</p>
-                  <p>My approach to development combines technical expertise with a strong focus on user experience and business goals. I believe that the best digital products are those that not only work flawlessly but also provide genuine value to users.</p>
+                  <p>{cv.summary}</p>
+                  <p>Aktuell belege ich Kurse wie Datenstrukturen, Algorithmen und Programmierung, Softwaretechnik, und Informationssysteme. Parallel arbeite ich als Werkstudent bei Iperceramica Deutschland GmbH, wo ich SAP und SAP S/4HANA einsetze.</p>
+                  <p>Meine technischen Interessen umfassen Objektorientierte Programmierung, Software Testing, Deep Learning und Datenstrukturen. Mit Erfahrung in Java, Python, und C-Programmierung strebe ich danach, meine Fähigkeiten ständig zu erweitern.</p>
                 </div>
                 
                 <div className="mt-6 flex gap-4">
                   <a 
-                    href="https://linkedin.com" 
+                    href="https://linkedin.com/in/mohamed-abdellatif-ayadi" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="text-primary-700 hover:text-primary-800"
