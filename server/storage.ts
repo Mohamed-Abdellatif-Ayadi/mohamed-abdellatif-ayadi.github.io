@@ -196,6 +196,262 @@ export class MemStorage implements IStorage {
   private addSampleArticles(): void {
     const articles: Omit<Article, "id">[] = [
       {
+        title: "A SQL Practical Challenge on Salary Analysis",
+        excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
+        content: `
+          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
+            <p class="text-xl leading-relaxed mb-8">SQL window functions offer powerful tools for salary data analysis in HR contexts. This practical case study demonstrates how to analyze employee compensation data, identify patterns, and generate insights using SQL.</p>
+            
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
+              <p class="text-indigo-800 font-medium">This article demonstrates practical applications of the concepts covered in our <a href="/blog/1" class="text-indigo-700 underline">SQL Window Functions Comprehensive Guide</a>.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">The Challenge: Salary Analysis</h2>
+            
+            <p>In this practical example, we'll work with an employee database to answer common HR analytics questions about salary distribution. Our sample dataset includes employee information across different departments with various compensation levels.</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">The Employee Dataset</h3>
+            
+            <p>Here's the table structure we'll be working with:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>SQL</span>
+                <span>Table Structure</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>CREATE TABLE employees (
+  employee_id INTEGER PRIMARY KEY,
+  employee_name VARCHAR(100),
+  department VARCHAR(50),
+  hire_date DATE,
+  salary NUMERIC(10,2),
+  manager_id INTEGER
+);</code></pre>
+            </div>
+            
+            <p>Our sample data contains employees from Engineering, Marketing, Sales, and HR departments with varying salaries and tenure.</p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Analyzing Department Salary Distribution</h2>
+            
+            <p>Let's start by finding the minimum, maximum, and average salary within each department:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>SQL</span>
+                <span>Department Salary Statistics</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
+  department,
+  MIN(salary) as min_salary,
+  MAX(salary) as max_salary,
+  AVG(salary) as avg_salary,
+  COUNT(*) as employee_count
+FROM employees
+GROUP BY department
+ORDER BY avg_salary DESC;</code></pre>
+            </div>
+            
+            <p>This query gives us a basic overview of each department's salary range and average. The result might look something like:</p>
+            
+            <div class="overflow-x-auto my-8">
+              <table class="min-w-full border-collapse">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border border-slate-300 px-4 py-2 text-left">department</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">min_salary</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">max_salary</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">avg_salary</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">employee_count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">Engineering</td>
+                    <td class="border border-slate-300 px-4 py-2">78000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">115000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">91666.67</td>
+                    <td class="border border-slate-300 px-4 py-2">12</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">Sales</td>
+                    <td class="border border-slate-300 px-4 py-2">65000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">102000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">85500.00</td>
+                    <td class="border border-slate-300 px-4 py-2">8</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">Marketing</td>
+                    <td class="border border-slate-300 px-4 py-2">67000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">95000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">80000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">6</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">HR</td>
+                    <td class="border border-slate-300 px-4 py-2">58000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">92000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">72000.00</td>
+                    <td class="border border-slate-300 px-4 py-2">4</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Finding Top Earners by Department</h2>
+            
+            <p>Now let's use window functions to rank employees by salary within each department:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>SQL</span>
+                <span>Ranking Employees by Salary</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
+  employee_name,
+  department,
+  salary,
+  RANK() OVER (PARTITION BY department ORDER BY salary DESC) as dept_rank
+FROM employees
+WHERE department IN ('Engineering', 'Marketing', 'Sales', 'HR')
+ORDER BY department, dept_rank;</code></pre>
+            </div>
+            
+            <p>This query partitions employees by department and ranks them based on their salary in descending order. The result will show the top earners in each department.</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Limiting to Top 3 Earners</h3>
+            
+            <p>To find just the top 3 earners in each department, we can use a common table expression (CTE) with our window function:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>SQL</span>
+                <span>Top 3 Earners by Department</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>WITH RankedEmployees AS (
+  SELECT 
+    employee_name,
+    department,
+    salary,
+    RANK() OVER (PARTITION BY department ORDER BY salary DESC) as dept_rank
+  FROM employees
+)
+SELECT *
+FROM RankedEmployees
+WHERE dept_rank <= 3
+ORDER BY department, dept_rank;</code></pre>
+            </div>
+            
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
+              <p class="text-amber-800 font-medium">💡 Pro tip: Always use a CTE when you need to filter by the result of a window function, as window functions are not allowed in WHERE clauses.</p>
+            </div>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Difference from Department Average</h2>
+            
+            <p>Let's calculate how each employee's salary compares to their department's average:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>SQL</span>
+                <span>Salary Difference from Department Average</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
+  employee_name,
+  department,
+  salary,
+  ROUND(AVG(salary) OVER (PARTITION BY department), 2) as dept_avg,
+  ROUND(salary - AVG(salary) OVER (PARTITION BY department), 2) as diff_from_avg,
+  ROUND((salary - AVG(salary) OVER (PARTITION BY department)) / 
+    AVG(salary) OVER (PARTITION BY department) * 100, 1) as pct_diff
+FROM employees
+ORDER BY department, salary DESC;</code></pre>
+            </div>
+            
+            <p>This query shows how much each employee earns compared to their department's average, both in absolute terms and as a percentage. This can help identify outliers and potential salary inequities.</p>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Bands and Distribution</h2>
+            
+            <p>Let's create a query to divide employees into quartiles based on salary within each department:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>SQL</span>
+                <span>Salary Quartiles by Department</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
+  employee_name,
+  department,
+  salary,
+  NTILE(4) OVER (PARTITION BY department ORDER BY salary DESC) as salary_quartile
+FROM employees
+ORDER BY department, salary_quartile;</code></pre>
+            </div>
+            
+            <p>The NTILE window function divides rows into a specified number of roughly equal groups (in this case, quartiles). This helps visualize the salary distribution within each department.</p>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Growth Over Time</h2>
+            
+            <p>Assuming we have salary history data, we can analyze salary growth trends:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>SQL</span>
+                <span>Year-over-Year Salary Growth</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>WITH YearlySalaries AS (
+  SELECT 
+    employee_id,
+    employee_name,
+    department,
+    EXTRACT(YEAR FROM effective_date) as year,
+    salary
+  FROM salary_history
+)
+SELECT 
+  employee_name,
+  department,
+  year,
+  salary,
+  LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) as prev_year_salary,
+  salary - LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) as absolute_growth,
+  ROUND((salary - LAG(salary) OVER (PARTITION BY employee_id ORDER BY year)) / 
+    LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) * 100, 1) as growth_pct
+FROM YearlySalaries
+ORDER BY department, employee_name, year;</code></pre>
+            </div>
+            
+            <p>This query uses the LAG window function to compare an employee's current salary with their salary from the previous year, calculating both absolute and percentage growth.</p>
+            
+            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
+              <h3 class="text-lg font-semibold mb-4 text-purple-900">Key Insights from Salary Analysis</h3>
+              <ul class="list-disc pl-5 space-y-3 text-purple-800">
+                <li>Engineering has the highest average salary across departments</li>
+                <li>There is a significant spread between minimum and maximum salaries in each department</li>
+                <li>Using NTILE to create quartiles helps identify salary bands for compensation planning</li>
+                <li>Calculating the difference from department average helps identify outliers</li>
+                <li>Year-over-year growth calculations can highlight promotion patterns and retention risks</li>
+              </ul>
+            </div>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
+            
+            <p>SQL window functions are powerful tools for salary analysis, providing insights that would be difficult to obtain using basic SQL aggregations. They allow HR analysts to:</p>
+            
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li>Rank employees within departments without complex subqueries</li>
+              <li>Compare individual salaries to department averages</li>
+              <li>Track salary growth and identify patterns</li>
+              <li>Create salary bands and distribution analysis</li>
+              <li>Generate comprehensive compensation reports with a few efficient queries</li>
+            </ul>
+            
+            <p>By mastering these techniques, you can transform raw employee data into actionable compensation insights that support strategic HR decisions.</p>
+          </div>
+        `,
+        coverImage: "/images/sql-salary-analysis.svg",
+        category: "Technology",
+        publishedAt: new Date("2025-01-23")
+      },
+      {
         title: "Mastering SQL Window Functions: A Comprehensive Guide",
         excerpt: "Learn how to leverage SQL window functions to perform complex data analysis efficiently. From basic aggregations to advanced ranking and partitioning.",
         content: `
