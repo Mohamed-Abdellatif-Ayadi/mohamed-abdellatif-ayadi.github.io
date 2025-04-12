@@ -1,6 +1,8 @@
 import { Link } from "wouter";
+import { useLanguage } from "@/lib/languageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
   return (
     <section className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
       <div className="container mx-auto px-4 py-20 md:py-24">
