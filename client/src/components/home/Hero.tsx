@@ -15,13 +15,13 @@ const Hero = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
               href="/blog" 
-              className="px-6 py-3 bg-white text-primary-800 rounded-lg font-medium hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl"
+              className="px-6 py-3 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600 transition-all shadow-lg hover:shadow-xl"
             >
               Meine Artikel
             </Link>
             <Link 
               href="/cv" 
-              className="px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all"
+              className="px-6 py-3 bg-transparent border-2 border-primary-400 text-primary-400 rounded-lg font-medium hover:bg-primary-400 hover:text-white transition-all"
             >
               Mein Lebenslauf
             </Link>
