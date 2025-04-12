@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e2e8f0" stop-opacity="1"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1e293b" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="#ffffff"/>
+  
+  <!-- Header Section -->
+  <rect x="50" y="30" width="700" height="100" rx="10" fill="url(#headerGradient)" filter="url(#dropShadow)"/>
+  
+  <!-- GitHub Icon -->
+  <g transform="translate(100, 80) scale(0.06)">
+    <path d="M400 139C145 139 0 284 0 539C0 747 93 923 222 989C240 994 246 983 246 972C246 963 245 928 245 887C154 917 135 833 135 833C120 774 99 758 99 758C69 726 101 727 101 727C134 729 151 777 151 777C181 854 227 835 247 824C250 791 258 768 268 754C195 741 119 697 119 511C119 453 131 405 152 368C148 354 137 302 155 235C155 235 182 222 245 268C271 258 299 253 328 252C356 251 385 258 411 268C473 222 500 235 500 235C518 302 507 354 504 368C525 405 537 453 537 511C537 697 460 740 387 754C400 772 411 806 411 859C411 933 410 958 410 972C410 983 416 994 434 989C563 923 656 747 656 539C656 284 511 139 256 139" fill="#ffffff"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="240" y="85" font-family="Arial" font-size="24" font-weight="bold" fill="#ffffff">How to Deploy Your Website to GitHub Pages</text>
+  
+  <!-- Step Cards -->
+  <!-- Step 1 -->
+  <g transform="translate(100, 160)">
+    <rect x="0" y="0" width="600" height="80" rx="8" fill="url(#cardGradient)" filter="url(#dropShadow)"/>
+    <circle cx="30" cy="40" r="20" fill="#4f46e5"/>
+    <text x="30" y="46" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">1</text>
+    <text x="70" y="32" font-family="Arial" font-size="18" font-weight="bold" fill="#1e293b">Create GitHub Repository</text>
+    <text x="70" y="60" font-family="Arial" font-size="14" fill="#475569">Initialize a repository named username.github.io</text>
+  </g>
+  
+  <!-- Step 2 -->
+  <g transform="translate(100, 260)">
+    <rect x="0" y="0" width="600" height="80" rx="8" fill="url(#cardGradient)" filter="url(#dropShadow)"/>
+    <circle cx="30" cy="40" r="20" fill="#4f46e5"/>
+    <text x="30" y="46" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">2</text>
+    <text x="70" y="32" font-family="Arial" font-size="18" font-weight="bold" fill="#1e293b">Configure Build Settings</text>
+    <text x="70" y="60" font-family="Arial" font-size="14" fill="#475569">Set up your build process with proper baseUrl and outDir options</text>
+  </g>
+  
+  <!-- Step 3 -->
+  <g transform="translate(100, 360)">
+    <rect x="0" y="0" width="600" height="80" rx="8" fill="url(#cardGradient)" filter="url(#dropShadow)"/>
+    <circle cx="30" cy="40" r="20" fill="#4f46e5"/>
+    <text x="30" y="46" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">3</text>
+    <text x="70" y="32" font-family="Arial" font-size="18" font-weight="bold" fill="#1e293b">Set Up Deployment Workflow</text>
+    <text x="70" y="60" font-family="Arial" font-size="14" fill="#475569">Create GitHub Actions workflow for automated deployments</text>
+  </g>
+  
+  <!-- Command Line Box -->
+  <g transform="translate(450, 430)">
+    <rect x="0" y="0" width="300" height="40" rx="4" fill="#1e293b"/>
+    <text x="20" y="25" font-family="monospace" font-size="14" fill="#e2e8f0">$ gh-pages -d dist</text>
+  </g>
+  
+  <!-- Footer -->
+  <text x="400" y="490" font-family="Arial" font-size="12" fill="#64748b" text-anchor="middle">Learn more about GitHub Pages deployment options at docs.github.com</text>
+</svg>

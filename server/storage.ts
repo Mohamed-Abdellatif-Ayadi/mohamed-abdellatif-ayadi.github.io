@@ -196,6 +196,297 @@ export class MemStorage implements IStorage {
   private addSampleArticles(): void {
     const articles: Omit<Article, "id">[] = [
       {
+        title: "How to Deploy Your Website to GitHub Pages",
+        excerpt: "A step-by-step guide to deploying your static website to GitHub Pages with workflow automation, custom domains, and best practices.",
+        content: `
+          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
+            <p class="text-xl leading-relaxed mb-8">GitHub Pages offers a free and easy way to host static websites directly from your GitHub repository. Whether you're building a personal portfolio, project documentation, or a small web application, this guide will walk you through deploying it quickly and efficiently.</p>
+            
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
+              <p class="text-indigo-800 font-medium">This article assumes you have basic knowledge of Git and GitHub. If you're new to these tools, you might want to check out GitHub's <a href="https://docs.github.com/en/get-started" class="text-indigo-700 underline">getting started guide</a> first.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">What is GitHub Pages?</h2>
+            
+            <p>GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files directly from a repository on GitHub, optionally runs the files through a build process, and publishes a website. You can host your site on GitHub's github.io domain or your own custom domain.</p>
+            
+            <p>Some key benefits of GitHub Pages include:</p>
+            <ul class="list-disc pl-5 my-4 space-y-2">
+              <li>Free hosting for static content</li>
+              <li>Direct deployment from your GitHub repository</li>
+              <li>Built-in support for Jekyll (a static site generator)</li>
+              <li>Custom domain support with HTTPS</li>
+              <li>Seamless integration with GitHub workflows</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Setting Up Your Repository</h2>
+            
+            <p>There are two main types of GitHub Pages sites:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h3 class="font-semibold text-lg mb-3 text-slate-900">User/Organization Sites</h3>
+                <p class="text-slate-700">Published from a repository named <code>username.github.io</code> (where username is your GitHub username or organization name).</p>
+                <p class="text-slate-700 mt-2">Content is published from the <code>main</code> branch by default.</p>
+              </div>
+              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h3 class="font-semibold text-lg mb-3 text-slate-900">Project Sites</h3>
+                <p class="text-slate-700">Published from any repository, with content stored in a <code>gh-pages</code> branch, a <code>docs</code> folder on the main branch, or the main branch itself.</p>
+                <p class="text-slate-700 mt-2">The site will be available at <code>username.github.io/repository-name</code>.</p>
+              </div>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-10 mb-4 text-slate-800">Creating a User/Organization Site</h3>
+            
+            <p>To create a user site:</p>
+            
+            <ol class="list-decimal pl-5 my-4 space-y-2">
+              <li>Create a new repository named <code>username.github.io</code>, where username is your GitHub username.</li>
+              <li>Clone the repository to your local machine.</li>
+              <li>Add your website files to the repository.</li>
+              <li>Commit and push your changes to GitHub.</li>
+            </ol>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>BASH</span>
+                <span>Terminal</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>git clone https://github.com/username/username.github.io.git
+cd username.github.io
+echo "Hello World" > index.html
+git add --all
+git commit -m "Initial commit"
+git push -u origin main</code></pre>
+            </div>
+            
+            <p>Your site should now be available at <code>https://username.github.io</code>.</p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Deploying a Modern Web Application</h2>
+            
+            <p>If you're building a modern web application with frameworks like React, Vue, or Angular, you'll need to set up a build process before deploying to GitHub Pages.</p>
+            
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Configuring Build Settings</h3>
+            
+            <p>Most modern JavaScript frameworks have specific configurations for GitHub Pages deployment. Here are examples for popular frameworks:</p>
+            
+            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">React (Create React App)</h4>
+            
+            <p>Add a <code>homepage</code> field to your <code>package.json</code>:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>JSON</span>
+                <span>package.json</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>{
+  "name": "my-app",
+  "version": "0.1.0",
+  "homepage": "https://username.github.io/repository-name",
+  ...
+}</code></pre>
+            </div>
+            
+            <p>Install the <code>gh-pages</code> package and add deployment scripts:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>BASH</span>
+                <span>Terminal</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>npm install --save-dev gh-pages</code></pre>
+            </div>
+            
+            <p>Add these scripts to your <code>package.json</code>:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>JSON</span>
+                <span>package.json</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
+  ...
+}</code></pre>
+            </div>
+            
+            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">Vue.js</h4>
+            
+            <p>Create or update your <code>vue.config.js</code> file:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>JavaScript</span>
+                <span>vue.config.js</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/repository-name/'
+    : '/'
+}</code></pre>
+            </div>
+            
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
+              <p class="text-amber-800 font-medium">💡 Pro tip: For project sites, make sure to set the correct base path in your configuration to match your repository name. This ensures that all asset paths resolve correctly.</p>
+            </div>
+            
+            <h3 class="text-xl font-semibold mt-10 mb-4 text-slate-800">Deployment Methods</h3>
+            
+            <p>There are several ways to deploy your site to GitHub Pages:</p>
+            
+            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">1. Manual Deployment</h4>
+            
+            <p>For projects using the <code>gh-pages</code> package:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>BASH</span>
+                <span>Terminal</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>npm run deploy</code></pre>
+            </div>
+            
+            <p>This builds your project and pushes the output to the <code>gh-pages</code> branch of your repository.</p>
+            
+            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">2. GitHub Actions (Automated Deployment)</h4>
+            
+            <p>Create a GitHub Actions workflow file at <code>.github/workflows/deploy.yml</code>:</p>
+            
+            <div class="my-6 rounded-lg overflow-hidden">
+              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
+                <span>YAML</span>
+                <span>.github/workflows/deploy.yml</span>
+              </div>
+              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build 🔧
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build # The folder the action should deploy
+          branch: gh-pages # The branch the action should deploy to</code></pre>
+            </div>
+            
+            <p>This workflow automatically builds and deploys your site whenever you push changes to the main branch.</p>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Using a Custom Domain</h2>
+            
+            <p>To use a custom domain with GitHub Pages:</p>
+            
+            <ol class="list-decimal pl-5 my-4 space-y-2">
+              <li>Go to your repository's Settings tab.</li>
+              <li>Scroll down to the "GitHub Pages" section.</li>
+              <li>Under "Custom domain," enter your domain name and click Save.</li>
+              <li>Create a <code>CNAME</code> file in your repository (or in the build output directory) containing your custom domain.</li>
+            </ol>
+            
+            <p>You'll also need to configure your domain's DNS settings:</p>
+            
+            <div class="overflow-x-auto my-8">
+              <table class="min-w-full border-collapse">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
+                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.108.153</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.109.153</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.110.153</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 px-4 py-2">A</td>
+                    <td class="border border-slate-300 px-4 py-2">@</td>
+                    <td class="border border-slate-300 px-4 py-2">185.199.111.153</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 px-4 py-2">CNAME</td>
+                    <td class="border border-slate-300 px-4 py-2">www</td>
+                    <td class="border border-slate-300 px-4 py-2">username.github.io</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
+              <h3 class="text-lg font-semibold mb-4 text-purple-900">Troubleshooting GitHub Pages</h3>
+              <ul class="list-disc pl-5 space-y-3 text-purple-800">
+                <li><strong>404 Errors:</strong> Check that your repository is properly configured for GitHub Pages in the repository settings</li>
+                <li><strong>Missing Assets:</strong> Ensure that all asset paths are relative or match your configured base path</li>
+                <li><strong>Custom Domain Not Working:</strong> DNS changes can take up to 24 hours to propagate</li>
+                <li><strong>Build Failures:</strong> Check your workflow logs for build errors</li>
+                <li><strong>Routing Issues:</strong> For single-page applications, you may need a 404.html redirect hack for client-side routing</li>
+              </ul>
+            </div>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Best Practices for GitHub Pages</h2>
+            
+            <ol class="list-decimal pl-5 my-4 space-y-4">
+              <li>
+                <strong>Optimize Your Assets:</strong>
+                <p>Minimize CSS, JavaScript, and image files to improve load times.</p>
+              </li>
+              <li>
+                <strong>Use a GitHub Actions Workflow:</strong>
+                <p>Automate your deployment process to reduce manual errors and save time.</p>
+              </li>
+              <li>
+                <strong>Enable HTTPS:</strong>
+                <p>GitHub Pages supports HTTPS for custom domains. Always use it for security.</p>
+              </li>
+              <li>
+                <strong>Add a 404 Page:</strong>
+                <p>Create a custom 404.html file to handle requests for non-existent pages.</p>
+              </li>
+              <li>
+                <strong>Test Before Deploying:</strong>
+                <p>Use tools like <code>http-server</code> to test your build locally before deploying.</p>
+              </li>
+            </ol>
+            
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
+            
+            <p>GitHub Pages offers a powerful, free platform for hosting static websites. With the right setup, you can have a professional-looking site deployed in minutes, with automated workflows to keep it updated.</p>
+            
+            <p>Whether you're showcasing a portfolio, documenting a project, or building a simple web application, GitHub Pages provides all the essentials for fast, reliable hosting.</p>
+            
+            <p class="mt-6 text-slate-600 italic">Happy deploying!</p>
+          </div>
+        `,
+        coverImage: "/images/github-pages.svg",
+        category: "Technology",
+        publishedAt: new Date("2025-02-08")
+      },
+      {
         title: "A SQL Practical Challenge on Salary Analysis",
         excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
         content: `
