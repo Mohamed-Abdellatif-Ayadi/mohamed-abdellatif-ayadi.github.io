@@ -53,7 +53,7 @@ export class MemStorage implements IStorage {
       title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
       photoUrl: "/images/mohamed-ayadi-photo.png", // Using the professional photo
       email: "mohamed.ayadi.data@gmail.com",
-      phone: "015252301739",
+      phone: "+4915252301739",
       location: "Dortmund, Germany",
       summary: "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb als Verkaufsberater. Mit großer Leidenschaft für Vertrieb, Programmierung, Innovation und die Tech-Industrie bin ich neugierig, zielstrebig und ehrgeizig. Ich suche stets nach Möglichkeiten, zu lernen und mich in den Bereichen Softwareentwicklung oder IT-Consulting weiterzuentwickeln. Mein Ziel ist es, an Projekten zu arbeiten, die einen Unterschied machen, und Teil der Innovationen der Zukunft zu sein.",
       skills: [
