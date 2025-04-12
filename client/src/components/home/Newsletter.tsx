@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { simulateEmailSending } from "@/lib/emailUtils";
 
 const newsletterSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -28,7 +29,13 @@ const Newsletter = () => {
 
   const mutation = useMutation({
     mutationFn: async (values: NewsletterFormValues) => {
-      return apiRequest('POST', '/api/newsletter/subscribe', values);
+      // Save newsletter subscription
+      const response = await apiRequest('POST', '/api/newsletter/subscribe', values);
+      
+      // Simulate sending email notifications (to owner and confirmation to subscriber)
+      await simulateEmailSending('newsletter', values);
+      
+      return response;
     },
     onSuccess: () => {
       toast({
@@ -36,6 +43,7 @@ const Newsletter = () => {
         description: "Thank you for subscribing to our newsletter.",
       });
       setIsSubmitted(true);
+      form.reset();
     },
     onError: (error) => {
       toast({
