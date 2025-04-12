@@ -61,8 +61,8 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact - John Doe</title>
-        <meta name="description" content="Get in touch with John Doe. Send a message and I'll get back to you as soon as possible." />
+        <title>Contact - Mohamed Abdellatif Ayadi</title>
+        <meta name="description" content="Get in touch with Mohamed Abdellatif Ayadi. Send a message and I'll get back to you as soon as possible." />
       </Helmet>
       <div className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
         <div className="container mx-auto px-4 py-16">
@@ -87,7 +87,7 @@ const Contact = () => {
                 </div>
                 <h3 className="font-semibold text-slate-900">Email</h3>
               </div>
-              <a href="mailto:john@example.com" className="text-slate-600 hover:text-primary-700">john@example.com</a>
+              <a href="mailto:mohamed.ayadi.data@gmail.com" className="text-slate-600 hover:text-primary-700">mohamed.ayadi.data@gmail.com</a>
             </div>
             
             <div className="bg-white p-6 rounded-xl shadow-sm">
@@ -99,7 +99,7 @@ const Contact = () => {
                 </div>
                 <h3 className="font-semibold text-slate-900">Phone</h3>
               </div>
-              <p className="text-slate-600">+1 (555) 123-4567</p>
+              <p className="text-slate-600">+4915252301739</p>
             </div>
             
             <div className="bg-white p-6 rounded-xl shadow-sm">
@@ -112,7 +112,7 @@ const Contact = () => {
                 </div>
                 <h3 className="font-semibold text-slate-900">Location</h3>
               </div>
-              <p className="text-slate-600">San Francisco, CA</p>
+              <p className="text-slate-600">Dortmund, Germany</p>
             </div>
           </div>
 
