@@ -196,44 +196,112 @@ export class MemStorage implements IStorage {
   private addSampleArticles(): void {
     const articles: Omit<Article, "id">[] = [
       {
-        title: "10 Web Development Trends to Watch in 2023",
-        excerpt: "The landscape of web development is constantly evolving. In this article, I explore the most promising trends that are shaping the future of the web.",
+        title: "Mastering SQL Window Functions: A Comprehensive Guide",
+        excerpt: "Learn how to leverage SQL window functions to perform complex data analysis efficiently. From basic aggregations to advanced ranking and partitioning.",
         content: `
-          <h2>Introduction</h2>
-          <p>The landscape of web development is constantly evolving. In this article, I explore the most promising trends that are shaping the future of the web.</p>
-          
-          <h3>1. WebAssembly (WASM)</h3>
-          <p>WebAssembly is becoming increasingly important for performance-critical applications on the web. It allows code written in languages like C++, Rust, and others to run at near-native speed in the browser.</p>
-          
-          <h3>2. Jamstack Architecture</h3>
-          <p>The Jamstack (JavaScript, APIs, and Markup) approach continues to gain popularity because it offers improved performance, higher security, and a better developer experience.</p>
-          
-          <h3>3. Serverless Functions</h3>
-          <p>Serverless architecture is becoming mainstream, allowing developers to focus on writing code without worrying about server management or scaling.</p>
-          
-          <h3>4. Micro-Frontends</h3>
-          <p>Breaking down frontend monoliths into smaller, more manageable pieces is a trend that's helping teams work more independently and deploy more frequently.</p>
-          
-          <h3>5. Progressive Web Apps (PWAs)</h3>
-          <p>PWAs continue to bridge the gap between web and native applications, offering offline functionality, push notifications, and app-like experiences.</p>
-          
-          <h3>6. API-First Development</h3>
-          <p>Starting with the API design before implementation helps teams work in parallel and ensures better integration between different systems.</p>
-          
-          <h3>7. Edge Computing</h3>
-          <p>Moving computation closer to the user with edge functions is improving performance for global applications.</p>
-          
-          <h3>8. Headless CMS</h3>
-          <p>Decoupling the content management from the presentation layer offers more flexibility and better performance.</p>
-          
-          <h3>9. TypeScript Dominance</h3>
-          <p>TypeScript has become the standard for large-scale JavaScript applications, offering type safety and better tooling.</p>
-          
-          <h3>10. Accessibility as Standard</h3>
-          <p>Building accessible websites is increasingly becoming a requirement rather than an afterthought, with more tools and awareness available.</p>
-          
-          <h2>Conclusion</h2>
-          <p>Staying on top of these trends will help you build better web applications and stay competitive in the job market. As always, it's important to evaluate which technologies make sense for your specific projects rather than adopting them just because they're trending.</p>
+          <div class="prose max-w-none">
+            <p class="lead">SQL window functions are powerful features that allow you to perform calculations across a set of rows related to the current row. In this comprehensive guide, we'll explore how to use window functions effectively for data analysis.</p>
+
+            <h2>Understanding Window Functions</h2>
+            <p>Window functions perform calculations across a specific "window" or set of rows that are somehow related to the current row. Unlike regular aggregate functions, window functions don't collapse the result into a single row.</p>
+
+            <pre><code class="language-sql">SELECT 
+  employee_name,
+  department,
+  salary,
+  AVG(salary) OVER (PARTITION BY department) as dept_avg
+FROM employees;</code></pre>
+
+            <h2>Basic Window Function Types</h2>
+            
+            <h3>1. Aggregate Functions</h3>
+            <p>These include familiar functions like SUM, AVG, COUNT, MIN, and MAX:</p>
+            <pre><code class="language-sql">SELECT 
+  product_name,
+  category,
+  price,
+  AVG(price) OVER (PARTITION BY category) as category_avg_price
+FROM products;</code></pre>
+
+            <h3>2. Ranking Functions</h3>
+            <p>Functions that assign ranks to rows based on specified criteria:</p>
+            <ul>
+              <li>ROW_NUMBER(): Assigns unique sequential numbers</li>
+              <li>RANK(): Assigns ranks with gaps for ties</li>
+              <li>DENSE_RANK(): Assigns ranks without gaps</li>
+            </ul>
+
+            <pre><code class="language-sql">SELECT 
+  student_name,
+  score,
+  RANK() OVER (ORDER BY score DESC) as rank,
+  DENSE_RANK() OVER (ORDER BY score DESC) as dense_rank
+FROM exam_results;</code></pre>
+
+            <h2>Advanced Concepts</h2>
+
+            <h3>PARTITION BY Clause</h3>
+            <p>The PARTITION BY clause divides rows into groups for processing:</p>
+            <pre><code class="language-sql">SELECT 
+  sales_date,
+  product_id,
+  sales_amount,
+  SUM(sales_amount) OVER (
+    PARTITION BY product_id 
+    ORDER BY sales_date
+  ) as running_total
+FROM sales;</code></pre>
+
+            <h3>Frame Clauses</h3>
+            <p>Frame clauses define the exact set of rows in the window:</p>
+            <pre><code class="language-sql">SELECT 
+  transaction_date,
+  amount,
+  AVG(amount) OVER (
+    ORDER BY transaction_date
+    ROWS BETWEEN 3 PRECEDING AND CURRENT ROW
+  ) as moving_average
+FROM transactions;</code></pre>
+
+            <h2>Practical Examples</h2>
+
+            <h3>Moving Averages</h3>
+            <pre><code class="language-sql">SELECT 
+  date,
+  stock_price,
+  AVG(stock_price) OVER (
+    ORDER BY date
+    ROWS BETWEEN 7 PRECEDING AND CURRENT ROW
+  ) as seven_day_avg
+FROM stock_prices;</code></pre>
+
+            <h3>Year-over-Year Growth</h3>
+            <pre><code class="language-sql">SELECT 
+  year,
+  revenue,
+  LAG(revenue) OVER (ORDER BY year) as prev_year_revenue,
+  ((revenue - LAG(revenue) OVER (ORDER BY year)) / 
+    LAG(revenue) OVER (ORDER BY year)) * 100 as yoy_growth
+FROM yearly_revenue;</code></pre>
+
+            <h2>Best Practices</h2>
+            <ul>
+              <li>Always specify ORDER BY in window functions when results order matters</li>
+              <li>Use appropriate frame clauses for moving calculations</li>
+              <li>Consider performance implications with large datasets</li>
+              <li>Test window functions with small datasets first</li>
+            </ul>
+
+            <h2>Common Pitfalls</h2>
+            <ul>
+              <li>Forgetting that window functions execute after WHERE but before ORDER BY</li>
+              <li>Not considering NULL values in calculations</li>
+              <li>Using inappropriate frame clauses for the intended analysis</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>Window functions are essential tools for data analysis in SQL. They allow you to perform complex calculations while maintaining the granularity of your data. As you become more comfortable with these functions, you'll find they can replace many complex self-joins and subqueries, making your SQL more readable and efficient.</p>
+          </div>
         `,
         coverImage: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=800&h=500",
         category: "Technology",
