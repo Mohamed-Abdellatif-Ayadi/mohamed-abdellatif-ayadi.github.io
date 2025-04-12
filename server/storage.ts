@@ -517,7 +517,7 @@ FROM sales;</code></pre>
             <p>As you become more comfortable with window functions, you'll find they can replace many complex SQL patterns, making your queries more efficient and easier to understand.</p>
           </div>
         `,
-        coverImage: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=800&h=500",
+        coverImage: "/images/sql-window-functions.svg",
         category: "Technology",
         publishedAt: new Date("2023-06-12")
       },
