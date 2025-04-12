@@ -1,66 +1,103 @@
 import { Link } from "wouter";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
     <footer className="bg-slate-900 text-slate-400">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
-            <Link href="/" className="text-xl font-bold text-white mb-4 inline-block">
-              John<span className="text-primary-500">Doe</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Logo and Description */}
+          <div className="col-span-1">
+            <Link href="/" className="flex items-center gap-3 mb-4">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-primary">
+                <img 
+                  src="/images/mohamed-ayadi-photo.png" 
+                  alt="Mohamed Ayadi" 
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <span className="text-xl font-bold">
+                <span className="text-primary">Mohamed</span>
+                <span className="text-white"> Ayadi</span>
+              </span>
             </Link>
-            <p className="mb-4">Personal blog and professional portfolio. I write about web development, design, and career growth.</p>
+            <p className="mb-6">
+              Personal blog and professional portfolio. I write about web development, design, and career growth.
+            </p>
             <div className="flex space-x-4">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+              <a 
+                href="https://linkedin.com/in/mohamed-abdellatif-ayadi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-primary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
-                </svg>
-              </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+              <a 
+                href="https://github.com/Mayedi007"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-primary transition-colors"
+                aria-label="GitHub"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
               </a>
             </div>
           </div>
           
-          <div>
-            <h3 className="text-white font-medium mb-4">Sections</h3>
+          {/* Sections Navigation */}
+          <div className="col-span-1">
+            <h3 className="text-white font-semibold text-lg mb-4">Sections</h3>
             <ul className="space-y-2">
-              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="/cv" className="hover:text-white transition-colors">CV</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li>
+                <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-primary transition-colors">Blog</Link>
+              </li>
+              <li>
+                <Link href="/cv" className="hover:text-primary transition-colors">CV</Link>
+              </li>
+              <li>
+                <Link href="/projects" className="hover:text-primary transition-colors">Projects</Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
+              </li>
             </ul>
           </div>
           
-          <div>
-            <h3 className="text-white font-medium mb-4">Contact</h3>
+          {/* Contact Info */}
+          <div className="col-span-1">
+            <h3 className="text-white font-semibold text-lg mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 mt-0.5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <li className="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:john@example.com" className="hover:text-white transition-colors">john@example.com</a>
+                <a href="mailto:mohamed.ayadi.data@gmail.com" className="hover:text-primary transition-colors">
+                  mohamed.ayadi.data@gmail.com
+                </a>
               </li>
-              <li className="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 mt-0.5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <li className="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <span>+1 (555) 123-4567</span>
+                <span>+4915252301739</span>
               </li>
             </ul>
           </div>
         </div>
         
-        <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} John Doe. All rights reserved.</p>
+        {/* Copyright */}
+        <div className="mt-12 pt-8 border-t border-slate-800 text-center">
+          <p>&copy; {currentYear} Mohamed Abdellatif Ayadi. All rights reserved.</p>
         </div>
       </div>
     </footer>
