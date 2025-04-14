@@ -25,7 +25,7 @@ const Projects = () => {
       title: "Database Table Directory Automation",
       description: "Implementation of patent CN111339081A for automatically collecting and integrating heterogeneous database table directories, boosting data extraction efficiency by up to 70% and reducing manual verification time by 90%.",
       techStack: ["ETL", "Data Engineering", "SQL", "Automation", "Database"],
-      imageUrl: "/images/database-automation.svg",
+      imageUrl: "/images/test-placeholder.svg",
       githubUrl: "https://github.com/Mayedi007/database-automation",
       liveUrl: "https://github.com/Mayedi007/database-automation",
       category: "ai"
@@ -35,7 +35,7 @@ const Projects = () => {
       title: "Flash Sale Platform",
       description: "A high-performance e-commerce platform for limited-time promotional deals, built with Spring Boot, Redis, MySQL, and a responsive frontend. Supports OTP-based registration, secure login, flash sale countdowns, and real-time inventory control.",
       techStack: ["Spring Boot", "Redis", "MySQL", "Bootstrap", "jQuery", "MyBatis"],
-      imageUrl: "/images/flash-sale-platform.svg",
+      imageUrl: "/images/test-placeholder.svg",
       githubUrl: "https://github.com/Mayedi007/flash-sale-platform",
       category: "web"
     },
@@ -44,7 +44,7 @@ const Projects = () => {
       title: "Reddit Data Streaming Pipeline",
       description: "A comprehensive ETL data pipeline that extracts Reddit data, processes it through AWS services, and visualizes insights in dashboards. Built with Airflow, Docker, dbt, and AWS cloud infrastructure.",
       techStack: ["Python", "AWS", "Airflow", "Docker", "Terraform", "PowerBI"],
-      imageUrl: "/images/reddit-pipeline.svg",
+      imageUrl: "/images/test-placeholder.svg",
       githubUrl: "https://github.com/Mayedi007/reddit-data-streaming-pipeline",
       category: "ai"
     },
@@ -53,7 +53,7 @@ const Projects = () => {
       title: "Java LeetCode Solutions",
       description: "A collection of coding problem solutions from LeetCode organized by topic (Dynamic Programming, Linked Lists, Stack) and solved using clean code principles with Java 17+.",
       techStack: ["Java", "Algorithms", "Data Structures", "LeetCode"],
-      imageUrl: "/images/leetcode-solutions.svg",
+      imageUrl: "/images/test-placeholder.svg",
       githubUrl: "https://github.com/Mayedi007/java-praktices-leetcode",
       category: "other"
     },
@@ -62,7 +62,7 @@ const Projects = () => {
       title: "Vue Pro Dashboard",
       description: "A professional dashboard built with Vue.js, featuring responsive design, interactive data visualization, and modern UI components.",
       techStack: ["Vue.js", "JavaScript", "CSS", "Responsive Design"],
-      imageUrl: "/images/vue-dashboard.svg",
+      imageUrl: "/images/test-placeholder.svg",
       githubUrl: "https://github.com/Mayedi007/vue-pro-dashboard",
       category: "web"
     }
