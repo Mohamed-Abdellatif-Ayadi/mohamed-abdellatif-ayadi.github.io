@@ -20,6 +20,7 @@ const Navbar = () => {
     { title: "Posts", path: "/blog" },
     { title: "Projects", path: "/projects" },
     { title: "CV", path: "/cv" },
+    { title: "Chat", path: "/chat" },
     { title: "Contact", path: "/contact" }
   ];
 

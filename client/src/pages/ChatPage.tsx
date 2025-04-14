@@ -10,6 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useLanguage } from '@/lib/languageContext';
 import { MessageSquare, SendIcon, User2, Bot } from 'lucide-react';
+import { type CV, type Article, type Education, type Experience, type Language as LanguageType } from '@shared/schema';
 
 // Define the structure of a chat message
 interface ChatMessage {
@@ -34,12 +35,12 @@ const ChatPage = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Fetch CV data
-  const { data: cv, isLoading: isCVLoading } = useQuery({
+  const { data: cv, isLoading: isCVLoading } = useQuery<CV>({
     queryKey: ['/api/cv'],
   });
 
   // Fetch articles data
-  const { data: articles, isLoading: isArticlesLoading } = useQuery({
+  const { data: articles, isLoading: isArticlesLoading } = useQuery<Article[]>({
     queryKey: ['/api/articles'],
   });
 
@@ -51,7 +52,7 @@ const ChatPage = () => {
   // Function to process user input and generate a response
   const processMessage = (userInput: string) => {
     // If data is still loading, inform the user
-    if (isCVLoading || isArticlesLoading) {
+    if (isCVLoading || isArticlesLoading || !cv || !articles) {
       return "I'm still gathering information. Please try again in a moment.";
     }
 
@@ -75,9 +76,9 @@ const ChatPage = () => {
     }
 
     if (normalizedInput.includes('language') || normalizedInput.includes('speak')) {
-      const languages = cv.languages.map((lang: any) => 
+      const languages = cv.languages ? cv.languages.map((lang: LanguageType) => 
         `${lang.name} (${lang.proficiency})`
-      ).join(', ');
+      ).join(', ') : 'No language information available';
       return `I speak: ${languages}`;
     }
 
