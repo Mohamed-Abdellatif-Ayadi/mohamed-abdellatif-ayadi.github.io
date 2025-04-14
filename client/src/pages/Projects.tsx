@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import { useState } from "react";
+import { Link } from "wouter";
 import { useLanguage } from "@/lib/languageContext";
 
 interface Project {
@@ -120,7 +121,11 @@ const Projects = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-slate-900">{project.title}</h3>
+                  <h3 className="text-xl font-bold mb-2 text-slate-900">
+                    <Link href={`/projects/${project.id}`} className="hover:text-primary transition-colors">
+                      {project.title}
+                    </Link>
+                  </h3>
                   <p className="text-slate-600 mb-4">{project.description}</p>
                   
                   {/* Tech Stack */}
