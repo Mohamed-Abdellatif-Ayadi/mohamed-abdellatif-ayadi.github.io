@@ -1,62 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background gradient -->
-  <defs>
-    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2c3e50" />
-      <stop offset="100%" stop-color="#1a1a2e" />
-    </linearGradient>
-    <linearGradient id="pipelineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff4500" /> <!-- Reddit orange -->
-      <stop offset="100%" stop-color="#3498db" /> <!-- AWS blue -->
-    </linearGradient>
-  </defs>
-  
   <!-- Background -->
-  <rect width="800" height="400" fill="url(#backgroundGradient)" rx="20" ry="20" />
+  <rect width="800" height="400" fill="#FF4500"/>
   
-  <!-- Data Pipeline Flow -->
-  <g transform="translate(100, 160)">
-    <!-- Pipeline path -->
-    <path d="M0,40 C150,0 300,80 450,40 S600,0 600,0" stroke="url(#pipelineGradient)" stroke-width="20" fill="none" stroke-linecap="round" />
+  <!-- Reddit Logo -->
+  <g transform="translate(200, 100) scale(0.7)">
+    <!-- Reddit Mascot (Simplified) -->
+    <circle cx="170" cy="100" r="90" fill="#FFFFFF"/>
+    <circle cx="140" cy="80" r="12" fill="#FF4500"/>
+    <circle cx="200" cy="80" r="12" fill="#FF4500"/>
+    <path d="M120,120 Q170,150 220,120" fill="none" stroke="#FF4500" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="170" cy="45" r="10" fill="#FFFFFF"/>
+    <circle cx="170" cy="45" r="5" fill="#FF4500"/>
+    <!-- Antenna -->
+    <path d="M170,45 Q210,10 250,30" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="250" cy="30" r="10" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- Data Pipeline Icons -->
+  <g transform="translate(400, 140)">
+    <!-- Pipeline Flow -->
+    <path d="M0,0 L200,0" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-dasharray="1, 20"/>
     
-    <!-- Data points along pipeline -->
-    <circle cx="0" cy="40" r="25" fill="#ff4500" /> <!-- Reddit -->
-    <circle cx="150" cy="0" r="20" fill="#ff7e29" /> <!-- Extraction -->
-    <circle cx="300" cy="80" r="20" fill="#ff9a52" /> <!-- Processing -->
-    <circle cx="450" cy="40" r="20" fill="#3498db" /> <!-- Storage -->
-    <circle cx="600" cy="0" r="25" fill="#2980b9" /> <!-- Dashboard -->
+    <!-- Data Nodes -->
+    <circle cx="0" cy="0" r="30" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="100" cy="0" r="30" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="200" cy="0" r="30" fill="#FFFFFF" opacity="0.9"/>
+    
+    <!-- AWS Cloud -->
+    <g transform="translate(100, 60)">
+      <path d="M-60,20 Q-60,-20 -20,-20 L20,-20 Q60,-20 60,20 L60,40 Q60,80 20,80 L-20,80 Q-60,80 -60,40 Z" fill="#FFFFFF" opacity="0.85"/>
+      <text x="0" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FF4500">AWS</text>
+    </g>
   </g>
   
-  <!-- Icons for AWS, Python, etc. -->
-  <g transform="translate(100, 220)">
-    <!-- Reddit icon (simplified) -->
-    <circle cx="0" cy="0" r="15" fill="white" />
-    <circle cx="-5" cy="-5" r="3" fill="#ff4500" />
-    <circle cx="5" cy="-5" r="3" fill="#ff4500" />
-    <path d="M-7,4 Q0,9 7,4" stroke="#ff4500" stroke-width="2" fill="none" />
-  </g>
-  
-  <g transform="translate(250, 180)">
-    <!-- Python icon (simplified) -->
-    <path d="M10,0 A10,10 0 1 0 -10,0 A10,10 0 1 0 10,0 z" fill="#306998" />
-    <path d="M-3,-6 L3,-6 L3,6 L-3,6 z" fill="#ffd43b" />
-  </g>
-  
-  <g transform="translate(400, 260)">
-    <!-- AWS icon (simplified) -->
-    <path d="M0,-10 L8.7,5 L-8.7,5 Z" fill="#ff9900" />
-    <path d="M0,8 L5,-2.5 L-5,-2.5 Z" fill="#ff9900" />
-  </g>
-  
-  <g transform="translate(550, 200)">
-    <!-- Dashboard icon (simplified) -->
-    <rect x="-15" y="-15" width="30" height="30" rx="3" ry="3" fill="#2c3e50" stroke="#ecf0f1" stroke-width="2" />
-    <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#ecf0f1" stroke-width="2" />
-    <line x1="-10" y1="0" x2="5" y2="0" stroke="#ecf0f1" stroke-width="2" />
-    <line x1="-10" y1="5" x2="8" y2="5" stroke="#ecf0f1" stroke-width="2" />
-  </g>
-  
-  <!-- Main Title -->
-  <text x="400" y="320" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="white">REDDIT DATA STREAMING PIPELINE</text>
-  <text x="400" y="350" font-family="Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="middle" fill="#ecf0f1">ETL Pipeline with AWS, Airflow, and PowerBI</text>
+  <!-- Title Text -->
+  <text x="400" y="320" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Reddit Data Streaming Pipeline
+  </text>
 </svg>

@@ -1,64 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background gradient -->
-  <defs>
-    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1e272e" />
-      <stop offset="100%" stop-color="#0c162b" />
-    </linearGradient>
-    <linearGradient id="javaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f89820" />
-      <stop offset="100%" stop-color="#ea2d2e" />
-    </linearGradient>
-  </defs>
-  
   <!-- Background -->
-  <rect width="800" height="400" fill="url(#backgroundGradient)" rx="20" ry="20" />
+  <rect width="800" height="400" fill="#2C3E50"/>
   
-  <!-- Code brackets design -->
-  <g transform="translate(140, 100)">
-    <!-- Left Bracket -->
-    <path d="M0,0 L-40,20 L-40,180 L0,200" stroke="#9ecbff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Java Cup Icon -->
+  <g transform="translate(200, 120)">
+    <path d="M50,30 C50,30 20,40 20,80 C20,120 30,140 30,160 C30,180 0,190 0,190 L100,190 C100,190 70,180 70,160 C70,140 80,120 80,80 C80,40 50,30 50,30 Z" fill="#FFFFFF" opacity="0.9"/>
+    <path d="M30,0 C30,0 -20,20 30,40 L70,40 C70,40 120,20 70,0 L30,0 Z" fill="#FFFFFF" opacity="0.9"/>
+    <ellipse cx="50" cy="200" rx="50" ry="10" fill="#FFFFFF" opacity="0.7"/>
+  </g>
+  
+  <!-- Code / Algorithm Visualization -->
+  <g transform="translate(420, 90)">
+    <!-- Code Lines -->
+    <rect x="0" y="0" width="180" height="170" rx="10" fill="#FFFFFF" opacity="0.85"/>
+    <line x1="20" y1="30" x2="160" y2="30" stroke="#2C3E50" stroke-width="4"/>
+    <line x1="20" y1="60" x2="120" y2="60" stroke="#2C3E50" stroke-width="4"/>
+    <line x1="40" y1="90" x2="140" y2="90" stroke="#2C3E50" stroke-width="4"/>
+    <line x1="40" y1="120" x2="100" y2="120" stroke="#2C3E50" stroke-width="4"/>
+    <line x1="20" y1="150" x2="120" y2="150" stroke="#2C3E50" stroke-width="4"/>
     
-    <!-- Right Bracket -->
-    <path d="M520,0 L560,20 L560,180 L520,200" stroke="#9ecbff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Brackets -->
+    <text x="20" y="45" font-family="monospace" font-size="24" fill="#2C3E50">{</text>
+    <text x="160" y="135" font-family="monospace" font-size="24" fill="#2C3E50">}</text>
     
-    <!-- Code Lines (simplified) -->
-    <line x1="0" y1="50" x2="520" y2="50" stroke="#4a69bd" stroke-width="5" stroke-dasharray="10,15" />
-    <line x1="0" y1="100" x2="520" y2="100" stroke="#4a69bd" stroke-width="5" stroke-dasharray="5,10" />
-    <line x1="0" y1="150" x2="520" y2="150" stroke="#4a69bd" stroke-width="5" stroke-dasharray="15,10" />
+    <!-- Class Indicator -->
+    <text x="10" y="20" font-family="monospace" font-size="16" fill="#2C3E50">class Solution {</text>
   </g>
   
-  <!-- Java cup logo (simplified) -->
-  <g transform="translate(400, 150)">
-    <path d="M-40,40 C-40,-20 40,-20 40,40 L30,70 L-30,70 L-40,40" fill="url(#javaGradient)" />
-    <path d="M-15,-30 C-15,-45 15,-45 15,-30 L10,40 L-10,40 L-15,-30" fill="url(#javaGradient)" />
-    <ellipse cx="0" cy="70" rx="35" ry="10" fill="#f89820" />
+  <!-- LeetCode Reference -->
+  <g transform="translate(320, 280)">
+    <rect x="0" y="0" width="160" height="40" rx="20" fill="#FFFFFF" opacity="0.85"/>
+    <text x="80" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">LeetCode</text>
   </g>
   
-  <!-- Algorithm visualization elements -->
-  <g transform="translate(250, 180)">
-    <!-- Binary Tree Representation -->
-    <circle cx="0" cy="0" r="15" fill="#27ae60" />
-    <circle cx="-30" cy="30" r="10" fill="#27ae60" />
-    <circle cx="30" cy="30" r="10" fill="#27ae60" />
-    <line x1="-5" y1="10" x2="-25" y2="25" stroke="#27ae60" stroke-width="3" />
-    <line x1="5" y1="10" x2="25" y2="25" stroke="#27ae60" stroke-width="3" />
-  </g>
-  
-  <g transform="translate(550, 180)">
-    <!-- Linked List Representation -->
-    <circle cx="-40" cy="0" r="12" fill="#3498db" />
-    <circle cx="0" cy="0" r="12" fill="#3498db" />
-    <circle cx="40" cy="0" r="12" fill="#3498db" />
-    <line x1="-28" y1="0" x2="-12" y2="0" stroke="#3498db" stroke-width="3" />
-    <line x1="12" y1="0" x2="28" y2="0" stroke="#3498db" stroke-width="3" />
-    <line x1="-28" y1="0" x2="-20" y2="-5" stroke="#3498db" stroke-width="3" />
-    <line x1="-28" y1="0" x2="-20" y2="5" stroke="#3498db" stroke-width="3" />
-    <line x1="12" y1="0" x2="20" y2="-5" stroke="#3498db" stroke-width="3" />
-    <line x1="12" y1="0" x2="20" y2="5" stroke="#3498db" stroke-width="3" />
-  </g>
-  
-  <!-- Title -->
-  <text x="400" y="320" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="white">JAVA LEETCODE SOLUTIONS</text>
-  <text x="400" y="350" font-family="Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="middle" fill="#ecf0f1">Algorithms & Data Structures Implementations</text>
+  <!-- Title Text -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Java LeetCode Solutions
+  </text>
 </svg>
