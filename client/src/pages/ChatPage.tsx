@@ -216,10 +216,11 @@ const ChatPage = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:h-[650px]">
-        <div className="md:col-span-3 h-full">
-          <Card className="flex flex-col h-full">
-            <div className="flex items-center justify-between px-6 py-3 border-b">
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Main Chat Section */}
+        <div className="flex-1">
+          <Card className="flex flex-col h-[600px]">
+            <div className="flex items-center justify-between px-6 py-3 border-b shrink-0">
               <div className="flex items-center space-x-2">
                 <Avatar>
                   <AvatarImage src="/images/mohamed-ayadi-photo.png" alt="Mohamed" />
@@ -236,7 +237,7 @@ const ChatPage = () => {
               </Badge>
             </div>
 
-            <ScrollArea className="flex-grow p-4">
+            <ScrollArea className="flex-grow p-4 overflow-y-auto">
               <div className="space-y-4">
                 {messages.map((message) => (
                   <div
@@ -295,7 +296,7 @@ const ChatPage = () => {
               </div>
             </ScrollArea>
 
-            <div className="p-4 border-t">
+            <div className="p-4 border-t shrink-0">
               <div className="flex space-x-2">
                 <Textarea
                   value={input}
@@ -318,11 +319,12 @@ const ChatPage = () => {
           </Card>
         </div>
 
-        <div className="md:col-span-1 h-full">
-          <Card className="p-5 h-full flex flex-col">
+        {/* Suggested Questions Section */}
+        <div className="md:w-72">
+          <Card className="p-5 h-[600px] flex flex-col">
             <h3 className="font-medium mb-3">Suggested Questions</h3>
             <Separator className="mb-3" />
-            <div className="space-y-3 flex-grow">
+            <div className="space-y-3 flex-grow overflow-y-auto">
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
