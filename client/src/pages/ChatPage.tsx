@@ -320,11 +320,11 @@ const ChatPage = () => {
         </div>
 
         {/* Suggested Questions Section */}
-        <div className="md:w-72">
+        <div className="md:w-96">
           <Card className="p-5 h-[600px] flex flex-col">
             <h3 className="font-medium mb-3">Suggested Questions</h3>
             <Separator className="mb-3" />
-            <div className="space-y-3 flex-grow overflow-y-auto">
+            <div className="space-y-3 flex-grow">
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
