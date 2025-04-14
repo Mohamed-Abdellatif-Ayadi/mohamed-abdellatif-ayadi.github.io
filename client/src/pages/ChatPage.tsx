@@ -216,9 +216,9 @@ const ChatPage = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="md:col-span-3">
-          <Card className="flex flex-col h-[600px]">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 min-h-[600px]">
+        <div className="md:col-span-3 h-full">
+          <Card className="flex flex-col h-full">
             <div className="flex items-center justify-between px-6 py-3 border-b">
               <div className="flex items-center space-x-2">
                 <Avatar>
@@ -318,8 +318,8 @@ const ChatPage = () => {
           </Card>
         </div>
 
-        <div className="md:col-span-1">
-          <Card className="p-5 h-[600px] flex flex-col">
+        <div className="md:col-span-1 h-full">
+          <Card className="p-5 h-full flex flex-col">
             <h3 className="font-medium mb-3">Suggested Questions</h3>
             <Separator className="mb-3" />
             <div className="space-y-3 flex-grow">
