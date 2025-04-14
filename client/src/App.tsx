@@ -12,6 +12,7 @@ import CVPage from "@/pages/CVPage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import ChatPage from "@/pages/ChatPage";
+import Projects from "@/pages/Projects";
 import { LanguageProvider } from "@/lib/languageContext";
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/chat" component={ChatPage} />
+      <Route path="/projects" component={Projects} />
       <Route component={NotFound} />
     </Switch>
   );
