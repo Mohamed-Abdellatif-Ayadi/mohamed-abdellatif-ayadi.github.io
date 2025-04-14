@@ -216,7 +216,7 @@ const ChatPage = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 min-h-[600px]">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:h-[650px]">
         <div className="md:col-span-3 h-full">
           <Card className="flex flex-col h-full">
             <div className="flex items-center justify-between px-6 py-3 border-b">
