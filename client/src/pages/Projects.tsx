@@ -21,13 +21,13 @@ const Projects = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Portfolio Website",
-      description: "Personal portfolio website and blog built with React, Express, and multilingual support.",
-      techStack: ["React", "TypeScript", "TailwindCSS", "Express"],
-      imageUrl: "/images/placeholder-project.jpg",
-      githubUrl: "https://github.com/Mayedi007",
-      liveUrl: "/",
-      category: "web"
+      title: "Database Table Directory Automation",
+      description: "Implementation of patent CN111339081A for automatically collecting and integrating heterogeneous database table directories, boosting data extraction efficiency by up to 70% and reducing manual verification time by 90%.",
+      techStack: ["ETL", "Data Engineering", "SQL", "Automation", "Database"],
+      imageUrl: "/images/database-automation.svg",
+      githubUrl: "https://github.com/Mayedi007/database-automation",
+      liveUrl: "https://github.com/Mayedi007/database-automation",
+      category: "ai"
     },
     {
       id: 2,
