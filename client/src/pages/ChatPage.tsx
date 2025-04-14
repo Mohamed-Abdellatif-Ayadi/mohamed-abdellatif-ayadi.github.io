@@ -319,13 +319,13 @@ const ChatPage = () => {
         </div>
 
         <div className="md:col-span-1">
-          <Card className="p-5">
+          <Card className="p-5 h-[600px] flex flex-col">
             <h3 className="font-medium mb-3">Suggested Questions</h3>
             <Separator className="mb-3" />
-            <div className="space-y-2">
+            <div className="space-y-3 flex-grow">
               <Button
                 variant="outline"
-                className="w-full justify-start text-left h-auto py-2"
+                className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
                   setInput("What is your educational background?");
                   handleSendMessage();
@@ -335,7 +335,7 @@ const ChatPage = () => {
               </Button>
               <Button
                 variant="outline"
-                className="w-full justify-start text-left h-auto py-2"
+                className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
                   setInput("What programming languages do you know?");
                   handleSendMessage();
@@ -345,7 +345,7 @@ const ChatPage = () => {
               </Button>
               <Button
                 variant="outline"
-                className="w-full justify-start text-left h-auto py-2"
+                className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
                   setInput("Tell me about your work experience.");
                   handleSendMessage();
@@ -355,7 +355,7 @@ const ChatPage = () => {
               </Button>
               <Button
                 variant="outline"
-                className="w-full justify-start text-left h-auto py-2"
+                className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
                   setInput("What blog posts have you written?");
                   handleSendMessage();
@@ -365,7 +365,7 @@ const ChatPage = () => {
               </Button>
               <Button
                 variant="outline"
-                className="w-full justify-start text-left h-auto py-2"
+                className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
                   setInput("What languages do you speak?");
                   handleSendMessage();
