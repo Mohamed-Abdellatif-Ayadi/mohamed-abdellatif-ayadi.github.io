@@ -79,6 +79,7 @@ const ProjectDetail = () => {
         id: 2,
         title: "Flash Sale Platform",
         description: "A high-performance e-commerce platform for limited-time promotional deals.",
+        imageUrl: "/images/flash-sale-platform.svg",
         fullDescription: `
           <h2>Project Overview</h2>
           <p>Flash Sale is a high-performance e-commerce platform designed specifically for limited-time promotional deals. Built with scalability and concurrency in mind, this platform can handle high volumes of simultaneous users during flash sale events.</p>

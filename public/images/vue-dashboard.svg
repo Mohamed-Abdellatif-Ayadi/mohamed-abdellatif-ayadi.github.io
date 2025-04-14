@@ -1,0 +1,69 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34495e" />
+      <stop offset="100%" stop-color="#2c3e50" />
+    </linearGradient>
+    <linearGradient id="vueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#41b883" />
+      <stop offset="100%" stop-color="#35495e" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#backgroundGradient)" rx="20" ry="20" />
+  
+  <!-- Dashboard UI Mockup -->
+  <g transform="translate(150, 80)">
+    <!-- Main Dashboard Frame -->
+    <rect x="0" y="0" width="500" height="220" rx="8" ry="8" fill="#ecf0f1" />
+    
+    <!-- Navbar -->
+    <rect x="0" y="0" width="500" height="40" rx="8" ry="8" fill="#42b883" />
+    
+    <!-- Sidebar -->
+    <rect x="0" y="40" width="100" height="180" fill="#35495e" />
+    
+    <!-- Main content area with cards -->
+    <rect x="120" y="60" width="140" height="80" rx="4" ry="4" fill="white" stroke="#dfe6e9" stroke-width="1" />
+    <rect x="120" y="150" width="140" height="50" rx="4" ry="4" fill="white" stroke="#dfe6e9" stroke-width="1" />
+    <rect x="280" y="60" width="200" height="140" rx="4" ry="4" fill="white" stroke="#dfe6e9" stroke-width="1" />
+    
+    <!-- Card content elements (simplified) -->
+    <rect x="130" y="70" width="120" height="10" rx="2" ry="2" fill="#42b883" />
+    <rect x="130" y="85" width="90" height="5" rx="2" ry="2" fill="#b2bec3" />
+    <rect x="130" y="95" width="100" height="5" rx="2" ry="2" fill="#b2bec3" />
+    <rect x="130" y="105" width="70" height="5" rx="2" ry="2" fill="#b2bec3" />
+    
+    <rect x="130" y="160" width="120" height="10" rx="2" ry="2" fill="#42b883" />
+    <rect x="130" y="175" width="90" height="5" rx="2" ry="2" fill="#b2bec3" />
+    
+    <!-- Chart in the larger card -->
+    <rect x="290" y="70" width="180" height="10" rx="2" ry="2" fill="#42b883" />
+    <polyline points="290,140 320,120 350,130 380,100 410,110 440,90 470,105" stroke="#42b883" stroke-width="3" fill="none" />
+    <circle cx="320" cy="120" r="4" fill="#42b883" />
+    <circle cx="350" cy="130" r="4" fill="#42b883" />
+    <circle cx="380" cy="100" r="4" fill="#42b883" />
+    <circle cx="410" cy="110" r="4" fill="#42b883" />
+    <circle cx="440" cy="90" r="4" fill="#42b883" />
+    <circle cx="470" cy="105" r="4" fill="#42b883" />
+    
+    <!-- Vue.js Logo (simplified) -->
+    <g transform="translate(50, 110) scale(0.6)">
+      <path d="M0,0 L50,0 L40,20 L25,50 L10,20 L0,0" fill="#42b883" />
+      <path d="M10,0 L40,0 L25,30 L10,0" fill="#35495e" />
+    </g>
+    
+    <!-- Sidebar menu items -->
+    <rect x="20" y="60" width="60" height="5" rx="2" ry="2" fill="#42b883" />
+    <rect x="20" y="75" width="60" height="5" rx="2" ry="2" fill="#7f8c8d" />
+    <rect x="20" y="90" width="60" height="5" rx="2" ry="2" fill="#7f8c8d" />
+    <rect x="20" y="105" width="60" height="5" rx="2" ry="2" fill="#7f8c8d" />
+    <rect x="20" y="120" width="60" height="5" rx="2" ry="2" fill="#7f8c8d" />
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="320" font-family="Arial, sans-serif" font-size="30" font-weight="bold" text-anchor="middle" fill="white">VUE PRO DASHBOARD</text>
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="16" font-weight="normal" text-anchor="middle" fill="#ecf0f1">Responsive Admin Interface with Vue.js</text>
+</svg>
