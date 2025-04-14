@@ -69,7 +69,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["ETL", "Data Engineering", "SQL", "Automation", "Database"],
-        imageUrl: "/images/database-automation.svg",
+        imageUrl: "https://via.placeholder.com/800x400/4F46E5/FFFFFF?text=Database+Automation",
         githubUrl: "https://github.com/Mayedi007/database-automation",
         liveUrl: "https://github.com/Mayedi007/database-automation",
         category: 'ai'
@@ -126,7 +126,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Spring Boot", "Redis", "MySQL", "Bootstrap", "jQuery", "MyBatis"],
-        imageUrl: "/images/flash-sale-platform.svg",
+        imageUrl: "https://via.placeholder.com/800x400/FF5722/FFFFFF?text=Flash+Sale+Platform",
         githubUrl: "https://github.com/Mayedi007/flash-sale-platform",
         category: 'web'
       });
@@ -183,7 +183,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Python", "AWS", "Airflow", "Docker", "Terraform", "PowerBI"],
-        imageUrl: "/images/reddit-pipeline.svg",
+        imageUrl: "https://via.placeholder.com/800x400/FF4500/FFFFFF?text=Reddit+Pipeline",
         githubUrl: "https://github.com/Mayedi007/reddit-data-streaming-pipeline",
         category: 'ai'
       });
@@ -236,7 +236,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Java", "Algorithms", "Data Structures", "LeetCode"],
-        imageUrl: "/images/leetcode-solutions.svg",
+        imageUrl: "https://via.placeholder.com/800x400/2C3E50/FFFFFF?text=LeetCode+Solutions",
         githubUrl: "https://github.com/Mayedi007/java-praktices-leetcode",
         category: 'other'
       });
@@ -292,7 +292,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Vue.js", "JavaScript", "CSS", "Responsive Design"],
-        imageUrl: "/images/vue-dashboard.svg",
+        imageUrl: "https://via.placeholder.com/800x400/41B883/FFFFFF?text=Vue+Dashboard",
         githubUrl: "https://github.com/Mayedi007/vue-pro-dashboard",
         category: 'web'
       });
