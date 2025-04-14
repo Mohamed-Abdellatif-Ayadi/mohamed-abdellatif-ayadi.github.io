@@ -62,7 +62,7 @@ const Projects = () => {
       title: "Vue Pro Dashboard",
       description: "A professional dashboard built with Vue.js, featuring responsive design, interactive data visualization, and modern UI components.",
       techStack: ["Vue.js", "JavaScript", "CSS", "Responsive Design"],
-      imageUrl: "https://via.placeholder.com/400x200/41B883/FFFFFF?text=Vue+Dashboard",
+      imageUrl: "/images/vue-dashboard.svg",
       githubUrl: "https://github.com/Mayedi007/vue-pro-dashboard",
       category: "web"
     }
