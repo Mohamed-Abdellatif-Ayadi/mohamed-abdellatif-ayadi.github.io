@@ -79,7 +79,6 @@ const ProjectDetail = () => {
         id: 2,
         title: "Flash Sale Platform",
         description: "A high-performance e-commerce platform for limited-time promotional deals.",
-        imageUrl: "/images/flash-sale-platform.svg",
         fullDescription: `
           <h2>Project Overview</h2>
           <p>Flash Sale is a high-performance e-commerce platform designed specifically for limited-time promotional deals. Built with scalability and concurrency in mind, this platform can handle high volumes of simultaneous users during flash sale events.</p>
@@ -127,7 +126,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Spring Boot", "Redis", "MySQL", "Bootstrap", "jQuery", "MyBatis"],
-        imageUrl: "/images/placeholder-project.jpg",
+        imageUrl: "/images/flash-sale-platform.svg",
         githubUrl: "https://github.com/Mayedi007/flash-sale-platform",
         category: 'web'
       });
@@ -184,7 +183,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Python", "AWS", "Airflow", "Docker", "Terraform", "PowerBI"],
-        imageUrl: "/images/placeholder-project.jpg",
+        imageUrl: "/images/reddit-pipeline.svg",
         githubUrl: "https://github.com/Mayedi007/reddit-data-streaming-pipeline",
         category: 'ai'
       });
@@ -237,7 +236,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Java", "Algorithms", "Data Structures", "LeetCode"],
-        imageUrl: "/images/placeholder-project.jpg",
+        imageUrl: "/images/leetcode-solutions.svg",
         githubUrl: "https://github.com/Mayedi007/java-praktices-leetcode",
         category: 'other'
       });
@@ -293,7 +292,7 @@ const ProjectDetail = () => {
           </ul>
         `,
         techStack: ["Vue.js", "JavaScript", "CSS", "Responsive Design"],
-        imageUrl: "/images/placeholder-project.jpg",
+        imageUrl: "/images/vue-dashboard.svg",
         githubUrl: "https://github.com/Mayedi007/vue-pro-dashboard",
         category: 'web'
       });
