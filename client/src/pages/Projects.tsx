@@ -134,7 +134,22 @@ const Projects = () => {
                     onError={(e) => {
                       // Fallback for broken images
                       const target = e.target as HTMLImageElement;
-                      target.src = "https://via.placeholder.com/400x200/4F46E5/FFFFFF?text=Project+Preview";
+                      
+                      // Create project-specific fallback images based on title
+                      const title = project.title;
+                      if (title.includes("Database")) {
+                        target.src = "https://via.placeholder.com/400x200/4F46E5/FFFFFF?text=Database+Automation";
+                      } else if (title.includes("Flash Sale")) {
+                        target.src = "https://via.placeholder.com/400x200/FF5722/FFFFFF?text=Flash+Sale+Platform";
+                      } else if (title.includes("Reddit")) {
+                        target.src = "https://via.placeholder.com/400x200/FF4500/FFFFFF?text=Reddit+Pipeline";
+                      } else if (title.includes("LeetCode")) {
+                        target.src = "https://via.placeholder.com/400x200/2C3E50/FFFFFF?text=LeetCode+Solutions";
+                      } else if (title.includes("Vue")) {
+                        target.src = "https://via.placeholder.com/400x200/41B883/FFFFFF?text=Vue+Dashboard";
+                      } else {
+                        target.src = "https://via.placeholder.com/400x200/4F46E5/FFFFFF?text=Project+Preview";
+                      }
                     }}
                   />
                 </div>
