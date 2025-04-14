@@ -11,6 +11,7 @@ import BlogPost from "@/pages/BlogPost";
 import CVPage from "@/pages/CVPage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import ChatPage from "@/pages/ChatPage";
 import { LanguageProvider } from "@/lib/languageContext";
 
 function Router() {
