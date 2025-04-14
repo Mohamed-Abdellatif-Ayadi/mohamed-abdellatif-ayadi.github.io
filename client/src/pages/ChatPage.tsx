@@ -65,14 +65,18 @@ const ChatPage = () => {
 
     if (normalizedInput.includes('study') || normalizedInput.includes('education') || 
         normalizedInput.includes('university') || normalizedInput.includes('degree')) {
-      const education = cv.education.map((edu: any) => 
-        `${edu.degree} at ${edu.institution} (${edu.startDate} - ${edu.endDate})`
-      ).join('\\n');
-      return `My educational background includes:\\n${education}`;
+      if (cv.education && cv.education.length > 0) {
+        const education = cv.education.map((edu: Education) => 
+          `${edu.degree} at ${edu.institution} (${edu.startDate} - ${edu.endDate})`
+        ).join('\\n');
+        return `My educational background includes:\\n${education}`;
+      } else {
+        return "I don't have any education information available.";
+      }
     }
 
     if (normalizedInput.includes('skills') || normalizedInput.includes('what can you do')) {
-      return `My technical skills include: ${cv.skills.join(', ')}`;
+      return `My technical skills include: ${cv.skills ? cv.skills.join(', ') : 'No skills information available'}`;
     }
 
     if (normalizedInput.includes('language') || normalizedInput.includes('speak')) {
@@ -84,33 +88,39 @@ const ChatPage = () => {
 
     if (normalizedInput.includes('experience') || normalizedInput.includes('work') || 
         normalizedInput.includes('job')) {
-      const workExp = cv.experience.map((exp: any) => 
-        `${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate || 'Present'})`
-      ).join('\\n');
-      return `My work experience includes:\\n${workExp}`;
+      if (cv.experience && cv.experience.length > 0) {
+        const workExp = cv.experience.map((exp: Experience) => 
+          `${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate || 'Present'})`
+        ).join('\\n');
+        return `My work experience includes:\\n${workExp}`;
+      } else {
+        return "I don't have any work experience information available.";
+      }
     }
 
     if (normalizedInput.includes('location') || normalizedInput.includes('where') || 
         normalizedInput.includes('city') || normalizedInput.includes('country') || 
         normalizedInput.includes('live')) {
-      return `I'm located in ${cv.location}.`;
+      return cv.location ? `I'm located in ${cv.location}.` : "My location information is not available.";
     }
 
     if (normalizedInput.includes('contact') || normalizedInput.includes('email') || 
         normalizedInput.includes('phone')) {
-      return `You can contact me at:\\nEmail: ${cv.email}\\nPhone: ${cv.phone}`;
+      const email = cv.email || "Email not available";
+      const phone = cv.phone || "Phone not available";
+      return `You can contact me at:\\nEmail: ${email}\\nPhone: ${phone}`;
     }
 
     if (normalizedInput.includes('summary') || normalizedInput.includes('about you') || 
         normalizedInput.includes('tell me about yourself')) {
-      return cv.summary;
+      return cv.summary || "I don't have a summary available yet.";
     }
 
     // Blog-related questions
     if (normalizedInput.includes('blog') || normalizedInput.includes('article') || 
         normalizedInput.includes('post') || normalizedInput.includes('write')) {
       if (articles && articles.length > 0) {
-        const articlesList = articles.map((article: any) => 
+        const articlesList = articles.map((article: Article) => 
           `- ${article.title}`
         ).join('\\n');
         return `I've written the following articles:\\n${articlesList}`;
@@ -127,13 +137,13 @@ const ChatPage = () => {
     
     for (const term of searchTerms) {
       if (normalizedInput.includes(term) && articles) {
-        const matchingArticles = articles.filter((article: any) => 
+        const matchingArticles = articles.filter((article: Article) => 
           article.title.toLowerCase().includes(term) || 
           article.excerpt.toLowerCase().includes(term)
         );
         
         if (matchingArticles.length > 0) {
-          const articlesList = matchingArticles.map((article: any) => 
+          const articlesList = matchingArticles.map((article: Article) => 
             `- ${article.title}`
           ).join('\\n');
           return `I have written about "${term}". Here are some relevant articles:\\n${articlesList}`;
