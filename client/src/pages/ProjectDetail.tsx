@@ -5,11 +5,19 @@ import { useLanguage } from "@/lib/languageContext";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface Project {
-  id: number;
+interface ProjectTranslation {
   title: string;
   description: string;
   fullDescription?: string;
+}
+
+interface Project {
+  id: number;
+  translations: {
+    en: ProjectTranslation;
+    de: ProjectTranslation;
+    fr: ProjectTranslation;
+  };
   techStack: string[];
   imageUrl: string;
   githubUrl: string;
@@ -20,9 +28,14 @@ interface Project {
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [, setLocation] = useLocation();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
+  
+  // Helper function to get the correct translation based on current language
+  const getTranslation = (project: Project) => {
+    return project.translations[language as keyof typeof project.translations] || project.translations.en;
+  };
 
   useEffect(() => {
     // In a real app, this would fetch from an API
@@ -30,44 +43,128 @@ const ProjectDetail = () => {
     if (id === "1") {
       setProject({
         id: 1,
-        title: "Database Table Directory Automation",
-        description: "Implementation of patent CN111339081A for automatically collecting and integrating heterogeneous database table directories.",
-        fullDescription: `
-          <h2>Patent Background</h2>
-          <p>In modern enterprises, data is often scattered across various database systems. Differences in data structures and formats make the process of collecting and integrating information cumbersome and time-consuming. This project implements patent CN111339081A, which proposes an automated approach to efficiently collecting table directory information from various database systems, significantly streamlining the data extraction and analysis process.</p>
-          
-          <h2>Project Overview</h2>
-          <p>This system automatically collects and integrates table information from heterogeneous databases, including MySQL, PostgreSQL, and Oracle. The implementation boosts data extraction efficiency by up to 70% and reduces manual deployment and verification time by 90%.</p>
-          
-          <h2>Key Features</h2>
-          <ul>
-            <li><strong>Automated Data Collection</strong> - The system automatically collects basic information from various databases, generating an initial list of database tables.</li>
-            <li><strong>Data Analysis</strong> - Collected information is analyzed to identify relationships between data.</li>
-            <li><strong>Quality Monitoring</strong> - Real-time monitoring of data quality metrics ensures the reliability of data analysis.</li>
-            <li><strong>Integration Framework</strong> - A unified system that bridges the gap between different database systems.</li>
-            <li><strong>Backup and Recovery</strong> - Automated backup and recovery processes ensure data security and availability.</li>
-          </ul>
-          
-          <h2>Technical Implementation</h2>
-          <p>The project was built using a combination of technologies:</p>
-          <ul>
-            <li>SQL for querying diverse database systems</li>
-            <li>ETL processes for data transformation</li>
-            <li>Automation scripts to minimize manual intervention</li>
-            <li>Data validation frameworks to ensure accuracy</li>
-            <li>Monitoring tools to maintain system health</li>
-          </ul>
-          
-          <h2>Impact and Results</h2>
-          <p>The implementation of this system has resulted in:</p>
-          <ul>
-            <li>70% increase in data extraction efficiency</li>
-            <li>90% reduction in manual verification time</li>
-            <li>Improved data quality and consistency</li>
-            <li>Enhanced visibility across database systems</li>
-            <li>Simplified ETL workflow management</li>
-          </ul>
-        `,
+        translations: {
+          en: {
+            title: "Database Table Directory Automation",
+            description: "Implementation of patent CN111339081A for automatically collecting and integrating heterogeneous database table directories.",
+            fullDescription: `
+              <h2>Patent Background</h2>
+              <p>In modern enterprises, data is often scattered across various database systems. Differences in data structures and formats make the process of collecting and integrating information cumbersome and time-consuming. This project implements patent CN111339081A, which proposes an automated approach to efficiently collecting table directory information from various database systems, significantly streamlining the data extraction and analysis process.</p>
+              
+              <h2>Project Overview</h2>
+              <p>This system automatically collects and integrates table information from heterogeneous databases, including MySQL, PostgreSQL, and Oracle. The implementation boosts data extraction efficiency by up to 70% and reduces manual deployment and verification time by 90%.</p>
+              
+              <h2>Key Features</h2>
+              <ul>
+                <li><strong>Automated Data Collection</strong> - The system automatically collects basic information from various databases, generating an initial list of database tables.</li>
+                <li><strong>Data Analysis</strong> - Collected information is analyzed to identify relationships between data.</li>
+                <li><strong>Quality Monitoring</strong> - Real-time monitoring of data quality metrics ensures the reliability of data analysis.</li>
+                <li><strong>Integration Framework</strong> - A unified system that bridges the gap between different database systems.</li>
+                <li><strong>Backup and Recovery</strong> - Automated backup and recovery processes ensure data security and availability.</li>
+              </ul>
+              
+              <h2>Technical Implementation</h2>
+              <p>The project was built using a combination of technologies:</p>
+              <ul>
+                <li>SQL for querying diverse database systems</li>
+                <li>ETL processes for data transformation</li>
+                <li>Automation scripts to minimize manual intervention</li>
+                <li>Data validation frameworks to ensure accuracy</li>
+                <li>Monitoring tools to maintain system health</li>
+              </ul>
+              
+              <h2>Impact and Results</h2>
+              <p>The implementation of this system has resulted in:</p>
+              <ul>
+                <li>70% increase in data extraction efficiency</li>
+                <li>90% reduction in manual verification time</li>
+                <li>Improved data quality and consistency</li>
+                <li>Enhanced visibility across database systems</li>
+                <li>Simplified ETL workflow management</li>
+              </ul>
+            `
+          },
+          de: {
+            title: "Datenbanktabellenverzeichnis-Automatisierung",
+            description: "Implementierung des Patents CN111339081A zur automatischen Erfassung und Integration heterogener Datenbanktabellenverzeichnisse.",
+            fullDescription: `
+              <h2>Patent-Hintergrund</h2>
+              <p>In modernen Unternehmen sind Daten oft über verschiedene Datenbanksysteme verteilt. Unterschiede in Datenstrukturen und -formaten machen den Prozess der Erfassung und Integration von Informationen umständlich und zeitaufwendig. Dieses Projekt implementiert das Patent CN111339081A, das einen automatisierten Ansatz zur effizienten Erfassung von Tabellenverzeichnisinformationen aus verschiedenen Datenbanksystemen vorschlägt und den Datenextraktions- und Analyseprozess erheblich rationalisiert.</p>
+              
+              <h2>Projektübersicht</h2>
+              <p>Dieses System erfasst und integriert automatisch Tabelleninformationen aus heterogenen Datenbanken, darunter MySQL, PostgreSQL und Oracle. Die Implementierung steigert die Datenextraktionseffizienz um bis zu 70% und reduziert die manuelle Bereitstellungs- und Verifizierungszeit um 90%.</p>
+              
+              <h2>Hauptmerkmale</h2>
+              <ul>
+                <li><strong>Automatisierte Datenerfassung</strong> - Das System erfasst automatisch grundlegende Informationen aus verschiedenen Datenbanken und generiert eine erste Liste von Datenbanktabellen.</li>
+                <li><strong>Datenanalyse</strong> - Gesammelte Informationen werden analysiert, um Beziehungen zwischen Daten zu identifizieren.</li>
+                <li><strong>Qualitätsüberwachung</strong> - Echtzeit-Überwachung von Datenqualitätsmetriken gewährleistet die Zuverlässigkeit der Datenanalyse.</li>
+                <li><strong>Integrationsframework</strong> - Ein einheitliches System, das die Lücke zwischen verschiedenen Datenbanksystemen überbrückt.</li>
+                <li><strong>Backup und Wiederherstellung</strong> - Automatisierte Backup- und Wiederherstellungsprozesse gewährleisten Datensicherheit und -verfügbarkeit.</li>
+              </ul>
+              
+              <h2>Technische Umsetzung</h2>
+              <p>Das Projekt wurde mit einer Kombination von Technologien entwickelt:</p>
+              <ul>
+                <li>SQL zur Abfrage verschiedener Datenbanksysteme</li>
+                <li>ETL-Prozesse für die Datentransformation</li>
+                <li>Automatisierungsskripte zur Minimierung manueller Eingriffe</li>
+                <li>Datenvalidierungsframeworks zur Sicherstellung der Genauigkeit</li>
+                <li>Überwachungstools zur Aufrechterhaltung der Systemintegrität</li>
+              </ul>
+              
+              <h2>Auswirkungen und Ergebnisse</h2>
+              <p>Die Implementierung dieses Systems hat zu folgenden Ergebnissen geführt:</p>
+              <ul>
+                <li>70% Steigerung der Datenextraktionseffizienz</li>
+                <li>90% Reduzierung der manuellen Überprüfungszeit</li>
+                <li>Verbesserte Datenqualität und -konsistenz</li>
+                <li>Erhöhte Transparenz über Datenbanksysteme hinweg</li>
+                <li>Vereinfachtes ETL-Workflow-Management</li>
+              </ul>
+            `
+          },
+          fr: {
+            title: "Automatisation des Répertoires de Tables de Base de Données",
+            description: "Implémentation du brevet CN111339081A pour la collecte et l'intégration automatiques de répertoires de tables de bases de données hétérogènes.",
+            fullDescription: `
+              <h2>Contexte du Brevet</h2>
+              <p>Dans les entreprises modernes, les données sont souvent dispersées dans divers systèmes de bases de données. Les différences de structures et de formats de données rendent le processus de collecte et d'intégration des informations fastidieux et chronophage. Ce projet implémente le brevet CN111339081A, qui propose une approche automatisée pour collecter efficacement les informations de répertoire de tables à partir de divers systèmes de bases de données, rationalisant considérablement le processus d'extraction et d'analyse des données.</p>
+              
+              <h2>Aperçu du Projet</h2>
+              <p>Ce système collecte et intègre automatiquement les informations de tables provenant de bases de données hétérogènes, notamment MySQL, PostgreSQL et Oracle. L'implémentation augmente l'efficacité d'extraction des données jusqu'à 70% et réduit le temps de déploiement et de vérification manuelle de 90%.</p>
+              
+              <h2>Caractéristiques Principales</h2>
+              <ul>
+                <li><strong>Collecte Automatisée de Données</strong> - Le système collecte automatiquement des informations de base à partir de diverses bases de données, générant une liste initiale des tables de base de données.</li>
+                <li><strong>Analyse de Données</strong> - Les informations collectées sont analysées pour identifier les relations entre les données.</li>
+                <li><strong>Surveillance de la Qualité</strong> - Le suivi en temps réel des métriques de qualité des données assure la fiabilité de l'analyse des données.</li>
+                <li><strong>Cadre d'Intégration</strong> - Un système unifié qui comble le fossé entre les différents systèmes de bases de données.</li>
+                <li><strong>Sauvegarde et Récupération</strong> - Des processus automatisés de sauvegarde et de récupération assurent la sécurité et la disponibilité des données.</li>
+              </ul>
+              
+              <h2>Implémentation Technique</h2>
+              <p>Le projet a été construit en utilisant une combinaison de technologies:</p>
+              <ul>
+                <li>SQL pour interroger divers systèmes de bases de données</li>
+                <li>Processus ETL pour la transformation des données</li>
+                <li>Scripts d'automatisation pour minimiser l'intervention manuelle</li>
+                <li>Frameworks de validation des données pour assurer la précision</li>
+                <li>Outils de surveillance pour maintenir la santé du système</li>
+              </ul>
+              
+              <h2>Impact et Résultats</h2>
+              <p>La mise en œuvre de ce système a entraîné:</p>
+              <ul>
+                <li>70% d'augmentation de l'efficacité d'extraction des données</li>
+                <li>90% de réduction du temps de vérification manuelle</li>
+                <li>Amélioration de la qualité et de la cohérence des données</li>
+                <li>Visibilité accrue à travers les systèmes de bases de données</li>
+                <li>Gestion simplifiée des flux de travail ETL</li>
+              </ul>
+            `
+          }
+        },
         techStack: ["ETL", "Data Engineering", "SQL", "Automation", "Database"],
         imageUrl: "/images/database-automation.svg",
         githubUrl: "https://github.com/Mayedi007/database-automation",
