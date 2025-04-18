@@ -1,12 +1,14 @@
 import { formatDate } from "@/lib/utils";
 import { Article } from "@shared/schema";
 import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import { useLanguage } from "@/lib/languageContext";
 
 type ArticleContentProps = {
   article: Article;
 };
 
 const ArticleContent = ({ article }: ArticleContentProps) => {
+  const { language, t } = useLanguage();
   // Keywords based on article content and category
   const getKeywords = (article: Article) => {
     if (article.category === 'Technology' && article.title.includes('SQL')) {
@@ -33,11 +35,15 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       </div>
       
       {/* Article Title */}
-      <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{article.title}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+        {article.translations && article.translations[language] 
+          ? article.translations[language].title 
+          : article.title}
+      </h1>
       
       {/* Reading Time & Date */}
       <div className="flex items-center text-sm text-slate-600 mb-4">
-        <span className="mr-4">8 mins</span>
+        <span className="mr-4">{t('blog.readingTime')}</span>
         <span className="mr-4">•</span>
         <span>{formattedDate}</span>
       </div>
@@ -69,9 +75,9 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
           className="w-16 h-16 rounded-full mr-4 object-cover border-2 border-indigo-100"
         />
         <div>
-          <div className="text-sm text-slate-500 mb-1">AUTHOR</div>
+          <div className="text-sm text-slate-500 mb-1">{t('blog.author')}</div>
           <div className="font-medium text-lg">Mohamed Abdellatif Ayadi</div>
-          <div className="text-slate-600 text-sm mt-1">Data enthusiast, turning insights into action.</div>
+          <div className="text-slate-600 text-sm mt-1">{t('blog.authorDescription')}</div>
           <div className="flex mt-2 space-x-3">
             <a href="https://linkedin.com/in/mohamed-abdellatif-ayadi" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-indigo-600">
               <FaLinkedin size={18} />
@@ -89,15 +95,23 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       {/* Article Content */}
       <div 
         className="article-content prose prose-slate max-w-none"
-        dangerouslySetInnerHTML={{ __html: article.content }}
+        dangerouslySetInnerHTML={{ 
+          __html: article.translations && article.translations[language] && article.translations[language].content
+            ? article.translations[language].content
+            : article.content 
+        }}
       />
       
       {/* Share Section */}
       <div className="mt-12 pt-8 border-t border-slate-200">
-        <h3 className="text-lg font-bold mb-4">Share this article:</h3>
+        <h3 className="text-lg font-bold mb-4">{t('blog.shareArticle')}:</h3>
         <div className="flex space-x-4">
           <a 
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}`} 
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+              article.translations && article.translations[language] 
+                ? article.translations[language].title 
+                : article.title
+            )}`} 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-slate-600 hover:text-indigo-700"
