@@ -421,17 +421,74 @@ export class MemStorage implements IStorage {
           en: {
             title: "Setting Up a Custom Domain for Your Website",
             excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
-            content: "English article content"
+            content: `
+          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
+            <p class="text-xl leading-relaxed mb-8">A custom domain is essential for establishing your professional online identity. This comprehensive guide walks you through the process of setting up, configuring, and troubleshooting a custom domain for your website.</p>
+            
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
+              <p class="text-indigo-800 font-medium">This article builds on concepts from our <a href="/blog/1" class="text-indigo-700 underline">GitHub Pages guide</a>, focusing specifically on custom domain setup and management across different hosting providers.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Why Use a Custom Domain?</h2>
+            
+            <p>Using a custom domain (like yourname.com instead of yourname.github.io) offers several important benefits:</p>
+            
+            <ul class="list-disc pl-5 my-6 space-y-2">
+              <li><strong>Professional brand image</strong> - Creates a more polished and credible impression</li>
+              <li><strong>Better memorability</strong> - Easier for users to remember and type</li>
+              <li><strong>Platform independence</strong> - Freedom to change hosting providers without changing your web address</li>
+              <li><strong>Email consistency</strong> - Ability to create professional email addresses (you@yourdomain.com)</li>
+              <li><strong>SEO advantages</strong> - May help with search engine optimization and ranking</li>
+            </ul>
+          </div>`
           },
           de: {
             title: "Einrichten einer benutzerdefinierten Domain für Ihre Website",
             excerpt: "Erfahren Sie, wie Sie eine professionelle benutzerdefinierte Domain für Ihre Website konfigurieren, einschließlich DNS-Einrichtung, Domain-Anbieter, SSL-Zertifikate und Fehlerbehebung.",
-            content: "German article content"
+            content: `
+          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
+            <p class="text-xl leading-relaxed mb-8">Eine benutzerdefinierte Domain ist essenziell für den Aufbau Ihrer professionellen Online-Identität. Dieser umfassende Leitfaden führt Sie durch den Prozess der Einrichtung, Konfiguration und Fehlerbehebung einer benutzerdefinierten Domain für Ihre Website.</p>
+            
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
+              <p class="text-indigo-800 font-medium">Dieser Artikel baut auf Konzepten aus unserem <a href="/blog/1" class="text-indigo-700 underline">GitHub Pages-Leitfaden</a> auf und konzentriert sich speziell auf die Einrichtung und Verwaltung benutzerdefinierter Domains bei verschiedenen Hosting-Anbietern.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Warum eine benutzerdefinierte Domain verwenden?</h2>
+            
+            <p>Die Verwendung einer benutzerdefinierten Domain (wie ihruname.com anstelle von ihruname.github.io) bietet mehrere wichtige Vorteile:</p>
+            
+            <ul class="list-disc pl-5 my-6 space-y-2">
+              <li><strong>Professionelles Markenimage</strong> - Schafft einen polierten und glaubwürdigen Eindruck</li>
+              <li><strong>Bessere Merkfähigkeit</strong> - Leichter für Benutzer zu merken und zu tippen</li>
+              <li><strong>Plattformunabhängigkeit</strong> - Freiheit, Hosting-Anbieter zu wechseln, ohne Ihre Webadresse zu ändern</li>
+              <li><strong>E-Mail-Konsistenz</strong> - Möglichkeit, professionelle E-Mail-Adressen zu erstellen (sie@ihredomain.com)</li>
+              <li><strong>SEO-Vorteile</strong> - Kann bei der Suchmaschinenoptimierung und Rangfolge helfen</li>
+            </ul>
+          </div>`
           },
           fr: {
             title: "Configuration d'un domaine personnalisé pour votre site web",
             excerpt: "Apprenez à configurer un domaine personnalisé professionnel pour votre site web, y compris la configuration DNS, les fournisseurs de domaines, les certificats SSL et le dépannage.",
-            content: "French article content"
+            content: `
+          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
+            <p class="text-xl leading-relaxed mb-8">Un domaine personnalisé est essentiel pour établir votre identité professionnelle en ligne. Ce guide complet vous accompagne dans le processus de configuration et de dépannage d'un domaine personnalisé pour votre site web.</p>
+            
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
+              <p class="text-indigo-800 font-medium">Cet article s'appuie sur les concepts de notre <a href="/blog/1" class="text-indigo-700 underline">guide GitHub Pages</a>, en se concentrant spécifiquement sur la configuration et la gestion des domaines personnalisés à travers différents fournisseurs d'hébergement.</p>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Pourquoi utiliser un domaine personnalisé ?</h2>
+            
+            <p>L'utilisation d'un domaine personnalisé (comme votrenom.com au lieu de votrenom.github.io) offre plusieurs avantages importants :</p>
+            
+            <ul class="list-disc pl-5 my-6 space-y-2">
+              <li><strong>Image de marque professionnelle</strong> - Crée une impression plus soignée et crédible</li>
+              <li><strong>Meilleure mémorabilité</strong> - Plus facile à retenir et à taper pour les utilisateurs</li>
+              <li><strong>Indépendance de plateforme</strong> - Liberté de changer de fournisseur d'hébergement sans changer votre adresse web</li>
+              <li><strong>Cohérence des emails</strong> - Possibilité de créer des adresses email professionnelles (vous@votredomaine.com)</li>
+              <li><strong>Avantages SEO</strong> - Peut aider à l'optimisation pour les moteurs de recherche et au classement</li>
+            </ul>
+          </div>`
           }
         },
         content: `

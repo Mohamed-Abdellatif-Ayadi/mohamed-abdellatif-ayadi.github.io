@@ -237,9 +237,9 @@ const ChatPage = () => {
       const phone = cv.phone || (language === 'de' ? "Telefon nicht verfügbar" : language === 'fr' ? "Téléphone non disponible" : "Phone not available");
       
       const responses = {
-        en: `You can contact me at:\\nEmail: ${email}\\nPhone: ${phone}`,
-        de: `Sie können mich kontaktieren unter:\\nE-Mail: ${email}\\nTelefon: ${phone}`,
-        fr: `Vous pouvez me contacter à:\\nEmail: ${email}\\nTéléphone: ${phone}`
+        en: `You can contact me at:\nEmail: ${email}\nPhone: ${phone}`,
+        de: `Sie können mich kontaktieren unter:\nE-Mail: ${email}\nTelefon: ${phone}`,
+        fr: `Vous pouvez me contacter à:\nEmail: ${email}\nTéléphone: ${phone}`
       };
       return responses[language as keyof typeof responses] || responses.en;
     }
@@ -274,12 +274,12 @@ const ChatPage = () => {
       if (articles && articles.length > 0) {
         const articlesList = articles.map((article: Article) => 
           `- ${article.title}`
-        ).join('\\n');
+        ).join('\n');
         
         const responses = {
-          en: `I've written the following articles:\\n${articlesList}`,
-          de: `Ich habe die folgenden Artikel geschrieben:\\n${articlesList}`,
-          fr: `J'ai écrit les articles suivants:\\n${articlesList}`
+          en: `I've written the following articles:\n${articlesList}`,
+          de: `Ich habe die folgenden Artikel geschrieben:\n${articlesList}`,
+          fr: `J'ai écrit les articles suivants:\n${articlesList}`
         };
         return responses[language as keyof typeof responses] || responses.en;
       } else {
@@ -308,12 +308,12 @@ const ChatPage = () => {
         if (matchingArticles.length > 0) {
           const articlesList = matchingArticles.map((article: Article) => 
             `- ${article.title}`
-          ).join('\\n');
+          ).join('\n');
           
           const responses = {
-            en: `I have written about "${term}". Here are some relevant articles:\\n${articlesList}`,
-            de: `Ich habe über "${term}" geschrieben. Hier sind einige relevante Artikel:\\n${articlesList}`,
-            fr: `J'ai écrit sur "${term}". Voici quelques articles pertinents:\\n${articlesList}`
+            en: `I have written about "${term}". Here are some relevant articles:\n${articlesList}`,
+            de: `Ich habe über "${term}" geschrieben. Hier sind einige relevante Artikel:\n${articlesList}`,
+            fr: `J'ai écrit sur "${term}". Voici quelques articles pertinents:\n${articlesList}`
           };
           return responses[language as keyof typeof responses] || responses.en;
         }
