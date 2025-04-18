@@ -334,55 +334,161 @@ const ProjectDetail = () => {
     } else if (id === "3") {
       setProject({
         id: 3,
-        title: "Reddit Data Streaming Pipeline",
-        description: "A comprehensive ETL data pipeline for Reddit data.",
-        fullDescription: `
-          <h2>Project Overview</h2>
-          <p>This project is a complete data pipeline that extracts data from Reddit's API, processes it through a series of AWS services, and outputs visualized insights through dashboards. The pipeline is built with modern data engineering principles and cloud-native technologies.</p>
-          
-          <h2>Architecture</h2>
-          <p>The pipeline follows a modern cloud-based ETL architecture:</p>
-          <ol>
-            <li>Extract data using Reddit API</li>
-            <li>Load data into AWS S3</li>
-            <li>Copy data into AWS Redshift</li>
-            <li>Transform using dbt (data build tool)</li>
-            <li>Create visualization dashboards in PowerBI or Google Data Studio</li>
-            <li>Orchestrate the entire workflow with Airflow in Docker</li>
-            <li>Provision AWS resources with Terraform</li>
-          </ol>
-          
-          <h2>Key Components</h2>
-          <ul>
-            <li><strong>Data Extraction:</strong> Python scripts to interact with Reddit's API</li>
-            <li><strong>Data Storage:</strong> AWS S3 for raw data and Redshift for analytical queries</li>
-            <li><strong>Transformation:</strong> dbt for SQL-based transformations with testing and documentation</li>
-            <li><strong>Orchestration:</strong> Apache Airflow running in Docker containers</li>
-            <li><strong>Infrastructure as Code:</strong> Terraform scripts for AWS resource provisioning</li>
-            <li><strong>Visualization:</strong> Interactive dashboards in PowerBI/Google Data Studio</li>
-          </ul>
-          
-          <h2>Technical Implementation</h2>
-          <p>The project demonstrates several advanced data engineering concepts:</p>
-          <ul>
-            <li>Containerization with Docker for consistent development and deployment</li>
-            <li>Infrastructure as Code (IaC) for reproducible cloud setups</li>
-            <li>Data modeling best practices in Redshift</li>
-            <li>Workflow orchestration with DAGs in Airflow</li>
-            <li>Incremental loading patterns</li>
-            <li>Error handling and monitoring</li>
-          </ul>
-          
-          <h2>Insights & Visualizations</h2>
-          <p>The final output is a comprehensive dashboard that provides insights into the r/dataengineering subreddit, including:</p>
-          <ul>
-            <li>Popular topics and trends</li>
-            <li>User engagement metrics</li>
-            <li>Posting patterns and timing analysis</li>
-            <li>Content categorization</li>
-            <li>Technology mentions and popularity</li>
-          </ul>
-        `,
+        translations: {
+          en: {
+            title: "Reddit Data Streaming Pipeline",
+            description: "A comprehensive ETL data pipeline for Reddit data.",
+            fullDescription: `
+              <h2>Project Overview</h2>
+              <p>This project is a complete data pipeline that extracts data from Reddit's API, processes it through a series of AWS services, and outputs visualized insights through dashboards. The pipeline is built with modern data engineering principles and cloud-native technologies.</p>
+              
+              <h2>Architecture</h2>
+              <p>The pipeline follows a modern cloud-based ETL architecture:</p>
+              <ol>
+                <li>Extract data using Reddit API</li>
+                <li>Load data into AWS S3</li>
+                <li>Copy data into AWS Redshift</li>
+                <li>Transform using dbt (data build tool)</li>
+                <li>Create visualization dashboards in PowerBI or Google Data Studio</li>
+                <li>Orchestrate the entire workflow with Airflow in Docker</li>
+                <li>Provision AWS resources with Terraform</li>
+              </ol>
+              
+              <h2>Key Components</h2>
+              <ul>
+                <li><strong>Data Extraction:</strong> Python scripts to interact with Reddit's API</li>
+                <li><strong>Data Storage:</strong> AWS S3 for raw data and Redshift for analytical queries</li>
+                <li><strong>Transformation:</strong> dbt for SQL-based transformations with testing and documentation</li>
+                <li><strong>Orchestration:</strong> Apache Airflow running in Docker containers</li>
+                <li><strong>Infrastructure as Code:</strong> Terraform scripts for AWS resource provisioning</li>
+                <li><strong>Visualization:</strong> Interactive dashboards in PowerBI/Google Data Studio</li>
+              </ul>
+              
+              <h2>Technical Implementation</h2>
+              <p>The project demonstrates several advanced data engineering concepts:</p>
+              <ul>
+                <li>Containerization with Docker for consistent development and deployment</li>
+                <li>Infrastructure as Code (IaC) for reproducible cloud setups</li>
+                <li>Data modeling best practices in Redshift</li>
+                <li>Workflow orchestration with DAGs in Airflow</li>
+                <li>Incremental loading patterns</li>
+                <li>Error handling and monitoring</li>
+              </ul>
+              
+              <h2>Insights & Visualizations</h2>
+              <p>The final output is a comprehensive dashboard that provides insights into the r/dataengineering subreddit, including:</p>
+              <ul>
+                <li>Popular topics and trends</li>
+                <li>User engagement metrics</li>
+                <li>Posting patterns and timing analysis</li>
+                <li>Content categorization</li>
+                <li>Technology mentions and popularity</li>
+              </ul>
+            `
+          },
+          de: {
+            title: "Reddit-Daten-Streaming-Pipeline",
+            description: "Eine umfassende ETL-Datenpipeline für Reddit-Daten.",
+            fullDescription: `
+              <h2>Projektübersicht</h2>
+              <p>Dieses Projekt ist eine vollständige Datenpipeline, die Daten aus der Reddit-API extrahiert, sie durch eine Reihe von AWS-Diensten verarbeitet und visualisierte Erkenntnisse über Dashboards ausgibt. Die Pipeline wurde mit modernen Datentechnikprinzipien und Cloud-nativen Technologien erstellt.</p>
+              
+              <h2>Architektur</h2>
+              <p>Die Pipeline folgt einer modernen Cloud-basierten ETL-Architektur:</p>
+              <ol>
+                <li>Datenextraktion mit der Reddit-API</li>
+                <li>Laden der Daten in AWS S3</li>
+                <li>Kopieren der Daten in AWS Redshift</li>
+                <li>Transformation mit dbt (data build tool)</li>
+                <li>Erstellung von Visualisierungs-Dashboards in PowerBI oder Google Data Studio</li>
+                <li>Orchestrierung des gesamten Workflows mit Airflow in Docker</li>
+                <li>Bereitstellung von AWS-Ressourcen mit Terraform</li>
+              </ol>
+              
+              <h2>Hauptkomponenten</h2>
+              <ul>
+                <li><strong>Datenextraktion:</strong> Python-Skripte für die Interaktion mit der Reddit-API</li>
+                <li><strong>Datenspeicherung:</strong> AWS S3 für Rohdaten und Redshift für analytische Abfragen</li>
+                <li><strong>Transformation:</strong> dbt für SQL-basierte Transformationen mit Tests und Dokumentation</li>
+                <li><strong>Orchestrierung:</strong> Apache Airflow in Docker-Containern</li>
+                <li><strong>Infrastructure as Code:</strong> Terraform-Skripte für die AWS-Ressourcenbereitstellung</li>
+                <li><strong>Visualisierung:</strong> Interaktive Dashboards in PowerBI/Google Data Studio</li>
+              </ul>
+              
+              <h2>Technische Umsetzung</h2>
+              <p>Das Projekt demonstriert mehrere fortgeschrittene Datentechnikkonzepte:</p>
+              <ul>
+                <li>Containerisierung mit Docker für konsistente Entwicklung und Bereitstellung</li>
+                <li>Infrastructure as Code (IaC) für reproduzierbare Cloud-Setups</li>
+                <li>Best Practices für Datenmodellierung in Redshift</li>
+                <li>Workflow-Orchestrierung mit DAGs in Airflow</li>
+                <li>Inkrementelle Lademuster</li>
+                <li>Fehlerbehandlung und Überwachung</li>
+              </ul>
+              
+              <h2>Erkenntnisse & Visualisierungen</h2>
+              <p>Das Endergebnis ist ein umfassendes Dashboard, das Einblicke in das r/dataengineering Subreddit bietet, darunter:</p>
+              <ul>
+                <li>Beliebte Themen und Trends</li>
+                <li>Metriken zur Benutzerinteraktion</li>
+                <li>Analyse von Posting-Mustern und -Zeiten</li>
+                <li>Inhaltskategorisierung</li>
+                <li>Technologieerwähnungen und Beliebtheit</li>
+              </ul>
+            `
+          },
+          fr: {
+            title: "Pipeline de Streaming de Données Reddit",
+            description: "Un pipeline ETL complet pour les données Reddit.",
+            fullDescription: `
+              <h2>Aperçu du Projet</h2>
+              <p>Ce projet est un pipeline de données complet qui extrait des données de l'API Reddit, les traite via une série de services AWS, et produit des insights visualisés à travers des tableaux de bord. Le pipeline est construit avec des principes modernes d'ingénierie de données et des technologies natives du cloud.</p>
+              
+              <h2>Architecture</h2>
+              <p>Le pipeline suit une architecture ETL moderne basée sur le cloud:</p>
+              <ol>
+                <li>Extraction des données via l'API Reddit</li>
+                <li>Chargement des données dans AWS S3</li>
+                <li>Copie des données dans AWS Redshift</li>
+                <li>Transformation avec dbt (data build tool)</li>
+                <li>Création de tableaux de bord de visualisation dans PowerBI ou Google Data Studio</li>
+                <li>Orchestration de l'ensemble du flux de travail avec Airflow dans Docker</li>
+                <li>Provisionnement des ressources AWS avec Terraform</li>
+              </ol>
+              
+              <h2>Composants Clés</h2>
+              <ul>
+                <li><strong>Extraction de Données:</strong> Scripts Python pour interagir avec l'API Reddit</li>
+                <li><strong>Stockage de Données:</strong> AWS S3 pour les données brutes et Redshift pour les requêtes analytiques</li>
+                <li><strong>Transformation:</strong> dbt pour les transformations basées sur SQL avec tests et documentation</li>
+                <li><strong>Orchestration:</strong> Apache Airflow fonctionnant dans des conteneurs Docker</li>
+                <li><strong>Infrastructure as Code:</strong> Scripts Terraform pour le provisionnement des ressources AWS</li>
+                <li><strong>Visualisation:</strong> Tableaux de bord interactifs dans PowerBI/Google Data Studio</li>
+              </ul>
+              
+              <h2>Implémentation Technique</h2>
+              <p>Le projet démontre plusieurs concepts avancés d'ingénierie de données:</p>
+              <ul>
+                <li>Conteneurisation avec Docker pour un développement et déploiement cohérents</li>
+                <li>Infrastructure as Code (IaC) pour des configurations cloud reproductibles</li>
+                <li>Meilleures pratiques de modélisation de données dans Redshift</li>
+                <li>Orchestration de flux de travail avec DAGs dans Airflow</li>
+                <li>Modèles de chargement incrémentiel</li>
+                <li>Gestion des erreurs et surveillance</li>
+              </ul>
+              
+              <h2>Insights & Visualisations</h2>
+              <p>Le résultat final est un tableau de bord complet qui fournit des insights sur le subreddit r/dataengineering, notamment:</p>
+              <ul>
+                <li>Sujets populaires et tendances</li>
+                <li>Métriques d'engagement des utilisateurs</li>
+                <li>Analyse des modèles de publication et de timing</li>
+                <li>Catégorisation du contenu</li>
+                <li>Mentions de technologies et popularité</li>
+              </ul>
+            `
+          }
+        },
         techStack: ["Python", "AWS", "Airflow", "Docker", "Terraform", "PowerBI"],
         imageUrl: "/images/reddit-pipeline.svg",
         githubUrl: "https://github.com/Mayedi007/reddit-data-streaming-pipeline",

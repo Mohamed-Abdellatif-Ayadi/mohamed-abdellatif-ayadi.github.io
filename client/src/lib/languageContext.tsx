@@ -21,11 +21,13 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.cv': 'CV',
     'nav.about': 'About',
     'nav.contact': 'Contact',
+    'nav.projects': 'Projects',
 
     // Hero section
     'hero.welcome': 'Welcome to my personal website, where I share my expertise, experiences, and insights about computer science, software development, and my professional journey.',
     'hero.blog': 'My Articles',
     'hero.cv': 'My Resume',
+    'hero.projects': 'My Projects',
 
     // CV page
     'cv.title': 'My Curriculum Vitae',
@@ -60,6 +62,23 @@ const translations: Record<Language, Record<string, string>> = {
     'newsletter.placeholder': 'Your email address',
     'newsletter.button': 'Subscribe',
     'newsletter.success': 'Thank you for subscribing!',
+    
+    // Projects
+    'projects.title': 'My Projects',
+    'projects.metaDescription': 'Explore the projects developed by Mohamed Abdellatif Ayadi, including web applications, data analysis and more.',
+    'projects.heading': 'My Projects',
+    'projects.subheading': 'A showcase of my technical work and projects',
+    'projects.filters.all': 'All',
+    'projects.filters.web': 'Web',
+    'projects.filters.aiData': 'AI/Data',
+    'projects.filters.other': 'Other',
+    'projects.noProjectsFound': 'No projects found in this category. Check back later!',
+    'projects.viewOnGitHub': 'GitHub Repository',
+    'projects.liveDemo': 'Live Demo',
+    'projects.backToProjects': 'Back to Projects',
+    'projects.githubRepository': 'GitHub Repository',
+    'projects.notFound': 'Project Not Found',
+    'projects.notFoundDescription': 'The project you\'re looking for doesn\'t exist or has been removed.',
   },
   de: {
     // Navigation
@@ -68,11 +87,13 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.cv': 'Lebenslauf',
     'nav.about': 'Über Mich',
     'nav.contact': 'Kontakt',
+    'nav.projects': 'Projekte',
 
     // Hero section
     'hero.welcome': 'Willkommen auf meiner persönlichen Website, wo ich meine Fachkenntnisse, Erfahrungen und Einsichten über Informatik, Softwareentwicklung und meine berufliche Laufbahn teile.',
     'hero.blog': 'Meine Artikel',
     'hero.cv': 'Mein Lebenslauf',
+    'hero.projects': 'Meine Projekte',
 
     // CV page
     'cv.title': 'Mein Lebenslauf',
@@ -107,6 +128,23 @@ const translations: Record<Language, Record<string, string>> = {
     'newsletter.placeholder': 'Ihre E-Mail-Adresse',
     'newsletter.button': 'Abonnieren',
     'newsletter.success': 'Vielen Dank für Ihr Abonnement!',
+    
+    // Projects
+    'projects.title': 'Meine Projekte',
+    'projects.metaDescription': 'Entdecken Sie die von Mohamed Abdellatif Ayadi entwickelten Projekte, darunter Webanwendungen, Datenanalyse und mehr.',
+    'projects.heading': 'Meine Projekte',
+    'projects.subheading': 'Eine Präsentation meiner technischen Arbeiten und Projekte',
+    'projects.filters.all': 'Alle',
+    'projects.filters.web': 'Web',
+    'projects.filters.aiData': 'KI/Daten',
+    'projects.filters.other': 'Andere',
+    'projects.noProjectsFound': 'Keine Projekte in dieser Kategorie gefunden. Schauen Sie später wieder vorbei!',
+    'projects.viewOnGitHub': 'GitHub Repository',
+    'projects.liveDemo': 'Live Demo',
+    'projects.backToProjects': 'Zurück zu Projekten',
+    'projects.githubRepository': 'GitHub Repository',
+    'projects.notFound': 'Projekt nicht gefunden',
+    'projects.notFoundDescription': 'Das gesuchte Projekt existiert nicht oder wurde entfernt.',
   },
   fr: {
     // Navigation
@@ -115,11 +153,13 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.cv': 'CV',
     'nav.about': 'À Propos',
     'nav.contact': 'Contact',
+    'nav.projects': 'Projets',
 
     // Hero section
     'hero.welcome': 'Bienvenue sur mon site personnel, où je partage mon expertise, mes expériences et mes réflexions sur l\'informatique, le développement logiciel et mon parcours professionnel.',
     'hero.blog': 'Mes Articles',
     'hero.cv': 'Mon CV',
+    'hero.projects': 'Mes Projets',
 
     // CV page
     'cv.title': 'Mon Curriculum Vitae',
@@ -154,6 +194,23 @@ const translations: Record<Language, Record<string, string>> = {
     'newsletter.placeholder': 'Votre adresse email',
     'newsletter.button': 'S\'abonner',
     'newsletter.success': 'Merci pour votre abonnement!',
+    
+    // Projects
+    'projects.title': 'Mes Projets',
+    'projects.metaDescription': 'Découvrez les projets développés par Mohamed Abdellatif Ayadi, notamment des applications web, des analyses de données et plus encore.',
+    'projects.heading': 'Mes Projets',
+    'projects.subheading': 'Une présentation de mon travail technique et de mes projets',
+    'projects.filters.all': 'Tous',
+    'projects.filters.web': 'Web',
+    'projects.filters.aiData': 'IA/Données',
+    'projects.filters.other': 'Autres',
+    'projects.noProjectsFound': 'Aucun projet trouvé dans cette catégorie. Revenez plus tard!',
+    'projects.viewOnGitHub': 'Dépôt GitHub',
+    'projects.liveDemo': 'Démo en Direct',
+    'projects.backToProjects': 'Retour aux Projets',
+    'projects.githubRepository': 'Dépôt GitHub',
+    'projects.notFound': 'Projet Non Trouvé',
+    'projects.notFoundDescription': 'Le projet que vous recherchez n\'existe pas ou a été supprimé.',
   }
 };
 
