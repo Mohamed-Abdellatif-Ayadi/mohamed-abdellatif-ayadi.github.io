@@ -8,23 +8,23 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-20 md:py-24">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            <span className="text-white">Mohamed Abdellatif Ayadi</span>
+            <span className="text-white">{t('home.hero.name')}</span>
           </h1>
           <p className="text-lg md:text-xl opacity-90 mb-8">
-            Personal blog and professional portfolio. I write about web development, design, and career growth.
+            {t('home.hero.subtitle')}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
               href="/blog" 
               className="px-6 py-3 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600 transition-all shadow-lg hover:shadow-xl"
             >
-              Blog
+              {t('nav.blog')}
             </Link>
             <Link 
               href="/cv" 
               className="px-6 py-3 bg-transparent border-2 border-primary-400 text-primary-400 rounded-lg font-medium hover:bg-primary-400 hover:text-white transition-all"
             >
-              CV
+              {t('nav.cv')}
             </Link>
           </div>
         </div>

@@ -2,19 +2,21 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { CV } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/lib/languageContext";
 
 const CVPreview = () => {
+  const { t, language } = useLanguage();
   const { data: cv, isLoading } = useQuery<CV>({
-    queryKey: ["/api/cv"],
+    queryKey: ["/api/cv", language],
   });
 
   return (
     <section className="py-16 bg-slate-50">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Professional CV</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">{t('home.cvPreview.title')}</h2>
           <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
-            A snapshot of my professional journey, skills, and experiences.
+            {t('home.cvPreview.subtitle')}
           </p>
         </div>
         
@@ -82,12 +84,12 @@ const CVPreview = () => {
               
               <div className="p-8">
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">Summary</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">{t('cv.summary')}</h3>
                   <p className="text-slate-600">{cv.summary}</p>
                 </div>
                 
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">Skills</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">{t('cv.skills')}</h3>
                   <div className="flex flex-wrap gap-2">
                     {cv.skills.slice(0, 8).map((skill, index) => (
                       <span key={index} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
@@ -98,7 +100,7 @@ const CVPreview = () => {
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">Experience</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">{t('cv.experience')}</h3>
                   <div className="space-y-4">
                     {cv.experience.slice(0, 2).map((exp, index) => (
                       <div key={index} className="flex">
