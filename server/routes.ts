@@ -35,10 +35,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get CV
+  // Get CV with optional language parameter
   app.get("/api/cv", async (req, res) => {
     try {
-      const cv = await storage.getCV();
+      const language = req.query.language as string | undefined;
+      const cv = await storage.getCV(language);
       res.json(cv);
     } catch (error) {
       res.status(500).json({ message: "Error fetching CV" });

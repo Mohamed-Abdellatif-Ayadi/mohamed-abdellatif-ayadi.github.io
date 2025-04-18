@@ -10,7 +10,14 @@ const CVPage = () => {
   const { t, language } = useLanguage();
   
   const { data: cv, isLoading } = useQuery<CV>({
-    queryKey: ["/api/cv"],
+    queryKey: ["/api/cv", language],
+    queryFn: async () => {
+      const response = await fetch(`/api/cv?language=${language}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch CV data');
+      }
+      return response.json();
+    }
   });
 
   const handlePrint = () => {

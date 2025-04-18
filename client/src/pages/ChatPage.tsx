@@ -21,11 +21,19 @@ interface ChatMessage {
 }
 
 const ChatPage = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  
+  // Welcome messages in different languages
+  const welcomeMessages = {
+    en: "Hello! I'm Mohamed's AI assistant. I can answer questions about his CV, education, skills, experience, and blog posts. How can I help you today?",
+    de: "Hallo! Ich bin Mohameds KI-Assistent. Ich kann Fragen zu seinem Lebenslauf, seiner Ausbildung, seinen Fähigkeiten, seiner Erfahrung und seinen Blogbeiträgen beantworten. Wie kann ich Ihnen heute helfen?",
+    fr: "Bonjour ! Je suis l'assistant IA de Mohamed. Je peux répondre à des questions sur son CV, son éducation, ses compétences, son expérience et ses articles de blog. Comment puis-je vous aider aujourd'hui ?"
+  };
+  
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: 'Hello! I\'m Mohamed\'s AI assistant. I can answer questions about his CV, education, skills, experience, and blog posts. How can I help you today?',
+      content: welcomeMessages[language as keyof typeof welcomeMessages] || welcomeMessages.en,
       sender: 'bot',
       timestamp: new Date(),
     }
@@ -34,9 +42,16 @@ const ChatPage = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Fetch CV data
+  // Fetch CV data with the current language
   const { data: cv, isLoading: isCVLoading } = useQuery<CV>({
-    queryKey: ['/api/cv'],
+    queryKey: ['/api/cv', language],
+    queryFn: async () => {
+      const response = await fetch(`/api/cv?language=${language}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch CV data');
+      }
+      return response.json();
+    }
   });
 
   // Fetch articles data
@@ -53,79 +68,220 @@ const ChatPage = () => {
   const processMessage = (userInput: string) => {
     // If data is still loading, inform the user
     if (isCVLoading || isArticlesLoading || !cv || !articles) {
-      return "I'm still gathering information. Please try again in a moment.";
+      const loadingResponses = {
+        en: "I'm still gathering information. Please try again in a moment.",
+        de: "Ich sammle noch Informationen. Bitte versuchen Sie es in einem Moment erneut.",
+        fr: "Je suis encore en train de recueillir des informations. Veuillez réessayer dans un instant."
+      };
+      return loadingResponses[language as keyof typeof loadingResponses] || loadingResponses.en;
     }
 
     const normalizedInput = userInput.toLowerCase();
+    
+    // Helper function to detect input language and check for keywords
+    const checkKeywords = (keywords: { [key: string]: string[] }): boolean => {
+      return Object.entries(keywords).some(([lang, terms]) => {
+        if (lang === language || language === 'en') {
+          return terms.some(term => normalizedInput.includes(term));
+        }
+        return false;
+      });
+    };
 
     // CV-related questions
-    if (normalizedInput.includes('name') || normalizedInput.includes('who are you')) {
-      return `My name is ${cv.name}.`;
+    const nameKeywords = {
+      en: ['name', 'who are you'],
+      de: ['name', 'wie heißt du', 'wer bist du'],
+      fr: ['nom', 'qui es-tu', 'comment tu t\'appelles']
+    };
+    
+    if (checkKeywords(nameKeywords)) {
+      const responses = {
+        en: `My name is ${cv.name}.`,
+        de: `Mein Name ist ${cv.name}.`,
+        fr: `Je m'appelle ${cv.name}.`
+      };
+      return responses[language as keyof typeof responses] || responses.en;
     }
 
-    if (normalizedInput.includes('study') || normalizedInput.includes('education') || 
-        normalizedInput.includes('university') || normalizedInput.includes('degree')) {
+    const educationKeywords = {
+      en: ['study', 'education', 'university', 'degree', 'school'],
+      de: ['studium', 'ausbildung', 'universität', 'abschluss', 'schule'],
+      fr: ['étude', 'éducation', 'université', 'diplôme', 'école']
+    };
+    
+    if (checkKeywords(educationKeywords)) {
       if (cv.education && cv.education.length > 0) {
         const education = cv.education.map((edu: Education) => 
-          `${edu.degree} at ${edu.institution} (${edu.startDate} - ${edu.endDate})`
+          `${edu.degree} ${language === 'de' ? 'an der' : language === 'fr' ? 'à' : 'at'} ${edu.institution} (${edu.startDate} - ${edu.endDate})`
         ).join('\\n');
-        return `My educational background includes:\\n${education}`;
+        
+        const responses = {
+          en: `My educational background includes:\\n${education}`,
+          de: `Meine Ausbildung umfasst:\\n${education}`,
+          fr: `Mon parcours éducatif comprend:\\n${education}`
+        };
+        return responses[language as keyof typeof responses] || responses.en;
       } else {
-        return "I don't have any education information available.";
+        const noInfoResponses = {
+          en: "I don't have any education information available.",
+          de: "Ich habe keine Informationen zur Ausbildung verfügbar.",
+          fr: "Je n'ai pas d'informations sur l'éducation disponibles."
+        };
+        return noInfoResponses[language as keyof typeof noInfoResponses] || noInfoResponses.en;
       }
     }
 
-    if (normalizedInput.includes('skills') || normalizedInput.includes('what can you do')) {
-      return `My technical skills include: ${cv.skills ? cv.skills.join(', ') : 'No skills information available'}`;
+    const skillsKeywords = {
+      en: ['skills', 'what can you do', 'abilities', 'capable'],
+      de: ['fähigkeiten', 'was kannst du', 'kenntnisse', 'kompetenz'],
+      fr: ['compétences', 'que sais-tu faire', 'capacités', 'aptitudes']
+    };
+    
+    if (checkKeywords(skillsKeywords)) {
+      const skills = cv.skills ? cv.skills.join(', ') : '';
+      const responses = {
+        en: `My technical skills include: ${skills || 'No skills information available'}`,
+        de: `Meine technischen Fähigkeiten umfassen: ${skills || 'Keine Informationen zu Fähigkeiten verfügbar'}`,
+        fr: `Mes compétences techniques incluent: ${skills || 'Aucune information sur les compétences disponible'}`
+      };
+      return responses[language as keyof typeof responses] || responses.en;
     }
 
-    if (normalizedInput.includes('language') || normalizedInput.includes('speak')) {
+    const languageKeywords = {
+      en: ['language', 'speak', 'fluent'],
+      de: ['sprache', 'sprechen', 'fließend'],
+      fr: ['langue', 'parler', 'couramment']
+    };
+    
+    if (checkKeywords(languageKeywords)) {
       const languages = cv.languages ? cv.languages.map((lang: LanguageType) => 
         `${lang.name} (${lang.proficiency})`
-      ).join(', ') : 'No language information available';
-      return `I speak: ${languages}`;
+      ).join(', ') : '';
+      
+      const responses = {
+        en: `I speak: ${languages || 'No language information available'}`,
+        de: `Ich spreche: ${languages || 'Keine Sprachinformationen verfügbar'}`,
+        fr: `Je parle: ${languages || 'Aucune information linguistique disponible'}`
+      };
+      return responses[language as keyof typeof responses] || responses.en;
     }
 
-    if (normalizedInput.includes('experience') || normalizedInput.includes('work') || 
-        normalizedInput.includes('job')) {
+    const experienceKeywords = {
+      en: ['experience', 'work', 'job', 'career', 'profession'],
+      de: ['erfahrung', 'arbeit', 'beruf', 'karriere', 'tätigkeit'],
+      fr: ['expérience', 'travail', 'emploi', 'carrière', 'profession']
+    };
+    
+    if (checkKeywords(experienceKeywords)) {
       if (cv.experience && cv.experience.length > 0) {
         const workExp = cv.experience.map((exp: Experience) => 
-          `${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate || 'Present'})`
+          `${exp.position} ${language === 'de' ? 'bei' : language === 'fr' ? 'chez' : 'at'} ${exp.company} (${exp.startDate} - ${exp.endDate || (language === 'de' ? 'Heute' : language === 'fr' ? 'Présent' : 'Present')})`
         ).join('\\n');
-        return `My work experience includes:\\n${workExp}`;
+        
+        const responses = {
+          en: `My work experience includes:\\n${workExp}`,
+          de: `Meine Arbeitserfahrung umfasst:\\n${workExp}`,
+          fr: `Mon expérience professionnelle comprend:\\n${workExp}`
+        };
+        return responses[language as keyof typeof responses] || responses.en;
       } else {
-        return "I don't have any work experience information available.";
+        const noInfoResponses = {
+          en: "I don't have any work experience information available.",
+          de: "Ich habe keine Informationen zur Arbeitserfahrung verfügbar.",
+          fr: "Je n'ai pas d'informations sur l'expérience professionnelle disponibles."
+        };
+        return noInfoResponses[language as keyof typeof noInfoResponses] || noInfoResponses.en;
       }
     }
 
-    if (normalizedInput.includes('location') || normalizedInput.includes('where') || 
-        normalizedInput.includes('city') || normalizedInput.includes('country') || 
-        normalizedInput.includes('live')) {
-      return cv.location ? `I'm located in ${cv.location}.` : "My location information is not available.";
+    const locationKeywords = {
+      en: ['location', 'where', 'city', 'country', 'live'],
+      de: ['standort', 'wo', 'stadt', 'land', 'wohnen', 'leben'],
+      fr: ['localisation', 'où', 'ville', 'pays', 'habiter', 'vivre']
+    };
+    
+    if (checkKeywords(locationKeywords)) {
+      if (cv.location) {
+        const responses = {
+          en: `I'm located in ${cv.location}.`,
+          de: `Ich befinde mich in ${cv.location}.`,
+          fr: `Je suis situé à ${cv.location}.`
+        };
+        return responses[language as keyof typeof responses] || responses.en;
+      } else {
+        const noInfoResponses = {
+          en: "My location information is not available.",
+          de: "Meine Standortinformationen sind nicht verfügbar.",
+          fr: "Mes informations de localisation ne sont pas disponibles."
+        };
+        return noInfoResponses[language as keyof typeof noInfoResponses] || noInfoResponses.en;
+      }
     }
 
-    if (normalizedInput.includes('contact') || normalizedInput.includes('email') || 
-        normalizedInput.includes('phone')) {
-      const email = cv.email || "Email not available";
-      const phone = cv.phone || "Phone not available";
-      return `You can contact me at:\\nEmail: ${email}\\nPhone: ${phone}`;
+    const contactKeywords = {
+      en: ['contact', 'email', 'phone', 'reach'],
+      de: ['kontakt', 'email', 'telefon', 'erreichen'],
+      fr: ['contact', 'email', 'téléphone', 'joindre']
+    };
+    
+    if (checkKeywords(contactKeywords)) {
+      const email = cv.email || (language === 'de' ? "E-Mail nicht verfügbar" : language === 'fr' ? "Email non disponible" : "Email not available");
+      const phone = cv.phone || (language === 'de' ? "Telefon nicht verfügbar" : language === 'fr' ? "Téléphone non disponible" : "Phone not available");
+      
+      const responses = {
+        en: `You can contact me at:\\nEmail: ${email}\\nPhone: ${phone}`,
+        de: `Sie können mich kontaktieren unter:\\nE-Mail: ${email}\\nTelefon: ${phone}`,
+        fr: `Vous pouvez me contacter à:\\nEmail: ${email}\\nTéléphone: ${phone}`
+      };
+      return responses[language as keyof typeof responses] || responses.en;
     }
 
-    if (normalizedInput.includes('summary') || normalizedInput.includes('about you') || 
-        normalizedInput.includes('tell me about yourself')) {
-      return cv.summary || "I don't have a summary available yet.";
+    const summaryKeywords = {
+      en: ['summary', 'about you', 'tell me about yourself', 'profile'],
+      de: ['zusammenfassung', 'über dich', 'erzähl mir von dir', 'profil'],
+      fr: ['résumé', 'à propos de toi', 'parle-moi de toi', 'profil']
+    };
+    
+    if (checkKeywords(summaryKeywords)) {
+      if (cv.summary) {
+        return cv.summary;
+      } else {
+        const noInfoResponses = {
+          en: "I don't have a summary available yet.",
+          de: "Ich habe noch keine Zusammenfassung verfügbar.",
+          fr: "Je n'ai pas encore de résumé disponible."
+        };
+        return noInfoResponses[language as keyof typeof noInfoResponses] || noInfoResponses.en;
+      }
     }
 
     // Blog-related questions
-    if (normalizedInput.includes('blog') || normalizedInput.includes('article') || 
-        normalizedInput.includes('post') || normalizedInput.includes('write')) {
+    const blogKeywords = {
+      en: ['blog', 'article', 'post', 'write', 'written'],
+      de: ['blog', 'artikel', 'beitrag', 'schreiben', 'geschrieben'],
+      fr: ['blog', 'article', 'publication', 'écrire', 'écrit']
+    };
+    
+    if (checkKeywords(blogKeywords)) {
       if (articles && articles.length > 0) {
         const articlesList = articles.map((article: Article) => 
           `- ${article.title}`
         ).join('\\n');
-        return `I've written the following articles:\\n${articlesList}`;
+        
+        const responses = {
+          en: `I've written the following articles:\\n${articlesList}`,
+          de: `Ich habe die folgenden Artikel geschrieben:\\n${articlesList}`,
+          fr: `J'ai écrit les articles suivants:\\n${articlesList}`
+        };
+        return responses[language as keyof typeof responses] || responses.en;
       } else {
-        return "I don't have any blog posts yet.";
+        const noInfoResponses = {
+          en: "I don't have any blog posts yet.",
+          de: "Ich habe noch keine Blogbeiträge.",
+          fr: "Je n'ai pas encore d'articles de blog."
+        };
+        return noInfoResponses[language as keyof typeof noInfoResponses] || noInfoResponses.en;
       }
     }
 
@@ -146,27 +302,70 @@ const ChatPage = () => {
           const articlesList = matchingArticles.map((article: Article) => 
             `- ${article.title}`
           ).join('\\n');
-          return `I have written about "${term}". Here are some relevant articles:\\n${articlesList}`;
+          
+          const responses = {
+            en: `I have written about "${term}". Here are some relevant articles:\\n${articlesList}`,
+            de: `Ich habe über "${term}" geschrieben. Hier sind einige relevante Artikel:\\n${articlesList}`,
+            fr: `J'ai écrit sur "${term}". Voici quelques articles pertinents:\\n${articlesList}`
+          };
+          return responses[language as keyof typeof responses] || responses.en;
         }
       }
     }
 
     // Default responses for common phrases
-    if (normalizedInput.includes('hello') || normalizedInput.includes('hi') || 
-        normalizedInput.includes('hey')) {
-      return 'Hello! How can I help you learn more about Mohamed?';
+    const greetingKeywords = {
+      en: ['hello', 'hi', 'hey', 'morning', 'afternoon', 'evening'],
+      de: ['hallo', 'hi', 'hey', 'morgen', 'tag', 'abend', 'servus', 'moin'],
+      fr: ['bonjour', 'salut', 'coucou', 'bonsoir']
+    };
+    
+    if (checkKeywords(greetingKeywords)) {
+      const responses = {
+        en: 'Hello! How can I help you learn more about Mohamed?',
+        de: 'Hallo! Wie kann ich Ihnen helfen, mehr über Mohamed zu erfahren?',
+        fr: 'Bonjour! Comment puis-je vous aider à en savoir plus sur Mohamed?'
+      };
+      return responses[language as keyof typeof responses] || responses.en;
     }
 
-    if (normalizedInput.includes('thank')) {
-      return "You're welcome! Is there anything else you'd like to know?";
+    const thankKeywords = {
+      en: ['thank', 'thanks', 'appreciate'],
+      de: ['danke', 'dank', 'schätze'],
+      fr: ['merci', 'remercie', 'apprécie']
+    };
+    
+    if (checkKeywords(thankKeywords)) {
+      const responses = {
+        en: "You're welcome! Is there anything else you'd like to know?",
+        de: "Gerne! Gibt es noch etwas, das Sie wissen möchten?",
+        fr: "Je vous en prie! Y a-t-il autre chose que vous aimeriez savoir?"
+      };
+      return responses[language as keyof typeof responses] || responses.en;
     }
 
-    if (normalizedInput.includes('bye') || normalizedInput.includes('goodbye')) {
-      return 'Goodbye! Feel free to return if you have more questions.';
+    const byeKeywords = {
+      en: ['bye', 'goodbye', 'see you', 'farewell'],
+      de: ['tschüss', 'auf wiedersehen', 'bis später', 'ciao'],
+      fr: ['au revoir', 'adieu', 'à bientôt', 'salut']
+    };
+    
+    if (checkKeywords(byeKeywords)) {
+      const responses = {
+        en: 'Goodbye! Feel free to return if you have more questions.',
+        de: 'Auf Wiedersehen! Kommen Sie gerne wieder, wenn Sie weitere Fragen haben.',
+        fr: 'Au revoir! N\'hésitez pas à revenir si vous avez d\'autres questions.'
+      };
+      return responses[language as keyof typeof responses] || responses.en;
     }
 
     // Default fallback response
-    return "I don't have specific information about that. You can ask me about my education, work experience, skills, blog posts, or contact information.";
+    const fallbackResponses = {
+      en: "I don't have specific information about that. You can ask me about my education, work experience, skills, blog posts, or contact information.",
+      de: "Ich habe keine spezifischen Informationen darüber. Sie können mich nach meiner Ausbildung, Arbeitserfahrung, Fähigkeiten, Blogbeiträgen oder Kontaktinformationen fragen.",
+      fr: "Je n'ai pas d'informations spécifiques à ce sujet. Vous pouvez me poser des questions sur mon éducation, mon expérience professionnelle, mes compétences, mes articles de blog ou mes coordonnées."
+    };
+    return fallbackResponses[language as keyof typeof fallbackResponses] || fallbackResponses.en;
   };
 
   const handleSendMessage = () => {

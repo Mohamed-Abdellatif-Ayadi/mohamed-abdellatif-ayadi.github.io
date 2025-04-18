@@ -21,7 +21,7 @@ export interface IStorage {
   getArticleById(id: number): Promise<Article | undefined>;
   
   // CV methods
-  getCV(): Promise<CV>;
+  getCV(language?: string): Promise<CV>;
   
   // Contact form
   saveContactMessage(message: ContactMessage): Promise<void>;
@@ -34,6 +34,7 @@ export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private articles: Map<number, Article>;
   private cv: CV;
+  private cvs: { [key: string]: CV };
   private contactMessages: ContactMessage[];
   private newsletterSubscriptions: Set<string>;
   currentId: number;
@@ -359,7 +360,10 @@ export class MemStorage implements IStorage {
   }
   
   // CV methods
-  async getCV(): Promise<CV> {
+  async getCV(language?: string): Promise<CV> {
+    if (language && this.cvs[language]) {
+      return this.cvs[language];
+    }
     return this.cv;
   }
   
