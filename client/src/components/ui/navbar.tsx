@@ -17,11 +17,11 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { title: "Posts", path: "/blog" },
-    { title: "Projects", path: "/projects" },
-    { title: "CV", path: "/cv" },
-    { title: "Chat", path: "/chat" },
-    { title: "Contact", path: "/contact" }
+    { title: t('nav.blog'), path: "/blog" },
+    { title: t('nav.projects'), path: "/projects" },
+    { title: t('nav.cv'), path: "/cv" },
+    { title: t('nav.chat'), path: "/chat" },
+    { title: t('nav.contact'), path: "/contact" }
   ];
 
   return (
