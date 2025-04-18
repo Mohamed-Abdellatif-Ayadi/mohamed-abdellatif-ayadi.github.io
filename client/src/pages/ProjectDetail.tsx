@@ -174,54 +174,158 @@ const ProjectDetail = () => {
     } else if (id === "2") {
       setProject({
         id: 2,
-        title: "Flash Sale Platform",
-        description: "A high-performance e-commerce platform for limited-time promotional deals.",
-        fullDescription: `
-          <h2>Project Overview</h2>
-          <p>Flash Sale is a high-performance e-commerce platform designed specifically for limited-time promotional deals. Built with scalability and concurrency in mind, this platform can handle high volumes of simultaneous users during flash sale events.</p>
-          
-          <h2>Key Features</h2>
-          <ul>
-            <li><strong>OTP-based User Registration</strong> - Secure one-time password verification during registration.</li>
-            <li><strong>Secure Login with Token Sessions</strong> - Redis-backed token sessions for authentication.</li>
-            <li><strong>Product Management</strong> - Comprehensive product information including title, image, description, price, and stock management.</li>
-            <li><strong>Promo-based Flash Sale</strong> - Time-limited sales with countdown timer to create urgency.</li>
-            <li><strong>Advanced Caching</strong> - Guava and Redis caching for high-speed data access during high-traffic periods.</li>
-            <li><strong>Responsive Design</strong> - Clean Bootstrap interface that works across all device sizes.</li>
-          </ul>
-          
-          <h2>Technical Architecture</h2>
-          <p>The platform is built using a modern multi-tier architecture:</p>
-          <ul>
-            <li><strong>Backend:</strong> Spring Boot for robust, maintainable server-side logic</li>
-            <li><strong>Frontend:</strong> HTML, Bootstrap, and jQuery for a responsive user interface</li>
-            <li><strong>ORM & Database:</strong> MyBatis integration with MySQL for data persistence</li>
-            <li><strong>Caching Layer:</strong> Redis and Guava Cache for performance optimization</li>
-            <li><strong>Authentication:</strong> Spring Session with Redis for secure, scalable user sessions</li>
-            <li><strong>Build Tool:</strong> Maven for dependency management and project building</li>
-          </ul>
-          
-          <h2>High-Concurrency Handling</h2>
-          <p>The platform implements several techniques to handle the high concurrency typical of flash sale events:</p>
-          <ul>
-            <li>Distributed caching to reduce database pressure</li>
-            <li>Asynchronous processing for order creation</li>
-            <li>Optimistic locking for inventory management</li>
-            <li>Rate limiting to prevent abuse</li>
-            <li>Circuit breakers to maintain system stability during peak loads</li>
-          </ul>
-          
-          <h2>Project Structure</h2>
-          <p>The codebase follows a clean, modular organization:</p>
-          <ul>
-            <li><strong>Controllers:</strong> REST endpoints for user interaction</li>
-            <li><strong>Services:</strong> Business logic implementation</li>
-            <li><strong>DAO Layer:</strong> MyBatis mappers for database operations</li>
-            <li><strong>Models:</strong> Data objects representing the domain</li>
-            <li><strong>Configuration:</strong> System setup and environment settings</li>
-            <li><strong>Error Handling:</strong> Custom exceptions and global error management</li>
-          </ul>
-        `,
+        translations: {
+          en: {
+            title: "Flash Sale Platform",
+            description: "A high-performance e-commerce platform for limited-time promotional deals.",
+            fullDescription: `
+              <h2>Project Overview</h2>
+              <p>Flash Sale is a high-performance e-commerce platform designed specifically for limited-time promotional deals. Built with scalability and concurrency in mind, this platform can handle high volumes of simultaneous users during flash sale events.</p>
+              
+              <h2>Key Features</h2>
+              <ul>
+                <li><strong>OTP-based User Registration</strong> - Secure one-time password verification during registration.</li>
+                <li><strong>Secure Login with Token Sessions</strong> - Redis-backed token sessions for authentication.</li>
+                <li><strong>Product Management</strong> - Comprehensive product information including title, image, description, price, and stock management.</li>
+                <li><strong>Promo-based Flash Sale</strong> - Time-limited sales with countdown timer to create urgency.</li>
+                <li><strong>Advanced Caching</strong> - Guava and Redis caching for high-speed data access during high-traffic periods.</li>
+                <li><strong>Responsive Design</strong> - Clean Bootstrap interface that works across all device sizes.</li>
+              </ul>
+              
+              <h2>Technical Architecture</h2>
+              <p>The platform is built using a modern multi-tier architecture:</p>
+              <ul>
+                <li><strong>Backend:</strong> Spring Boot for robust, maintainable server-side logic</li>
+                <li><strong>Frontend:</strong> HTML, Bootstrap, and jQuery for a responsive user interface</li>
+                <li><strong>ORM & Database:</strong> MyBatis integration with MySQL for data persistence</li>
+                <li><strong>Caching Layer:</strong> Redis and Guava Cache for performance optimization</li>
+                <li><strong>Authentication:</strong> Spring Session with Redis for secure, scalable user sessions</li>
+                <li><strong>Build Tool:</strong> Maven for dependency management and project building</li>
+              </ul>
+              
+              <h2>High-Concurrency Handling</h2>
+              <p>The platform implements several techniques to handle the high concurrency typical of flash sale events:</p>
+              <ul>
+                <li>Distributed caching to reduce database pressure</li>
+                <li>Asynchronous processing for order creation</li>
+                <li>Optimistic locking for inventory management</li>
+                <li>Rate limiting to prevent abuse</li>
+                <li>Circuit breakers to maintain system stability during peak loads</li>
+              </ul>
+              
+              <h2>Project Structure</h2>
+              <p>The codebase follows a clean, modular organization:</p>
+              <ul>
+                <li><strong>Controllers:</strong> REST endpoints for user interaction</li>
+                <li><strong>Services:</strong> Business logic implementation</li>
+                <li><strong>DAO Layer:</strong> MyBatis mappers for database operations</li>
+                <li><strong>Models:</strong> Data objects representing the domain</li>
+                <li><strong>Configuration:</strong> System setup and environment settings</li>
+                <li><strong>Error Handling:</strong> Custom exceptions and global error management</li>
+              </ul>
+            `
+          },
+          de: {
+            title: "Blitzverkauf-Plattform",
+            description: "Eine Hochleistungs-E-Commerce-Plattform für zeitlich begrenzte Werbeaktionen.",
+            fullDescription: `
+              <h2>Projektübersicht</h2>
+              <p>Flash Sale ist eine Hochleistungs-E-Commerce-Plattform, die speziell für zeitlich begrenzte Werbeaktionen entwickelt wurde. Mit Skalierbarkeit und Parallelität im Fokus kann diese Plattform große Mengen gleichzeitiger Benutzer während Blitzverkaufsveranstaltungen bewältigen.</p>
+              
+              <h2>Hauptmerkmale</h2>
+              <ul>
+                <li><strong>OTP-basierte Benutzerregistrierung</strong> - Sichere Einmalpasswort-Verifizierung während der Registrierung.</li>
+                <li><strong>Sichere Anmeldung mit Token-Sitzungen</strong> - Redis-gestützte Token-Sitzungen für die Authentifizierung.</li>
+                <li><strong>Produktmanagement</strong> - Umfassende Produktinformationen einschließlich Titel, Bild, Beschreibung, Preis und Bestandsverwaltung.</li>
+                <li><strong>Aktionsbasierter Blitzverkauf</strong> - Zeitlich begrenzte Verkäufe mit Countdown-Timer, um Dringlichkeit zu erzeugen.</li>
+                <li><strong>Erweitertes Caching</strong> - Guava- und Redis-Caching für schnellen Datenzugriff in Hochverkehrszeiten.</li>
+                <li><strong>Responsives Design</strong> - Saubere Bootstrap-Oberfläche, die auf allen Gerätegrößen funktioniert.</li>
+              </ul>
+              
+              <h2>Technische Architektur</h2>
+              <p>Die Plattform ist mit einer modernen mehrstufigen Architektur aufgebaut:</p>
+              <ul>
+                <li><strong>Backend:</strong> Spring Boot für robuste, wartbare serverseitige Logik</li>
+                <li><strong>Frontend:</strong> HTML, Bootstrap und jQuery für eine responsive Benutzeroberfläche</li>
+                <li><strong>ORM & Datenbank:</strong> MyBatis-Integration mit MySQL für Datenpersistenz</li>
+                <li><strong>Caching-Schicht:</strong> Redis und Guava Cache für Leistungsoptimierung</li>
+                <li><strong>Authentifizierung:</strong> Spring Session mit Redis für sichere, skalierbare Benutzersitzungen</li>
+                <li><strong>Build-Tool:</strong> Maven für Abhängigkeitsmanagement und Projektbuild</li>
+              </ul>
+              
+              <h2>Hochkonkurrenz-Handling</h2>
+              <p>Die Plattform implementiert mehrere Techniken, um die hohe Parallelität zu bewältigen, die für Blitzverkaufsveranstaltungen typisch ist:</p>
+              <ul>
+                <li>Verteiltes Caching zur Reduzierung des Datenbankdrucks</li>
+                <li>Asynchrone Verarbeitung für die Auftragserstellung</li>
+                <li>Optimistisches Sperren für die Bestandsverwaltung</li>
+                <li>Ratenbegrenzung zur Verhinderung von Missbrauch</li>
+                <li>Kreisunterbrecher zur Aufrechterhaltung der Systemstabilität bei Spitzenlasten</li>
+              </ul>
+              
+              <h2>Projektstruktur</h2>
+              <p>Der Codebase folgt einer sauberen, modularen Organisation:</p>
+              <ul>
+                <li><strong>Controller:</strong> REST-Endpunkte für Benutzerinteraktion</li>
+                <li><strong>Services:</strong> Implementierung der Geschäftslogik</li>
+                <li><strong>DAO-Schicht:</strong> MyBatis-Mapper für Datenbankoperationen</li>
+                <li><strong>Modelle:</strong> Datenobjekte, die die Domäne repräsentieren</li>
+                <li><strong>Konfiguration:</strong> Systemeinrichtung und Umgebungseinstellungen</li>
+                <li><strong>Fehlerbehandlung:</strong> Benutzerdefinierte Ausnahmen und globales Fehlermanagement</li>
+              </ul>
+            `
+          },
+          fr: {
+            title: "Plateforme de Vente Flash",
+            description: "Une plateforme e-commerce haute performance pour des offres promotionnelles à durée limitée.",
+            fullDescription: `
+              <h2>Aperçu du Projet</h2>
+              <p>Flash Sale est une plateforme e-commerce haute performance conçue spécifiquement pour les offres promotionnelles à durée limitée. Construite avec la scalabilité et la concurrence à l'esprit, cette plateforme peut gérer des volumes élevés d'utilisateurs simultanés pendant les événements de vente flash.</p>
+              
+              <h2>Caractéristiques Principales</h2>
+              <ul>
+                <li><strong>Inscription Utilisateur basée sur OTP</strong> - Vérification sécurisée par mot de passe à usage unique lors de l'inscription.</li>
+                <li><strong>Connexion Sécurisée avec Sessions Token</strong> - Sessions token basées sur Redis pour l'authentification.</li>
+                <li><strong>Gestion des Produits</strong> - Informations complètes sur les produits comprenant titre, image, description, prix et gestion des stocks.</li>
+                <li><strong>Vente Flash basée sur Promotions</strong> - Ventes à durée limitée avec compte à rebours pour créer un sentiment d'urgence.</li>
+                <li><strong>Mise en Cache Avancée</strong> - Mise en cache Guava et Redis pour un accès aux données à haute vitesse pendant les périodes de trafic élevé.</li>
+                <li><strong>Design Responsive</strong> - Interface Bootstrap épurée qui fonctionne sur toutes les tailles d'appareils.</li>
+              </ul>
+              
+              <h2>Architecture Technique</h2>
+              <p>La plateforme est construite en utilisant une architecture moderne à plusieurs niveaux:</p>
+              <ul>
+                <li><strong>Backend:</strong> Spring Boot pour une logique côté serveur robuste et maintenable</li>
+                <li><strong>Frontend:</strong> HTML, Bootstrap et jQuery pour une interface utilisateur responsive</li>
+                <li><strong>ORM & Base de Données:</strong> Intégration MyBatis avec MySQL pour la persistance des données</li>
+                <li><strong>Couche de Cache:</strong> Redis et Guava Cache pour l'optimisation des performances</li>
+                <li><strong>Authentification:</strong> Spring Session avec Redis pour des sessions utilisateur sécurisées et scalables</li>
+                <li><strong>Outil de Build:</strong> Maven pour la gestion des dépendances et la construction du projet</li>
+              </ul>
+              
+              <h2>Gestion de Haute Concurrence</h2>
+              <p>La plateforme implémente plusieurs techniques pour gérer la haute concurrence typique des événements de vente flash:</p>
+              <ul>
+                <li>Mise en cache distribuée pour réduire la pression sur la base de données</li>
+                <li>Traitement asynchrone pour la création de commandes</li>
+                <li>Verrouillage optimiste pour la gestion des stocks</li>
+                <li>Limitation de débit pour prévenir les abus</li>
+                <li>Disjoncteurs pour maintenir la stabilité du système pendant les charges de pointe</li>
+              </ul>
+              
+              <h2>Structure du Projet</h2>
+              <p>Le code suit une organisation propre et modulaire:</p>
+              <ul>
+                <li><strong>Contrôleurs:</strong> Points d'extrémité REST pour l'interaction utilisateur</li>
+                <li><strong>Services:</strong> Implémentation de la logique métier</li>
+                <li><strong>Couche DAO:</strong> Mappeurs MyBatis pour les opérations de base de données</li>
+                <li><strong>Modèles:</strong> Objets de données représentant le domaine</li>
+                <li><strong>Configuration:</strong> Configuration système et paramètres d'environnement</li>
+                <li><strong>Gestion des Erreurs:</strong> Exceptions personnalisées et gestion globale des erreurs</li>
+              </ul>
+            `
+          }
+        },
         techStack: ["Spring Boot", "Redis", "MySQL", "Bootstrap", "jQuery", "MyBatis"],
         imageUrl: "/images/flash-sale-platform.svg",
         githubUrl: "https://github.com/Mayedi007/flash-sale-platform",
@@ -427,8 +531,8 @@ const ProjectDetail = () => {
   return (
     <>
       <Helmet>
-        <title>{project.title} - Mohamed Abdellatif Ayadi</title>
-        <meta name="description" content={project.description} />
+        <title>{getTranslation(project).title} - Mohamed Abdellatif Ayadi</title>
+        <meta name="description" content={getTranslation(project).description} />
       </Helmet>
 
       <div className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
@@ -440,11 +544,11 @@ const ProjectDetail = () => {
               className="mb-6 bg-white/10 hover:bg-white/20 text-white border-white/20"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Projects
+              {t('projects.backToProjects')}
             </Button>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">{getTranslation(project).title}</h1>
             <p className="text-lg opacity-90 mb-6">
-              {project.description}
+              {getTranslation(project).description}
             </p>
             <div className="flex flex-wrap gap-3 mb-6">
               {project.techStack.map((tech) => (
@@ -463,7 +567,7 @@ const ProjectDetail = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
-                <span>GitHub Repository</span>
+                <span>{t('projects.githubRepository')}</span>
               </a>
               {project.liveUrl && (
                 <a
@@ -477,7 +581,7 @@ const ProjectDetail = () => {
                     <polyline points="15 3 21 3 21 9"></polyline>
                     <line x1="10" y1="14" x2="21" y2="3"></line>
                   </svg>
-                  <span>Live Demo</span>
+                  <span>{t('projects.liveDemo')}</span>
                 </a>
               )}
             </div>
@@ -490,13 +594,13 @@ const ProjectDetail = () => {
           <div className="bg-white p-6 md:p-8 rounded-lg shadow-md mb-8">
             <img
               src={project.imageUrl}
-              alt={project.title}
+              alt={getTranslation(project).title}
               className="w-full h-auto object-cover rounded-lg border border-slate-200 mb-8"
             />
             
             <div 
               className="prose prose-slate max-w-none"
-              dangerouslySetInnerHTML={{ __html: project.fullDescription || '' }}
+              dangerouslySetInnerHTML={{ __html: getTranslation(project).fullDescription || '' }}
             />
           </div>
         </div>
