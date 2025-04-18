@@ -60,7 +60,7 @@ const BlogPage = () => {
           <div className="w-full md:w-2/3">
             <Input
               type="text"
-              placeholder="Search articles..."
+              placeholder={t('blog.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full"
@@ -72,7 +72,7 @@ const BlogPage = () => {
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
-              <option value="">All Categories</option>
+              <option value="">{t('blog.allCategories')}</option>
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category}
@@ -109,9 +109,9 @@ const BlogPage = () => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <h3 className="text-xl font-semibold text-slate-800 mb-2">No articles found</h3>
+            <h3 className="text-xl font-semibold text-slate-800 mb-2">{t('blog.noArticlesFoundTitle')}</h3>
             <p className="text-slate-600">
-              No articles match your current search criteria. Try adjusting your search or view all articles.
+              {t('blog.noArticlesFoundMessage')}
             </p>
           </div>
         )}

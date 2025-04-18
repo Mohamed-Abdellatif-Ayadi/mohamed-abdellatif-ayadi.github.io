@@ -54,10 +54,29 @@ const BlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>{article.title} - Mohamed Abdellatif Ayadi</title>
-        <meta name="description" content={article.excerpt} />
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.excerpt} />
+        <title>
+          {article.translations && article.translations[language] 
+            ? article.translations[language].title 
+            : article.title} - Mohamed Abdellatif Ayadi
+        </title>
+        <meta 
+          name="description" 
+          content={article.translations && article.translations[language] 
+            ? article.translations[language].excerpt 
+            : article.excerpt} 
+        />
+        <meta 
+          property="og:title" 
+          content={article.translations && article.translations[language] 
+            ? article.translations[language].title 
+            : article.title} 
+        />
+        <meta 
+          property="og:description" 
+          content={article.translations && article.translations[language] 
+            ? article.translations[language].excerpt 
+            : article.excerpt}
+        />
         <meta property="og:image" content={article.coverImage} />
         <meta property="og:type" content="article" />
       </Helmet>

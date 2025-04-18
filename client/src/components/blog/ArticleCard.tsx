@@ -39,7 +39,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           href={`/blog/${article.id}`} 
           className="inline-flex items-center font-medium text-primary-700 hover:text-primary-800"
         >
-          Read more
+          {t('blog.readMore')}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-4 w-4 ml-1" 
