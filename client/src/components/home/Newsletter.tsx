@@ -41,16 +41,16 @@ const Newsletter = () => {
     },
     onSuccess: () => {
       toast({
-        title: "Successfully subscribed!",
-        description: "Thank you for subscribing to our newsletter.",
+        title: t('home.newsletter.successTitle'),
+        description: t('home.newsletter.successDescription'),
       });
       setIsSubmitted(true);
       form.reset();
     },
     onError: (error) => {
       toast({
-        title: "Failed to subscribe",
-        description: error.message || "Please try again later.",
+        title: t('home.newsletter.errorTitle'),
+        description: error.message || t('home.newsletter.errorDescription'),
         variant: "destructive",
       });
     },
@@ -64,15 +64,15 @@ const Newsletter = () => {
     <section className="py-16 bg-slate-100">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Subscribe to my Newsletter</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">{t('home.newsletter.title')}</h2>
           <p className="text-slate-600 mb-8">
-            Get notified when I publish new articles and content. No spam, just useful insights delivered straight to your inbox.
+            {t('home.newsletter.subtitle')}
           </p>
           
           {isSubmitted ? (
             <div className="p-4 bg-green-50 text-green-700 rounded-lg">
-              <p className="font-medium">Thank you for subscribing!</p>
-              <p className="text-sm mt-1">You'll receive updates when new content is published.</p>
+              <p className="font-medium">{t('home.newsletter.thankYou')}</p>
+              <p className="text-sm mt-1">{t('home.newsletter.confirmationMessage')}</p>
             </div>
           ) : (
             <Form {...form}>
@@ -84,7 +84,7 @@ const Newsletter = () => {
                     <FormItem className="flex-grow">
                       <FormControl>
                         <Input 
-                          placeholder="Your email address" 
+                          placeholder={t('home.newsletter.emailPlaceholder')} 
                           type="email" 
                           className="px-4 py-3 rounded-lg" 
                           {...field} 
@@ -99,14 +99,14 @@ const Newsletter = () => {
                   className="px-6 py-3 whitespace-nowrap"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? "Subscribing..." : "Subscribe"}
+                  {mutation.isPending ? t('home.newsletter.subscribing') : t('home.newsletter.subscribe')}
                 </Button>
               </form>
             </Form>
           )}
           
           <p className="text-xs text-slate-500 mt-4">
-            By subscribing, you agree to receive email updates. You can unsubscribe at any time.
+            {t('home.newsletter.disclaimer')}
           </p>
         </div>
       </div>
