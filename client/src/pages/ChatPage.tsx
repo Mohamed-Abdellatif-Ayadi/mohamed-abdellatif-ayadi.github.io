@@ -466,7 +466,7 @@ const ChatPage = () => {
                           <User2 className="h-4 w-4" />
                         )}
                         <span className="text-xs font-medium">
-                          {message.sender === 'user' ? 'You' : "Mohamed's Assistant"}
+                          {message.sender === 'user' ? t('chat.you') : t('chat.assistantName')}
                         </span>
                       </div>
                       <div className="whitespace-pre-line">
@@ -487,7 +487,7 @@ const ChatPage = () => {
                       <div className="flex items-center space-x-2 mb-1">
                         <Bot className="h-4 w-4" />
                         <span className="text-xs font-medium">
-                          Mohamed's Assistant
+                          {t('chat.assistantName')}
                         </span>
                       </div>
                       <div className="flex space-x-1">
@@ -508,7 +508,7 @@ const ChatPage = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyPress}
-                  placeholder="Type your message here..."
+                  placeholder={t('chat.messagePlaceholder')}
                   className="flex-grow resize-none"
                   rows={2}
                 />
@@ -528,58 +528,58 @@ const ChatPage = () => {
         {/* Suggested Questions Section */}
         <div className="md:w-96">
           <Card className="p-5 h-[600px] flex flex-col">
-            <h3 className="font-medium mb-3">Suggested Questions</h3>
+            <h3 className="font-medium mb-3">{t('chat.suggestedQuestions')}</h3>
             <Separator className="mb-3" />
             <div className="space-y-3 flex-grow">
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
-                  setInput("What is your educational background?");
+                  setInput(t('chat.questions.education'));
                   handleSendMessage();
                 }}
               >
-                What is your educational background?
+                {t('chat.questions.education')}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
-                  setInput("What programming languages do you know?");
+                  setInput(t('chat.questions.programming'));
                   handleSendMessage();
                 }}
               >
-                What programming languages do you know?
+                {t('chat.questions.programming')}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
-                  setInput("Tell me about your work experience.");
+                  setInput(t('chat.questions.experience'));
                   handleSendMessage();
                 }}
               >
-                Tell me about your work experience.
+                {t('chat.questions.experience')}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
-                  setInput("What blog posts have you written?");
+                  setInput(t('chat.questions.blog'));
                   handleSendMessage();
                 }}
               >
-                What blog posts have you written?
+                {t('chat.questions.blog')}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
                 onClick={() => {
-                  setInput("What languages do you speak?");
+                  setInput(t('chat.questions.languages'));
                   handleSendMessage();
                 }}
               >
-                What languages do you speak?
+                {t('chat.questions.languages')}
               </Button>
             </div>
           </Card>

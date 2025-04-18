@@ -417,6 +417,23 @@ export class MemStorage implements IStorage {
       {
         title: "Setting Up a Custom Domain for Your Website",
         excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
+        translations: {
+          en: {
+            title: "Setting Up a Custom Domain for Your Website",
+            excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
+            content: "English article content"
+          },
+          de: {
+            title: "Einrichten einer benutzerdefinierten Domain für Ihre Website",
+            excerpt: "Erfahren Sie, wie Sie eine professionelle benutzerdefinierte Domain für Ihre Website konfigurieren, einschließlich DNS-Einrichtung, Domain-Anbieter, SSL-Zertifikate und Fehlerbehebung.",
+            content: "German article content"
+          },
+          fr: {
+            title: "Configuration d'un domaine personnalisé pour votre site web",
+            excerpt: "Apprenez à configurer un domaine personnalisé professionnel pour votre site web, y compris la configuration DNS, les fournisseurs de domaines, les certificats SSL et le dépannage.",
+            content: "French article content"
+          }
+        },
         content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">A custom domain is essential for establishing your professional online identity. This comprehensive guide walks you through the process of setting up, configuring, and troubleshooting a custom domain for your website.</p>
