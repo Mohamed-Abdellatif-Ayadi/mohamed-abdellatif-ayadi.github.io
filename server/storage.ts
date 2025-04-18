@@ -48,13 +48,19 @@ export class MemStorage implements IStorage {
     this.currentArticleId = 1;
     
     // Initialize with Mohamed Ayadi's CV data
-    this.cv = {
+    const cvBase = {
       name: "MOHAMED ABDELLATIF AYADI",
-      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
-      photoUrl: "/images/mohamed-ayadi-photo.png", // Using the professional photo
+      photoUrl: "/images/mohamed-ayadi-photo.png",
       email: "mohamed.ayadi.data@gmail.com",
       phone: "+4915252301739",
       location: "Dortmund, Germany",
+      certifications: [],
+    };
+    
+    // German CV
+    const germanCV = {
+      ...cvBase,
+      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
       summary: "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb als Verkaufsberater. Mit großer Leidenschaft für Vertrieb, Programmierung, Innovation und die Tech-Industrie bin ich neugierig, zielstrebig und ehrgeizig. Ich suche stets nach Möglichkeiten, zu lernen und mich in den Bereichen Softwareentwicklung oder IT-Consulting weiterzuentwickeln. Mein Ziel ist es, an Projekten zu arbeiten, die einen Unterschied machen, und Teil der Innovationen der Zukunft zu sein.",
       skills: [
         "GitLab", 
@@ -111,7 +117,6 @@ export class MemStorage implements IStorage {
           endDate: "Juli 2021"
         }
       ],
-      certifications: [],
       languages: [
         {
           name: "Deutsch",
@@ -134,6 +139,184 @@ export class MemStorage implements IStorage {
           proficiency: "Basiskenntnisse"
         }
       ]
+    };
+    
+    // English CV
+    const englishCV = {
+      ...cvBase,
+      title: "Student in 4th Semester B.Sc. Computer Science at Technical University of Dortmund",
+      summary: "I am Mohamed Abdellatif Ayadi, a fourth-semester student pursuing a B.Sc. in Computer Science at the Technical University of Dortmund. I currently work as a student sales advisor. With a strong passion for sales, programming, innovation, and the tech industry, I am curious, determined, and ambitious. I continuously seek opportunities to learn and develop in software development or IT consulting. My goal is to work on projects that make a difference and to be part of the innovations of the future.",
+      skills: [
+        "GitLab", 
+        "C Programming", 
+        "Java", 
+        "Python", 
+        "Eclipse", 
+        "Microsoft Visual Studio", 
+        "Docker",
+        "Object-Oriented Programming (OOP)",
+        "Unified Modeling Language (UML)",
+        "Software Design Patterns",
+        "Code Review",
+        "Software Testing",
+        "Data Structures",
+        "Time Series and Forecasting",
+        "Data Augmentation",
+        "Deep Learning",
+        "Generative AI",
+        "Relational Databases",
+        "Data Warehousing",
+        "SAP",
+        "SAP S/4HANA"
+      ],
+      experience: [
+        {
+          position: "Working Student",
+          company: "Iperceramica Deutschland GmbH",
+          startDate: "April 2024",
+          endDate: "Present",
+          description: "Using SAP and SAP S/4HANA to optimize inventory, orders, delivery processes, and complaint handling. Sales: Active customer acquisition in B2B and B2C sectors through targeted acquisition and building long-term customer relationships. Sales and consultation for high-quality tiles, parquet flooring, sanitary ware, and bathroom furniture. Maintenance of customer data and partner relationships in CRM and PRM systems to improve communication and collaboration."
+        },
+        {
+          position: "Student Assistant",
+          company: "Technical University of Dortmund",
+          startDate: "October 2023",
+          endDate: "April 2024",
+          description: "Served as a student tutor for the 'Data Structures, Algorithms, and Programming 1' course as a mini-job. Organized and conducted tutorials for first-semester students focusing on object-oriented programming in Java. Tasks included practical programming exercises, deepening and expanding lecture content, homework supervision, and targeted preparation for exams and strategy planning. Participated in a workshop on academic teaching before beginning the activity, where I learned and practiced presentation and group techniques, tutorial planning, and motivation methods."
+        }
+      ],
+      education: [
+        {
+          degree: "Bachelor of Computer Science",
+          institution: "Technical University of Dortmund",
+          location: "Dortmund, Germany",
+          startDate: "April 2022",
+          endDate: "April 2026"
+        },
+        {
+          degree: "High School Diploma in Mathematics",
+          institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
+          location: "Sfax, Tunisia",
+          startDate: "2017",
+          endDate: "July 2021"
+        }
+      ],
+      languages: [
+        {
+          name: "German",
+          proficiency: "Fluent to business proficient"
+        },
+        {
+          name: "English",
+          proficiency: "Fluent to business proficient"
+        },
+        {
+          name: "French",
+          proficiency: "Native"
+        },
+        {
+          name: "Arabic",
+          proficiency: "Native"
+        },
+        {
+          name: "Italian",
+          proficiency: "Basic knowledge"
+        }
+      ]
+    };
+    
+    // French CV
+    const frenchCV = {
+      ...cvBase,
+      title: "Étudiant en 4ème semestre de licence en informatique à l'Université Technique de Dortmund",
+      summary: "Je suis Mohamed Abdellatif Ayadi, étudiant en quatrième semestre de licence en informatique à l'Université Technique de Dortmund. Je travaille actuellement comme conseiller commercial étudiant. Avec une forte passion pour la vente, la programmation, l'innovation et l'industrie technologique, je suis curieux, déterminé et ambitieux. Je recherche continuellement des opportunités pour apprendre et me développer dans le développement logiciel ou le conseil informatique. Mon objectif est de travailler sur des projets qui font la différence et de participer aux innovations du futur.",
+      skills: [
+        "GitLab", 
+        "Programmation C", 
+        "Java", 
+        "Python", 
+        "Eclipse", 
+        "Microsoft Visual Studio", 
+        "Docker",
+        "Programmation Orientée Objet (POO)",
+        "Unified Modeling Language (UML)",
+        "Patrons de Conception Logicielle",
+        "Revue de Code",
+        "Tests Logiciels",
+        "Structures de Données",
+        "Séries Temporelles et Prévisions",
+        "Augmentation de Données",
+        "Apprentissage Profond",
+        "IA Générative",
+        "Bases de Données Relationnelles",
+        "Entrepôts de Données",
+        "SAP",
+        "SAP S/4HANA"
+      ],
+      experience: [
+        {
+          position: "Étudiant Salarié",
+          company: "Iperceramica Deutschland GmbH",
+          startDate: "Avril 2024",
+          endDate: "Présent",
+          description: "Utilisation de SAP et SAP S/4HANA pour optimiser les stocks, les commandes, les processus de livraison et la gestion des réclamations. Vente: Acquisition active de clients dans les secteurs B2B et B2C grâce à des acquisitions ciblées et à l'établissement de relations clients à long terme. Vente et consultation pour des carreaux de haute qualité, des parquets, des articles sanitaires et des meubles de salle de bain. Maintenance des données clients et des relations partenaires dans les systèmes CRM et PRM pour améliorer la communication et la collaboration."
+        },
+        {
+          position: "Assistant Étudiant",
+          company: "Université Technique de Dortmund",
+          startDate: "Octobre 2023",
+          endDate: "Avril 2024",
+          description: "J'ai servi comme tuteur étudiant pour le cours 'Structures de Données, Algorithmes et Programmation 1' comme mini-job. J'ai organisé et animé des tutoriels pour les étudiants de premier semestre en mettant l'accent sur la programmation orientée objet en Java. Les tâches comprenaient des exercices pratiques de programmation, l'approfondissement et l'élargissement du contenu des cours, la supervision des devoirs et la préparation ciblée aux examens et à la planification stratégique. J'ai participé à un atelier sur l'enseignement académique avant de commencer l'activité, où j'ai appris et pratiqué des techniques de présentation et de groupe, la planification de tutoriels et des méthodes de motivation."
+        }
+      ],
+      education: [
+        {
+          degree: "Licence en Informatique",
+          institution: "Université Technique de Dortmund",
+          location: "Dortmund, Allemagne",
+          startDate: "Avril 2022",
+          endDate: "Avril 2026"
+        },
+        {
+          degree: "Baccalauréat en Mathématiques",
+          institution: "Lycée Pilote de Sfax",
+          location: "Sfax, Tunisie",
+          startDate: "2017",
+          endDate: "Juillet 2021"
+        }
+      ],
+      languages: [
+        {
+          name: "Allemand",
+          proficiency: "Courant à professionnel"
+        },
+        {
+          name: "Anglais",
+          proficiency: "Courant à professionnel"
+        },
+        {
+          name: "Français",
+          proficiency: "Langue maternelle"
+        },
+        {
+          name: "Arabe",
+          proficiency: "Langue maternelle"
+        },
+        {
+          name: "Italien",
+          proficiency: "Connaissances de base"
+        }
+      ]
+    };
+    
+    // Default to German CV
+    this.cv = germanCV;
+    
+    // Store all language versions
+    this.cvs = {
+      de: germanCV,
+      en: englishCV,
+      fr: frenchCV
     };
     
     // Initialize with sample articles

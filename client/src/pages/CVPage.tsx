@@ -4,8 +4,11 @@ import { CV } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
+import { useLanguage } from "@/lib/languageContext";
 
 const CVPage = () => {
+  const { t, language } = useLanguage();
+  
   const { data: cv, isLoading } = useQuery<CV>({
     queryKey: ["/api/cv"],
   });
@@ -17,8 +20,8 @@ const CVPage = () => {
   return (
     <>
       <Helmet>
-        <title>CV - Mohamed Abdellatif Ayadi</title>
-        <meta name="description" content="Professional CV and resume of Mohamed Abdellatif Ayadi. View my skills, experience, and qualifications." />
+        <title>{t('cv.title')} - Mohamed Abdellatif Ayadi</title>
+        <meta name="description" content={t('cv.subtitle')} />
         <style type="text/css">
           {`
             @media print {
@@ -40,9 +43,9 @@ const CVPage = () => {
       <div className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Mein Lebenslauf</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('cv.title')}</h1>
             <p className="text-lg opacity-90 mb-6">
-              Ein umfassender Überblick über meinen akademischen Werdegang, berufliche Erfahrungen und technische Fähigkeiten.
+              {t('cv.subtitle')}
             </p>
             <Button 
               onClick={handlePrint} 
@@ -63,7 +66,7 @@ const CVPage = () => {
                   d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" 
                 />
               </svg>
-              Print CV
+              {t('cv.print')}
             </Button>
           </div>
         </div>
@@ -144,9 +147,9 @@ const CVPage = () => {
 
       <section className="py-16 bg-primary-700 text-white cta-section">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-xl md:text-2xl font-bold mb-6">Interested in working together?</h2>
+          <h2 className="text-xl md:text-2xl font-bold mb-6">{t('cv.cta.title')}</h2>
           <p className="max-w-xl mx-auto mb-8 opacity-90">
-            I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+            {t('cv.cta.text')}
           </p>
           <Button variant="secondary" asChild>
             <a href="mailto:mohamed.ayadi.data@gmail.com">
@@ -164,7 +167,7 @@ const CVPage = () => {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" 
                 />
               </svg>
-              Get In Touch
+              {t('cv.cta.button')}
             </a>
           </Button>
         </div>
