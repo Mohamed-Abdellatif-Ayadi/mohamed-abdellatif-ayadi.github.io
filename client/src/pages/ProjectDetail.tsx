@@ -648,54 +648,158 @@ const ProjectDetail = () => {
     } else if (id === "5") {
       setProject({
         id: 5,
-        title: "Vue Pro Dashboard",
-        description: "A professional dashboard built with Vue.js.",
-        fullDescription: `
-          <h2>Project Overview</h2>
-          <p>Vue Pro Dashboard is a modern, responsive administrative dashboard built with Vue.js. It provides a comprehensive set of UI components and data visualization tools for building professional web applications.</p>
-          
-          <h2>Key Features</h2>
-          <ul>
-            <li><strong>Responsive Design</strong> - Fully responsive layout that works seamlessly on desktop, tablet, and mobile devices</li>
-            <li><strong>Interactive Components</strong> - Rich set of UI elements including cards, tables, forms, and navigation components</li>
-            <li><strong>Data Visualization</strong> - Charts and graphs for displaying analytical data</li>
-            <li><strong>Theme Customization</strong> - Adjustable theme settings with light and dark mode support</li>
-            <li><strong>Authentication</strong> - Login, registration, and user profile management</li>
-            <li><strong>State Management</strong> - Vuex integration for centralized state handling</li>
-          </ul>
-          
-          <h2>Technical Implementation</h2>
-          <p>The dashboard is built with modern frontend technologies:</p>
-          <ul>
-            <li><strong>Vue.js Framework</strong> - Progressive JavaScript framework for building user interfaces</li>
-            <li><strong>Vue Router</strong> - For seamless navigation between dashboard sections</li>
-            <li><strong>Vuex</strong> - State management pattern and library</li>
-            <li><strong>Vue CLI</strong> - Standard tooling for Vue.js development</li>
-            <li><strong>CSS Preprocessors</strong> - SCSS/SASS for advanced styling capabilities</li>
-            <li><strong>Responsive Grid System</strong> - Flexible layout system for different screen sizes</li>
-          </ul>
-          
-          <h2>Components & Modules</h2>
-          <p>The dashboard includes several pre-built modules:</p>
-          <ul>
-            <li><strong>Analytics Dashboard</strong> - Overview of key metrics and performance indicators</li>
-            <li><strong>User Management</strong> - Interface for managing system users</li>
-            <li><strong>Product Management</strong> - Tools for product data management</li>
-            <li><strong>Content Management</strong> - Simple CMS functionality</li>
-            <li><strong>Settings Panel</strong> - Application and user preference configuration</li>
-            <li><strong>Authentication Screens</strong> - Login, registration, and password recovery</li>
-          </ul>
-          
-          <h2>Design Principles</h2>
-          <p>The project follows several key design principles:</p>
-          <ul>
-            <li>Component-based architecture for reusability</li>
-            <li>Responsive-first approach to design</li>
-            <li>Consistent visual language throughout the interface</li>
-            <li>Accessibility considerations for all users</li>
-            <li>Performance optimization for fast loading times</li>
-          </ul>
-        `,
+        translations: {
+          en: {
+            title: "Vue Pro Dashboard",
+            description: "A professional dashboard built with Vue.js.",
+            fullDescription: `
+              <h2>Project Overview</h2>
+              <p>Vue Pro Dashboard is a modern, responsive administrative dashboard built with Vue.js. It provides a comprehensive set of UI components and data visualization tools for building professional web applications.</p>
+              
+              <h2>Key Features</h2>
+              <ul>
+                <li><strong>Responsive Design</strong> - Fully responsive layout that works seamlessly on desktop, tablet, and mobile devices</li>
+                <li><strong>Interactive Components</strong> - Rich set of UI elements including cards, tables, forms, and navigation components</li>
+                <li><strong>Data Visualization</strong> - Charts and graphs for displaying analytical data</li>
+                <li><strong>Theme Customization</strong> - Adjustable theme settings with light and dark mode support</li>
+                <li><strong>Authentication</strong> - Login, registration, and user profile management</li>
+                <li><strong>State Management</strong> - Vuex integration for centralized state handling</li>
+              </ul>
+              
+              <h2>Technical Implementation</h2>
+              <p>The dashboard is built with modern frontend technologies:</p>
+              <ul>
+                <li><strong>Vue.js Framework</strong> - Progressive JavaScript framework for building user interfaces</li>
+                <li><strong>Vue Router</strong> - For seamless navigation between dashboard sections</li>
+                <li><strong>Vuex</strong> - State management pattern and library</li>
+                <li><strong>Vue CLI</strong> - Standard tooling for Vue.js development</li>
+                <li><strong>CSS Preprocessors</strong> - SCSS/SASS for advanced styling capabilities</li>
+                <li><strong>Responsive Grid System</strong> - Flexible layout system for different screen sizes</li>
+              </ul>
+              
+              <h2>Components & Modules</h2>
+              <p>The dashboard includes several pre-built modules:</p>
+              <ul>
+                <li><strong>Analytics Dashboard</strong> - Overview of key metrics and performance indicators</li>
+                <li><strong>User Management</strong> - Interface for managing system users</li>
+                <li><strong>Product Management</strong> - Tools for product data management</li>
+                <li><strong>Content Management</strong> - Simple CMS functionality</li>
+                <li><strong>Settings Panel</strong> - Application and user preference configuration</li>
+                <li><strong>Authentication Screens</strong> - Login, registration, and password recovery</li>
+              </ul>
+              
+              <h2>Design Principles</h2>
+              <p>The project follows several key design principles:</p>
+              <ul>
+                <li>Component-based architecture for reusability</li>
+                <li>Responsive-first approach to design</li>
+                <li>Consistent visual language throughout the interface</li>
+                <li>Accessibility considerations for all users</li>
+                <li>Performance optimization for fast loading times</li>
+              </ul>
+            `
+          },
+          de: {
+            title: "Vue Pro Dashboard",
+            description: "Ein professionelles Dashboard, erstellt mit Vue.js.",
+            fullDescription: `
+              <h2>Projektübersicht</h2>
+              <p>Vue Pro Dashboard ist ein modernes, responsives Administrations-Dashboard, das mit Vue.js erstellt wurde. Es bietet einen umfassenden Satz von UI-Komponenten und Datenvisualisierungstools zum Erstellen professioneller Webanwendungen.</p>
+              
+              <h2>Hauptfunktionen</h2>
+              <ul>
+                <li><strong>Responsives Design</strong> - Vollständig responsives Layout, das nahtlos auf Desktop-, Tablet- und Mobilgeräten funktioniert</li>
+                <li><strong>Interaktive Komponenten</strong> - Umfangreiche Sammlung von UI-Elementen, darunter Karten, Tabellen, Formulare und Navigationskomponenten</li>
+                <li><strong>Datenvisualisierung</strong> - Diagramme und Grafiken zur Anzeige analytischer Daten</li>
+                <li><strong>Theme-Anpassung</strong> - Anpassbare Theme-Einstellungen mit Unterstützung für hellen und dunklen Modus</li>
+                <li><strong>Authentifizierung</strong> - Anmeldung, Registrierung und Benutzerprofilverwaltung</li>
+                <li><strong>Zustandsverwaltung</strong> - Vuex-Integration für zentralisierte Zustandsbehandlung</li>
+              </ul>
+              
+              <h2>Technische Umsetzung</h2>
+              <p>Das Dashboard wurde mit modernen Frontend-Technologien erstellt:</p>
+              <ul>
+                <li><strong>Vue.js Framework</strong> - Progressives JavaScript-Framework zum Erstellen von Benutzeroberflächen</li>
+                <li><strong>Vue Router</strong> - Für nahtlose Navigation zwischen Dashboard-Bereichen</li>
+                <li><strong>Vuex</strong> - Muster und Bibliothek für Zustandsverwaltung</li>
+                <li><strong>Vue CLI</strong> - Standardwerkzeuge für Vue.js-Entwicklung</li>
+                <li><strong>CSS-Präprozessoren</strong> - SCSS/SASS für erweiterte Styling-Möglichkeiten</li>
+                <li><strong>Responsives Grid-System</strong> - Flexibles Layout-System für verschiedene Bildschirmgrößen</li>
+              </ul>
+              
+              <h2>Komponenten & Module</h2>
+              <p>Das Dashboard enthält mehrere vorgefertigte Module:</p>
+              <ul>
+                <li><strong>Analytics-Dashboard</strong> - Überblick über wichtige Metriken und Leistungsindikatoren</li>
+                <li><strong>Benutzerverwaltung</strong> - Schnittstelle zur Verwaltung von Systembenutzern</li>
+                <li><strong>Produktverwaltung</strong> - Tools für die Produktdatenverwaltung</li>
+                <li><strong>Inhaltsverwaltung</strong> - Einfache CMS-Funktionalität</li>
+                <li><strong>Einstellungsbereich</strong> - Anwendungs- und Benutzerpräferenzkonfiguration</li>
+                <li><strong>Authentifizierungsbildschirme</strong> - Anmeldung, Registrierung und Passwortwiederherstellung</li>
+              </ul>
+              
+              <h2>Designprinzipien</h2>
+              <p>Das Projekt folgt mehreren wichtigen Designprinzipien:</p>
+              <ul>
+                <li>Komponentenbasierte Architektur für Wiederverwendbarkeit</li>
+                <li>Responsive-First-Ansatz für Design</li>
+                <li>Konsistente visuelle Sprache in der gesamten Benutzeroberfläche</li>
+                <li>Überlegungen zur Barrierefreiheit für alle Benutzer</li>
+                <li>Leistungsoptimierung für schnelle Ladezeiten</li>
+              </ul>
+            `
+          },
+          fr: {
+            title: "Tableau de Bord Vue Pro",
+            description: "Un tableau de bord professionnel construit avec Vue.js.",
+            fullDescription: `
+              <h2>Aperçu du Projet</h2>
+              <p>Vue Pro Dashboard est un tableau de bord administratif moderne et réactif construit avec Vue.js. Il fournit un ensemble complet de composants d'interface utilisateur et d'outils de visualisation de données pour créer des applications web professionnelles.</p>
+              
+              <h2>Fonctionnalités Clés</h2>
+              <ul>
+                <li><strong>Design Réactif</strong> - Mise en page entièrement responsive qui fonctionne parfaitement sur les ordinateurs de bureau, les tablettes et les appareils mobiles</li>
+                <li><strong>Composants Interactifs</strong> - Riche ensemble d'éléments d'interface utilisateur comprenant des cartes, des tableaux, des formulaires et des composants de navigation</li>
+                <li><strong>Visualisation de Données</strong> - Graphiques pour afficher des données analytiques</li>
+                <li><strong>Personnalisation de Thème</strong> - Paramètres de thème ajustables avec prise en charge des modes clair et sombre</li>
+                <li><strong>Authentification</strong> - Connexion, inscription et gestion de profil utilisateur</li>
+                <li><strong>Gestion d'État</strong> - Intégration Vuex pour la gestion centralisée des états</li>
+              </ul>
+              
+              <h2>Implémentation Technique</h2>
+              <p>Le tableau de bord est construit avec des technologies frontend modernes:</p>
+              <ul>
+                <li><strong>Framework Vue.js</strong> - Framework JavaScript progressif pour la construction d'interfaces utilisateur</li>
+                <li><strong>Vue Router</strong> - Pour une navigation fluide entre les sections du tableau de bord</li>
+                <li><strong>Vuex</strong> - Modèle et bibliothèque de gestion d'état</li>
+                <li><strong>Vue CLI</strong> - Outillage standard pour le développement Vue.js</li>
+                <li><strong>Préprocesseurs CSS</strong> - SCSS/SASS pour des capacités de style avancées</li>
+                <li><strong>Système de Grille Responsive</strong> - Système de mise en page flexible pour différentes tailles d'écran</li>
+              </ul>
+              
+              <h2>Composants & Modules</h2>
+              <p>Le tableau de bord comprend plusieurs modules préconçus:</p>
+              <ul>
+                <li><strong>Tableau de Bord Analytique</strong> - Aperçu des métriques clés et des indicateurs de performance</li>
+                <li><strong>Gestion des Utilisateurs</strong> - Interface pour gérer les utilisateurs du système</li>
+                <li><strong>Gestion des Produits</strong> - Outils pour la gestion des données produit</li>
+                <li><strong>Gestion de Contenu</strong> - Fonctionnalité CMS simple</li>
+                <li><strong>Panneau de Paramètres</strong> - Configuration des préférences d'application et d'utilisateur</li>
+                <li><strong>Écrans d'Authentification</strong> - Connexion, inscription et récupération de mot de passe</li>
+              </ul>
+              
+              <h2>Principes de Design</h2>
+              <p>Le projet suit plusieurs principes de design clés:</p>
+              <ul>
+                <li>Architecture basée sur les composants pour la réutilisabilité</li>
+                <li>Approche "responsive-first" pour la conception</li>
+                <li>Langage visuel cohérent dans toute l'interface</li>
+                <li>Considérations d'accessibilité pour tous les utilisateurs</li>
+                <li>Optimisation des performances pour des temps de chargement rapides</li>
+              </ul>
+            `
+          }
+        },
         techStack: ["Vue.js", "JavaScript", "CSS", "Responsive Design"],
         imageUrl: "/images/vue-dashboard.svg",
         githubUrl: "https://github.com/Mayedi007/vue-pro-dashboard",

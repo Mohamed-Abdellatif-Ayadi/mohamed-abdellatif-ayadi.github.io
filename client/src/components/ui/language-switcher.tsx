@@ -22,8 +22,14 @@ export function LanguageSwitcher() {
 
   const handleLanguageChange = (newLang: Language) => {
     console.log("Switching to language:", newLang);
+    
+    // Set language in localStorage directly to ensure it persists through reload
+    localStorage.setItem('language', newLang);
+    
+    // Set language in context
     setLanguage(newLang);
-    // Force page refresh to apply changes everywhere
+    
+    // Force a full page reload to apply changes everywhere including API calls
     window.location.reload();
   };
 
