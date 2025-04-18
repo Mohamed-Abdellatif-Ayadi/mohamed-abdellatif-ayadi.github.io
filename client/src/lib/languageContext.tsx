@@ -216,32 +216,54 @@ const translations: Record<Language, Record<string, string>> = {
 
 // Provider component
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Try to get the language from localStorage, default to 'en'
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window !== 'undefined') {
-      const savedLanguage = localStorage.getItem('language') as Language;
-      return savedLanguage || 'en';
+  // Create a state for the language, default to 'en'
+  const [language, setLanguageState] = useState<Language>('en');
+  
+  // Try to get the language from localStorage on component mount
+  useEffect(() => {
+    try {
+      const savedLanguage = localStorage.getItem('language');
+      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'de' || savedLanguage === 'fr')) {
+        setLanguageState(savedLanguage as Language);
+      }
+    } catch (error) {
+      console.error("Error accessing localStorage:", error);
     }
-    return 'en';
-  });
+  }, []);
 
   // Update localStorage when language changes
   useEffect(() => {
-    localStorage.setItem('language', language);
+    try {
+      localStorage.setItem('language', language);
+      // Force re-render by triggering a window event
+      window.dispatchEvent(new Event('storage'));
+    } catch (error) {
+      console.error("Error setting localStorage:", error);
+    }
   }, [language]);
 
   // Function to set the language
   const setLanguage = (newLanguage: Language) => {
+    console.log("Changing language to:", newLanguage);
     setLanguageState(newLanguage);
   };
 
   // Translation function
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    if (!translations[language] || !translations[language][key]) {
+      return key;
+    }
+    return translations[language][key];
+  };
+
+  const contextValue = {
+    language,
+    setLanguage,
+    t
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );

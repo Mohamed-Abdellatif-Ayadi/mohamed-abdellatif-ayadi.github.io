@@ -16,14 +16,23 @@ export function LanguageSwitcher() {
     { code: "fr", label: "Français", flag: "🇫🇷" },
   ];
 
-  const currentLanguage = languages.find((lang) => lang.code === language);
+  const currentLanguage = languages.find((lang) => lang.code === language) || languages[0];
+  
+  console.log("Current language in switcher:", language);
+
+  const handleLanguageChange = (newLang: Language) => {
+    console.log("Switching to language:", newLang);
+    setLanguage(newLang);
+    // Force page refresh to apply changes everywhere
+    window.location.reload();
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="flex items-center gap-1">
-          <span className="text-lg">{currentLanguage?.flag}</span>
-          <span className="sr-only md:not-sr-only">{currentLanguage?.label}</span>
+          <span className="text-lg">{currentLanguage.flag}</span>
+          <span className="sr-only md:not-sr-only">{currentLanguage.label}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -33,7 +42,7 @@ export function LanguageSwitcher() {
             className={`flex items-center gap-2 ${
               language === lang.code ? "bg-primary/10" : ""
             }`}
-            onClick={() => setLanguage(lang.code)}
+            onClick={() => handleLanguageChange(lang.code)}
           >
             <span className="text-lg">{lang.flag}</span>
             <span>{lang.label}</span>

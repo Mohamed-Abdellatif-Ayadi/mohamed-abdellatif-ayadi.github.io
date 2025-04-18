@@ -497,51 +497,149 @@ const ProjectDetail = () => {
     } else if (id === "4") {
       setProject({
         id: 4,
-        title: "Java LeetCode Solutions",
-        description: "A collection of coding problems from LeetCode solved using Java.",
-        fullDescription: `
-          <h2>Project Overview</h2>
-          <p>This repository is a personal collection of Java solutions to various LeetCode problems, organized by topic and implemented using clean code principles and modern Java features.</p>
-          
-          <h2>Problem Categories</h2>
-          <p>The solutions are organized into several key algorithm and data structure categories:</p>
-          <ul>
-            <li><strong>Dynamic Programming</strong> - Solutions to complex optimization problems like "Minimum Number of Taps to Open to Water a Garden"</li>
-            <li><strong>Linked Lists</strong> - Implementations of list manipulation algorithms including "Convert Binary Number in a Linked List to Integer"</li>
-            <li><strong>Stack-based Problems</strong> - Solutions using stack data structures like "Remove Duplicate Letters"</li>
-            <li><strong>Other Data Structures</strong> - Additional problems solved using trees, queues, graphs, and more</li>
-          </ul>
-          
-          <h2>Technical Implementation</h2>
-          <p>The solutions are implemented with the following technical considerations:</p>
-          <ul>
-            <li>Java 17+ features for modern, concise code</li>
-            <li>Time and space complexity optimization</li>
-            <li>Clean code principles for readability and maintainability</li>
-            <li>Detailed comments explaining the algorithm approach</li>
-            <li>Maven project structure for dependency management</li>
-          </ul>
-          
-          <h2>Problem-Solving Approach</h2>
-          <p>Each solution follows a structured approach to problem-solving:</p>
-          <ol>
-            <li>Problem understanding and edge case identification</li>
-            <li>Multiple solution approaches with complexity analysis</li>
-            <li>Implementation of the optimal solution</li>
-            <li>Code refactoring for readability</li>
-            <li>Testing with various inputs</li>
-          </ol>
-          
-          <h2>Learning Value</h2>
-          <p>This repository serves as both a reference and a learning tool for:</p>
-          <ul>
-            <li>Advanced algorithm techniques</li>
-            <li>Java language features and best practices</li>
-            <li>Optimization strategies for common computational problems</li>
-            <li>Interview preparation patterns</li>
-            <li>Clean code implementation examples</li>
-          </ul>
-        `,
+        translations: {
+          en: {
+            title: "Java LeetCode Solutions",
+            description: "A collection of coding problems from LeetCode solved using Java.",
+            fullDescription: `
+              <h2>Project Overview</h2>
+              <p>This repository is a personal collection of Java solutions to various LeetCode problems, organized by topic and implemented using clean code principles and modern Java features.</p>
+              
+              <h2>Problem Categories</h2>
+              <p>The solutions are organized into several key algorithm and data structure categories:</p>
+              <ul>
+                <li><strong>Dynamic Programming</strong> - Solutions to complex optimization problems like "Minimum Number of Taps to Open to Water a Garden"</li>
+                <li><strong>Linked Lists</strong> - Implementations of list manipulation algorithms including "Convert Binary Number in a Linked List to Integer"</li>
+                <li><strong>Stack-based Problems</strong> - Solutions using stack data structures like "Remove Duplicate Letters"</li>
+                <li><strong>Other Data Structures</strong> - Additional problems solved using trees, queues, graphs, and more</li>
+              </ul>
+              
+              <h2>Technical Implementation</h2>
+              <p>The solutions are implemented with the following technical considerations:</p>
+              <ul>
+                <li>Java 17+ features for modern, concise code</li>
+                <li>Time and space complexity optimization</li>
+                <li>Clean code principles for readability and maintainability</li>
+                <li>Detailed comments explaining the algorithm approach</li>
+                <li>Maven project structure for dependency management</li>
+              </ul>
+              
+              <h2>Problem-Solving Approach</h2>
+              <p>Each solution follows a structured approach to problem-solving:</p>
+              <ol>
+                <li>Problem understanding and edge case identification</li>
+                <li>Multiple solution approaches with complexity analysis</li>
+                <li>Implementation of the optimal solution</li>
+                <li>Code refactoring for readability</li>
+                <li>Testing with various inputs</li>
+              </ol>
+              
+              <h2>Learning Value</h2>
+              <p>This repository serves as both a reference and a learning tool for:</p>
+              <ul>
+                <li>Advanced algorithm techniques</li>
+                <li>Java language features and best practices</li>
+                <li>Optimization strategies for common computational problems</li>
+                <li>Interview preparation patterns</li>
+                <li>Clean code implementation examples</li>
+              </ul>
+            `
+          },
+          de: {
+            title: "Java LeetCode Lösungen",
+            description: "Eine Sammlung von Lösungen für Programmierprobleme von LeetCode in Java.",
+            fullDescription: `
+              <h2>Projektübersicht</h2>
+              <p>Dieses Repository ist eine persönliche Sammlung von Java-Lösungen für verschiedene LeetCode-Probleme, thematisch geordnet und unter Verwendung von Clean-Code-Prinzipien und modernen Java-Funktionen implementiert.</p>
+              
+              <h2>Problemkategorien</h2>
+              <p>Die Lösungen sind in mehrere wichtige Algorithmen- und Datenstrukturkategorien unterteilt:</p>
+              <ul>
+                <li><strong>Dynamische Programmierung</strong> - Lösungen für komplexe Optimierungsprobleme wie "Minimale Anzahl von Wasserhähnen, um einen Garten zu bewässern"</li>
+                <li><strong>Verkettete Listen</strong> - Implementierungen von Algorithmen zur Listenmanipulation, einschließlich "Konvertieren einer Binärzahl in einer verketteten Liste in eine Ganzzahl"</li>
+                <li><strong>Stack-basierte Probleme</strong> - Lösungen unter Verwendung von Stack-Datenstrukturen wie "Entfernen doppelter Buchstaben"</li>
+                <li><strong>Andere Datenstrukturen</strong> - Zusätzliche Probleme, die mit Bäumen, Warteschlangen, Graphen und mehr gelöst wurden</li>
+              </ul>
+              
+              <h2>Technische Umsetzung</h2>
+              <p>Die Lösungen werden mit folgenden technischen Überlegungen implementiert:</p>
+              <ul>
+                <li>Java 17+ Funktionen für modernen, präzisen Code</li>
+                <li>Optimierung von Zeit- und Raumkomplexität</li>
+                <li>Clean-Code-Prinzipien für Lesbarkeit und Wartbarkeit</li>
+                <li>Detaillierte Kommentare zur Erklärung des Algorithmus-Ansatzes</li>
+                <li>Maven-Projektstruktur für Abhängigkeitsmanagement</li>
+              </ul>
+              
+              <h2>Problemlösungsansatz</h2>
+              <p>Jede Lösung folgt einem strukturierten Ansatz zur Problemlösung:</p>
+              <ol>
+                <li>Problemverständnis und Identifizierung von Grenzfällen</li>
+                <li>Mehrere Lösungsansätze mit Komplexitätsanalyse</li>
+                <li>Implementierung der optimalen Lösung</li>
+                <li>Code-Refaktorisierung für bessere Lesbarkeit</li>
+                <li>Testen mit verschiedenen Eingaben</li>
+              </ol>
+              
+              <h2>Lernwert</h2>
+              <p>Dieses Repository dient sowohl als Referenz als auch als Lernwerkzeug für:</p>
+              <ul>
+                <li>Fortgeschrittene Algorithmentechniken</li>
+                <li>Java-Sprachfunktionen und Best Practices</li>
+                <li>Optimierungsstrategien für häufige Berechnungsprobleme</li>
+                <li>Vorbereitungsmuster für Vorstellungsgespräche</li>
+                <li>Beispiele für Clean-Code-Implementierung</li>
+              </ul>
+            `
+          },
+          fr: {
+            title: "Solutions Java pour LeetCode",
+            description: "Une collection de problèmes de codage de LeetCode résolus en utilisant Java.",
+            fullDescription: `
+              <h2>Aperçu du Projet</h2>
+              <p>Ce dépôt est une collection personnelle de solutions Java à divers problèmes LeetCode, organisées par sujet et implémentées selon les principes de code propre et les fonctionnalités modernes de Java.</p>
+              
+              <h2>Catégories de Problèmes</h2>
+              <p>Les solutions sont organisées en plusieurs catégories clés d'algorithmes et de structures de données:</p>
+              <ul>
+                <li><strong>Programmation Dynamique</strong> - Solutions à des problèmes d'optimisation complexes comme "Nombre minimal de robinets à ouvrir pour arroser un jardin"</li>
+                <li><strong>Listes Chaînées</strong> - Implémentations d'algorithmes de manipulation de listes, y compris "Convertir un nombre binaire dans une liste chaînée en entier"</li>
+                <li><strong>Problèmes basés sur les Piles</strong> - Solutions utilisant des structures de données de pile comme "Supprimer les lettres en double"</li>
+                <li><strong>Autres Structures de Données</strong> - Problèmes supplémentaires résolus à l'aide d'arbres, de files d'attente, de graphes, et plus encore</li>
+              </ul>
+              
+              <h2>Implémentation Technique</h2>
+              <p>Les solutions sont implémentées avec les considérations techniques suivantes:</p>
+              <ul>
+                <li>Fonctionnalités Java 17+ pour un code moderne et concis</li>
+                <li>Optimisation de la complexité temporelle et spatiale</li>
+                <li>Principes de code propre pour la lisibilité et la maintenabilité</li>
+                <li>Commentaires détaillés expliquant l'approche algorithmique</li>
+                <li>Structure de projet Maven pour la gestion des dépendances</li>
+              </ul>
+              
+              <h2>Approche de Résolution de Problèmes</h2>
+              <p>Chaque solution suit une approche structurée de résolution de problèmes:</p>
+              <ol>
+                <li>Compréhension du problème et identification des cas limites</li>
+                <li>Approches multiples de solution avec analyse de complexité</li>
+                <li>Implémentation de la solution optimale</li>
+                <li>Refactorisation du code pour la lisibilité</li>
+                <li>Tests avec diverses entrées</li>
+              </ol>
+              
+              <h2>Valeur d'Apprentissage</h2>
+              <p>Ce dépôt sert à la fois de référence et d'outil d'apprentissage pour:</p>
+              <ul>
+                <li>Techniques d'algorithmes avancées</li>
+                <li>Fonctionnalités et bonnes pratiques du langage Java</li>
+                <li>Stratégies d'optimisation pour les problèmes de calcul courants</li>
+                <li>Modèles de préparation aux entretiens</li>
+                <li>Exemples d'implémentation de code propre</li>
+              </ul>
+            `
+          }
+        },
         techStack: ["Java", "Algorithms", "Data Structures", "LeetCode"],
         imageUrl: "/images/leetcode-solutions.svg",
         githubUrl: "https://github.com/Mayedi007/java-praktices-leetcode",
