@@ -1,12 +1,14 @@
 import { Link } from "wouter";
 import { formatDate, truncateText } from "@/lib/utils";
 import { Article } from "@shared/schema";
+import { useLanguage } from "@/lib/languageContext";
 
 type ArticleCardProps = {
   article: Article;
 };
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
+  const { t, language } = useLanguage();
   return (
     <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <img 
@@ -23,9 +25,15 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             {formatDate(article.publishedAt)}
           </span>
         </div>
-        <h3 className="text-xl font-bold mb-2 text-slate-900">{article.title}</h3>
+        <h3 className="text-xl font-bold mb-2 text-slate-900">
+          {article.translations && article.translations[language] 
+            ? article.translations[language].title 
+            : article.title}
+        </h3>
         <p className="text-slate-600 mb-4 line-clamp-3">
-          {truncateText(article.excerpt, 150)}
+          {article.translations && article.translations[language] 
+            ? truncateText(article.translations[language].excerpt, 150) 
+            : truncateText(article.excerpt, 150)}
         </p>
         <Link 
           href={`/blog/${article.id}`} 
