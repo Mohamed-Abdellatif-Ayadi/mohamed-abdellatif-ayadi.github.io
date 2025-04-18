@@ -863,6 +863,23 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</code></
       {
         title: "How to Deploy Your Website to GitHub Pages",
         excerpt: "A step-by-step guide to deploying your static website to GitHub Pages with workflow automation, custom domains, and best practices.",
+        translations: {
+          en: {
+            title: "How to Deploy Your Website to GitHub Pages",
+            excerpt: "A step-by-step guide to deploying your static website to GitHub Pages with workflow automation, custom domains, and best practices.",
+            content: "English content for GitHub Pages deployment article"
+          },
+          de: {
+            title: "So veröffentlichen Sie Ihre Website auf GitHub Pages",
+            excerpt: "Eine Schritt-für-Schritt-Anleitung zur Bereitstellung Ihrer statischen Website auf GitHub Pages mit Workflow-Automatisierung, benutzerdefinierten Domains und Best Practices.",
+            content: "German content for GitHub Pages deployment article"
+          },
+          fr: {
+            title: "Comment déployer votre site web sur GitHub Pages",
+            excerpt: "Un guide étape par étape pour déployer votre site web statique sur GitHub Pages avec automatisation du flux de travail, domaines personnalisés et meilleures pratiques.",
+            content: "French content for GitHub Pages deployment article"
+          }
+        },
         content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">GitHub Pages offers a free and easy way to host static websites directly from your GitHub repository. Whether you're building a personal portfolio, project documentation, or a small web application, this guide will walk you through deploying it quickly and efficiently.</p>
@@ -1154,6 +1171,23 @@ jobs:
       {
         title: "A SQL Practical Challenge on Salary Analysis",
         excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
+        translations: {
+          en: {
+            title: "A SQL Practical Challenge on Salary Analysis",
+            excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
+            content: "English content for SQL Challenge article"
+          },
+          de: {
+            title: "Eine praktische SQL-Herausforderung zur Gehaltsanalyse",
+            excerpt: "Erfahren Sie, wie Sie SQL-Fensterfunktionen verwenden können, um Mitarbeitergehaltsdaten zu analysieren, Topverdiener zu identifizieren und Abteilungsstatistiken und -rankings zu berechnen.",
+            content: "German content for SQL Challenge article"
+          },
+          fr: {
+            title: "Un défi pratique SQL sur l'analyse des salaires",
+            excerpt: "Apprenez à utiliser les fonctions de fenêtrage SQL pour analyser les données salariales des employés, identifier les hauts salaires et calculer les statistiques et les classements par département.",
+            content: "French content for SQL Challenge article"
+          }
+        },
         content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">SQL window functions offer powerful tools for salary data analysis in HR contexts. This practical case study demonstrates how to analyze employee compensation data, identify patterns, and generate insights using SQL.</p>
@@ -1409,6 +1443,23 @@ ORDER BY department, employee_name, year;</code></pre>
       },
       {
         title: "Mastering SQL Window Functions: A Comprehensive Guide",
+        translations: {
+          en: {
+            title: "Mastering SQL Window Functions: A Comprehensive Guide",
+            excerpt: "Learn essential SQL window functions for data analysis, including RANK, ROW_NUMBER, NTILE, LAG/LEAD, and practical examples for business applications.",
+            content: "English content for the SQL Window Functions guide"
+          },
+          de: {
+            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt: "Lernen Sie wesentliche SQL-Fensterfunktionen für die Datenanalyse kennen, einschließlich RANK, ROW_NUMBER, NTILE, LAG/LEAD und praktischer Beispiele für Geschäftsanwendungen.",
+            content: "German content for the SQL Window Functions guide"
+          },
+          fr: {
+            title: "Maîtriser les fonctions de fenêtrage SQL: Un guide complet",
+            excerpt: "Apprenez les fonctions de fenêtrage SQL essentielles pour l'analyse de données, notamment RANK, ROW_NUMBER, NTILE, LAG/LEAD, et des exemples pratiques pour les applications commerciales.",
+            content: "French content for the SQL Window Functions guide"
+          }
+        },
         excerpt: "Learn how to leverage SQL window functions to perform complex data analysis efficiently. From basic aggregations to advanced ranking and partitioning.",
         content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
