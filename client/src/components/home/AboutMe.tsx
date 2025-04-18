@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { CV } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/lib/languageContext";
 
 const AboutMe = () => {
+  const { t, language } = useLanguage();
   const { data: cv, isLoading } = useQuery<CV>({
-    queryKey: ["/api/cv"],
+    queryKey: ["/api/cv", language],
   });
 
   return (

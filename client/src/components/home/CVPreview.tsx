@@ -129,7 +129,7 @@ const CVPreview = () => {
                     href="/cv" 
                     className="inline-flex items-center text-primary-700 hover:text-primary-800 font-medium"
                   >
-                    View complete CV
+                    {t('home.cvPreview.viewComplete')}
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
                       className="h-4 w-4 ml-1" 
@@ -151,7 +151,7 @@ const CVPreview = () => {
           </div>
         ) : (
           <div className="text-center">
-            <p>Failed to load CV data. Please try again later.</p>
+            <p>{t('home.cvPreview.loadError')}</p>
           </div>
         )}
       </div>

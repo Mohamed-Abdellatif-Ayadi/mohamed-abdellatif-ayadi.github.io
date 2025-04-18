@@ -4,19 +4,21 @@ import ArticleCard from "../blog/ArticleCard";
 import { Button } from "@/components/ui/button";
 import { Article } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/lib/languageContext";
 
 const LatestArticles = () => {
+  const { t, language } = useLanguage();
   const { data: articles, isLoading } = useQuery<Article[]>({
-    queryKey: ["/api/articles?limit=3"],
+    queryKey: ["/api/articles?limit=3", language],
   });
 
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Latest Articles</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900">{t('home.latestArticles.title')}</h2>
           <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
-            Explore my recent posts on various topics including technology, design, and professional growth.
+            {t('home.latestArticles.subtitle')}
           </p>
         </div>
         
@@ -50,7 +52,7 @@ const LatestArticles = () => {
         <div className="mt-12 text-center">
           <Link href="/blog">
             <Button size="lg" className="inline-flex items-center">
-              View all articles
+              {t('home.latestArticles.viewAll')}
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 className="h-5 w-5 ml-2" 
