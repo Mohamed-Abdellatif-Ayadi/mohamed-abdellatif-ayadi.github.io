@@ -54,9 +54,16 @@ const ChatPage = () => {
     }
   });
 
-  // Fetch articles data
+  // Fetch articles data with the current language
   const { data: articles, isLoading: isArticlesLoading } = useQuery<Article[]>({
-    queryKey: ['/api/articles'],
+    queryKey: ['/api/articles', language],
+    queryFn: async () => {
+      const response = await fetch(`/api/articles?language=${language}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch articles');
+      }
+      return response.json();
+    }
   });
 
   // Scroll to bottom of messages whenever messages change
@@ -409,9 +416,9 @@ const ChatPage = () => {
   return (
     <div className="container max-w-5xl mx-auto px-4 py-12">
       <div className="flex flex-col space-y-4 mb-8">
-        <h1 className="text-3xl font-bold">Chat with Mohamed's Assistant</h1>
+        <h1 className="text-3xl font-bold">{t('chat.title')}</h1>
         <p className="text-slate-600">
-          Ask questions about Mohamed's CV, work experience, skills, education, and blog posts.
+          {t('chat.subtitle')}
         </p>
       </div>
 
@@ -426,13 +433,13 @@ const ChatPage = () => {
                   <AvatarFallback>MA</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium">Mohamed's Assistant</p>
-                  <p className="text-xs text-slate-500">Ask me anything about Mohamed</p>
+                  <p className="font-medium">{t('chat.assistantName')}</p>
+                  <p className="text-xs text-slate-500">{t('chat.assistantDescription')}</p>
                 </div>
               </div>
               <Badge variant="outline" className="gap-1">
                 <MessageSquare className="h-3 w-3" />
-                <span>Chat</span>
+                <span>{t('chat.badge')}</span>
               </Badge>
             </div>
 

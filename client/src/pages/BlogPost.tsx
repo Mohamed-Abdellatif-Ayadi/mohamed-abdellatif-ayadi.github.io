@@ -5,13 +5,22 @@ import { Article } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Helmet } from "react-helmet";
 import NotFound from "./not-found";
+import { useLanguage } from "@/lib/languageContext";
 
 const BlogPost = () => {
+  const { language, t } = useLanguage();
   const [, params] = useRoute<{ id: string }>("/blog/:id");
   const articleId = params?.id ? parseInt(params.id) : null;
 
   const { data: article, isLoading, error } = useQuery<Article>({
-    queryKey: [`/api/articles/${articleId}`],
+    queryKey: [`/api/articles/${articleId}`, language],
+    queryFn: async () => {
+      const response = await fetch(`/api/articles/${articleId}?language=${language}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch article');
+      }
+      return response.json();
+    },
     enabled: !!articleId,
   });
 
@@ -45,7 +54,7 @@ const BlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>{article.title} - John Doe</title>
+        <title>{article.title} - Mohamed Abdellatif Ayadi</title>
         <meta name="description" content={article.excerpt} />
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.excerpt} />

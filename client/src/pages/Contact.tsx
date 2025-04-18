@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
 import { simulateEmailSending } from "@/lib/emailUtils";
+import { useLanguage } from "@/lib/languageContext";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -23,6 +24,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const Contact = () => {
   const { toast } = useToast();
+  const { t, language } = useLanguage();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const form = useForm<ContactFormValues>({
@@ -47,16 +49,16 @@ const Contact = () => {
     },
     onSuccess: () => {
       toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you as soon as possible.",
+        title: t('contact.toast.successTitle'),
+        description: t('contact.toast.successMessage'),
       });
       setIsSubmitted(true);
       form.reset();
     },
     onError: (error) => {
       toast({
-        title: "Error sending message",
-        description: error.message || "Please try again later.",
+        title: t('contact.toast.errorTitle'),
+        description: error.message || t('contact.toast.errorMessage'),
         variant: "destructive",
       });
     },
@@ -69,15 +71,15 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact - Mohamed Abdellatif Ayadi</title>
-        <meta name="description" content="Get in touch with Mohamed Abdellatif Ayadi. Send a message and I'll get back to you as soon as possible." />
+        <title>{t('contact.title')} - Mohamed Abdellatif Ayadi</title>
+        <meta name="description" content={t('contact.metaDescription')} />
       </Helmet>
       <div className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('contact.heading')}</h1>
             <p className="text-lg opacity-90 mb-0">
-              Have a question or want to work together? Feel free to reach out!
+              {t('contact.subtitle')}
             </p>
           </div>
         </div>
@@ -93,7 +95,7 @@ const Contact = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-slate-900">Email</h3>
+                <h3 className="font-semibold text-slate-900">{t('contact.email')}</h3>
               </div>
               <a 
                 href="mailto:mohamed.ayadi.data@gmail.com" 
@@ -110,7 +112,7 @@ const Contact = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-slate-900">Phone</h3>
+                <h3 className="font-semibold text-slate-900">{t('contact.phone')}</h3>
               </div>
               <p className="text-slate-600">+4915252301739</p>
             </div>
@@ -123,19 +125,19 @@ const Contact = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-slate-900">Location</h3>
+                <h3 className="font-semibold text-slate-900">{t('contact.location')}</h3>
               </div>
               <p className="text-slate-600">Dortmund, Germany</p>
             </div>
           </div>
 
           <div className="bg-white p-8 rounded-xl shadow-md">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Send Me a Message</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
             
             {isSubmitted ? (
               <div className="p-6 bg-green-50 text-green-700 rounded-lg">
-                <h3 className="text-lg font-medium mb-2">Thank you for your message!</h3>
-                <p>I appreciate you taking the time to reach out. I'll get back to you as soon as possible.</p>
+                <h3 className="text-lg font-medium mb-2">{t('contact.thankYouTitle')}</h3>
+                <p>{t('contact.thankYouMessage')}</p>
               </div>
             ) : (
               <Form {...form}>
@@ -146,9 +148,9 @@ const Contact = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Name</FormLabel>
+                          <FormLabel>{t('contact.form.name')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Your name" {...field} />
+                            <Input placeholder={t('contact.form.namePlaceholder')} {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -160,9 +162,9 @@ const Contact = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel>{t('contact.form.email')}</FormLabel>
                           <FormControl>
-                            <Input placeholder="Your email address" type="email" {...field} />
+                            <Input placeholder={t('contact.form.emailPlaceholder')} type="email" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -175,9 +177,9 @@ const Contact = () => {
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Subject</FormLabel>
+                        <FormLabel>{t('contact.form.subject')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Subject of your message" {...field} />
+                          <Input placeholder={t('contact.form.subjectPlaceholder')} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -189,10 +191,10 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel>{t('contact.form.message')}</FormLabel>
                         <FormControl>
                           <Textarea 
-                            placeholder="Your message" 
+                            placeholder={t('contact.form.messagePlaceholder')} 
                             className="min-h-32" 
                             {...field} 
                           />
@@ -208,7 +210,7 @@ const Contact = () => {
                     size="lg"
                     disabled={mutation.isPending}
                   >
-                    {mutation.isPending ? "Sending..." : "Send Message"}
+                    {mutation.isPending ? t('contact.form.sending') : t('contact.form.submit')}
                   </Button>
                 </form>
               </Form>
