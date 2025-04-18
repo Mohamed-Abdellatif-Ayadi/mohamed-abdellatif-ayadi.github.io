@@ -5,13 +5,22 @@ import { Input } from "@/components/ui/input";
 import { Article } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Helmet } from "react-helmet";
+import { useLanguage } from "@/lib/languageContext";
 
 const BlogPage = () => {
+  const { t, language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const { data: articles, isLoading } = useQuery<Article[]>({
-    queryKey: ["/api/articles"],
+    queryKey: ["/api/articles", language],
+    queryFn: async () => {
+      const response = await fetch(`/api/articles?language=${language}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch articles');
+      }
+      return response.json();
+    }
   });
 
   const filteredArticles = articles?.filter((article) => {
@@ -32,15 +41,15 @@ const BlogPage = () => {
   return (
     <>
       <Helmet>
-        <title>Blog - John Doe</title>
-        <meta name="description" content="Read my latest articles on technology, design, and professional growth." />
+        <title>{t('blog.title')} - Mohamed Abdellatif Ayadi</title>
+        <meta name="description" content={t('blog.subtitle')} />
       </Helmet>
       <div className="bg-gradient-to-br from-primary-700 to-primary-900 text-white">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Articles</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('blog.title')}</h1>
             <p className="text-lg opacity-90 mb-0">
-              Thoughts, stories and ideas on technology, design, and professional growth.
+              {t('blog.subtitle')}
             </p>
           </div>
         </div>

@@ -8,22 +8,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // put application routes here
   // prefix all routes with /api
 
-  // Get all articles
+  // Get all articles with optional language parameter
   app.get("/api/articles", async (req, res) => {
     try {
       const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
-      const articles = await storage.getArticles(limit);
+      const language = req.query.language as string | undefined;
+      const articles = await storage.getArticles(limit, language);
       res.json(articles);
     } catch (error) {
       res.status(500).json({ message: "Error fetching articles" });
     }
   });
 
-  // Get a single article by ID
+  // Get a single article by ID with optional language parameter
   app.get("/api/articles/:id", async (req, res) => {
     try {
       const id = parseInt(req.params.id);
-      const article = await storage.getArticleById(id);
+      const language = req.query.language as string | undefined;
+      const article = await storage.getArticleById(id, language);
       
       if (!article) {
         return res.status(404).json({ message: "Article not found" });

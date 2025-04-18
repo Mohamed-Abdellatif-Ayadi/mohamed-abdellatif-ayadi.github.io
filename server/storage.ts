@@ -343,20 +343,52 @@ export class MemStorage implements IStorage {
   }
   
   // Article methods
-  async getArticles(limit?: number): Promise<Article[]> {
+  async getArticles(limit?: number, language?: string): Promise<Article[]> {
+    // First get all articles
     const allArticles = Array.from(this.articles.values()).sort(
       (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
     
+    // Handle language-specific content if possible
+    const processedArticles = allArticles.map(article => {
+      // If the article has translations field and the requested language is available
+      if (article.translations && language && article.translations[language]) {
+        return {
+          ...article,
+          title: article.translations[language].title || article.title,
+          excerpt: article.translations[language].excerpt || article.excerpt,
+          content: article.translations[language].content || article.content
+        };
+      }
+      return article;
+    });
+    
+    // Apply the limit if provided
     if (limit && limit > 0) {
-      return allArticles.slice(0, limit);
+      return processedArticles.slice(0, limit);
     }
     
-    return allArticles;
+    return processedArticles;
   }
   
-  async getArticleById(id: number): Promise<Article | undefined> {
-    return this.articles.get(id);
+  async getArticleById(id: number, language?: string): Promise<Article | undefined> {
+    const article = this.articles.get(id);
+    
+    if (!article) {
+      return undefined;
+    }
+    
+    // Handle language-specific content if possible
+    if (article.translations && language && article.translations[language]) {
+      return {
+        ...article,
+        title: article.translations[language].title || article.title,
+        excerpt: article.translations[language].excerpt || article.excerpt,
+        content: article.translations[language].content || article.content
+      };
+    }
+    
+    return article;
   }
   
   // CV methods

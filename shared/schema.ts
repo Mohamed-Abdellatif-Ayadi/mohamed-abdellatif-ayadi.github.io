@@ -2,6 +2,15 @@ import { pgTable, text, serial, integer, timestamp, json, boolean } from "drizzl
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+// Article translation schema for multilingual support
+export const articleTranslationSchema = z.object({
+  title: z.string(),
+  excerpt: z.string(),
+  content: z.string()
+});
+
+export type ArticleTranslation = z.infer<typeof articleTranslationSchema>;
+
 // Article schema
 export const articles = pgTable("articles", {
   id: serial("id").primaryKey(),
@@ -11,6 +20,8 @@ export const articles = pgTable("articles", {
   coverImage: text("cover_image").notNull(),
   category: text("category").notNull(),
   publishedAt: timestamp("published_at").notNull(),
+  // Add translations as JSON field, though we'll simulate it for our in-memory storage
+  translations: json("translations")
 });
 
 export const insertArticleSchema = createInsertSchema(articles).pick({
@@ -20,10 +31,15 @@ export const insertArticleSchema = createInsertSchema(articles).pick({
   coverImage: true,
   category: true,
   publishedAt: true,
+  translations: true
 });
 
 export type InsertArticle = z.infer<typeof insertArticleSchema>;
-export type Article = typeof articles.$inferSelect;
+export type Article = typeof articles.$inferSelect & {
+  translations?: {
+    [key: string]: ArticleTranslation;
+  };
+};
 
 // Experience schema for CV
 export const experienceSchema = z.object({
