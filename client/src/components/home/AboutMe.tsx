@@ -14,9 +14,9 @@ const AboutMe = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="mb-10 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">About Me</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">{t('home.aboutMe.title')}</h2>
             <p className="mt-3 text-slate-600">
-              Get to know me better and what drives my passion for technology and writing.
+              {t('home.aboutMe.subtitle')}
             </p>
           </div>
           
@@ -49,7 +49,7 @@ const AboutMe = () => {
               </div>
               
               <div className="md:w-2/3">
-                <h3 className="text-xl font-bold text-slate-900 mb-4">Hi, I'm {cv.name}</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">{t('home.aboutMe.greeting')} {cv.name}</h3>
                 <div className="space-y-4 text-slate-600 article-content">
                   <p>{cv.summary}</p>
                   <p>Aktuell belege ich Kurse wie Datenstrukturen, Algorithmen und Programmierung, Softwaretechnik, und Informationssysteme. Parallel arbeite ich als Werkstudent bei Iperceramica Deutschland GmbH, wo ich SAP und SAP S/4HANA einsetze.</p>
@@ -92,7 +92,7 @@ const AboutMe = () => {
             </div>
           ) : (
             <div className="text-center">
-              <p>Failed to load data. Please try again later.</p>
+              <p>{t('home.aboutMe.loadError')}</p>
             </div>
           )}
         </div>

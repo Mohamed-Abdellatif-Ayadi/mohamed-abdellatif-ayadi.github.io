@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { simulateEmailSending } from "@/lib/emailUtils";
+import { useLanguage } from "@/lib/languageContext";
 
 const newsletterSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -18,6 +19,7 @@ type NewsletterFormValues = z.infer<typeof newsletterSchema>;
 
 const Newsletter = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const form = useForm<NewsletterFormValues>({
