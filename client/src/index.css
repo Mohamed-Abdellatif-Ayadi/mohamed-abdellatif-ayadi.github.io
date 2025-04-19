@@ -128,10 +128,10 @@
   
   /* Style the step numbers with purple */
   .article-content h2.flex.items-center.gap-2 {
-    color: #c4b5fd !important; /* purple-300 */
+    color: #ffffff !important; /* white */
   }
   
-  /* Make text purple for specific step elements */
+  /* Make text white for specific step elements */
   .article-content h2.flex.items-center.gap-2 span,
   .article-content h2.flex.items-center.gap-2 div + *,
   .article-content li,
@@ -142,18 +142,18 @@
   .article-content [class*="text-slate-700"],
   .article-content [class*="text-slate-800"],
   .article-content [class*="text-slate-900"] {
-    color: #c4b5fd !important; 
+    color: #ffffff !important; 
   }
   
   /* Colorize specific text elements */
   .article-content .text-primary-800,
   .article-content [class*="text-primary-800"] {
-    color: #c4b5fd !important; /* purple-300 */
+    color: #ffffff !important; /* white */
   }
   
   /* Override specific style for the step numbers */
   .article-content h2[class*="flex items-center gap-2"] {
-    color: #c4b5fd !important;
+    color: #ffffff !important;
   }
 }
 
