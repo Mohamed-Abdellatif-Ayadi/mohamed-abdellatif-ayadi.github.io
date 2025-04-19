@@ -10,13 +10,13 @@ type ArticleCardProps = {
 const ArticleCard = ({ article }: ArticleCardProps) => {
   const { t, language } = useLanguage();
   return (
-    <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
       <img 
         src={article.coverImage} 
         alt={article.title} 
         className="w-full h-48 object-cover"
       />
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-center mb-4">
           <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-primary-100 text-primary-800">
             {article.category}
@@ -37,26 +37,28 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             ? truncateText(article.translations[language].excerpt, 150) 
             : truncateText(article.excerpt, 150)}
         </p>
-        <Link 
-          href={`/blog/${article.id}`} 
-          className="inline-flex items-center font-medium bg-primary-700 text-white px-3 py-2 rounded-md hover:bg-primary-800 transition-colors shadow-sm"
-        >
-          {t('blog.readMore')}
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-4 w-4 ml-1" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
+        <div className="mt-auto pt-2">
+          <Link 
+            href={`/blog/${article.id}`} 
+            className="inline-flex items-center font-medium bg-primary-700 text-white px-4 py-2 rounded-md hover:bg-primary-800 transition-colors shadow-md"
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M14 5l7 7m0 0l-7 7m7-7H3" 
-            />
-          </svg>
-        </Link>
+            {t('blog.readMore')}
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-4 w-4 ml-1" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M14 5l7 7m0 0l-7 7m7-7H3" 
+              />
+            </svg>
+          </Link>
+        </div>
       </div>
     </article>
   );
