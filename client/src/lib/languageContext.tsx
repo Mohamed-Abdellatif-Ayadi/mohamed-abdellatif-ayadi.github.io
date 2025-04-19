@@ -60,7 +60,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Blog Articles',
-    'blog.subtitle': 'Thoughts, insights, and experiences from my journey in technology',
+    'blog.subtitle': 'Thoughts, insights, and experiences from my journey in <span className="text-purple-400">technology</span>',
     'blog.readMore': 'Read More',
     'blog.search': 'Search',
     'blog.categories': 'Categories',
@@ -158,7 +158,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Blog-Artikel',
-    'blog.subtitle': 'Gedanken, Erkenntnisse und Erfahrungen aus meiner Reise in der Technologie',
+    'blog.subtitle': 'Gedanken, Erkenntnisse und Erfahrungen aus meiner Reise in der <span className="text-purple-400">Technologie</span>',
     'blog.readMore': 'Weiterlesen',
     'blog.search': 'Suchen',
     'blog.categories': 'Kategorien',
@@ -256,7 +256,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Articles de Blog',
-    'blog.subtitle': 'Réflexions, idées et expériences de mon parcours dans la technologie',
+    'blog.subtitle': 'Réflexions, idées et expériences de mon parcours dans la <span className="text-purple-400">technologie</span>',
     'blog.readMore': 'Lire Plus',
     'blog.search': 'Rechercher',
     'blog.categories': 'Catégories',

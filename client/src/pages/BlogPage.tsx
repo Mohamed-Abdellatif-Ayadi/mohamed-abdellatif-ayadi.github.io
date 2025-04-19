@@ -48,8 +48,8 @@ const BlogPage = () => {
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('blog.title')}</h1>
-            <p className="text-lg opacity-90 mb-0">
-              {t('blog.subtitle')}
+            <p className="text-lg opacity-90 mb-0" 
+               dangerouslySetInnerHTML={{ __html: t('blog.subtitle') }}>
             </p>
           </div>
         </div>
