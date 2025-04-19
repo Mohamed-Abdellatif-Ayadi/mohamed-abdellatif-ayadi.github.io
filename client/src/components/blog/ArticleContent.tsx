@@ -31,7 +31,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
     <article className="max-w-3xl mx-auto px-4 py-8">
       {/* Category Heading */}
       <div className="uppercase tracking-wider font-medium mb-2">
-        <span className="bg-purple-700 text-white px-2 py-1 rounded-md shadow-md">
+        <span className="bg-purple-700 text-white px-5 py-1.5 rounded-lg font-bold tracking-wider text-base shadow-md">
           {article.category}
         </span> /
       </div>

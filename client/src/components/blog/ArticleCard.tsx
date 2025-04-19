@@ -18,7 +18,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       />
       <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-center mb-4">
-          <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-purple-700 text-white shadow-sm">
+          <span className="text-xs font-bold px-3 py-1 tracking-wider rounded-lg bg-purple-700 text-white shadow-sm">
             {article.category}
           </span>
           <span className="ml-2 text-xs text-slate-500">
