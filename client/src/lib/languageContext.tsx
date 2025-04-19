@@ -60,7 +60,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Blog Articles',
-    'blog.subtitle': 'Thoughts, insights, and experiences from my journey in <span style="color: #c084fc; font-weight: bold; background-color: rgba(192, 132, 252, 0.1); padding: 0px 5px; border-radius: 4px;">technology</span>',
+    'blog.subtitle': 'Thoughts, insights, and experiences from my journey in <span style="color: white; font-weight: bold; background-color: #8B5CF6; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 5px #A855F7;">technology</span>',
     'blog.readMore': 'Read More',
     'blog.search': 'Search',
     'blog.categories': 'Categories',
@@ -158,7 +158,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Blog-Artikel',
-    'blog.subtitle': 'Gedanken, Erkenntnisse und Erfahrungen aus meiner Reise in der <span style="color: #c084fc; font-weight: bold; background-color: rgba(192, 132, 252, 0.1); padding: 0px 5px; border-radius: 4px;">Technologie</span>',
+    'blog.subtitle': 'Gedanken, Erkenntnisse und Erfahrungen aus meiner Reise in der <span style="color: white; font-weight: bold; background-color: #8B5CF6; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 5px #A855F7;">Technologie</span>',
     'blog.readMore': 'Weiterlesen',
     'blog.search': 'Suchen',
     'blog.categories': 'Kategorien',
@@ -256,7 +256,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Articles de Blog',
-    'blog.subtitle': 'Réflexions, idées et expériences de mon parcours dans la <span style="color: #c084fc; font-weight: bold; background-color: rgba(192, 132, 252, 0.1); padding: 0px 5px; border-radius: 4px;">technologie</span>',
+    'blog.subtitle': 'Réflexions, idées et expériences de mon parcours dans la <span style="color: white; font-weight: bold; background-color: #8B5CF6; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 5px #A855F7;">technologie</span>',
     'blog.readMore': 'Lire Plus',
     'blog.search': 'Rechercher',
     'blog.categories': 'Catégories',
