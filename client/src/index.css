@@ -106,27 +106,27 @@
   }
   
   .article-content [class*="bg-indigo-50"] {
-    background-color: #4c1d95; /* purple-900 */
-    border-color: #8b5cf6; /* purple-500 */
+    background-color: #172554; /* blue-950 */
+    border-color: #3b82f6; /* blue-500 */
   }
   
   .article-content [class*="bg-indigo-50"] [class*="text-indigo-800"] {
-    color: #ede9fe; /* purple-100 */
+    color: #ffffff; /* white */
   }
   
   /* Improve numbered steps */
   .article-content [class*="bg-primary-100"] {
-    background-color: #8b5cf6 !important; /* purple-500 */
+    background-color: #2563eb !important; /* blue-600 */
     color: white !important;
   }
   
   /* Further improve specific GitHub Pages article colors */
   .article-content div[class*="flex items-center justify-center w-8 h-8 rounded-full"] {
-    background-color: #8b5cf6 !important; /* purple-500 */
+    background-color: #2563eb !important; /* blue-600 */
     color: white !important;
   }
   
-  /* Style the step numbers with purple */
+  /* Style the step numbers with white */
   .article-content h2.flex.items-center.gap-2 {
     color: #ffffff !important; /* white */
   }
