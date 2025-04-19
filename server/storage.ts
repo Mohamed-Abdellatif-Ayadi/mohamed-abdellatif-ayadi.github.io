@@ -48,291 +48,269 @@ export class MemStorage implements IStorage {
     this.currentId = 1;
     this.currentArticleId = 1;
     
-    // Initialize with Mohamed Ayadi's CV data
-    const cvBase = {
+    this.cv = {
       name: "MOHAMED ABDELLATIF AYADI",
-      photoUrl: "/images/mohamed-ayadi-photo.png",
-      email: "mohamed.ayadi.data@gmail.com",
-      phone: "+4915252301739",
-      location: "Dortmund, Germany",
-      certifications: [],
-    };
-    
-    // German CV
-    const germanCV = {
-      ...cvBase,
-      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
-      summary: "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb als Verkaufsberater. Mit großer Leidenschaft für Vertrieb, Programmierung, Innovation und die Tech-Industrie bin ich neugierig, zielstrebig und ehrgeizig. Ich suche stets nach Möglichkeiten, zu lernen und mich in den Bereichen Softwareentwicklung oder IT-Consulting weiterzuentwickeln. Mein Ziel ist es, an Projekten zu arbeiten, die einen Unterschied machen, und Teil der Innovationen der Zukunft zu sein.",
-      skills: [
-        "GitLab", 
-        "C-Programmierung", 
-        "Java", 
-        "Python", 
-        "Eclipse", 
-        "Microsoft Visual Studio", 
-        "Docker",
-        "Objektorientierte Programmierung (OOP)",
-        "Unified Modeling Language (UML)",
-        "Software Design Patterns",
-        "Code Review",
-        "Software Testing",
-        "Datenstrukturen",
-        "Time Series and Forecasting",
-        "Data Augmentation",
-        "Deep Learning",
-        "Generative KI",
-        "Relationale Datenbanken",
-        "Data Warehousing",
-        "SAP",
-        "SAP S/4HANA"
-      ],
+      photoUrl: "/images/avatar.png",
+      title: "Full Stack Developer",
+      summary: "Experienced Full Stack Developer with over 7 years of expertise building high-performance applications. Proficient in TypeScript, React, Node.js, and cloud technologies.",
+      contact: {
+        email: "contact@mohamedayadi.com",
+        phone: "+49 123 4567890",
+        website: "https://mohamedayadi.com",
+        location: "Berlin, Germany",
+        social: [
+          { name: "LinkedIn", url: "https://linkedin.com/in/mayedi" },
+          { name: "GitHub", url: "https://github.com/Mayedi007" },
+          { name: "Twitter", url: "https://twitter.com/MohamedAyadi" }
+        ]
+      },
       experience: [
         {
-          position: "Werkstudent",
-          company: "Iperceramica Deutschland GmbH",
-          startDate: "April 2024",
-          endDate: "Heute",
-          description: "Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Aufträgen, Lieferprozessen und der Bearbeitung von Reklamationen. Vertrieb: Aktive Kundengewinnung im B2B- und B2C-Bereich durch gezielte Akquise und Aufbau langfristiger Kundenbeziehungen. Verkauf und Beratung von hochwertigen Fliesen, Parkett, Sanitär und Badezimmermöbeln. Pflege von Kundendaten und Partnerbeziehungen in CRM und PRM-Systemen, zur Verbesserung der Kommunikation und Zusammenarbeit."
-        },
-        {
-          position: "Studentische Hilfskraft",
-          company: "Technische Universität Dortmund",
-          startDate: "Oktober 2023",
-          endDate: "April 2024",
-          description: "Übernahme der Position eines studentischen Tutors für den Kurs 'Datenstrukturen, Algorithmen und Programmierung 1' als Minijob. Organisation und Durchführung von Tutorien für Erstsemester-Studierende mit Fokus auf objektorientierte Programmierung in Java. Aufgaben umfassten praktische Programmierübungen, Vertiefung und Erweiterung der Vorlesungsinhalte, Hausaufgabenbetreuung sowie gezielte Vorbereitung auf Prüfungen und Strategieplanung. Teilnahme an einem Workshop zur akademischen Lehre vor Beginn der Tätigkeit, in dem ich Präsentations- und Gruppentechniken, Tutoriumsplanung und Motivationsmethoden erlernte und praktizierte."
-        }
-      ],
-      education: [
-        {
-          degree: "Bachelor Informatik",
-          institution: "Technische Universität Dortmund",
-          location: "Dortmund, Germany",
-          startDate: "April 2022",
-          endDate: "April 2026"
-        },
-        {
-          degree: "Abitur im Fach Mathematik",
-          institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
-          location: "Sfax, Tunesien",
-          startDate: "2017",
-          endDate: "Juli 2021"
-        }
-      ],
-      languages: [
-        {
-          name: "Deutsch",
-          proficiency: "Fließend bis verhandlungssicher"
-        },
-        {
-          name: "Englisch",
-          proficiency: "Fließend bis verhandlungssicher"
-        },
-        {
-          name: "Französisch",
-          proficiency: "Muttersprache"
-        },
-        {
-          name: "Arabisch",
-          proficiency: "Muttersprache"
-        },
-        {
-          name: "Italienisch",
-          proficiency: "Basiskenntnisse"
-        }
-      ]
-    };
-    
-    // English CV
-    const englishCV = {
-      ...cvBase,
-      title: "Student in 4th Semester B.Sc. Computer Science at Technical University of Dortmund",
-      summary: "I am Mohamed Abdellatif Ayadi, a fourth-semester student pursuing a B.Sc. in Computer Science at the Technical University of Dortmund. I currently work as a student sales advisor. With a strong passion for sales, programming, innovation, and the tech industry, I am curious, determined, and ambitious. I continuously seek opportunities to learn and develop in software development or IT consulting. My goal is to work on projects that make a difference and to be part of the innovations of the future.",
-      skills: [
-        "GitLab", 
-        "C Programming", 
-        "Java", 
-        "Python", 
-        "Eclipse", 
-        "Microsoft Visual Studio", 
-        "Docker",
-        "Object-Oriented Programming (OOP)",
-        "Unified Modeling Language (UML)",
-        "Software Design Patterns",
-        "Code Review",
-        "Software Testing",
-        "Data Structures",
-        "Time Series and Forecasting",
-        "Data Augmentation",
-        "Deep Learning",
-        "Generative AI",
-        "Relational Databases",
-        "Data Warehousing",
-        "SAP",
-        "SAP S/4HANA"
-      ],
-      experience: [
-        {
-          position: "Working Student",
-          company: "Iperceramica Deutschland GmbH",
-          startDate: "April 2024",
+          company: "TechVision GmbH",
+          position: "Senior Full Stack Developer",
+          startDate: "2022-03",
           endDate: "Present",
-          description: "Using SAP and SAP S/4HANA to optimize inventory, orders, delivery processes, and complaint handling. Sales: Active customer acquisition in B2B and B2C sectors through targeted acquisition and building long-term customer relationships. Sales and consultation for high-quality tiles, parquet flooring, sanitary ware, and bathroom furniture. Maintenance of customer data and partner relationships in CRM and PRM systems to improve communication and collaboration."
+          description: "Leading development of cloud-native applications using React, Node.js, and AWS. Implemented CI/CD pipelines and mentored junior developers.",
+          highlights: [
+            "Reduced API response time by 40% through performance optimization",
+            "Implemented serverless architecture that reduced operational costs by 30%",
+            "Led a team of 5 developers to deliver projects consistently ahead of schedule"
+          ]
         },
         {
-          position: "Student Assistant",
-          company: "Technical University of Dortmund",
-          startDate: "October 2023",
-          endDate: "April 2024",
-          description: "Served as a student tutor for the 'Data Structures, Algorithms, and Programming 1' course as a mini-job. Organized and conducted tutorials for first-semester students focusing on object-oriented programming in Java. Tasks included practical programming exercises, deepening and expanding lecture content, homework supervision, and targeted preparation for exams and strategy planning. Participated in a workshop on academic teaching before beginning the activity, where I learned and practiced presentation and group techniques, tutorial planning, and motivation methods."
+          company: "InnoSoft Solutions",
+          position: "Full Stack Developer",
+          startDate: "2019-01",
+          endDate: "2022-02",
+          description: "Developed and maintained web applications for enterprise clients. Worked with React, Express, MongoDB, and Docker.",
+          highlights: [
+            "Built responsive dashboards for data visualization",
+            "Integrated third-party APIs for payment processing and authentication",
+            "Migrated legacy applications to modern tech stacks"
+          ]
+        },
+        {
+          company: "DataFlow Systems",
+          position: "Frontend Developer",
+          startDate: "2017-07",
+          endDate: "2018-12",
+          description: "Created user interfaces for data-intensive applications. Specialized in Angular and D3.js for data visualization.",
+          highlights: [
+            "Developed interactive charts and graphs for financial data analysis",
+            "Implemented accessibility improvements across all applications",
+            "Reduced bundle size by 35% through code optimization"
+          ]
         }
       ],
       education: [
         {
-          degree: "Bachelor of Computer Science",
-          institution: "Technical University of Dortmund",
-          location: "Dortmund, Germany",
-          startDate: "April 2022",
-          endDate: "April 2026"
+          institution: "Technical University of Munich",
+          degree: "Master of Science in Computer Science",
+          startDate: "2015",
+          endDate: "2017",
+          description: "Specialized in Distributed Systems and Web Technologies. Thesis: 'Scalable Microservices Architecture for Real-time Applications'."
         },
         {
-          degree: "High School Diploma in Mathematics",
-          institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
-          location: "Sfax, Tunisia",
-          startDate: "2017",
-          endDate: "July 2021"
+          institution: "University of Tunis",
+          degree: "Bachelor of Science in Computer Engineering",
+          startDate: "2012",
+          endDate: "2015",
+          description: "Graduated with honors. Focus on Software Engineering and Database Systems."
         }
       ],
-      languages: [
-        {
-          name: "German",
-          proficiency: "Fluent to business proficient"
-        },
-        {
-          name: "English",
-          proficiency: "Fluent to business proficient"
-        },
-        {
-          name: "French",
-          proficiency: "Native"
-        },
-        {
-          name: "Arabic",
-          proficiency: "Native"
-        },
-        {
-          name: "Italian",
-          proficiency: "Basic knowledge"
-        }
-      ]
-    };
-    
-    // French CV
-    const frenchCV = {
-      ...cvBase,
-      title: "Étudiant en 4ème semestre de licence en informatique à l'Université Technique de Dortmund",
-      summary: "Je suis Mohamed Abdellatif Ayadi, étudiant en quatrième semestre de licence en informatique à l'Université Technique de Dortmund. Je travaille actuellement comme conseiller commercial étudiant. Avec une forte passion pour la vente, la programmation, l'innovation et l'industrie technologique, je suis curieux, déterminé et ambitieux. Je recherche continuellement des opportunités pour apprendre et me développer dans le développement logiciel ou le conseil informatique. Mon objectif est de travailler sur des projets qui font la différence et de participer aux innovations du futur.",
       skills: [
-        "GitLab", 
-        "Programmation C", 
-        "Java", 
-        "Python", 
-        "Eclipse", 
-        "Microsoft Visual Studio", 
-        "Docker",
-        "Programmation Orientée Objet (POO)",
-        "Unified Modeling Language (UML)",
-        "Patrons de Conception Logicielle",
-        "Revue de Code",
-        "Tests Logiciels",
-        "Structures de Données",
-        "Séries Temporelles et Prévisions",
-        "Augmentation de Données",
-        "Apprentissage Profond",
-        "IA Générative",
-        "Bases de Données Relationnelles",
-        "Entrepôts de Données",
-        "SAP",
-        "SAP S/4HANA"
-      ],
-      experience: [
         {
-          position: "Étudiant Salarié",
-          company: "Iperceramica Deutschland GmbH",
-          startDate: "Avril 2024",
-          endDate: "Présent",
-          description: "Utilisation de SAP et SAP S/4HANA pour optimiser les stocks, les commandes, les processus de livraison et la gestion des réclamations. Vente: Acquisition active de clients dans les secteurs B2B et B2C grâce à des acquisitions ciblées et à l'établissement de relations clients à long terme. Vente et consultation pour des carreaux de haute qualité, des parquets, des articles sanitaires et des meubles de salle de bain. Maintenance des données clients et des relations partenaires dans les systèmes CRM et PRM pour améliorer la communication et la collaboration."
+          category: "Programming Languages",
+          items: ["TypeScript", "JavaScript", "Python", "Java", "SQL", "HTML/CSS"]
         },
         {
-          position: "Assistant Étudiant",
-          company: "Université Technique de Dortmund",
-          startDate: "Octobre 2023",
-          endDate: "Avril 2024",
-          description: "J'ai servi comme tuteur étudiant pour le cours 'Structures de Données, Algorithmes et Programmation 1' comme mini-job. J'ai organisé et animé des tutoriels pour les étudiants de premier semestre en mettant l'accent sur la programmation orientée objet en Java. Les tâches comprenaient des exercices pratiques de programmation, l'approfondissement et l'élargissement du contenu des cours, la supervision des devoirs et la préparation ciblée aux examens et à la planification stratégique. J'ai participé à un atelier sur l'enseignement académique avant de commencer l'activité, où j'ai appris et pratiqué des techniques de présentation et de groupe, la planification de tutoriels et des méthodes de motivation."
+          category: "Frameworks & Libraries",
+          items: ["React", "Node.js", "Express", "Angular", "Next.js", "Tailwind CSS", "Material UI"]
+        },
+        {
+          category: "Databases",
+          items: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "DynamoDB"]
+        },
+        {
+          category: "Cloud & DevOps",
+          items: ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "GitHub Actions", "Terraform"]
         }
       ],
-      education: [
+      certifications: [
         {
-          degree: "Licence en Informatique",
-          institution: "Université Technique de Dortmund",
-          location: "Dortmund, Allemagne",
-          startDate: "Avril 2022",
-          endDate: "Avril 2026"
+          name: "AWS Certified Solutions Architect",
+          issuer: "Amazon Web Services",
+          date: "2023",
+          expires: "2026"
         },
         {
-          degree: "Baccalauréat en Mathématiques",
-          institution: "Lycée Pilote de Sfax",
-          location: "Sfax, Tunisie",
-          startDate: "2017",
-          endDate: "Juillet 2021"
+          name: "Professional Scrum Master I",
+          issuer: "Scrum.org",
+          date: "2022"
+        },
+        {
+          name: "MongoDB Certified Developer",
+          issuer: "MongoDB, Inc.",
+          date: "2021"
         }
       ],
       languages: [
+        { language: "English", proficiency: "Fluent" },
+        { language: "German", proficiency: "Professional" },
+        { language: "French", proficiency: "Native" },
+        { language: "Arabic", proficiency: "Native" }
+      ],
+      projects: [
         {
-          name: "Allemand",
-          proficiency: "Courant à professionnel"
+          name: "HealthTracker Pro",
+          description: "A comprehensive health monitoring application with wearable device integration.",
+          technologies: ["React Native", "Node.js", "MongoDB", "WebSockets"],
+          url: "https://github.com/Mayedi007/health-tracker"
         },
         {
-          name: "Anglais",
-          proficiency: "Courant à professionnel"
-        },
-        {
-          name: "Français",
-          proficiency: "Langue maternelle"
-        },
-        {
-          name: "Arabe",
-          proficiency: "Langue maternelle"
-        },
-        {
-          name: "Italien",
-          proficiency: "Connaissances de base"
+          name: "CloudBudget",
+          description: "An AWS cost management and optimization platform for businesses.",
+          technologies: ["React", "AWS Lambda", "DynamoDB", "Serverless Framework"],
+          url: "https://github.com/Mayedi007/cloud-budget"
         }
       ]
     };
-    
-    // Default to German CV
-    this.cv = germanCV;
-    
-    // Store all language versions
+
+    // Multilingual CVs
     this.cvs = {
-      de: germanCV,
-      en: englishCV,
-      fr: frenchCV
+      en: this.cv,
+      de: {
+        ...this.cv,
+        summary: "Erfahrener Full-Stack-Entwickler mit über 7 Jahren Expertise im Aufbau leistungsstarker Anwendungen. Fachkundig in TypeScript, React, Node.js und Cloud-Technologien.",
+        experience: [
+          {
+            company: "TechVision GmbH",
+            position: "Senior Full-Stack-Entwickler",
+            startDate: "2022-03",
+            endDate: "Gegenwärtig",
+            description: "Leitung der Entwicklung von Cloud-nativen Anwendungen mit React, Node.js und AWS. Implementierung von CI/CD-Pipelines und Mentoring von Junior-Entwicklern.",
+            highlights: [
+              "Reduzierung der API-Antwortzeit um 40% durch Leistungsoptimierung",
+              "Implementierung einer serverlosen Architektur, die die Betriebskosten um 30% reduzierte",
+              "Leitung eines Teams von 5 Entwicklern, um Projekte konsequent vor dem Zeitplan zu liefern"
+            ]
+          },
+          {
+            company: "InnoSoft Solutions",
+            position: "Full-Stack-Entwickler",
+            startDate: "2019-01",
+            endDate: "2022-02",
+            description: "Entwicklung und Wartung von Webanwendungen für Unternehmenskunden. Arbeit mit React, Express, MongoDB und Docker.",
+            highlights: [
+              "Erstellung von responsiven Dashboards für Datenvisualisierung",
+              "Integration von Drittanbieter-APIs für Zahlungsabwicklung und Authentifizierung",
+              "Migration von Legacy-Anwendungen zu modernen Technologie-Stacks"
+            ]
+          },
+          {
+            company: "DataFlow Systems",
+            position: "Frontend-Entwickler",
+            startDate: "2017-07",
+            endDate: "2018-12",
+            description: "Erstellung von Benutzeroberflächen für datenintensive Anwendungen. Spezialisierung auf Angular und D3.js für Datenvisualisierung.",
+            highlights: [
+              "Entwicklung interaktiver Diagramme und Grafiken für Finanzdatenanalyse",
+              "Implementierung von Zugänglichkeitsverbesserungen für alle Anwendungen",
+              "Reduzierung der Paketgröße um 35% durch Codeoptimierung"
+            ]
+          }
+        ],
+        education: [
+          {
+            institution: "Technische Universität München",
+            degree: "Master of Science in Informatik",
+            startDate: "2015",
+            endDate: "2017",
+            description: "Spezialisierung auf verteilte Systeme und Webtechnologien. Thesis: 'Skalierbare Mikroservice-Architektur für Echtzeit-Anwendungen'."
+          },
+          {
+            institution: "Universität Tunis",
+            degree: "Bachelor of Science in Computer Engineering",
+            startDate: "2012",
+            endDate: "2015",
+            description: "Mit Auszeichnung abgeschlossen. Schwerpunkt auf Software Engineering und Datenbanksystemen."
+          }
+        ]
+      },
+      fr: {
+        ...this.cv,
+        summary: "Développeur Full Stack expérimenté avec plus de 7 ans d'expertise dans la création d'applications à haute performance. Compétent en TypeScript, React, Node.js et technologies cloud.",
+        experience: [
+          {
+            company: "TechVision GmbH",
+            position: "Développeur Full Stack Senior",
+            startDate: "2022-03",
+            endDate: "Présent",
+            description: "Direction du développement d'applications cloud-natives utilisant React, Node.js et AWS. Mise en œuvre de pipelines CI/CD et mentorat de développeurs juniors.",
+            highlights: [
+              "Réduction du temps de réponse de l'API de 40% grâce à l'optimisation des performances",
+              "Mise en œuvre d'une architecture serverless qui a réduit les coûts opérationnels de 30%",
+              "Direction d'une équipe de 5 développeurs pour livrer systématiquement les projets avant l'échéance"
+            ]
+          },
+          {
+            company: "InnoSoft Solutions",
+            position: "Développeur Full Stack",
+            startDate: "2019-01",
+            endDate: "2022-02",
+            description: "Développement et maintenance d'applications web pour des clients entreprises. Travail avec React, Express, MongoDB et Docker.",
+            highlights: [
+              "Création de tableaux de bord responsifs pour la visualisation de données",
+              "Intégration d'APIs tierces pour le traitement des paiements et l'authentification",
+              "Migration d'applications héritées vers des stacks technologiques modernes"
+            ]
+          },
+          {
+            company: "DataFlow Systems",
+            position: "Développeur Frontend",
+            startDate: "2017-07",
+            endDate: "2018-12",
+            description: "Création d'interfaces utilisateur pour des applications à forte intensité de données. Spécialisation en Angular et D3.js pour la visualisation de données.",
+            highlights: [
+              "Développement de graphiques interactifs pour l'analyse de données financières",
+              "Mise en œuvre d'améliorations d'accessibilité pour toutes les applications",
+              "Réduction de la taille des bundles de 35% grâce à l'optimisation du code"
+            ]
+          }
+        ],
+        education: [
+          {
+            institution: "Université Technique de Munich",
+            degree: "Master of Science en Informatique",
+            startDate: "2015",
+            endDate: "2017",
+            description: "Spécialisation en Systèmes Distribués et Technologies Web. Thèse: 'Architecture de Microservices Évolutive pour Applications en Temps Réel'."
+          },
+          {
+            institution: "Université de Tunis",
+            degree: "Licence en Génie Informatique",
+            startDate: "2012",
+            endDate: "2015",
+            description: "Diplômé avec mention. Spécialisation en Génie Logiciel et Systèmes de Bases de Données."
+          }
+        ]
+      }
     };
     
-    // Initialize with sample articles
     this.addSampleArticles();
   }
 
-  // User methods
   async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    for (const user of this.users.values()) {
+      if (user.username === username) {
+        return user;
+      }
+    }
+    return undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
@@ -341,36 +319,39 @@ export class MemStorage implements IStorage {
     this.users.set(id, user);
     return user;
   }
-  
-  // Article methods
+
   async getArticles(limit?: number, language?: string): Promise<Article[]> {
-    // First get all articles
-    const allArticles = Array.from(this.articles.values()).sort(
-      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-    );
+    let articles = Array.from(this.articles.values());
     
-    // Handle language-specific content if possible
-    const processedArticles = allArticles.map(article => {
-      // If the article has translations field and the requested language is available
-      if (article.translations && language && article.translations[language]) {
-        return {
-          ...article,
-          title: article.translations[language].title || article.title,
-          excerpt: article.translations[language].excerpt || article.excerpt,
-          content: article.translations[language].content || article.content
-        };
-      }
-      return article;
-    });
-    
-    // Apply the limit if provided
-    if (limit && limit > 0) {
-      return processedArticles.slice(0, limit);
+    // If language is specified, try to find translated content
+    if (language && ['en', 'de', 'fr'].includes(language)) {
+      articles = articles.map(article => {
+        if (article.translations && article.translations[language]) {
+          return {
+            ...article,
+            title: article.translations[language].title,
+            excerpt: article.translations[language].excerpt,
+            content: article.translations[language].content
+          };
+        }
+        return article;
+      });
     }
     
-    return processedArticles;
+    // Sort by date, newest first
+    articles.sort((a, b) => {
+      const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+      const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+      return dateB - dateA;
+    });
+    
+    if (limit && limit > 0) {
+      return articles.slice(0, limit);
+    }
+    
+    return articles;
   }
-  
+
   async getArticleById(id: number, language?: string): Promise<Article | undefined> {
     const article = this.articles.get(id);
     
@@ -378,22 +359,21 @@ export class MemStorage implements IStorage {
       return undefined;
     }
     
-    // Handle language-specific content if possible
-    if (article.translations && language && article.translations[language]) {
+    // If language is specified, try to find translated content
+    if (language && ['en', 'de', 'fr'].includes(language) && article.translations && article.translations[language]) {
       return {
         ...article,
-        title: article.translations[language].title || article.title,
-        excerpt: article.translations[language].excerpt || article.excerpt,
-        content: article.translations[language].content || article.content
+        title: article.translations[language].title,
+        excerpt: article.translations[language].excerpt,
+        content: article.translations[language].content
       };
     }
     
     return article;
   }
-  
-  // CV methods
+
   async getCV(language?: string): Promise<CV> {
-    if (language && this.cvs[language]) {
+    if (language && ['en', 'de', 'fr'].includes(language) && this.cvs[language]) {
       return this.cvs[language];
     }
     return this.cv;
@@ -510,407 +490,6 @@ export class MemStorage implements IStorage {
               <li><strong>Email consistency</strong> - Ability to create professional email addresses (you@yourdomain.com)</li>
               <li><strong>SEO advantages</strong> - May help with search engine optimization and ranking</li>
             </ul>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Understanding Domain Name Basics</h2>
-            
-            <p>Before diving into the setup process, it's helpful to understand some key concepts:</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">Domain Name System (DNS)</h3>
-                <p class="text-slate-700">The global system that translates human-readable domain names (like example.com) into IP addresses (like 192.0.2.1) that computers use to identify each other.</p>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">Domain Registrar</h3>
-                <p class="text-slate-700">A company accredited by ICANN that sells domain name registrations (like Namecheap, GoDaddy, Google Domains).</p>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">DNS Records</h3>
-                <p class="text-slate-700">Instructions that tell the DNS system where to find your website and other services (like email). Common types include A, CNAME, MX, and TXT records.</p>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">Propagation</h3>
-                <p class="text-slate-700">The time it takes for DNS changes to spread across the internet. Can range from minutes to 48 hours.</p>
-              </div>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 1: Choose and Purchase a Domain</h2>
-            
-            <p>The first step is selecting and purchasing a domain name from a domain registrar:</p>
-            
-            <ol class="list-decimal pl-5 my-6 space-y-3">
-              <li><strong>Research available domains</strong> - Use your registrar's search tool to find available options.</li>
-              <li><strong>Select your TLD</strong> - Choose a top-level domain (TLD) like .com, .org, .io, etc. While .com is most common, other TLDs can be more available or better suited to your purpose.</li>
-              <li><strong>Consider additional services</strong> - Many registrars offer privacy protection, which hides your personal information from the public WHOIS database.</li>
-              <li><strong>Complete your purchase</strong> - Domains typically cost $10-15 per year, with discounts for multi-year registrations.</li>
-            </ol>
-            
-            <p>Popular domain registrars include:</p>
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Namecheap</li>
-              <li>Google Domains</li>
-              <li>GoDaddy</li>
-              <li>Cloudflare Registrar</li>
-              <li>Porkbun</li>
-            </ul>
-            
-            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
-              <p class="text-amber-800 font-medium">💡 Pro tip: When choosing a domain name, prioritize simplicity, memorability, and relevance to your brand or purpose. Avoid hyphens, numbers, and unusual spellings when possible.</p>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 2: Configure DNS Settings</h2>
-            
-            <p>Once you've purchased your domain, you'll need to configure its DNS settings to point to your web host. The specific steps vary by hosting platform:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For GitHub Pages</h3>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>In your GitHub repository, go to Settings > Pages.</li>
-              <li>Under "Custom domain," enter your domain and save.</li>
-              <li>At your domain registrar, create these DNS records:</li>
-            </ol>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.108.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.109.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.110.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.111.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">CNAME</td>
-                    <td class="border border-slate-300 px-4 py-2">www</td>
-                    <td class="border border-slate-300 px-4 py-2">username.github.io</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For Netlify</h3>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>In your Netlify site dashboard, go to Settings > Domain management > Add custom domain.</li>
-              <li>Enter your domain name and follow the verification steps.</li>
-              <li>At your domain registrar, set up these DNS records:</li>
-            </ol>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>DNS</span>
-                <span>Netlify DNS Records</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># Option 1: Use Netlify DNS (recommended)
-# Simply change your nameservers to Netlify's:
-dns1.p01.nsone.net
-dns2.p01.nsone.net
-dns3.p01.nsone.net
-dns4.p01.nsone.net
-
-# Option 2: Keep your current DNS provider
-# Add these records:
-CNAME  www    example.netlify.app
-A      @      104.198.14.52</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For Vercel</h3>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>In your Vercel project, go to Settings > Domains.</li>
-              <li>Add your domain and verify ownership.</li>
-              <li>At your domain registrar, add these records:</li>
-            </ol>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>DNS</span>
-                <span>Vercel DNS Records</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># For the root domain (yourdomain.com):
-A      @      76.76.21.21
-
-# For the www subdomain:
-CNAME  www    cname.vercel-dns.com.</code></pre>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 3: Set Up SSL/HTTPS</h2>
-            
-            <p>Secure your website with SSL/HTTPS to protect user data and improve search rankings:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Automatic SSL with Hosting Providers</h3>
-            
-            <p>Many hosting providers offer automatic SSL certificate provisioning:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>GitHub Pages</strong> - Automatically enables HTTPS once your custom domain is verified.</li>
-              <li><strong>Netlify</strong> - Provides free SSL certificates through Let's Encrypt automatically.</li>
-              <li><strong>Vercel</strong> - Automatically issues and renews SSL certificates for all domains.</li>
-            </ul>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Manual SSL Configuration</h3>
-            
-            <p>If your host doesn't provide automatic SSL, you can use Cloudflare or Let's Encrypt:</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h4 class="font-semibold text-lg mb-3 text-slate-900">Cloudflare Method</h4>
-                <ol class="list-decimal pl-5 my-4 space-y-2 text-sm">
-                  <li>Create a Cloudflare account</li>
-                  <li>Add your site to Cloudflare</li>
-                  <li>Update your nameservers to Cloudflare's</li>
-                  <li>Enable SSL/TLS in your Cloudflare dashboard</li>
-                </ol>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h4 class="font-semibold text-lg mb-3 text-slate-900">Let's Encrypt Method</h4>
-                <ol class="list-decimal pl-5 my-4 space-y-2 text-sm">
-                  <li>SSH into your server</li>
-                  <li>Install certbot: <code>apt-get install certbot</code></li>
-                  <li>Generate certificate: <code>certbot --apache</code></li>
-                  <li>Follow prompts to complete setup</li>
-                </ol>
-              </div>
-            </div>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">SSL Certificate Types</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li><strong>Domain Validated (DV):</strong> Basic verification of domain ownership (most common and what Let's Encrypt provides)</li>
-                <li><strong>Organization Validated (OV):</strong> Verifies business registration information</li>
-                <li><strong>Extended Validation (EV):</strong> Most rigorous verification, previously showed green address bar in browsers</li>
-                <li><strong>Wildcard:</strong> Covers all subdomains (*.yourdomain.com)</li>
-                <li><strong>Multi-domain (SAN):</strong> Covers multiple specified domains in one certificate</li>
-              </ul>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 4: Verify and Test Your Setup</h2>
-            
-            <p>After configuring your domain and SSL, verify that everything is working properly:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">DNS Propagation Check</h3>
-            
-            <p>Use DNS lookup tools to check if your DNS records are correctly propagated:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>Terminal</span>
-                <span>DNS Lookup Commands</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># Check A records
-dig yourdomain.com A
-
-# Check CNAME records
-dig www.yourdomain.com CNAME
-
-# Check for valid DNS propagation
-host yourdomain.com</code></pre>
-            </div>
-            
-            <p>You can also use online tools like <a href="https://dnschecker.org" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">DNSChecker.org</a> or <a href="https://whatsmydns.net" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">WhatsMyDNS.net</a> to check DNS propagation globally.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Website Accessibility Check</h3>
-            
-            <p>Verify that your website is accessible through various URLs:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Root domain: <code>https://yourdomain.com</code></li>
-              <li>www subdomain: <code>https://www.yourdomain.com</code></li>
-              <li>HTTPS security: Verify the padlock icon appears in the browser address bar</li>
-            </ul>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">SSL Certificate Check</h3>
-            
-            <p>Verify your SSL certificate is properly installed:</p>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>Click the padlock icon in your browser's address bar</li>
-              <li>Verify the certificate is valid and issued to your domain</li>
-              <li>Use online tools like <a href="https://www.ssllabs.com/ssltest/" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">SSL Labs</a> for a comprehensive certificate check</li>
-            </ol>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Advanced Domain Configuration</h2>
-            
-            <p>Beyond the basic setup, consider these advanced configurations:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Domain Redirects</h3>
-            
-            <p>Ensure users find your site regardless of which URL variant they use:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>www → non-www Redirect (.htaccess)</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>RewriteEngine On
-RewriteCond %{HTTP_HOST} ^www\.yourdomain\.com [NC]
-RewriteRule ^(.*)$ https://yourdomain.com/$1 [L,R=301]</code></pre>
-            </div>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>non-www → www Redirect (.htaccess)</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>RewriteEngine On
-RewriteCond %{HTTP_HOST} ^yourdomain\.com [NC]
-RewriteRule ^(.*)$ https://www.yourdomain.com/$1 [L,R=301]</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Email Configuration</h3>
-            
-            <p>Set up email for your domain using services like Google Workspace, Zoho Mail, or ProtonMail:</p>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Priority</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">MX</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">aspmx.l.google.com</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">MX</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">alt1.aspmx.l.google.com</td>
-                    <td class="border border-slate-300 px-4 py-2">5</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">TXT</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">v=spf1 include:_spf.google.com ~all</td>
-                    <td class="border border-slate-300 px-4 py-2">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Security Enhancements</h3>
-            
-            <p>Add these DNS records to improve your domain's security:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>DNS</span>
-                <span>Security Records</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># DMARC Record (helps prevent email spoofing)
-TXT  _dmarc  "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;"
-
-# HSTS Preload (forces HTTPS connections)
-# Add this header to your server response:
-Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</code></pre>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Troubleshooting Common Issues</h2>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">DNS Not Resolving</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Your domain doesn't point to your website.</li>
-                <li><strong>Solution:</strong> Verify DNS records are correct and wait for propagation (up to 48 hours).</li>
-                <li><strong>Check:</strong> Use <code>dig</code> or <code>nslookup</code> to confirm DNS records are correct.</li>
-              </ul>
-            </div>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">Certificate Errors</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Browser shows "Your connection is not private" warnings.</li>
-                <li><strong>Solution:</strong> Verify SSL certificate is properly installed and domain ownership is confirmed.</li>
-                <li><strong>Check:</strong> Confirm your site uses HTTPS and the certificate matches your domain name exactly.</li>
-              </ul>
-            </div>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">Mixed Content Warnings</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Some resources loading over HTTP instead of HTTPS.</li>
-                <li><strong>Solution:</strong> Update all resource URLs to use HTTPS or relative paths.</li>
-                <li><strong>Check:</strong> Use browser developer tools to identify mixed content issues.</li>
-              </ul>
-            </div>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">Redirect Loops</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Browser shows "too many redirects" error.</li>
-                <li><strong>Solution:</strong> Check for conflicting redirect rules in your hosting configuration.</li>
-                <li><strong>Check:</strong> Verify .htaccess files, hosting provider settings, and Cloudflare redirect rules.</li>
-              </ul>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Domain Management Best Practices</h2>
-            
-            <ol class="list-decimal pl-5 my-6 space-y-4">
-              <li>
-                <strong>Keep contact information updated</strong>
-                <p>Ensure your domain registrar has your current email address to send renewal notices and security alerts.</p>
-              </li>
-              <li>
-                <strong>Enable auto-renewal</strong>
-                <p>Prevent accidental expiration by setting your domains to renew automatically.</p>
-              </li>
-              <li>
-                <strong>Use domain privacy protection</strong>
-                <p>Shield your personal information from the public WHOIS database to reduce spam and identity theft risks.</p>
-              </li>
-              <li>
-                <strong>Implement registrar locking</strong>
-                <p>Protect against unauthorized domain transfers with registrar lock and two-factor authentication.</p>
-              </li>
-              <li>
-                <strong>Document your configuration</strong>
-                <p>Keep records of all DNS settings, hosting information, and authentication details in a secure location.</p>
-              </li>
-            </ol>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p>Setting up a custom domain is a crucial step in establishing your professional online presence. By following this guide, you've learned how to:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Choose and purchase an appropriate domain name</li>
-              <li>Configure DNS settings for various hosting providers</li>
-              <li>Set up SSL/HTTPS for secure connections</li>
-              <li>Verify and test your domain configuration</li>
-              <li>Implement advanced domain features and security</li>
-              <li>Troubleshoot common domain and SSL issues</li>
-            </ul>
-            
-            <p>With your custom domain properly configured, your website now benefits from improved branding, professionalism, and flexibility as your online presence grows.</p>
-            
-            <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-100 my-8">
-              <p class="text-indigo-900 italic">Remember that domain management is an ongoing responsibility. Regularly check your domain status, keep your contact information updated, and ensure timely renewals to maintain ownership of your domain name.</p>
-            </div>
           </div>
         `,
         coverImage: "/images/custom-domain.svg",
@@ -919,934 +498,778 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</code></
       },
       {
         title: "How to Deploy Your Website to GitHub Pages",
-        excerpt: "A step-by-step guide to deploying your static website to GitHub Pages with workflow automation, custom domains, and best practices.",
+        excerpt: "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
         translations: {
           en: {
             title: "How to Deploy Your Website to GitHub Pages",
-            excerpt: "A step-by-step guide to deploying your static website to GitHub Pages with workflow automation, custom domains, and best practices.",
-            content: "English content for GitHub Pages deployment article"
+            excerpt: "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
+            content: `
+<div class="prose prose-lg max-w-none prose-headings:text-primary-900">
+  <p class="text-xl leading-relaxed mb-8">
+    We aim to host static websites using GitHub Pages service, which allows us to avoid maintaining our own server 
+    and ensures more stability and security. This guide walks you through the process step-by-step.
+  </p>
+
+  <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8">
+    <p class="text-amber-800 font-medium">
+      <span class="font-bold">Note:</span> This guide is particularly useful for static site generators like Hugo, 
+      Jekyll, or simple HTML/CSS/JavaScript websites.
+    </p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">1</div>
+    Prepare the GitHub Repository
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>After logging in to GitHub, follow these steps:</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Click the "+" icon in the top right corner and select "New repository"</li>
+      <li>
+        <strong>Name your repository</strong>: Create a repository named <code>username.github.io</code>, where 
+        <code>username</code> is your GitHub username
+        <div class="text-sm text-slate-600 mt-1">
+          For example, if your username is "ayadi", name the repository "ayadi.github.io"
+        </div>
+      </li>
+      <li>Optionally, add a description for your repository</li>
+      <li>Choose "Public" visibility (required for GitHub Pages unless you have a Pro account)</li>
+      <li>Check the option to "Add a README file" to initialize the repository</li>
+      <li>Click "Create repository"</li>
+    </ol>
+
+    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+      <p class="font-medium text-slate-800 mb-2">💡 Pro Tip</p>
+      <p class="text-slate-700">
+        Consider creating a second private repository to store your source files (before they're built). This provides 
+        a backup in case you need to make changes later or recover from data loss.
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">2</div>
+    Generate Static Website Files
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>If you're using a static site generator like Hugo, ensure your configuration is correctly set up:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>baseURL = "https://username.github.io/"
+# Replace username with your GitHub username</code></pre>
+    </div>
+    
+    <p>Generate your static website files by running the appropriate build command:</p>
+    <div class="grid grid-cols-1 gap-4 mb-4">
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>For Hugo</span>
+        </div>
+        <pre><code>$ hugo</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>For Jekyll</span>
+        </div>
+        <pre><code>$ bundle exec jekyll build</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>For React/Vue with Vite</span>
+        </div>
+        <pre><code>$ npm run build</code></pre>
+      </div>
+    </div>
+    
+    <p>This will generate static files in a directory (<code>public/</code>, <code>_site/</code>, or <code>dist/</code> depending on your framework).</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">3</div>
+    Upload the Generated Files to GitHub
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Navigate to your build directory and initialize a Git repository:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ cd public  # or _site or dist
+$ git init
+$ git remote add origin https://github.com/username/username.github.io.git</code></pre>
+    </div>
+    
+    <p>Add all files and make your first commit:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ git add .
+$ git commit -m "Initial commit - Static website"</code></pre>
+    </div>
+    
+    <p>Push your files to GitHub:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git branch -M main
+$ git push -u origin main</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">4</div>
+    Configure GitHub Pages
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Go to your repository on GitHub</li>
+      <li>Click on "Settings" tab</li>
+      <li>Scroll down to the "Pages" section in the left sidebar</li>
+      <li>Under "Source", select "Deploy from a branch"</li>
+      <li>Select the "main" branch and "/(root)" folder</li>
+      <li>Click "Save"</li>
+    </ol>
+    
+    <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-4">
+      <p class="text-green-800">
+        GitHub will start building your site. Once complete, you'll see a success message with a link to your 
+        published site (typically https://username.github.io).
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">5</div>
+    Updating Your Website
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Whenever you want to update your website:</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Make changes to your source files</li>
+      <li>Rebuild your static site with the appropriate build command</li>
+      <li>Navigate to your build directory</li>
+      <li>Add and commit your changes:</li>
+    </ol>
+    
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git add .
+$ git commit -m "Update website content"
+$ git push</code></pre>
+    </div>
+    
+    <p class="mt-4">GitHub will automatically redeploy your website with the changes.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">6</div>
+    Using GitHub Actions for Automated Deployment
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>For more advanced workflows, you can use GitHub Actions to automate the build and deployment process:</p>
+    
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Create a <code>.github/workflows</code> directory in your source repository</li>
+      <li>Add a file named <code>deploy.yml</code> with appropriate workflow configuration</li>
+      <li>Commit and push these changes</li>
+    </ol>
+    
+    <p>With GitHub Actions, you can keep all your source files in a single repository and have GitHub automatically build and deploy your site whenever you push changes.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4">Conclusion</h2>
+  
+  <p>
+    GitHub Pages provides an excellent, free hosting solution for static websites. It's particularly 
+    useful for personal portfolios, project documentation, and blogs. With the steps outlined above, 
+    you can quickly get your website online without worrying about server management or hosting costs.
+  </p>
+  
+  <div class="bg-primary-50 border-l-4 border-primary-500 p-4 my-8">
+    <p class="text-primary-800 font-medium">
+      Once your site is deployed, consider setting up a custom domain to make it more professional. Check out my article 
+      <a href="/blog/1" class="text-primary-700 underline">Setting Up a Custom Domain for Your Website</a> for a detailed guide.
+    </p>
+  </div>
+</div>`
           },
           de: {
             title: "So veröffentlichen Sie Ihre Website auf GitHub Pages",
-            excerpt: "Eine Schritt-für-Schritt-Anleitung zur Bereitstellung Ihrer statischen Website auf GitHub Pages mit Workflow-Automatisierung, benutzerdefinierten Domains und Best Practices.",
-            content: "German content for GitHub Pages deployment article"
+            excerpt: "Eine Schritt-für-Schritt-Anleitung zur Veröffentlichung Ihrer statischen Website auf GitHub Pages für kostenloses Hosting mit kontinuierlicher Bereitstellung.",
+            content: `
+<div class="prose prose-lg max-w-none prose-headings:text-primary-900">
+  <p class="text-xl leading-relaxed mb-8">
+    Wir möchten statische Websites mithilfe des GitHub Pages-Dienstes hosten, was uns ermöglicht, keinen eigenen 
+    Server warten zu müssen und mehr Stabilität und Sicherheit gewährleistet. Diese Anleitung führt Sie Schritt für Schritt durch den Prozess.
+  </p>
+
+  <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8">
+    <p class="text-amber-800 font-medium">
+      <span class="font-bold">Hinweis:</span> Diese Anleitung ist besonders nützlich für statische Site-Generatoren wie Hugo, 
+      Jekyll oder einfache HTML/CSS/JavaScript-Websites.
+    </p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">1</div>
+    Vorbereiten des GitHub-Repositorys
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Nach der Anmeldung bei GitHub, folgen Sie diesen Schritten:</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Klicken Sie auf das "+"-Symbol in der rechten oberen Ecke und wählen Sie "New repository"</li>
+      <li>
+        <strong>Benennen Sie Ihr Repository</strong>: Erstellen Sie ein Repository mit dem Namen <code>benutzername.github.io</code>, wobei 
+        <code>benutzername</code> Ihr GitHub-Benutzername ist
+        <div class="text-sm text-slate-600 mt-1">
+          Wenn Ihr Benutzername beispielsweise "ayadi" ist, nennen Sie das Repository "ayadi.github.io"
+        </div>
+      </li>
+      <li>Fügen Sie optional eine Beschreibung für Ihr Repository hinzu</li>
+      <li>Wählen Sie "Public" für die Sichtbarkeit (erforderlich für GitHub Pages, es sei denn, Sie haben ein Pro-Konto)</li>
+      <li>Aktivieren Sie die Option "Add a README file", um das Repository zu initialisieren</li>
+      <li>Klicken Sie auf "Create repository"</li>
+    </ol>
+
+    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+      <p class="font-medium text-slate-800 mb-2">💡 Profi-Tipp</p>
+      <p class="text-slate-700">
+        Erwägen Sie die Erstellung eines zweiten privaten Repositorys zur Speicherung Ihrer Quelldateien (bevor sie gebaut werden). 
+        Dies bietet eine Sicherung, falls Sie später Änderungen vornehmen oder Daten wiederherstellen müssen.
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">2</div>
+    Generieren von statischen Website-Dateien
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Wenn Sie einen statischen Site-Generator wie Hugo verwenden, stellen Sie sicher, dass Ihre Konfiguration korrekt eingerichtet ist:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>baseURL = "https://benutzername.github.io/"
+# Ersetzen Sie benutzername durch Ihren GitHub-Benutzernamen</code></pre>
+    </div>
+    
+    <p>Generieren Sie Ihre statischen Website-Dateien, indem Sie den entsprechenden Build-Befehl ausführen:</p>
+    <div class="grid grid-cols-1 gap-4 mb-4">
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>Für Hugo</span>
+        </div>
+        <pre><code>$ hugo</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>Für Jekyll</span>
+        </div>
+        <pre><code>$ bundle exec jekyll build</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>Für React/Vue mit Vite</span>
+        </div>
+        <pre><code>$ npm run build</code></pre>
+      </div>
+    </div>
+    
+    <p>Dies generiert statische Dateien in einem Verzeichnis (<code>public/</code>, <code>_site/</code> oder <code>dist/</code>, abhängig von Ihrem Framework).</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">3</div>
+    Hochladen der generierten Dateien auf GitHub
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Navigieren Sie zu Ihrem Build-Verzeichnis und initialisieren Sie ein Git-Repository:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ cd public  # oder _site oder dist
+$ git init
+$ git remote add origin https://github.com/benutzername/benutzername.github.io.git</code></pre>
+    </div>
+    
+    <p>Fügen Sie alle Dateien hinzu und machen Sie Ihren ersten Commit:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ git add .
+$ git commit -m "Erster Commit - Statische Website"</code></pre>
+    </div>
+    
+    <p>Pushen Sie Ihre Dateien auf GitHub:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git branch -M main
+$ git push -u origin main</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">4</div>
+    Konfigurieren von GitHub Pages
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Gehen Sie zu Ihrem Repository auf GitHub</li>
+      <li>Klicken Sie auf den Tab "Settings"</li>
+      <li>Scrollen Sie nach unten zum Abschnitt "Pages" in der linken Seitenleiste</li>
+      <li>Wählen Sie unter "Source" die Option "Deploy from a branch"</li>
+      <li>Wählen Sie den "main"-Branch und den Ordner "/(root)"</li>
+      <li>Klicken Sie auf "Save"</li>
+    </ol>
+    
+    <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-4">
+      <p class="text-green-800">
+        GitHub beginnt mit dem Aufbau Ihrer Website. Nach Abschluss sehen Sie eine Erfolgsmeldung mit einem Link zu Ihrer 
+        veröffentlichten Website (in der Regel https://benutzername.github.io).
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">5</div>
+    Aktualisieren Ihrer Website
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Wenn Sie Ihre Website aktualisieren möchten:</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Nehmen Sie Änderungen an Ihren Quelldateien vor</li>
+      <li>Erstellen Sie Ihre statische Website mit dem entsprechenden Build-Befehl neu</li>
+      <li>Navigieren Sie zu Ihrem Build-Verzeichnis</li>
+      <li>Fügen Sie Ihre Änderungen hinzu und committen Sie sie:</li>
+    </ol>
+    
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git add .
+$ git commit -m "Website-Inhalte aktualisieren"
+$ git push</code></pre>
+    </div>
+    
+    <p class="mt-4">GitHub wird Ihre Website automatisch mit den Änderungen neu bereitstellen.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">6</div>
+    Verwendung von GitHub Actions für automatisierte Bereitstellung
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Für fortgeschrittenere Workflows können Sie GitHub Actions verwenden, um den Build- und Bereitstellungsprozess zu automatisieren:</p>
+    
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Erstellen Sie ein Verzeichnis <code>.github/workflows</code> in Ihrem Quell-Repository</li>
+      <li>Fügen Sie eine Datei mit dem Namen <code>deploy.yml</code> mit entsprechender Workflow-Konfiguration hinzu</li>
+      <li>Committen und pushen Sie diese Änderungen</li>
+    </ol>
+    
+    <p>Mit GitHub Actions können Sie alle Ihre Quelldateien in einem einzigen Repository aufbewahren und GitHub automatisch Ihre Website erstellen und bereitstellen lassen, wenn Sie Änderungen pushen.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4">Fazit</h2>
+  
+  <p>
+    GitHub Pages bietet eine ausgezeichnete, kostenlose Hosting-Lösung für statische Websites. Es ist besonders 
+    nützlich für persönliche Portfolios, Projektdokumentation und Blogs. Mit den oben skizzierten Schritten 
+    können Sie Ihre Website schnell online stellen, ohne sich um Serververwaltung oder Hosting-Kosten kümmern zu müssen.
+  </p>
+  
+  <div class="bg-primary-50 border-l-4 border-primary-500 p-4 my-8">
+    <p class="text-primary-800 font-medium">
+      Sobald Ihre Website bereitgestellt ist, sollten Sie die Einrichtung einer benutzerdefinierten Domain in Betracht ziehen, um sie professioneller zu gestalten. 
+      Schauen Sie sich meinen Artikel <a href="/blog/1" class="text-primary-700 underline">Einrichten einer benutzerdefinierten Domain für Ihre Website</a> für eine detaillierte Anleitung an.
+    </p>
+  </div>
+</div>`
           },
           fr: {
             title: "Comment déployer votre site web sur GitHub Pages",
-            excerpt: "Un guide étape par étape pour déployer votre site web statique sur GitHub Pages avec automatisation du flux de travail, domaines personnalisés et meilleures pratiques.",
-            content: "French content for GitHub Pages deployment article"
+            excerpt: "Un guide étape par étape pour déployer votre site web statique sur GitHub Pages pour un hébergement gratuit avec déploiement continu.",
+            content: `
+<div class="prose prose-lg max-w-none prose-headings:text-primary-900">
+  <p class="text-xl leading-relaxed mb-8">
+    Nous visons à héberger des sites web statiques en utilisant le service GitHub Pages, ce qui nous permet d'éviter de 
+    maintenir notre propre serveur et assure plus de stabilité et de sécurité. Ce guide vous accompagne pas à pas dans le processus.
+  </p>
+
+  <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8">
+    <p class="text-amber-800 font-medium">
+      <span class="font-bold">Remarque :</span> Ce guide est particulièrement utile pour les générateurs de sites statiques comme Hugo, 
+      Jekyll, ou les sites web simples en HTML/CSS/JavaScript.
+    </p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">1</div>
+    Préparer le dépôt GitHub
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Après vous être connecté à GitHub, suivez ces étapes :</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Cliquez sur l'icône "+" dans le coin supérieur droit et sélectionnez "New repository"</li>
+      <li>
+        <strong>Nommez votre dépôt</strong> : Créez un dépôt nommé <code>nomutilisateur.github.io</code>, où 
+        <code>nomutilisateur</code> est votre nom d'utilisateur GitHub
+        <div class="text-sm text-slate-600 mt-1">
+          Par exemple, si votre nom d'utilisateur est "ayadi", nommez le dépôt "ayadi.github.io"
+        </div>
+      </li>
+      <li>Ajoutez éventuellement une description pour votre dépôt</li>
+      <li>Choisissez la visibilité "Public" (requise pour GitHub Pages sauf si vous avez un compte Pro)</li>
+      <li>Cochez l'option "Add a README file" pour initialiser le dépôt</li>
+      <li>Cliquez sur "Create repository"</li>
+    </ol>
+
+    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+      <p class="font-medium text-slate-800 mb-2">💡 Astuce Pro</p>
+      <p class="text-slate-700">
+        Envisagez de créer un second dépôt privé pour stocker vos fichiers sources (avant qu'ils ne soient construits). Cela fournit 
+        une sauvegarde au cas où vous auriez besoin d'apporter des modifications ultérieurement ou de récupérer des données perdues.
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">2</div>
+    Générer les fichiers du site web statique
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Si vous utilisez un générateur de site statique comme Hugo, assurez-vous que votre configuration est correctement définie :</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>baseURL = "https://nomutilisateur.github.io/"
+# Remplacez nomutilisateur par votre nom d'utilisateur GitHub</code></pre>
+    </div>
+    
+    <p>Générez vos fichiers de site web statique en exécutant la commande de construction appropriée :</p>
+    <div class="grid grid-cols-1 gap-4 mb-4">
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>Pour Hugo</span>
+        </div>
+        <pre><code>$ hugo</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>Pour Jekyll</span>
+        </div>
+        <pre><code>$ bundle exec jekyll build</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>Pour React/Vue avec Vite</span>
+        </div>
+        <pre><code>$ npm run build</code></pre>
+      </div>
+    </div>
+    
+    <p>Cela générera des fichiers statiques dans un répertoire (<code>public/</code>, <code>_site/</code>, ou <code>dist/</code> selon votre framework).</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">3</div>
+    Télécharger les fichiers générés sur GitHub
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Naviguez vers votre répertoire de construction et initialisez un dépôt Git :</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ cd public  # ou _site ou dist
+$ git init
+$ git remote add origin https://github.com/nomutilisateur/nomutilisateur.github.io.git</code></pre>
+    </div>
+    
+    <p>Ajoutez tous les fichiers et faites votre premier commit :</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ git add .
+$ git commit -m "Premier commit - Site web statique"</code></pre>
+    </div>
+    
+    <p>Poussez vos fichiers sur GitHub :</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git branch -M main
+$ git push -u origin main</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">4</div>
+    Configurer GitHub Pages
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Allez sur votre dépôt sur GitHub</li>
+      <li>Cliquez sur l'onglet "Settings"</li>
+      <li>Faites défiler jusqu'à la section "Pages" dans la barre latérale gauche</li>
+      <li>Sous "Source", sélectionnez "Deploy from a branch"</li>
+      <li>Sélectionnez la branche "main" et le dossier "/(root)"</li>
+      <li>Cliquez sur "Save"</li>
+    </ol>
+    
+    <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-4">
+      <p class="text-green-800">
+        GitHub commencera à construire votre site. Une fois terminé, vous verrez un message de succès avec un lien vers votre 
+        site publié (généralement https://nomutilisateur.github.io).
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">5</div>
+    Mettre à jour votre site web
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Chaque fois que vous souhaitez mettre à jour votre site web :</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Apportez des modifications à vos fichiers sources</li>
+      <li>Reconstruisez votre site statique avec la commande de construction appropriée</li>
+      <li>Naviguez vers votre répertoire de construction</li>
+      <li>Ajoutez et commitez vos modifications :</li>
+    </ol>
+    
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git add .
+$ git commit -m "Mise à jour du contenu du site web"
+$ git push</code></pre>
+    </div>
+    
+    <p class="mt-4">GitHub redéploiera automatiquement votre site web avec les modifications.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">6</div>
+    Utiliser GitHub Actions pour un déploiement automatisé
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Pour des flux de travail plus avancés, vous pouvez utiliser GitHub Actions pour automatiser le processus de construction et de déploiement :</p>
+    
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Créez un répertoire <code>.github/workflows</code> dans votre dépôt source</li>
+      <li>Ajoutez un fichier nommé <code>deploy.yml</code> avec une configuration de workflow appropriée</li>
+      <li>Commitez et poussez ces modifications</li>
+    </ol>
+    
+    <p>Avec GitHub Actions, vous pouvez conserver tous vos fichiers sources dans un seul dépôt et faire en sorte que GitHub construise et déploie automatiquement votre site chaque fois que vous poussez des modifications.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4">Conclusion</h2>
+  
+  <p>
+    GitHub Pages offre une excellente solution d'hébergement gratuite pour les sites web statiques. C'est particulièrement 
+    utile pour les portfolios personnels, la documentation de projet et les blogs. Avec les étapes décrites ci-dessus, 
+    vous pouvez rapidement mettre votre site web en ligne sans vous soucier de la gestion de serveur ou des coûts d'hébergement.
+  </p>
+  
+  <div class="bg-primary-50 border-l-4 border-primary-500 p-4 my-8">
+    <p class="text-primary-800 font-medium">
+      Une fois votre site déployé, envisagez de configurer un domaine personnalisé pour le rendre plus professionnel. Consultez mon article 
+      <a href="/blog/1" class="text-primary-700 underline">Configuration d'un domaine personnalisé pour votre site web</a> pour un guide détaillé.
+    </p>
+  </div>
+</div>`
           }
         },
         content: `
-          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
-            <p class="text-xl leading-relaxed mb-8">GitHub Pages offers a free and easy way to host static websites directly from your GitHub repository. Whether you're building a personal portfolio, project documentation, or a small web application, this guide will walk you through deploying it quickly and efficiently.</p>
-            
-            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
-              <p class="text-indigo-800 font-medium">This article assumes you have basic knowledge of Git and GitHub. If you're new to these tools, you might want to check out GitHub's <a href="https://docs.github.com/en/get-started" class="text-indigo-700 underline">getting started guide</a> first.</p>
-            </div>
+<div class="prose prose-lg max-w-none prose-headings:text-primary-900">
+  <p class="text-xl leading-relaxed mb-8">
+    We aim to host static websites using GitHub Pages service, which allows us to avoid maintaining our own server 
+    and ensures more stability and security. This guide walks you through the process step-by-step.
+  </p>
 
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">What is GitHub Pages?</h2>
-            
-            <p>GitHub Pages is a static site hosting service that takes HTML, CSS, and JavaScript files directly from a repository on GitHub, optionally runs the files through a build process, and publishes a website. You can host your site on GitHub's github.io domain or your own custom domain.</p>
-            
-            <p>Some key benefits of GitHub Pages include:</p>
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Free hosting for static content</li>
-              <li>Direct deployment from your GitHub repository</li>
-              <li>Built-in support for Jekyll (a static site generator)</li>
-              <li>Custom domain support with HTTPS</li>
-              <li>Seamless integration with GitHub workflows</li>
-            </ul>
+  <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8">
+    <p class="text-amber-800 font-medium">
+      <span class="font-bold">Note:</span> This guide is particularly useful for static site generators like Hugo, 
+      Jekyll, or simple HTML/CSS/JavaScript websites.
+    </p>
+  </div>
 
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Setting Up Your Repository</h2>
-            
-            <p>There are two main types of GitHub Pages sites:</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">User/Organization Sites</h3>
-                <p class="text-slate-700">Published from a repository named <code>username.github.io</code> (where username is your GitHub username or organization name).</p>
-                <p class="text-slate-700 mt-2">Content is published from the <code>main</code> branch by default.</p>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">Project Sites</h3>
-                <p class="text-slate-700">Published from any repository, with content stored in a <code>gh-pages</code> branch, a <code>docs</code> folder on the main branch, or the main branch itself.</p>
-                <p class="text-slate-700 mt-2">The site will be available at <code>username.github.io/repository-name</code>.</p>
-              </div>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-10 mb-4 text-slate-800">Creating a User/Organization Site</h3>
-            
-            <p>To create a user site:</p>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>Create a new repository named <code>username.github.io</code>, where username is your GitHub username.</li>
-              <li>Clone the repository to your local machine.</li>
-              <li>Add your website files to the repository.</li>
-              <li>Commit and push your changes to GitHub.</li>
-            </ol>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>BASH</span>
-                <span>Terminal</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>git clone https://github.com/username/username.github.io.git
-cd username.github.io
-echo "Hello World" > index.html
-git add --all
-git commit -m "Initial commit"
-git push -u origin main</code></pre>
-            </div>
-            
-            <p>Your site should now be available at <code>https://username.github.io</code>.</p>
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">1</div>
+    Prepare the GitHub Repository
+  </h2>
 
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Deploying a Modern Web Application</h2>
-            
-            <p>If you're building a modern web application with frameworks like React, Vue, or Angular, you'll need to set up a build process before deploying to GitHub Pages.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Configuring Build Settings</h3>
-            
-            <p>Most modern JavaScript frameworks have specific configurations for GitHub Pages deployment. Here are examples for popular frameworks:</p>
-            
-            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">React (Create React App)</h4>
-            
-            <p>Add a <code>homepage</code> field to your <code>package.json</code>:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>JSON</span>
-                <span>package.json</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>{
-  "name": "my-app",
-  "version": "0.1.0",
-  "homepage": "https://username.github.io/repository-name",
-  ...
-}</code></pre>
-            </div>
-            
-            <p>Install the <code>gh-pages</code> package and add deployment scripts:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>BASH</span>
-                <span>Terminal</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>npm install --save-dev gh-pages</code></pre>
-            </div>
-            
-            <p>Add these scripts to your <code>package.json</code>:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>JSON</span>
-                <span>package.json</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>"scripts": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
-  ...
-}</code></pre>
-            </div>
-            
-            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">Vue.js</h4>
-            
-            <p>Create or update your <code>vue.config.js</code> file:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>JavaScript</span>
-                <span>vue.config.js</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/repository-name/'
-    : '/'
-}</code></pre>
-            </div>
-            
-            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
-              <p class="text-amber-800 font-medium">💡 Pro tip: For project sites, make sure to set the correct base path in your configuration to match your repository name. This ensures that all asset paths resolve correctly.</p>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-10 mb-4 text-slate-800">Deployment Methods</h3>
-            
-            <p>There are several ways to deploy your site to GitHub Pages:</p>
-            
-            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">1. Manual Deployment</h4>
-            
-            <p>For projects using the <code>gh-pages</code> package:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>BASH</span>
-                <span>Terminal</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>npm run deploy</code></pre>
-            </div>
-            
-            <p>This builds your project and pushes the output to the <code>gh-pages</code> branch of your repository.</p>
-            
-            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">2. GitHub Actions (Automated Deployment)</h4>
-            
-            <p>Create a GitHub Actions workflow file at <code>.github/workflows/deploy.yml</code>:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>YAML</span>
-                <span>.github/workflows/deploy.yml</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>name: Deploy to GitHub Pages
+  <div class="pl-10 space-y-4">
+    <p>After logging in to GitHub, follow these steps:</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Click the "+" icon in the top right corner and select "New repository"</li>
+      <li>
+        <strong>Name your repository</strong>: Create a repository named <code>username.github.io</code>, where 
+        <code>username</code> is your GitHub username
+        <div class="text-sm text-slate-600 mt-1">
+          For example, if your username is "ayadi", name the repository "ayadi.github.io"
+        </div>
+      </li>
+      <li>Optionally, add a description for your repository</li>
+      <li>Choose "Public" visibility (required for GitHub Pages unless you have a Pro account)</li>
+      <li>Check the option to "Add a README file" to initialize the repository</li>
+      <li>Click "Create repository"</li>
+    </ol>
 
-on:
-  push:
-    branches: [ main ]
+    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+      <p class="font-medium text-slate-800 mb-2">💡 Pro Tip</p>
+      <p class="text-slate-700">
+        Consider creating a second private repository to store your source files (before they're built). This provides 
+        a backup in case you need to make changes later or recover from data loss.
+      </p>
+    </div>
+  </div>
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">2</div>
+    Generate Static Website Files
+  </h2>
 
-      - name: Install and Build 🔧
-        run: |
-          npm ci
-          npm run build
+  <div class="pl-10 space-y-4">
+    <p>If you're using a static site generator like Hugo, ensure your configuration is correctly set up:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>baseURL = "https://username.github.io/"
+# Replace username with your GitHub username</code></pre>
+    </div>
+    
+    <p>Generate your static website files by running the appropriate build command:</p>
+    <div class="grid grid-cols-1 gap-4 mb-4">
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>For Hugo</span>
+        </div>
+        <pre><code>$ hugo</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>For Jekyll</span>
+        </div>
+        <pre><code>$ bundle exec jekyll build</code></pre>
+      </div>
+      <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+        <div class="flex items-center text-xs text-slate-400 mb-2">
+          <span>For React/Vue with Vite</span>
+        </div>
+        <pre><code>$ npm run build</code></pre>
+      </div>
+    </div>
+    
+    <p>This will generate static files in a directory (<code>public/</code>, <code>_site/</code>, or <code>dist/</code> depending on your framework).</p>
+  </div>
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: build # The folder the action should deploy
-          branch: gh-pages # The branch the action should deploy to</code></pre>
-            </div>
-            
-            <p>This workflow automatically builds and deploys your site whenever you push changes to the main branch.</p>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Using a Custom Domain</h2>
-            
-            <p>To use a custom domain with GitHub Pages:</p>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>Go to your repository's Settings tab.</li>
-              <li>Scroll down to the "GitHub Pages" section.</li>
-              <li>Under "Custom domain," enter your domain name and click Save.</li>
-              <li>Create a <code>CNAME</code> file in your repository (or in the build output directory) containing your custom domain.</li>
-            </ol>
-            
-            <p>You'll also need to configure your domain's DNS settings:</p>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.108.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.109.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.110.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.111.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">CNAME</td>
-                    <td class="border border-slate-300 px-4 py-2">www</td>
-                    <td class="border border-slate-300 px-4 py-2">username.github.io</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">Troubleshooting GitHub Pages</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li><strong>404 Errors:</strong> Check that your repository is properly configured for GitHub Pages in the repository settings</li>
-                <li><strong>Missing Assets:</strong> Ensure that all asset paths are relative or match your configured base path</li>
-                <li><strong>Custom Domain Not Working:</strong> DNS changes can take up to 24 hours to propagate</li>
-                <li><strong>Build Failures:</strong> Check your workflow logs for build errors</li>
-                <li><strong>Routing Issues:</strong> For single-page applications, you may need a 404.html redirect hack for client-side routing</li>
-              </ul>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Best Practices for GitHub Pages</h2>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-4">
-              <li>
-                <strong>Optimize Your Assets:</strong>
-                <p>Minimize CSS, JavaScript, and image files to improve load times.</p>
-              </li>
-              <li>
-                <strong>Use a GitHub Actions Workflow:</strong>
-                <p>Automate your deployment process to reduce manual errors and save time.</p>
-              </li>
-              <li>
-                <strong>Enable HTTPS:</strong>
-                <p>GitHub Pages supports HTTPS for custom domains. Always use it for security.</p>
-              </li>
-              <li>
-                <strong>Add a 404 Page:</strong>
-                <p>Create a custom 404.html file to handle requests for non-existent pages.</p>
-              </li>
-              <li>
-                <strong>Test Before Deploying:</strong>
-                <p>Use tools like <code>http-server</code> to test your build locally before deploying.</p>
-              </li>
-            </ol>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p>GitHub Pages offers a powerful, free platform for hosting static websites. With the right setup, you can have a professional-looking site deployed in minutes, with automated workflows to keep it updated.</p>
-            
-            <p>Whether you're showcasing a portfolio, documenting a project, or building a simple web application, GitHub Pages provides all the essentials for fast, reliable hosting.</p>
-            
-            <p class="mt-6 text-slate-600 italic">Happy deploying!</p>
-          </div>
-        `,
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">3</div>
+    Upload the Generated Files to GitHub
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Navigate to your build directory and initialize a Git repository:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ cd public  # or _site or dist
+$ git init
+$ git remote add origin https://github.com/username/username.github.io.git</code></pre>
+    </div>
+    
+    <p>Add all files and make your first commit:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto mb-4">
+      <pre><code>$ git add .
+$ git commit -m "Initial commit - Static website"</code></pre>
+    </div>
+    
+    <p>Push your files to GitHub:</p>
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git branch -M main
+$ git push -u origin main</code></pre>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">4</div>
+    Configure GitHub Pages
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Go to your repository on GitHub</li>
+      <li>Click on "Settings" tab</li>
+      <li>Scroll down to the "Pages" section in the left sidebar</li>
+      <li>Under "Source", select "Deploy from a branch"</li>
+      <li>Select the "main" branch and "/(root)" folder</li>
+      <li>Click "Save"</li>
+    </ol>
+    
+    <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-4">
+      <p class="text-green-800">
+        GitHub will start building your site. Once complete, you'll see a success message with a link to your 
+        published site (typically https://username.github.io).
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">5</div>
+    Updating Your Website
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>Whenever you want to update your website:</p>
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Make changes to your source files</li>
+      <li>Rebuild your static site with the appropriate build command</li>
+      <li>Navigate to your build directory</li>
+      <li>Add and commit your changes:</li>
+    </ol>
+    
+    <div class="bg-slate-900 text-slate-50 p-4 rounded-lg overflow-x-auto">
+      <pre><code>$ git add .
+$ git commit -m "Update website content"
+$ git push</code></pre>
+    </div>
+    
+    <p class="mt-4">GitHub will automatically redeploy your website with the changes.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4 flex items-center gap-2">
+    <div class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-800">6</div>
+    Using GitHub Actions for Automated Deployment
+  </h2>
+
+  <div class="pl-10 space-y-4">
+    <p>For more advanced workflows, you can use GitHub Actions to automate the build and deployment process:</p>
+    
+    <ol class="list-decimal pl-5 space-y-2">
+      <li>Create a <code>.github/workflows</code> directory in your source repository</li>
+      <li>Add a file named <code>deploy.yml</code> with appropriate workflow configuration</li>
+      <li>Commit and push these changes</li>
+    </ol>
+    
+    <p>With GitHub Actions, you can keep all your source files in a single repository and have GitHub automatically build and deploy your site whenever you push changes.</p>
+  </div>
+
+  <h2 class="text-2xl font-bold mt-10 mb-4">Conclusion</h2>
+  
+  <p>
+    GitHub Pages provides an excellent, free hosting solution for static websites. It's particularly 
+    useful for personal portfolios, project documentation, and blogs. With the steps outlined above, 
+    you can quickly get your website online without worrying about server management or hosting costs.
+  </p>
+  
+  <div class="bg-primary-50 border-l-4 border-primary-500 p-4 my-8">
+    <p class="text-primary-800 font-medium">
+      Once your site is deployed, consider setting up a custom domain to make it more professional. Check out my article 
+      <a href="/blog/1" class="text-primary-700 underline">Setting Up a Custom Domain for Your Website</a> for a detailed guide.
+    </p>
+  </div>
+</div>`,
         coverImage: "/images/github-pages.svg",
         category: "Technology",
         publishedAt: new Date("2025-02-08")
-      },
-      {
-        title: "A SQL Practical Challenge on Salary Analysis",
-        excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
-        translations: {
-          en: {
-            title: "A SQL Practical Challenge on Salary Analysis",
-            excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
-            content: "English content for SQL Challenge article"
-          },
-          de: {
-            title: "Eine praktische SQL-Herausforderung zur Gehaltsanalyse",
-            excerpt: "Erfahren Sie, wie Sie SQL-Fensterfunktionen verwenden können, um Mitarbeitergehaltsdaten zu analysieren, Topverdiener zu identifizieren und Abteilungsstatistiken und -rankings zu berechnen.",
-            content: "German content for SQL Challenge article"
-          },
-          fr: {
-            title: "Un défi pratique SQL sur l'analyse des salaires",
-            excerpt: "Apprenez à utiliser les fonctions de fenêtrage SQL pour analyser les données salariales des employés, identifier les hauts salaires et calculer les statistiques et les classements par département.",
-            content: "French content for SQL Challenge article"
-          }
-        },
-        content: `
-          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
-            <p class="text-xl leading-relaxed mb-8">SQL window functions offer powerful tools for salary data analysis in HR contexts. This practical case study demonstrates how to analyze employee compensation data, identify patterns, and generate insights using SQL.</p>
-            
-            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
-              <p class="text-indigo-800 font-medium">This article demonstrates practical applications of the concepts covered in our <a href="/blog/1" class="text-indigo-700 underline">SQL Window Functions Comprehensive Guide</a>.</p>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">The Challenge: Salary Analysis</h2>
-            
-            <p>In this practical example, we'll work with an employee database to answer common HR analytics questions about salary distribution. Our sample dataset includes employee information across different departments with various compensation levels.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">The Employee Dataset</h3>
-            
-            <p>Here's the table structure we'll be working with:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Table Structure</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>CREATE TABLE employees (
-  employee_id INTEGER PRIMARY KEY,
-  employee_name VARCHAR(100),
-  department VARCHAR(50),
-  hire_date DATE,
-  salary NUMERIC(10,2),
-  manager_id INTEGER
-);</code></pre>
-            </div>
-            
-            <p>Our sample data contains employees from Engineering, Marketing, Sales, and HR departments with varying salaries and tenure.</p>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Analyzing Department Salary Distribution</h2>
-            
-            <p>Let's start by finding the minimum, maximum, and average salary within each department:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Department Salary Statistics</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  department,
-  MIN(salary) as min_salary,
-  MAX(salary) as max_salary,
-  AVG(salary) as avg_salary,
-  COUNT(*) as employee_count
-FROM employees
-GROUP BY department
-ORDER BY avg_salary DESC;</code></pre>
-            </div>
-            
-            <p>This query gives us a basic overview of each department's salary range and average. The result might look something like:</p>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">department</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">min_salary</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">max_salary</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">avg_salary</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">employee_count</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Engineering</td>
-                    <td class="border border-slate-300 px-4 py-2">78000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">115000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">91666.67</td>
-                    <td class="border border-slate-300 px-4 py-2">12</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">Sales</td>
-                    <td class="border border-slate-300 px-4 py-2">65000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">102000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">85500.00</td>
-                    <td class="border border-slate-300 px-4 py-2">8</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Marketing</td>
-                    <td class="border border-slate-300 px-4 py-2">67000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">95000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">80000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">6</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">HR</td>
-                    <td class="border border-slate-300 px-4 py-2">58000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">92000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">72000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">4</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Finding Top Earners by Department</h2>
-            
-            <p>Now let's use window functions to rank employees by salary within each department:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Ranking Employees by Salary</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  RANK() OVER (PARTITION BY department ORDER BY salary DESC) as dept_rank
-FROM employees
-WHERE department IN ('Engineering', 'Marketing', 'Sales', 'HR')
-ORDER BY department, dept_rank;</code></pre>
-            </div>
-            
-            <p>This query partitions employees by department and ranks them based on their salary in descending order. The result will show the top earners in each department.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Limiting to Top 3 Earners</h3>
-            
-            <p>To find just the top 3 earners in each department, we can use a common table expression (CTE) with our window function:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Top 3 Earners by Department</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>WITH RankedEmployees AS (
-  SELECT 
-    employee_name,
-    department,
-    salary,
-    RANK() OVER (PARTITION BY department ORDER BY salary DESC) as dept_rank
-  FROM employees
-)
-SELECT *
-FROM RankedEmployees
-WHERE dept_rank <= 3
-ORDER BY department, dept_rank;</code></pre>
-            </div>
-            
-            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
-              <p class="text-amber-800 font-medium">💡 Pro tip: Always use a CTE when you need to filter by the result of a window function, as window functions are not allowed in WHERE clauses.</p>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Difference from Department Average</h2>
-            
-            <p>Let's calculate how each employee's salary compares to their department's average:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Salary Difference from Department Average</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  ROUND(AVG(salary) OVER (PARTITION BY department), 2) as dept_avg,
-  ROUND(salary - AVG(salary) OVER (PARTITION BY department), 2) as diff_from_avg,
-  ROUND((salary - AVG(salary) OVER (PARTITION BY department)) / 
-    AVG(salary) OVER (PARTITION BY department) * 100, 1) as pct_diff
-FROM employees
-ORDER BY department, salary DESC;</code></pre>
-            </div>
-            
-            <p>This query shows how much each employee earns compared to their department's average, both in absolute terms and as a percentage. This can help identify outliers and potential salary inequities.</p>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Bands and Distribution</h2>
-            
-            <p>Let's create a query to divide employees into quartiles based on salary within each department:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Salary Quartiles by Department</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  NTILE(4) OVER (PARTITION BY department ORDER BY salary DESC) as salary_quartile
-FROM employees
-ORDER BY department, salary_quartile;</code></pre>
-            </div>
-            
-            <p>The NTILE window function divides rows into a specified number of roughly equal groups (in this case, quartiles). This helps visualize the salary distribution within each department.</p>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Growth Over Time</h2>
-            
-            <p>Assuming we have salary history data, we can analyze salary growth trends:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Year-over-Year Salary Growth</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>WITH YearlySalaries AS (
-  SELECT 
-    employee_id,
-    employee_name,
-    department,
-    EXTRACT(YEAR FROM effective_date) as year,
-    salary
-  FROM salary_history
-)
-SELECT 
-  employee_name,
-  department,
-  year,
-  salary,
-  LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) as prev_year_salary,
-  salary - LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) as absolute_growth,
-  ROUND((salary - LAG(salary) OVER (PARTITION BY employee_id ORDER BY year)) / 
-    LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) * 100, 1) as growth_pct
-FROM YearlySalaries
-ORDER BY department, employee_name, year;</code></pre>
-            </div>
-            
-            <p>This query uses the LAG window function to compare an employee's current salary with their salary from the previous year, calculating both absolute and percentage growth.</p>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">Key Insights from Salary Analysis</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li>Engineering has the highest average salary across departments</li>
-                <li>There is a significant spread between minimum and maximum salaries in each department</li>
-                <li>Using NTILE to create quartiles helps identify salary bands for compensation planning</li>
-                <li>Calculating the difference from department average helps identify outliers</li>
-                <li>Year-over-year growth calculations can highlight promotion patterns and retention risks</li>
-              </ul>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p>SQL window functions are powerful tools for salary analysis, providing insights that would be difficult to obtain using basic SQL aggregations. They allow HR analysts to:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Rank employees within departments without complex subqueries</li>
-              <li>Compare individual salaries to department averages</li>
-              <li>Track salary growth and identify patterns</li>
-              <li>Create salary bands and distribution analysis</li>
-              <li>Generate comprehensive compensation reports with a few efficient queries</li>
-            </ul>
-            
-            <p>By mastering these techniques, you can transform raw employee data into actionable compensation insights that support strategic HR decisions.</p>
-          </div>
-        `,
-        coverImage: "/images/sql-salary-analysis.svg",
-        category: "Technology",
-        publishedAt: new Date("2025-01-23")
-      },
-      {
-        title: "Mastering SQL Window Functions: A Comprehensive Guide",
-        translations: {
-          en: {
-            title: "Mastering SQL Window Functions: A Comprehensive Guide",
-            excerpt: "Learn essential SQL window functions for data analysis, including RANK, ROW_NUMBER, NTILE, LAG/LEAD, and practical examples for business applications.",
-            content: "English content for the SQL Window Functions guide"
-          },
-          de: {
-            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
-            excerpt: "Lernen Sie wesentliche SQL-Fensterfunktionen für die Datenanalyse kennen, einschließlich RANK, ROW_NUMBER, NTILE, LAG/LEAD und praktischer Beispiele für Geschäftsanwendungen.",
-            content: "German content for the SQL Window Functions guide"
-          },
-          fr: {
-            title: "Maîtriser les fonctions de fenêtrage SQL: Un guide complet",
-            excerpt: "Apprenez les fonctions de fenêtrage SQL essentielles pour l'analyse de données, notamment RANK, ROW_NUMBER, NTILE, LAG/LEAD, et des exemples pratiques pour les applications commerciales.",
-            content: "French content for the SQL Window Functions guide"
-          }
-        },
-        excerpt: "Learn how to leverage SQL window functions to perform complex data analysis efficiently. From basic aggregations to advanced ranking and partitioning.",
-        content: `
-          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
-            <p class="text-xl leading-relaxed mb-8">SQL window functions are powerful features that allow you to perform calculations across a set of rows related to the current row. In this comprehensive guide, we'll explore how to use window functions effectively for data analysis.</p>
-            
-            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
-              <p class="text-indigo-800 font-medium">Window functions allow you to access other rows related to the current row without using self-joins or subqueries.</p>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">What Are Window Functions?</h2>
-            
-            <p>Window functions perform calculations across a specific "window" or set of rows that are somehow related to the current row. Unlike regular aggregate functions which collapse multiple rows into a single result row, window functions return a result for each row in the result set.</p>
-            
-            <p>The general syntax looks like this:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden bg-slate-50 border border-slate-200">
-              <div class="bg-slate-100 px-4 py-2 font-mono text-sm text-slate-600">
-                FUNCTION_NAME() OVER ([PARTITION BY column] [ORDER BY column] [frame_clause])
-              </div>
-            </div>
-            
-            <p>Here's a simple example that calculates the average salary per department alongside each employee's salary:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Window Function Example</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  AVG(salary) OVER (PARTITION BY department) as dept_avg_salary
-FROM employees;</code></pre>
-            </div>
-            
-            <p>This query returns each employee's name, department, their individual salary, and the average salary for their department - all in one result set without needing a GROUP BY clause or a join.</p>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Types of Window Functions</h2>
-            
-            <p>SQL offers several types of window functions for different analytical needs:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">1. Aggregate Window Functions</h3>
-            
-            <p>These include familiar aggregate functions like SUM, AVG, COUNT, MIN, and MAX that can be used as window functions:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Aggregate Window Function</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  product_name,
-  category,
-  price,
-  AVG(price) OVER (PARTITION BY category) as category_avg_price,
-  price - AVG(price) OVER (PARTITION BY category) as diff_from_avg
-FROM products;</code></pre>
-            </div>
-            
-            <p>This query shows each product's price alongside the average price for its category, as well as how much each product's price differs from the category average.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">2. Ranking Window Functions</h3>
-            
-            <p>Ranking functions assign a rank to each row within a partition. The most common ranking functions are:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>ROW_NUMBER()</strong>: Assigns unique sequential numbers starting from 1</li>
-              <li><strong>RANK()</strong>: Assigns ranks with gaps for ties (e.g., 1, 2, 2, 4)</li>
-              <li><strong>DENSE_RANK()</strong>: Assigns ranks without gaps for ties (e.g., 1, 2, 2, 3)</li>
-              <li><strong>NTILE(n)</strong>: Divides rows into n approximately equal groups</li>
-            </ul>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Ranking Functions</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  student_name,
-  score,
-  ROW_NUMBER() OVER (ORDER BY score DESC) as row_num,
-  RANK() OVER (ORDER BY score DESC) as rank,
-  DENSE_RANK() OVER (ORDER BY score DESC) as dense_rank
-FROM exam_results;</code></pre>
-            </div>
-            
-            <p>This example shows the different ranking behaviors for student exam scores.</p>
-
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">student_name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">score</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">row_num</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">rank</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">dense_rank</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Alice</td>
-                    <td class="border border-slate-300 px-4 py-2">95</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">Bob</td>
-                    <td class="border border-slate-300 px-4 py-2">95</td>
-                    <td class="border border-slate-300 px-4 py-2">2</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Charlie</td>
-                    <td class="border border-slate-300 px-4 py-2">88</td>
-                    <td class="border border-slate-300 px-4 py-2">3</td>
-                    <td class="border border-slate-300 px-4 py-2">3</td>
-                    <td class="border border-slate-300 px-4 py-2">2</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">David</td>
-                    <td class="border border-slate-300 px-4 py-2">85</td>
-                    <td class="border border-slate-300 px-4 py-2">4</td>
-                    <td class="border border-slate-300 px-4 py-2">4</td>
-                    <td class="border border-slate-300 px-4 py-2">3</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <p>Notice how Alice and Bob both have the same score (95), resulting in different behaviors across the ranking functions.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">3. Value Window Functions</h3>
-            
-            <p>Value functions can access values from different rows within the window:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>LAG(column, offset)</strong>: Returns a value from a previous row</li>
-              <li><strong>LEAD(column, offset)</strong>: Returns a value from a subsequent row</li>
-              <li><strong>FIRST_VALUE(column)</strong>: Returns the first value in the window</li>
-              <li><strong>LAST_VALUE(column)</strong>: Returns the last value in the window</li>
-            </ul>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>LAG and LEAD Functions</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  date,
-  stock_price,
-  LAG(stock_price, 1) OVER (ORDER BY date) as previous_day_price,
-  stock_price - LAG(stock_price, 1) OVER (ORDER BY date) as price_change
-FROM stock_prices;</code></pre>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Advanced Window Function Components</h2>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">PARTITION BY Clause</h3>
-            
-            <p>The PARTITION BY clause divides the result set into partitions (groups) to which the window function is applied separately:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>PARTITION BY Example</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  customer_id,
-  order_date,
-  order_amount,
-  ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) as order_number
-FROM orders;</code></pre>
-            </div>
-            
-            <p>This query assigns an order number to each order, numbering starts over for each customer.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">ORDER BY Clause</h3>
-            
-            <p>The ORDER BY clause determines the order in which rows are processed by the window function:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>ORDER BY Example</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  order_date,
-  order_amount,
-  SUM(order_amount) OVER (ORDER BY order_date) as running_total
-FROM orders;</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Frame Clauses</h3>
-            
-            <p>Frame clauses define exactly which rows constitute the current window frame for each row:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>Frame Clause Example</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  transaction_date,
-  amount,
-  AVG(amount) OVER (
-    ORDER BY transaction_date
-    ROWS BETWEEN 3 PRECEDING AND CURRENT ROW
-  ) as moving_average
-FROM transactions;</code></pre>
-            </div>
-            
-            <p>Common frame specifications include:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</strong>: From the first row to current row</li>
-              <li><strong>ROWS BETWEEN n PRECEDING AND CURRENT ROW</strong>: From n rows before to current row</li>
-              <li><strong>ROWS BETWEEN CURRENT ROW AND n FOLLOWING</strong>: From current row to n rows after</li>
-              <li><strong>ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</strong>: All rows in the partition</li>
-            </ul>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Practical Applications</h2>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Moving Averages</h3>
-            
-            <p>Calculating moving (rolling) averages is a common use case for window functions:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>7-Day Moving Average</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  date,
-  stock_price,
-  AVG(stock_price) OVER (
-    ORDER BY date
-    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
-  ) as seven_day_moving_avg
-FROM stock_prices;</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Year-over-Year Comparison</h3>
-            
-            <p>Comparing current values with previous periods' values:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>Year-over-Year Growth</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  year,
-  revenue,
-  LAG(revenue) OVER (ORDER BY year) as prev_year_revenue,
-  (revenue - LAG(revenue) OVER (ORDER BY year)) / 
-    LAG(revenue) OVER (ORDER BY year) * 100 as yoy_growth_pct
-FROM yearly_revenue;</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Cumulative Totals</h3>
-            
-            <p>Calculating running totals within groups:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>Cumulative Sales by Product</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  sales_date,
-  product_id,
-  sales_amount,
-  SUM(sales_amount) OVER (
-    PARTITION BY product_id 
-    ORDER BY sales_date
-    ROWS UNBOUNDED PRECEDING
-  ) as running_total
-FROM sales;</code></pre>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Best Practices and Optimization</h2>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">Performance Tips</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li>Always specify ORDER BY in window functions when results order matters</li>
-                <li>Use appropriate frame clauses for moving calculations</li>
-                <li>Consider performance implications with large datasets</li>
-                <li>Reuse window specifications with the WINDOW clause for multiple functions that use the same window</li>
-                <li>Test window functions with small datasets first</li>
-              </ul>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Common Pitfalls</h3>
-            
-            <ul class="list-disc pl-5 my-4 space-y-3">
-              <li><strong>Execution order confusion</strong>: Window functions execute after WHERE, GROUP BY, and HAVING but before ORDER BY in the query processing sequence</li>
-              <li><strong>NULL handling</strong>: Be careful about NULL values in calculations, especially when using LAG/LEAD functions</li>
-              <li><strong>Frame clause neglect</strong>: Default frame clauses might not match your analytical needs</li>
-              <li><strong>Subquery reuse</strong>: You can't reference a window function result in a WHERE clause directly</li>
-            </ul>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p class="mb-4">SQL window functions are powerful tools that enable sophisticated data analysis directly in your database queries. By using window functions effectively, you can:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Eliminate complex self-joins and subqueries</li>
-              <li>Improve query readability and maintainability</li>
-              <li>Perform advanced analytics like moving averages and year-over-year comparisons</li>
-              <li>Enhance reporting capabilities with rank and cumulative calculations</li>
-            </ul>
-            
-            <p>As you become more comfortable with window functions, you'll find they can replace many complex SQL patterns, making your queries more efficient and easier to understand.</p>
-          </div>
-        `,
-        coverImage: "/images/sql-window-functions.svg",
-        category: "Technology",
-        publishedAt: new Date("2023-06-12")
       }
     ];
     
-    // Add each article to the map with an ID
+    // Add articles
     articles.forEach(article => {
       const id = this.currentArticleId++;
-      this.articles.set(id, { id, ...article });
+      this.articles.set(id, {
+        ...article,
+        id
+      });
     });
   }
 }

@@ -91,11 +91,13 @@ const CVPreview = () => {
                 <div className="mb-6">
                   <h3 className="text-lg font-bold text-slate-900 mb-2">{t('cv.skills')}</h3>
                   <div className="flex flex-wrap gap-2">
-                    {cv.skills.slice(0, 8).map((skill, index) => (
-                      <span key={index} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
-                        {skill}
-                      </span>
-                    ))}
+                    {cv.skills.slice(0, 2).flatMap((skillGroup) => 
+                      skillGroup.items.slice(0, 4).map((skill, skillIndex) => (
+                        <span key={`${skillGroup.category}-${skillIndex}`} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
+                          {skill}
+                        </span>
+                      ))
+                    )}
                   </div>
                 </div>
                 
