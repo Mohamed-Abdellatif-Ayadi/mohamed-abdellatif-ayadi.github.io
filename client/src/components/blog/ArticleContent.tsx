@@ -55,7 +55,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
         {keywords.map((keyword, index) => (
           <span 
             key={index} 
-            className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${keyword === 'Technology' ? 'bg-purple-700 text-white shadow-md' : 'bg-indigo-100 text-indigo-800'}`}
+            className="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm"
           >
             {keyword}
           </span>
