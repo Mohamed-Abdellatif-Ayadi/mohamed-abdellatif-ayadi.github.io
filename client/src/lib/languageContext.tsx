@@ -62,7 +62,7 @@ const translations: Record<Language, Record<string, string>> = {
     'blog.title': 'Blog Articles',
     'blog.subtitle': 'Thoughts, insights, and experiences from my journey in technology',
     'blog.readmore': 'Read More',
-    'blog.search': 'Search articles...',
+    'blog.search': 'Search',
     'blog.categories': 'Categories',
     'blog.allCategories': 'All Categories',
     'blog.share': 'Share this article',
