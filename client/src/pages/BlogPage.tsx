@@ -60,17 +60,17 @@ const BlogPage = () => {
           <div className="w-full md:w-2/3">
             <Input
               type="text"
-              placeholder={t('blog.searchPlaceholder')}
+              placeholder={t('blog.search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full"
+              className="w-full text-slate-800 font-medium"
             />
           </div>
           <div className="w-full md:w-1/3">
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-800 font-medium"
             >
               <option value="">{t('blog.allCategories')}</option>
               {categories.map((category) => (

@@ -32,7 +32,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
               : article.title}
           </h3>
         </Link>
-        <p className="text-slate-600 mb-4 line-clamp-3">
+        <p className="text-slate-800 mb-4 line-clamp-3 font-medium">
           {article.translations && article.translations[language] 
             ? truncateText(article.translations[language].excerpt, 150) 
             : truncateText(article.excerpt, 150)}
