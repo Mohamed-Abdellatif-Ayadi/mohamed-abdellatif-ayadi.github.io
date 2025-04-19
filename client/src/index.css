@@ -46,6 +46,48 @@
   .article-content li {
     @apply text-lg;
   }
+  
+  /* GitHub Pages article specific styles */
+  .article-content [class*="text-slate-600"],
+  .article-content [class*="text-slate-700"],
+  .article-content [class*="text-slate-800"],
+  .article-content [class*="text-slate-900"] {
+    color: #f1f5f9; /* slate-100 */
+  }
+  
+  .article-content [class*="text-primary-800"],
+  .article-content [class*="text-primary-900"] {
+    color: #dbeafe; /* blue-100 */
+  }
+  
+  /* Make code blocks more visible on dark backgrounds */
+  .article-content [class*="bg-slate-900"] code,
+  .article-content [class*="bg-indigo-950"] code {
+    color: #a5b4fc; /* indigo-200 */
+  }
+  
+  /* Improve colored callouts */
+  .article-content [class*="bg-slate-50"] {
+    background-color: #1e293b; /* slate-800 */
+    border-color: #475569; /* slate-600 */
+  }
+  
+  .article-content [class*="bg-slate-50"] [class*="text-slate-800"],
+  .article-content [class*="bg-slate-50"] [class*="text-slate-700"] {
+    color: #f1f5f9; /* slate-100 */
+  }
+  
+  /* Improve numbered steps */
+  .article-content [class*="bg-primary-100"] {
+    background-color: #1e3a8a; /* blue-900 */
+    color: white;
+  }
+  
+  /* Further improve specific GitHub Pages article colors */
+  .article-content div[class*="flex items-center justify-center w-8 h-8 rounded-full"] {
+    background-color: #1e3a8a !important; /* blue-900 */
+    color: white !important;
+  }
 }
 
 @layer components {
