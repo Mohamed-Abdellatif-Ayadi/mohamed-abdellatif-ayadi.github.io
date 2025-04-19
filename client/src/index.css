@@ -77,6 +77,34 @@
     color: #f1f5f9; /* slate-100 */
   }
   
+  /* Fix specific callout box colors */
+  .article-content [class*="bg-green-50"] {
+    background-color: #064e3b; /* green-900 */
+    border-color: #059669; /* green-600 */
+  }
+  
+  .article-content [class*="bg-green-50"] [class*="text-green-800"] {
+    color: #d1fae5; /* green-100 */
+  }
+  
+  .article-content [class*="bg-amber-50"] {
+    background-color: #78350f; /* amber-900 */
+    border-color: #d97706; /* amber-600 */
+  }
+  
+  .article-content [class*="bg-amber-50"] [class*="text-amber-800"] {
+    color: #fef3c7; /* amber-100 */
+  }
+  
+  .article-content [class*="bg-primary-50"] {
+    background-color: #1e3a8a; /* blue-900 */
+    border-color: #3b82f6; /* blue-500 */
+  }
+  
+  .article-content [class*="bg-primary-50"] [class*="text-primary-800"] {
+    color: #dbeafe; /* blue-100 */
+  }
+  
   /* Improve numbered steps */
   .article-content [class*="bg-primary-100"] {
     background-color: #1e3a8a; /* blue-900 */
