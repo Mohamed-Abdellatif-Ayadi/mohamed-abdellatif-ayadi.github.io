@@ -30,8 +30,10 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
   return (
     <article className="max-w-3xl mx-auto px-4 py-8">
       {/* Category Heading */}
-      <div className="uppercase tracking-wider text-indigo-600 font-medium mb-2">
-        {article.category} /
+      <div className="uppercase tracking-wider font-medium mb-2">
+        <span className="bg-purple-700 text-white px-2 py-1 rounded-md shadow-md">
+          {article.category}
+        </span> /
       </div>
       
       {/* Article Title */}
@@ -94,7 +96,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       
       {/* Article Content */}
       <div 
-        className="article-content prose prose-slate max-w-none"
+        className="article-content prose prose-slate max-w-none prose-headings:text-slate-900 prose-p:text-slate-800 prose-li:text-slate-800 prose-strong:text-slate-900"
         dangerouslySetInnerHTML={{ 
           __html: article.translations && article.translations[language] && article.translations[language].content
             ? article.translations[language].content

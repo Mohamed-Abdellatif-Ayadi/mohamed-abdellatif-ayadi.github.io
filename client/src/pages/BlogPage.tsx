@@ -110,7 +110,7 @@ const BlogPage = () => {
         ) : (
           <div className="text-center py-12">
             <h3 className="text-xl font-semibold text-slate-800 mb-2">{t('blog.noArticlesFoundTitle')}</h3>
-            <p className="text-slate-600">
+            <p className="text-slate-700 font-medium">
               {t('blog.noArticlesFoundMessage')}
             </p>
           </div>
