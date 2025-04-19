@@ -31,13 +31,13 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
     <article className="max-w-3xl mx-auto px-4 py-8">
       {/* Category Heading */}
       <div className="uppercase tracking-wider font-medium mb-2">
-        <span className="bg-purple-700 text-white px-5 py-1.5 rounded-lg font-bold tracking-wider text-base shadow-md">
+        <span className="bg-purple-700 text-white px-3 py-1 rounded-md font-medium tracking-wider text-sm shadow-sm">
           {article.category}
         </span> /
       </div>
       
       {/* Article Title */}
-      <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+      <h1 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4">
         {article.translations && article.translations[language] 
           ? article.translations[language].title 
           : article.title}
@@ -96,7 +96,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       
       {/* Article Content */}
       <div 
-        className="article-content prose prose-slate max-w-none prose-headings:text-slate-900 prose-p:text-slate-800 prose-li:text-slate-800 prose-strong:text-slate-900"
+        className="article-content prose prose-slate max-w-none prose-headings:text-purple-900 prose-p:text-slate-800 prose-li:text-slate-800 prose-strong:text-purple-800 prose-a:text-purple-700 prose-a:no-underline hover:prose-a:text-purple-800 hover:prose-a:underline"
         dangerouslySetInnerHTML={{ 
           __html: article.translations && article.translations[language] && article.translations[language].content
             ? article.translations[language].content

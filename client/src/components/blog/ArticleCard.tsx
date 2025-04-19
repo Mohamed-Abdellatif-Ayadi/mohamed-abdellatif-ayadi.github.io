@@ -18,7 +18,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       />
       <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-center mb-4">
-          <span className="text-xs font-bold px-3 py-1 tracking-wider rounded-lg bg-purple-700 text-white shadow-sm">
+          <span className="text-xs font-medium px-3 py-1 tracking-wider rounded-md bg-purple-700 text-white shadow-sm">
             {article.category}
           </span>
           <span className="ml-2 text-xs text-slate-500">
@@ -26,7 +26,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           </span>
         </div>
         <Link href={`/blog/${article.id}`}>
-          <h3 className="text-xl font-bold mb-2 text-slate-900 hover:text-primary-700 transition-colors">
+          <h3 className="text-xl font-bold mb-2 text-purple-900 hover:text-purple-700 transition-colors">
             {article.translations && article.translations[language] 
               ? article.translations[language].title 
               : article.title}
