@@ -25,11 +25,13 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             {formatDate(article.publishedAt)}
           </span>
         </div>
-        <h3 className="text-xl font-bold mb-2 text-slate-900">
-          {article.translations && article.translations[language] 
-            ? article.translations[language].title 
-            : article.title}
-        </h3>
+        <Link href={`/blog/${article.id}`}>
+          <h3 className="text-xl font-bold mb-2 text-slate-900 hover:text-primary-700 transition-colors">
+            {article.translations && article.translations[language] 
+              ? article.translations[language].title 
+              : article.title}
+          </h3>
+        </Link>
         <p className="text-slate-600 mb-4 line-clamp-3">
           {article.translations && article.translations[language] 
             ? truncateText(article.translations[language].excerpt, 150) 
@@ -37,7 +39,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
         </p>
         <Link 
           href={`/blog/${article.id}`} 
-          className="inline-flex items-center font-medium bg-primary-700 text-white px-3 py-1 rounded-md hover:bg-primary-800 transition-colors"
+          className="inline-flex items-center font-medium bg-primary-700 text-white px-3 py-2 rounded-md hover:bg-primary-800 transition-colors shadow-sm"
         >
           {t('blog.readMore')}
           <svg 
