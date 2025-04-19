@@ -40,7 +40,13 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
         <div className="mt-auto pt-2">
           <Link 
             href={`/blog/${article.id}`} 
-            className="inline-flex items-center font-medium bg-primary-700 text-white px-4 py-2 rounded-md hover:bg-primary-800 transition-colors shadow-md"
+            className="inline-flex items-center font-medium bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors shadow-md border border-purple-400"
+            style={{ 
+              backgroundColor: '#6d28d9', /* purple-700 */
+              color: 'white',
+              borderColor: '#a78bfa', /* purple-400 */
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            }}
           >
             {t('blog.readMore')}
             <svg 
