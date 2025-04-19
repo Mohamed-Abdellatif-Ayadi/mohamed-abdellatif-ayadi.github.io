@@ -116,19 +116,44 @@
   
   /* Improve numbered steps */
   .article-content [class*="bg-primary-100"] {
-    background-color: #6d28d9; /* purple-700 */
-    color: white;
+    background-color: #8b5cf6 !important; /* purple-500 */
+    color: white !important;
   }
   
   /* Further improve specific GitHub Pages article colors */
   .article-content div[class*="flex items-center justify-center w-8 h-8 rounded-full"] {
-    background-color: #6d28d9 !important; /* purple-700 */
+    background-color: #8b5cf6 !important; /* purple-500 */
     color: white !important;
   }
   
   /* Style the step numbers with purple */
   .article-content h2.flex.items-center.gap-2 {
-    color: white !important;
+    color: #c4b5fd !important; /* purple-300 */
+  }
+  
+  /* Make text purple for specific step elements */
+  .article-content h2.flex.items-center.gap-2 span,
+  .article-content h2.flex.items-center.gap-2 div + *,
+  .article-content li,
+  .article-content h2,
+  .article-content ol li,
+  .article-content ol li span,
+  .article-content p,
+  .article-content [class*="text-slate-700"],
+  .article-content [class*="text-slate-800"],
+  .article-content [class*="text-slate-900"] {
+    color: #c4b5fd !important; 
+  }
+  
+  /* Colorize specific text elements */
+  .article-content .text-primary-800,
+  .article-content [class*="text-primary-800"] {
+    color: #c4b5fd !important; /* purple-300 */
+  }
+  
+  /* Override specific style for the step numbers */
+  .article-content h2[class*="flex items-center gap-2"] {
+    color: #c4b5fd !important;
   }
 }
 
