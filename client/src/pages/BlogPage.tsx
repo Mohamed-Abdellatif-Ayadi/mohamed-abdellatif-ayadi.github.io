@@ -63,14 +63,14 @@ const BlogPage = () => {
               placeholder={t('blog.search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full text-slate-800 font-medium"
+              className="w-full text-white font-medium bg-slate-800 border-slate-700"
             />
           </div>
           <div className="w-full md:w-1/3">
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-slate-800 font-medium"
+              className="w-full p-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-white font-medium bg-slate-800"
             >
               <option value="">{t('blog.allCategories')}</option>
               {categories.map((category) => (
