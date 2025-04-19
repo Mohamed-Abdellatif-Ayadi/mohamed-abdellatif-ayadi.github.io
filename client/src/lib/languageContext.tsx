@@ -60,7 +60,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Blog Articles',
-    'blog.subtitle': 'Thoughts, insights, and experiences from my journey in <span className="text-purple-400">technology</span>',
+    'blog.subtitle': 'Thoughts, insights, and experiences from my journey in <span style="color: #c084fc; font-weight: bold; background-color: rgba(192, 132, 252, 0.1); padding: 0px 5px; border-radius: 4px;">technology</span>',
     'blog.readMore': 'Read More',
     'blog.search': 'Search',
     'blog.categories': 'Categories',
@@ -158,7 +158,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Blog-Artikel',
-    'blog.subtitle': 'Gedanken, Erkenntnisse und Erfahrungen aus meiner Reise in der <span className="text-purple-400">Technologie</span>',
+    'blog.subtitle': 'Gedanken, Erkenntnisse und Erfahrungen aus meiner Reise in der <span style="color: #c084fc; font-weight: bold; background-color: rgba(192, 132, 252, 0.1); padding: 0px 5px; border-radius: 4px;">Technologie</span>',
     'blog.readMore': 'Weiterlesen',
     'blog.search': 'Suchen',
     'blog.categories': 'Kategorien',
@@ -256,7 +256,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Blog
     'blog.title': 'Articles de Blog',
-    'blog.subtitle': 'Réflexions, idées et expériences de mon parcours dans la <span className="text-purple-400">technologie</span>',
+    'blog.subtitle': 'Réflexions, idées et expériences de mon parcours dans la <span style="color: #c084fc; font-weight: bold; background-color: rgba(192, 132, 252, 0.1); padding: 0px 5px; border-radius: 4px;">technologie</span>',
     'blog.readMore': 'Lire Plus',
     'blog.search': 'Rechercher',
     'blog.categories': 'Catégories',
