@@ -47,6 +47,67 @@
     @apply text-lg;
   }
   
+  /* SQL Window Functions article styles */
+  .article-content .section-title {
+    @apply text-2xl font-bold mt-8 mb-4 text-blue-400 border-b-2 border-blue-500 pb-2 inline-block;
+  }
+  
+  .article-content .numbered-section {
+    @apply flex items-center mt-6 mb-4;
+  }
+  
+  .article-content .number-circle {
+    @apply flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white font-bold mr-3 flex-shrink-0;
+  }
+  
+  .article-content .numbered-section h3 {
+    @apply m-0 text-xl font-semibold text-blue-400;
+  }
+  
+  .article-content .highlight-box {
+    @apply bg-slate-900 border-l-4 border-blue-500 p-5 my-6 rounded-r-lg;
+  }
+  
+  .article-content .highlight-box h4 {
+    @apply text-blue-400 text-lg font-semibold mt-0 mb-3;
+  }
+  
+  .article-content .table-container {
+    @apply overflow-x-auto my-6 rounded-lg shadow-md;
+  }
+  
+  .article-content .table-container table {
+    @apply w-full border-collapse;
+  }
+  
+  .article-content .table-container th {
+    @apply bg-blue-900 text-white font-semibold p-3 text-left;
+  }
+  
+  .article-content .table-container td {
+    @apply p-3 border-b border-slate-700;
+  }
+  
+  .article-content .table-container tr:nth-child(even) {
+    @apply bg-slate-700;
+  }
+  
+  .article-content .social-sharing {
+    @apply mt-12 pt-6 border-t border-slate-700;
+  }
+  
+  .article-content .social-sharing h4 {
+    @apply mb-4 text-slate-400 text-base;
+  }
+  
+  .article-content .social-icons {
+    @apply flex gap-4;
+  }
+  
+  .article-content .social-icons a {
+    @apply flex items-center justify-center w-10 h-10 rounded-full bg-blue-900 text-white transition-all hover:bg-blue-700;
+  }
+  
   /* GitHub Pages article specific styles */
   .article-content [class*="text-slate-600"],
   .article-content [class*="text-slate-700"],
@@ -127,13 +188,13 @@
   }
   
   /* Style the step numbers with white */
-  .article-content h2.flex.items-center.gap-2 {
+  .article-content h2[class*="flex"][class*="items-center"][class*="gap-2"] {
     color: #ffffff !important; /* white */
   }
   
   /* Make text white for specific step elements */
-  .article-content h2.flex.items-center.gap-2 span,
-  .article-content h2.flex.items-center.gap-2 div + *,
+  .article-content h2[class*="flex"][class*="items-center"][class*="gap-2"] span,
+  .article-content h2[class*="flex"][class*="items-center"][class*="gap-2"] div + *,
   .article-content li,
   .article-content h2,
   .article-content ol li,
@@ -152,7 +213,7 @@
   }
   
   /* Override specific style for the step numbers */
-  .article-content h2[class*="flex items-center gap-2"] {
+  .article-content h2 {
     color: #ffffff !important;
   }
 }
