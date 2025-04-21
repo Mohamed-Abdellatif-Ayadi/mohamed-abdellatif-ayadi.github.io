@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#0e1c36" />
+  
+  <!-- Database icon -->
+  <g transform="translate(400, 170) scale(2.5)">
+    <!-- Database cylinders -->
+    <ellipse cx="0" cy="-20" rx="30" ry="10" fill="none" stroke="#3498db" stroke-width="2" />
+    <ellipse cx="0" cy="20" rx="30" ry="10" fill="none" stroke="#3498db" stroke-width="2" />
+    <line x1="-30" y1="-20" x2="-30" y2="20" stroke="#3498db" stroke-width="2" />
+    <line x1="30" y1="-20" x2="30" y2="20" stroke="#3498db" stroke-width="2" />
+    
+    <!-- Window function visualization -->
+    <rect x="-25" y="-15" width="50" height="30" fill="none" stroke="#e74c3c" stroke-width="2" rx="3" ry="3" />
+    
+    <!-- Data rows visualization -->
+    <line x1="-20" y1="-5" x2="20" y2="-5" stroke="#2ecc71" stroke-width="2" />
+    <line x1="-20" y1="0" x2="20" y2="0" stroke="#2ecc71" stroke-width="2" />
+    <line x1="-20" y1="5" x2="20" y2="5" stroke="#2ecc71" stroke-width="2" />
+    <line x1="-20" y1="10" x2="20" y2="10" stroke="#2ecc71" stroke-width="2" />
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="32" fill="#ffffff" text-anchor="middle" font-weight="bold">
+    Mastering SQL Window Functions
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="120" font-family="Arial, sans-serif" font-size="18" fill="#3498db" text-anchor="middle">
+    Advanced techniques for powerful data analysis
+  </text>
+  
+  <!-- Footer -->
+  <text x="400" y="350" font-family="Arial, sans-serif" font-size="16" fill="#cccccc" text-anchor="middle">
+    A comprehensive guide to RANK(), ROW_NUMBER(), PARTITION BY and more
+  </text>
+</svg>
