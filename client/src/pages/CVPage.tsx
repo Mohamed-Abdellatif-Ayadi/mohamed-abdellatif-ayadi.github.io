@@ -6,10 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet";
 import { useLanguage } from "@/lib/languageContext";
 
+// Import ExtendedCV type from CVDisplay for API data compatibility
+import type { ExtendedCV } from "@/components/cv/CVDisplay";
+
 const CVPage = () => {
   const { t, language } = useLanguage();
   
-  const { data: cv, isLoading } = useQuery<CV>({
+  // Use the ExtendedCV type to match the API response structure
+  const { data: cv, isLoading } = useQuery({
     queryKey: ["/api/cv", language],
     queryFn: async () => {
       const response = await fetch(`/api/cv?language=${language}`);

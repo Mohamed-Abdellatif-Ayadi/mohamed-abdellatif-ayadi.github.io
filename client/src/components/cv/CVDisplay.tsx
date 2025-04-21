@@ -1,12 +1,12 @@
 import { CV as OriginalCV } from "@shared/schema";
 
 // Define interfaces to match the actual API response structure
-interface SkillCategory {
+export interface SkillCategory {
   category: string;
   items: string[];
 }
 
-interface ContactInfo {
+export interface ContactInfo {
   email: string;
   phone: string;
   location: string;
@@ -14,7 +14,7 @@ interface ContactInfo {
   social?: Array<{name: string, url: string}>;
 }
 
-interface ExtendedCV {
+export interface ExtendedCV {
   name: string;
   title: string;
   photoUrl: string;
@@ -110,32 +110,20 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
           
           <div className="mb-6">
             <h3 className="text-lg font-bold text-slate-900 mb-2">Skills</h3>
-            {Array.isArray(cv.skills) && cv.skills.length > 0 && cv.skills[0].category ? (
-              // New structure with categories
-              <div className="space-y-4">
-                {cv.skills.map((skillCategory, catIndex) => (
-                  <div key={catIndex}>
-                    <h4 className="text-base font-medium text-slate-800 mb-2">{skillCategory.category}</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {skillCategory.items.map((item, itemIndex) => (
-                        <span key={`${catIndex}-${itemIndex}`} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
+            <div className="space-y-4">
+              {cv.skills.map((skillCategory, catIndex) => (
+                <div key={catIndex}>
+                  <h4 className="text-base font-medium text-slate-800 mb-2">{skillCategory.category}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {skillCategory.items.map((item: string, itemIndex: number) => (
+                      <span key={`${catIndex}-${itemIndex}`} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
+                        {item}
+                      </span>
+                    ))}
                   </div>
-                ))}
-              </div>
-            ) : (
-              // Fallback to old structure (flat array)
-              <div className="flex flex-wrap gap-2">
-                {Array.isArray(cv.skills) && cv.skills.map((skill, index) => (
-                  <span key={index} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            )}
+                </div>
+              ))}
+            </div>
           </div>
           
           <div>
@@ -185,7 +173,7 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
               <h3 className="text-lg font-bold text-slate-900 mb-2">Certifications</h3>
               <ul className="list-disc list-inside space-y-1 text-slate-600">
                 {cv.certifications.map((certification, index) => (
-                  <li key={index}>{certification.name} ({certification.year})</li>
+                  <li key={index}>{certification.name} ({certification.year || certification.date})</li>
                 ))}
               </ul>
             </div>
@@ -197,7 +185,7 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
               <div className="flex flex-wrap gap-4">
                 {cv.languages.map((language, index) => (
                   <div key={index} className="flex items-center">
-                    <span className="font-medium text-slate-700">{language.name}:</span>
+                    <span className="font-medium text-slate-700">{language.language || language.name}:</span>
                     <span className="ml-2 text-slate-600">{language.proficiency}</span>
                   </div>
                 ))}
