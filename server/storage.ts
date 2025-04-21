@@ -1447,6 +1447,201 @@ $ git push</code></pre>
         coverImage: "/images/github-pages.svg",
         category: "Technology",
         publishedAt: new Date("2025-02-08")
+      },
+      {
+        title: "Mastering SQL Window Functions: A Comprehensive Guide",
+        excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+        translations: {
+          en: {
+            title: "Mastering SQL Window Functions: A Comprehensive Guide",
+            excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL Window Functions Diagram" class="article-featured-image" /><p class="article-date">April 21, 2025</p></div><p>SQL window functions are one of the most powerful and flexible tools available to analysts and developers. They allow for sophisticated calculations across rows of data while preserving the individual rows, which makes them ideal for a wide range of use cases, from ranking and cumulative sums to moving averages and comparisons.</p><p>This blog post provides a detailed overview of all major window functions using the Employees table as an example.</p><div class="code-block"><pre><code>-- Create the table
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Insert data into the Employees table
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">What Are SQL Window Functions?</h2><p>SQL window functions operate on a set of rows, known as a "window," defined by the OVER() clause. Unlike aggregate functions such as SUM() or COUNT(), window functions return a result for each row in the dataset, making them incredibly powerful for detailed analysis that requires both individual row-level calculations and group-level operations.</p><h2 class="section-title">Syntax Overview</h2><p>The general syntax of a window function looks like this:</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong>: The window function (e.g., ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong>: Divides the dataset into partitions (optional).</li><li><strong>ORDER BY</strong>: Specifies the ordering of rows within each partition (optional).</li><li><strong>OVER()</strong>: Defines the window of rows for the function.</li></ul><h2 class="section-title">Key SQL Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Ranking Functions</h3></div><p>Ranking functions are useful when you want to assign a rank to each row within a partition. They are commonly used in scenarios such as leaderboard generation or employee salary rankings.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Generates a unique number for each row in the partition. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>This query ranks employees in each department by their salary in descending order.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Assigns a rank to each row, but leaves gaps when there are ties. The next rank is skipped for rows with the same value. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>If two employees have the same salary, they will have the same rank, and the next rank will be skipped.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Similar to RANK(), but without gaps in ranking. All rows with the same value receive the same rank, but subsequent ranks are not skipped. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>The query results are same and will be:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">2</div><h3>Aggregate Functions (Windowed)</h3></div><p>Window functions can be combined with aggregate functions, allowing you to calculate values like running totals or averages without collapsing the rows into a single result.</p><div class="highlight-box"><h4>SUM()</h4><p>Calculates the cumulative sum over a window of rows. Example:</p><div class="code-block"><pre><code>SELECT employee_id, salary,
+       SUM(salary) OVER (PARTITION BY department ORDER BY salary DESC) AS cumulative_salary
+FROM employees;</code></pre></div><p>This query calculates the cumulative salary for each employee in each department.</p></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>CumulativeSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>80000.00</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>120000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.00</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.00</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.00</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.00</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>186000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>251000.00</td></tr></tbody></table></div><div class="highlight-box"><h4>AVG()</h4><p>Calculates the average salary for employees in each department. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID) AS AvgSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>AvgSalary</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>60000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>83666.666667</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>83666.666667</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>83666.666667</td></tr></tbody></table></div><div class="highlight-box"><h4>COUNT()</h4><p>Counts the number of rows in the window. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    COUNT(*) OVER (PARTITION BY DivisionID) AS EmployeeCount
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>EmployeeCount</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>2</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>1</td></tr><tr><td>105</td><td>Mary Dial</td><td>3</td></tr><tr><td>105</td><td>Susan Wall</td><td>3</td></tr><tr><td>105</td><td>Robert Night</td><td>3</td></tr></tbody></table></div><div class="highlight-box"><h4>MAX() / MIN()</h4><p>Returns the maximum or minimum value in a window. Example: Find the highest salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    MAX(Salary) OVER (PARTITION BY DivisionID) AS MaxSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MaxSalary</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>80000.00</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>80000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.00</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.00</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.00</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>110000.00</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">3</div><h3>Window-Based Row Navigation</h3></div><p>These functions allow you to reference values from previous or next rows, which is especially useful for calculating differences, moving averages, or time-based comparisons.</p><div class="highlight-box"><h4>LAG()</h4><p>Returns the value of a specified column from a previous row in the same partition. Example: Find the previous salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS PreviousSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>PreviousSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td></td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>80000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td></td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td></td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td></td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td></td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td></td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>76000.00</td></tr></tbody></table></div><div class="highlight-box"><h4>LEAD()</h4><p>Returns the value of a specified column from a subsequent row in the same partition. Example: Find the next salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LEAD(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS NextSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>NextSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>40000.00</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td></td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td></td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td></td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td></td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td></td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>76000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>65000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td></td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">4</div><h3>First and Last Value Functions</h3></div><p>These functions return the first or last value in a window.</p><div class="highlight-box"><h4>FIRST_VALUE()</h4><p>Returns the first value in the window. Example: Find the highest-paid employee in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    FIRST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS TopEarner
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>TopEarner</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>Lisa Roberts</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>Lisa Roberts</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>Arnold Sully</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>Mark Red</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>Dennis Front</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>Larry Weis</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>Susan Wall</td></tr></tbody></table></div><div class="highlight-box"><h4>LAST_VALUE()</h4><p>Returns the last value in the window. Example: Find the lowest-paid employee in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS LowestEarner
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>LowestEarner</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>Lisa Roberts</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>Lisa Roberts</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>Arnold Sully</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>Mark Red</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>Dennis Front</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>Larry Weis</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>Susan Wall</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">5</div><h3>Windowing Clauses (ROWS and RANGE)</h3></div><p>In SQL, the ROWS and RANGE clauses let you specify the exact set of rows that make up the window. This is particularly useful for time-series analysis or when comparing a specific range of rows.</p><div class="highlight-box"><h4>ROWS Example</h4><p>Defines the window in terms of physical rows (e.g., the current row and the previous 2 rows). Example: Calculate a moving average of salaries for each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS MovingAvg
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`
+          },
+          de: {
+            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt: "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL-Fensterfunktionen Diagramm" class="article-featured-image" /><p class="article-date">21. April 2025</p></div><p>SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Sie ermöglichen anspruchsvolle Berechnungen über Datenzeilen hinweg, wobei die einzelnen Zeilen erhalten bleiben, was sie ideal für eine Vielzahl von Anwendungsfällen macht, von Ranking und kumulativen Summen bis hin zu gleitenden Durchschnitten und Vergleichen.</p><p>Dieser Blogbeitrag bietet einen detaillierten Überblick über alle wichtigen Fensterfunktionen am Beispiel der Employees-Tabelle.</p><div class="code-block"><pre><code>-- Tabelle erstellen
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Daten in die Employees-Tabelle einfügen
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">Was sind SQL-Fensterfunktionen?</h2><p>SQL-Fensterfunktionen operieren auf einer Gruppe von Zeilen, einem sogenannten "Fenster", das durch die OVER()-Klausel definiert wird. Im Gegensatz zu Aggregatfunktionen wie SUM() oder COUNT() geben Fensterfunktionen ein Ergebnis für jede Zeile im Datensatz zurück, was sie unglaublich leistungsstark für detaillierte Analysen macht, die sowohl zeilenbasierte als auch gruppenbasierte Operationen erfordern.</p><h2 class="section-title">Syntax-Übersicht</h2><p>Die allgemeine Syntax einer Fensterfunktion sieht wie folgt aus:</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong>: Die Fensterfunktion (z.B. ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong>: Teilt den Datensatz in Partitionen (optional).</li><li><strong>ORDER BY</strong>: Legt die Sortierung der Zeilen innerhalb jeder Partition fest (optional).</li><li><strong>OVER()</strong>: Definiert das Fenster der Zeilen für die Funktion.</li></ul><h2 class="section-title">Wichtige SQL-Fensterfunktionen</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Ranking-Funktionen</h3></div><p>Ranking-Funktionen sind nützlich, wenn Sie jeder Zeile innerhalb einer Partition einen Rang zuweisen möchten. Sie werden häufig in Szenarien wie Bestenlisten oder Mitarbeitergehaltsrankings verwendet.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Generiert eine eindeutige Nummer für jede Zeile in der Partition. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Diese Abfrage ordnet Mitarbeiter in jeder Abteilung nach ihrem Gehalt in absteigender Reihenfolge.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Weist jeder Zeile einen Rang zu, lässt aber Lücken, wenn es Gleichstände gibt. Der nächste Rang wird für Zeilen mit demselben Wert übersprungen. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Wenn zwei Mitarbeiter das gleiche Gehalt haben, erhalten sie den gleichen Rang, und der nächste Rang wird übersprungen.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Ähnlich wie RANK(), aber ohne Lücken im Ranking. Alle Zeilen mit demselben Wert erhalten den gleichen Rang, aber nachfolgende Ränge werden nicht übersprungen. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`
+          },
+          fr: {
+            title: "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
+            excerpt: "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="Diagramme des fonctions de fenêtrage SQL" class="article-featured-image" /><p class="article-date">21 avril 2025</p></div><p>Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Elles permettent d'effectuer des calculs sophistiqués sur des lignes de données tout en préservant les lignes individuelles, ce qui les rend idéales pour une large gamme de cas d'utilisation, du classement et des sommes cumulatives aux moyennes mobiles et aux comparaisons.</p><p>Ce billet de blog fournit un aperçu détaillé de toutes les principales fonctions de fenêtrage en utilisant la table Employees comme exemple.</p><div class="code-block"><pre><code>-- Créer la table
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Insérer des données dans la table Employees
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">Que sont les fonctions de fenêtrage SQL?</h2><p>Les fonctions de fenêtrage SQL opèrent sur un ensemble de lignes, appelé « fenêtre », défini par la clause OVER(). Contrairement aux fonctions d'agrégation comme SUM() ou COUNT(), les fonctions de fenêtrage renvoient un résultat pour chaque ligne du jeu de données, ce qui les rend incroyablement puissantes pour des analyses détaillées nécessitant à la fois des calculs au niveau des lignes individuelles et des opérations au niveau du groupe.</p><h2 class="section-title">Aperçu de la syntaxe</h2><p>La syntaxe générale d'une fonction de fenêtrage ressemble à ceci :</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong> : La fonction de fenêtrage (par exemple, ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong> : Divise le jeu de données en partitions (facultatif).</li><li><strong>ORDER BY</strong> : Spécifie l'ordre des lignes dans chaque partition (facultatif).</li><li><strong>OVER()</strong> : Définit la fenêtre de lignes pour la fonction.</li></ul><h2 class="section-title">Fonctions de fenêtrage SQL clés</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Fonctions de classement</h3></div><p>Les fonctions de classement sont utiles lorsque vous voulez attribuer un rang à chaque ligne au sein d'une partition. Elles sont couramment utilisées dans des scénarios tels que la génération de classements ou les classements de salaires d'employés.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Génère un numéro unique pour chaque ligne de la partition. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Cette requête classe les employés de chaque département par leur salaire en ordre décroissant.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Attribue un rang à chaque ligne, mais laisse des écarts lorsqu'il y a des égalités. Le rang suivant est sauté pour les lignes ayant la même valeur. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Si deux employés ont le même salaire, ils auront le même rang, et le rang suivant sera sauté.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Similaire à RANK(), mais sans écarts dans le classement. Toutes les lignes avec la même valeur reçoivent le même rang, mais les rangs suivants ne sont pas sautés. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`
+          }
+        },
+        slug: "mastering-sql-window-functions",
+        tags: [
+          "SQL",
+          "Database",
+          "Data Analysis",
+          "Development",
+          "Programming"
+        ],
+        createdAt: new Date("2025-04-21T10:00:00.000Z"),
+        updatedAt: new Date("2025-04-21T10:00:00.000Z"),
+        featured: true,
+        publishedAt: new Date("2025-04-21T10:00:00.000Z"),
+        author: {
+          name: "Mohamed Ayadi",
+          avatar: "/images/avatar.png",
+          bio: "A passionate Full Stack Developer with over 7 years of experience."
+        },
+        coverImage: "/images/sql-window-functions.svg",
+        category: "Database"
       }
     ];
     
