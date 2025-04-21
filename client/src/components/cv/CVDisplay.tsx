@@ -1,7 +1,64 @@
-import { CV } from "@shared/schema";
+import { CV as OriginalCV } from "@shared/schema";
+
+// Define interfaces to match the actual API response structure
+interface SkillCategory {
+  category: string;
+  items: string[];
+}
+
+interface ContactInfo {
+  email: string;
+  phone: string;
+  location: string;
+  website?: string;
+  social?: Array<{name: string, url: string}>;
+}
+
+interface ExtendedCV {
+  name: string;
+  title: string;
+  photoUrl: string;
+  summary: string;
+  contact: ContactInfo;
+  skills: SkillCategory[];
+  experience: Array<{
+    position: string;
+    company: string;
+    startDate: string;
+    endDate?: string;
+    description: string;
+    highlights?: string[];
+  }>;
+  education: Array<{
+    institution: string;
+    degree: string;
+    startDate: string;
+    endDate: string;
+    location?: string;
+    description?: string;
+  }>;
+  certifications?: Array<{
+    name: string;
+    issuer?: string;
+    date?: string;
+    year?: string;
+    expires?: string;
+  }>;
+  languages?: Array<{
+    language?: string;
+    name?: string;
+    proficiency: string;
+  }>;
+  projects?: Array<{
+    name: string;
+    description: string;
+    technologies: string[];
+    url?: string;
+  }>;
+}
 
 type CVDisplayProps = {
-  cv: CV;
+  cv: ExtendedCV;
 };
 
 const CVDisplay = ({ cv }: CVDisplayProps) => {
@@ -22,24 +79,24 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
           <div className="mt-6 w-full">
             <h4 className="font-semibold mb-2 text-white/90">Contact</h4>
             <div className="space-y-2 text-sm">
-              <a href={`mailto:${cv.email}`} className="flex items-center text-white/80 hover:text-white">
+              <a href={`mailto:${cv.contact?.email}`} className="flex items-center text-white/80 hover:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                {cv.email}
+                {cv.contact?.email}
               </a>
               <div className="flex items-center text-white/80">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                {cv.phone}
+                {cv.contact?.phone}
               </div>
               <div className="flex items-center text-white/80">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                {cv.location}
+                {cv.contact?.location}
               </div>
             </div>
           </div>
@@ -53,13 +110,32 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
           
           <div className="mb-6">
             <h3 className="text-lg font-bold text-slate-900 mb-2">Skills</h3>
-            <div className="flex flex-wrap gap-2">
-              {cv.skills.map((skill, index) => (
-                <span key={index} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
+            {Array.isArray(cv.skills) && cv.skills.length > 0 && cv.skills[0].category ? (
+              // New structure with categories
+              <div className="space-y-4">
+                {cv.skills.map((skillCategory, catIndex) => (
+                  <div key={catIndex}>
+                    <h4 className="text-base font-medium text-slate-800 mb-2">{skillCategory.category}</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {skillCategory.items.map((item, itemIndex) => (
+                        <span key={`${catIndex}-${itemIndex}`} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              // Fallback to old structure (flat array)
+              <div className="flex flex-wrap gap-2">
+                {Array.isArray(cv.skills) && cv.skills.map((skill, index) => (
+                  <span key={index} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
           
           <div>
