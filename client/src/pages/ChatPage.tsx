@@ -378,10 +378,13 @@ const ChatPage = () => {
   const handleSendMessage = () => {
     if (input.trim() === '') return;
 
+    // Store current input value before clearing it
+    const currentInput = input.trim();
+
     // Add user message
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
-      content: input,
+      content: currentInput,
       sender: 'user',
       timestamp: new Date(),
     };
@@ -392,7 +395,7 @@ const ChatPage = () => {
 
     // Simulate response delay
     setTimeout(() => {
-      const response = processMessage(input);
+      const response = processMessage(currentInput);
       
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
