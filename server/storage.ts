@@ -1833,6 +1833,23 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
         coverImage: "/images/sql-window-functions.svg",
         category: "Database",
       },
+      {
+        title: "Advanced Asynchronous Programming in JavaScript",
+        excerpt: "Master the art of asynchronous programming in JavaScript with practical techniques for handling complex workflows, error management, and optimization strategies for modern web applications.",
+        slug: "advanced-asynchronous-programming-javascript",
+        tags: ["JavaScript", "Web Development", "Programming", "Async/Await", "Promises"],
+        createdAt: "2025-04-15T10:00:00.000Z",
+        updatedAt: "2025-04-15T10:00:00.000Z",
+        featured: true,
+        publishedAt: "2025-04-15T10:00:00.000Z",
+        author: {
+          name: "Mohamed Ayadi",
+          avatar: "/images/avatar.png",
+          bio: "A passionate Full Stack Developer with over 7 years of experience.",
+        },
+        coverImage: "/images/async-javascript.svg",
+        category: "Programming",
+      },
     ];
 
     // Add articles
