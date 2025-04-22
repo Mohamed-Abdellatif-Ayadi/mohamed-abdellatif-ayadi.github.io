@@ -359,7 +359,34 @@ export class MemStorage implements IStorage {
       return undefined;
     }
     
-    // If language is specified, try to find translated content
+    // For SQL Window Functions article (id 1), ensure full translations are loaded in both languages
+    if (id === 1) {
+      // This is a special case for the SQL Window Functions article
+      // The translations are explicitly loaded from a JSON file
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        
+        // Read the article data from the JSON file
+        const articleData = JSON.parse(
+          fs.readFileSync(path.join(__dirname, 'data/articles/mastering-sql-window-functions.json'), 'utf8')
+        );
+        
+        // If language is specified, try to find translated content
+        if (language && ['en', 'de', 'fr'].includes(language) && articleData.translations && articleData.translations[language]) {
+          return {
+            ...article,
+            title: articleData.translations[language].title,
+            excerpt: articleData.translations[language].excerpt,
+            content: articleData.translations[language].content
+          };
+        }
+      } catch (error) {
+        console.error("Error loading SQL Window Functions article:", error);
+      }
+    }
+    
+    // Default behavior for other articles
     if (language && ['en', 'de', 'fr'].includes(language) && article.translations && article.translations[language]) {
       return {
         ...article,
