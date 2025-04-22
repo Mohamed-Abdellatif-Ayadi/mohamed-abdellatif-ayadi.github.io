@@ -420,8 +420,27 @@ export class MemStorage implements IStorage {
   
   // Helper method to add sample articles
   private addSampleArticles(): void {
+    // We'll use hard-coded content for all languages instead of loading from a file
+    // This ensures all translations have the complete content
+    const sqlArticleData = {
+        title: "Mastering SQL Window Functions: A Comprehensive Guide",
+        excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+        slug: "mastering-sql-window-functions",
+        tags: ["SQL", "Database", "Data Analysis", "Development", "Programming"],
+        createdAt: "2025-04-21T10:00:00.000Z",
+        updatedAt: "2025-04-21T10:00:00.000Z",
+        featured: true,
+        publishedAt: "2025-04-21T10:00:00.000Z",
+        author: {
+          name: "Mohamed Ayadi",
+          avatar: "/images/avatar.png",
+          bio: "A passionate Full Stack Developer with over 7 years of experience."
+        }
+      };
+    
     const articles: Omit<Article, "id">[] = [
       {
+        ...sqlArticleData,
         title: "Mastering SQL Window Functions: A Comprehensive Guide",
         excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
         slug: "mastering-sql-window-functions",

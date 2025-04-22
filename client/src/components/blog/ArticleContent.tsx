@@ -98,7 +98,7 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       <div 
         className="article-content prose prose-slate max-w-none prose-headings:text-purple-900 prose-p:text-slate-800 prose-li:text-slate-800 prose-strong:text-purple-800 prose-a:text-purple-700 prose-a:no-underline hover:prose-a:text-purple-800 hover:prose-a:underline"
         dangerouslySetInnerHTML={{ 
-          __html: article.content || (article.translations && article.translations[language] && article.translations[language].content) || ''
+          __html: getSQLArticleContent(article.id, language) || article.content || (article.translations && article.translations[language] && article.translations[language].content) || ''
         }}
       />
       
