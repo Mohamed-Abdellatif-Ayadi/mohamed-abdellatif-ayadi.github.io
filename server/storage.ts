@@ -410,13 +410,13 @@ export class MemStorage implements IStorage {
       return undefined;
     }
 
-    // For SQL Window Functions article (id 1), ensure full translations are loaded in both languages
-    if (id === 1) {
-      // This is a special case for the SQL Window Functions article
-      try {
-        const fs = require("fs");
-        const path = require("path");
-
+    // Special handling for specific articles with full translations
+    try {
+      const fs = require("fs");
+      const path = require("path");
+      
+      // For SQL Window Functions article (id 1)
+      if (id === 1) {
         // If German or French, load from separate complete translation files
         if (language === "de") {
           const germanContent = fs.readFileSync(
@@ -463,9 +463,33 @@ export class MemStorage implements IStorage {
             content: articleData.translations.en.content,
           };
         }
-      } catch (error) {
-        console.error("Error loading SQL Window Functions article:", error);
       }
+      
+      // For JavaScript Async Programming article (id 2)
+      else if (id === 2) {
+        const articleData = JSON.parse(
+          fs.readFileSync(path.join(__dirname, 'data/articles/javascript-async-programming.json'), 'utf8')
+        );
+        
+        if (language && ['en', 'de', 'fr'].includes(language) && articleData.translations && articleData.translations[language]) {
+          return {
+            ...article,
+            title: articleData.translations[language].title,
+            excerpt: articleData.translations[language].excerpt,
+            content: articleData.translations[language].content
+          };
+        } else {
+          // Default to English
+          return {
+            ...article,
+            title: articleData.translations.en.title,
+            excerpt: articleData.translations.en.excerpt,
+            content: articleData.translations.en.content
+          };
+        }
+      }
+    } catch (error) {
+      console.error("Error loading article:", error);
     }
 
     // Default behavior for other articles

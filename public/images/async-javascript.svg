@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#1E293B" rx="8" ry="8" />
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Advanced Asynchronous JavaScript</text>
+  
+  <!-- Central JavaScript Logo -->
+  <rect x="370" y="170" width="60" height="60" fill="#F7DF1E" rx="4" ry="4" />
+  <text x="400" y="210" font-family="Arial, sans-serif" font-size="28" fill="#000000" text-anchor="middle" font-weight="bold">JS</text>
+  
+  <!-- Left Section: Callbacks -->
+  <g transform="translate(100,200)">
+    <rect x="0" y="-40" width="120" height="80" fill="#334155" rx="6" ry="6" stroke="#64748B" stroke-width="2" />
+    <text x="60" y="-15" font-family="Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle">Callbacks</text>
+    <text x="60" y="10" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">function(data) {</text>
+    <text x="60" y="30" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">  function(result) {</text>
+    
+    <!-- Arrow to JS -->
+    <path d="M120,0 C170,0 180,170 250,170" stroke="#64748B" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+    <polygon points="250,170 240,165 240,175" fill="#64748B" />
+    <text x="180" y="40" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8" transform="rotate(15, 180, 40)">Evolution</text>
+  </g>
+  
+  <!-- Right Section: Async/Await -->
+  <g transform="translate(580,200)">
+    <rect x="0" y="-40" width="120" height="80" fill="#334155" rx="6" ry="6" stroke="#64748B" stroke-width="2" />
+    <text x="60" y="-15" font-family="Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle">Async/Await</text>
+    <text x="60" y="10" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">async function() {</text>
+    <text x="60" y="30" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">  await fetch();</text>
+    
+    <!-- Arrow from JS -->
+    <path d="M0,0 C-50,0 -60,170 -130,170" stroke="#64748B" stroke-width="2" fill="none" />
+    <polygon points="-130,170 -120,165 -120,175" fill="#64748B" />
+    <text x="-60" y="40" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8" transform="rotate(-15, -60, 40)">Modern</text>
+  </g>
+  
+  <!-- Top Section: Promises -->
+  <g transform="translate(400,100)">
+    <rect x="-60" y="-40" width="120" height="80" fill="#334155" rx="6" ry="6" stroke="#64748B" stroke-width="2" />
+    <text x="0" y="-15" font-family="Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle">Promises</text>
+    <text x="0" y="10" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">.then(data => {</text>
+    <text x="0" y="30" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">}).catch(err => {</text>
+    
+    <!-- Arrow to JS -->
+    <path d="M0,40 C0,50 0,60 0,70" stroke="#64748B" stroke-width="2" fill="none" />
+    <polygon points="0,70 -5,60 5,60" fill="#64748B" />
+  </g>
+  
+  <!-- Bottom Section: Error Handling -->
+  <g transform="translate(400,300)">
+    <rect x="-60" y="-40" width="120" height="80" fill="#334155" rx="6" ry="6" stroke="#64748B" stroke-width="2" />
+    <text x="0" y="-15" font-family="Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle">Error Handling</text>
+    <text x="0" y="10" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">try {</text>
+    <text x="0" y="30" font-family="monospace" font-size="11" fill="#94A3B8" text-anchor="middle">} catch (error) {</text>
+    
+    <!-- Arrow from JS -->
+    <path d="M0,-40 C0,-50 0,-60 0,-70" stroke="#64748B" stroke-width="2" fill="none" />
+    <polygon points="0,-70 -5,-60 5,-60" fill="#64748B" />
+  </g>
+  
+  <!-- Decorator elements -->
+  <circle cx="100" cy="100" r="20" fill="none" stroke="#0EA5E9" stroke-width="2" opacity="0.5" />
+  <circle cx="700" cy="300" r="20" fill="none" stroke="#0EA5E9" stroke-width="2" opacity="0.5" />
+  <circle cx="150" cy="350" r="15" fill="none" stroke="#0EA5E9" stroke-width="2" opacity="0.3" />
+  <circle cx="650" cy="50" r="15" fill="none" stroke="#0EA5E9" stroke-width="2" opacity="0.3" />
+  
+  <!-- Patterns -->
+  <g opacity="0.1">
+    <path d="M0,250 L800,250" stroke="#94A3B8" stroke-width="1" stroke-dasharray="1,5" />
+    <path d="M0,150 L800,150" stroke="#94A3B8" stroke-width="1" stroke-dasharray="1,5" />
+    <path d="M200,0 L200,400" stroke="#94A3B8" stroke-width="1" stroke-dasharray="1,5" />
+    <path d="M600,0 L600,400" stroke="#94A3B8" stroke-width="1" stroke-dasharray="1,5" />
+  </g>
+  
+  <!-- Annotations -->
+  <g font-family="Arial, sans-serif" font-size="10" fill="#94A3B8">
+    <text x="20" y="380">CALLBACK PATTERN</text>
+    <text x="680" y="380" text-anchor="end">MODERN PATTERN</text>
+    <text x="400" y="380" text-anchor="middle">EFFICIENCY • READABILITY • MAINTAINABILITY</text>
+  </g>
+</svg>
