@@ -6,13 +6,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Helmet } from "react-helmet";
 import NotFound from "./not-found";
 import { useLanguage } from "@/lib/languageContext";
+import { useEffect } from "react";
 
 const BlogPost = () => {
   const { language, t } = useLanguage();
   const [, params] = useRoute<{ id: string }>("/blog/:id");
   const articleId = params?.id ? parseInt(params.id) : null;
 
-  const { data: article, isLoading, error } = useQuery<Article>({
+  const { 
+    data: article, 
+    isLoading, 
+    error, 
+    refetch 
+  } = useQuery<Article>({
     queryKey: [`/api/articles/${articleId}`, language],
     queryFn: async () => {
       const response = await fetch(`/api/articles/${articleId}?language=${language}`);
@@ -23,6 +29,13 @@ const BlogPost = () => {
     },
     enabled: !!articleId,
   });
+  
+  // Refetch the article when language changes
+  useEffect(() => {
+    if (articleId) {
+      refetch();
+    }
+  }, [language, articleId, refetch]);
 
   if (isLoading) {
     return (
