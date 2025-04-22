@@ -372,13 +372,37 @@ export class MemStorage implements IStorage {
           fs.readFileSync(path.join(__dirname, 'data/articles/mastering-sql-window-functions.json'), 'utf8')
         );
         
-        // If language is specified, try to find translated content
+        // Always return the full article from the JSON file
         if (language && ['en', 'de', 'fr'].includes(language) && articleData.translations && articleData.translations[language]) {
           return {
             ...article,
+            id: article.id,
             title: articleData.translations[language].title,
             excerpt: articleData.translations[language].excerpt,
-            content: articleData.translations[language].content
+            content: articleData.translations[language].content,
+            slug: article.slug,
+            tags: article.tags,
+            createdAt: article.createdAt,
+            updatedAt: article.updatedAt,
+            featured: article.featured,
+            publishedAt: article.publishedAt,
+            author: article.author
+          };
+        } else if (!language || language === 'en') {
+          // Default to English if no language is specified or language is English
+          return {
+            ...article,
+            id: article.id,
+            title: articleData.translations.en.title,
+            excerpt: articleData.translations.en.excerpt,
+            content: articleData.translations.en.content,
+            slug: article.slug,
+            tags: article.tags,
+            createdAt: article.createdAt,
+            updatedAt: article.updatedAt,
+            featured: article.featured,
+            publishedAt: article.publishedAt,
+            author: article.author
           };
         }
       } catch (error) {
