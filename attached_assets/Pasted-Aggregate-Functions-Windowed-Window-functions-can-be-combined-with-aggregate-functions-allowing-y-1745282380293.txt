@@ -1,0 +1,212 @@
+Aggregate Functions (Windowed)
+Window functions can be combined with aggregate functions, allowing you to calculate values like running totals or averages without collapsing the rows into a single result.
+
+SUM()
+
+Calculates the cumulative sum over a window of rows. Example:
+
+SELECT employee_id, salary,
+       SUM(salary) OVER (PARTITION BY department ORDER BY salary DESC) AS cumulative_salary
+FROM employees;
+This query calculates the cumulative salary for each employee in each department.
+
+DivisionID	Name	Salary	CumulativeSalary
+100	Lisa Roberts	80000.00	80000.00
+100	Daniel Smith	40000.00	120000.00
+101	Arnold Sully	60000.00	60000.00
+102	Mark Red	86000.00	86000.00
+103	Dennis Front	90000.00	90000.00
+104	Larry Weis	75000.00	75000.00
+105	Susan Wall	110000.00	110000.00
+105	Robert Night	76000.00	186000.00
+105	Mary Dial	65000.00	251000.00
+AVG()
+
+Calculates the average salary for employees in each department. Example:
+
+SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID) AS AvgSalary
+FROM Employees;
+DivisionID	Name	Salary	AvgSalary
+100	Daniel Smith	40000.00	60000.000000
+100	Lisa Roberts	80000.00	60000.000000
+101	Arnold Sully	60000.00	60000.000000
+102	Mark Red	86000.00	86000.000000
+103	Dennis Front	90000.00	90000.000000
+104	Larry Weis	75000.00	75000.000000
+105	Mary Dial	65000.00	83666.666667
+105	Susan Wall	110000.00	83666.666667
+105	Robert Night	76000.00	83666.666667
+COUNT()
+
+Counts the number of rows in the window. Example:
+
+SELECT
+    DivisionID,
+    Name,
+    COUNT(*) OVER (PARTITION BY DivisionID) AS EmployeeCount
+FROM Employees;
+DivisionID	Name	EmployeeCount
+100	Daniel Smith	2
+100	Lisa Roberts	2
+101	Arnold Sully	1
+102	Mark Red	1
+103	Dennis Front	1
+104	Larry Weis	1
+105	Mary Dial	3
+105	Susan Wall	3
+105	Robert Night	3
+MAX() / MIN()
+
+Returns the maximum or minimum value in a window. Example: Find the highest salary in each department.
+
+SELECT
+    DivisionID,
+    Name,
+    Salary,
+    MAX(Salary) OVER (PARTITION BY DivisionID) AS MaxSalary
+FROM Employees;
+DivisionID	Name	Salary	MaxSalary
+100	Daniel Smith	40000.00	80000.00
+100	Lisa Roberts	80000.00	80000.00
+101	Arnold Sully	60000.00	60000.00
+102	Mark Red	86000.00	86000.00
+103	Dennis Front	90000.00	90000.00
+104	Larry Weis	75000.00	75000.00
+105	Mary Dial	65000.00	110000.00
+105	Susan Wall	110000.00	110000.00
+105	Robert Night	76000.00	110000.00
+3
+Window-Based Row Navigation
+These functions allow you to reference values from previous or next rows, which is especially useful for calculating differences, moving averages, or time-based comparisons.
+
+LAG()
+
+Returns the value of a specified column from a previous row in the same partition. Example: Find the previous salary in each department.
+
+SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS PreviousSalary
+FROM Employees;
+DivisionID	Name	Salary	PreviousSalary
+100	Lisa Roberts	80000.00	
+100	Daniel Smith	40000.00	80000.00
+101	Arnold Sully	60000.00	
+102	Mark Red	86000.00	
+103	Dennis Front	90000.00	
+104	Larry Weis	75000.00	
+105	Susan Wall	110000.00	
+105	Robert Night	76000.00	110000.00
+105	Mary Dial	65000.00	76000.00
+LEAD()
+
+Returns the value of a specified column from a subsequent row in the same partition. Example: Find the next salary in each department.
+
+SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LEAD(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS NextSalary
+FROM Employees;
+DivisionID	Name	Salary	NextSalary
+100	Lisa Roberts	80000.00	40000.00
+100	Daniel Smith	40000.00	
+101	Arnold Sully	60000.00	
+102	Mark Red	86000.00	
+103	Dennis Front	90000.00	
+104	Larry Weis	75000.00	
+105	Susan Wall	110000.00	76000.00
+105	Robert Night	76000.00	65000.00
+105	Mary Dial	65000.00	
+4
+First and Last Value Functions
+These functions return the first or last value in a window.
+
+FIRST_VALUE()
+
+Returns the first value in the window. Example: Find the highest-paid employee in each department.
+
+SELECT
+    DivisionID,
+    Name,
+    Salary,
+    FIRST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS TopEarner
+FROM Employees;
+DivisionID	Name	Salary	TopEarner
+100	Lisa Roberts	80000.00	Lisa Roberts
+100	Daniel Smith	40000.00	Lisa Roberts
+101	Arnold Sully	60000.00	Arnold Sully
+102	Mark Red	86000.00	Mark Red
+103	Dennis Front	90000.00	Dennis Front
+104	Larry Weis	75000.00	Larry Weis
+105	Susan Wall	110000.00	Susan Wall
+105	Robert Night	76000.00	Susan Wall
+105	Mary Dial	65000.00	Susan Wall
+LAST_VALUE()
+
+Returns the last value in the window. Example: Find the lowest-paid employee in each department.
+
+SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS LowestEarner
+FROM Employees;
+DivisionID	Name	Salary	LowestEarner
+100	Daniel Smith	40000.00	Lisa Roberts
+100	Lisa Roberts	80000.00	Lisa Roberts
+101	Arnold Sully	60000.00	Arnold Sully
+102	Mark Red	86000.00	Mark Red
+103	Dennis Front	90000.00	Dennis Front
+104	Larry Weis	75000.00	Larry Weis
+105	Mary Dial	65000.00	Susan Wall
+105	Robert Night	76000.00	Susan Wall
+105	Susan Wall	110000.00	Susan Wall
+5
+Windowing Clauses (ROWS and RANGE)
+In SQL, the ROWS and RANGE clauses let you specify the exact set of rows that make up the window. This is particularly useful for time-series analysis or when comparing a specific range of rows.
+
+ROWS Example
+
+Defines the window in terms of physical rows (e.g., the current row and the previous 2 rows). Example: Calculate a moving average of salaries for each department.
+
+SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS MovingAvg
+FROM Employees;
+DivisionID	Name	Salary	MovingAvg
+100	Daniel Smith	40000.00	40000.000000
+100	Lisa Roberts	80000.00	60000.000000
+101	Arnold Sully	60000.00	60000.000000
+102	Mark Red	86000.00	86000.000000
+103	Dennis Front	90000.00	90000.000000
+104	Larry Weis	75000.00	75000.000000
+105	Mary Dial	65000.00	65000.000000
+105	Robert Night	76000.00	70500.000000
+105	Susan Wall	110000.00	93000.000000
+Common Use Cases for Window Functions
+1
+Cumulative Calculations
+You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.
+
+2
+Ranking and Sorting
+Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.
+
+3
+Time-Series Analysis
+For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).
+
+4
+Comparative Analysis
+Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.
+
+Conclusion
+SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.

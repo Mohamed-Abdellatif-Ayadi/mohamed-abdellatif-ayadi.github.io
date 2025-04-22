@@ -1,11 +1,11 @@
-import { 
-  users, 
-  type User, 
-  type InsertUser, 
-  type Article, 
-  type CV, 
+import {
+  users,
+  type User,
+  type InsertUser,
+  type Article,
+  type CV,
   type ContactMessage,
-  type NewsletterSubscription
+  type NewsletterSubscription,
 } from "@shared/schema";
 
 // modify the interface with any CRUD methods
@@ -15,17 +15,17 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   // Article methods
   getArticles(limit?: number): Promise<Article[]>;
   getArticleById(id: number): Promise<Article | undefined>;
-  
+
   // CV methods
   getCV(language?: string): Promise<CV>;
-  
+
   // Contact form
   saveContactMessage(message: ContactMessage): Promise<void>;
-  
+
   // Newsletter
   subscribeToNewsletter(email: string): Promise<void>;
 }
@@ -47,12 +47,13 @@ export class MemStorage implements IStorage {
     this.newsletterSubscriptions = new Set();
     this.currentId = 1;
     this.currentArticleId = 1;
-    
+
     this.cv = {
       name: "MOHAMED ABDELLATIF AYADI",
       photoUrl: "/images/avatar.png",
       title: "Full Stack Developer",
-      summary: "Experienced Full Stack Developer with over 7 years of expertise building high-performance applications. Proficient in TypeScript, React, Node.js, and cloud technologies.",
+      summary:
+        "Experienced Full Stack Developer with over 7 years of expertise building high-performance applications. Proficient in TypeScript, React, Node.js, and cloud technologies.",
       contact: {
         email: "contact@mohamedayadi.com",
         phone: "+49 123 4567890",
@@ -61,8 +62,8 @@ export class MemStorage implements IStorage {
         social: [
           { name: "LinkedIn", url: "https://linkedin.com/in/mayedi" },
           { name: "GitHub", url: "https://github.com/Mayedi007" },
-          { name: "Twitter", url: "https://twitter.com/MohamedAyadi" }
-        ]
+          { name: "Twitter", url: "https://twitter.com/MohamedAyadi" },
+        ],
       },
       experience: [
         {
@@ -70,37 +71,40 @@ export class MemStorage implements IStorage {
           position: "Senior Full Stack Developer",
           startDate: "2022-03",
           endDate: "Present",
-          description: "Leading development of cloud-native applications using React, Node.js, and AWS. Implemented CI/CD pipelines and mentored junior developers.",
+          description:
+            "Leading development of cloud-native applications using React, Node.js, and AWS. Implemented CI/CD pipelines and mentored junior developers.",
           highlights: [
             "Reduced API response time by 40% through performance optimization",
             "Implemented serverless architecture that reduced operational costs by 30%",
-            "Led a team of 5 developers to deliver projects consistently ahead of schedule"
-          ]
+            "Led a team of 5 developers to deliver projects consistently ahead of schedule",
+          ],
         },
         {
           company: "InnoSoft Solutions",
           position: "Full Stack Developer",
           startDate: "2019-01",
           endDate: "2022-02",
-          description: "Developed and maintained web applications for enterprise clients. Worked with React, Express, MongoDB, and Docker.",
+          description:
+            "Developed and maintained web applications for enterprise clients. Worked with React, Express, MongoDB, and Docker.",
           highlights: [
             "Built responsive dashboards for data visualization",
             "Integrated third-party APIs for payment processing and authentication",
-            "Migrated legacy applications to modern tech stacks"
-          ]
+            "Migrated legacy applications to modern tech stacks",
+          ],
         },
         {
           company: "DataFlow Systems",
           position: "Frontend Developer",
           startDate: "2017-07",
           endDate: "2018-12",
-          description: "Created user interfaces for data-intensive applications. Specialized in Angular and D3.js for data visualization.",
+          description:
+            "Created user interfaces for data-intensive applications. Specialized in Angular and D3.js for data visualization.",
           highlights: [
             "Developed interactive charts and graphs for financial data analysis",
             "Implemented accessibility improvements across all applications",
-            "Reduced bundle size by 35% through code optimization"
-          ]
-        }
+            "Reduced bundle size by 35% through code optimization",
+          ],
+        },
       ],
       education: [
         {
@@ -108,72 +112,104 @@ export class MemStorage implements IStorage {
           degree: "Master of Science in Computer Science",
           startDate: "2015",
           endDate: "2017",
-          description: "Specialized in Distributed Systems and Web Technologies. Thesis: 'Scalable Microservices Architecture for Real-time Applications'."
+          description:
+            "Specialized in Distributed Systems and Web Technologies. Thesis: 'Scalable Microservices Architecture for Real-time Applications'.",
         },
         {
           institution: "University of Tunis",
           degree: "Bachelor of Science in Computer Engineering",
           startDate: "2012",
           endDate: "2015",
-          description: "Graduated with honors. Focus on Software Engineering and Database Systems."
-        }
+          description:
+            "Graduated with honors. Focus on Software Engineering and Database Systems.",
+        },
       ],
       skills: [
         {
           category: "Programming Languages",
-          items: ["TypeScript", "JavaScript", "Python", "Java", "SQL", "HTML/CSS"]
+          items: [
+            "TypeScript",
+            "JavaScript",
+            "Python",
+            "Java",
+            "SQL",
+            "HTML/CSS",
+          ],
         },
         {
           category: "Frameworks & Libraries",
-          items: ["React", "Node.js", "Express", "Angular", "Next.js", "Tailwind CSS", "Material UI"]
+          items: [
+            "React",
+            "Node.js",
+            "Express",
+            "Angular",
+            "Next.js",
+            "Tailwind CSS",
+            "Material UI",
+          ],
         },
         {
           category: "Databases",
-          items: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "DynamoDB"]
+          items: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "DynamoDB"],
         },
         {
           category: "Cloud & DevOps",
-          items: ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "GitHub Actions", "Terraform"]
-        }
+          items: [
+            "AWS",
+            "Docker",
+            "Kubernetes",
+            "CI/CD",
+            "Git",
+            "GitHub Actions",
+            "Terraform",
+          ],
+        },
       ],
       certifications: [
         {
           name: "AWS Certified Solutions Architect",
           issuer: "Amazon Web Services",
           date: "2023",
-          expires: "2026"
+          expires: "2026",
         },
         {
           name: "Professional Scrum Master I",
           issuer: "Scrum.org",
-          date: "2022"
+          date: "2022",
         },
         {
           name: "MongoDB Certified Developer",
           issuer: "MongoDB, Inc.",
-          date: "2021"
-        }
+          date: "2021",
+        },
       ],
       languages: [
         { language: "English", proficiency: "Fluent" },
         { language: "German", proficiency: "Professional" },
         { language: "French", proficiency: "Native" },
-        { language: "Arabic", proficiency: "Native" }
+        { language: "Arabic", proficiency: "Native" },
       ],
       projects: [
         {
           name: "HealthTracker Pro",
-          description: "A comprehensive health monitoring application with wearable device integration.",
+          description:
+            "A comprehensive health monitoring application with wearable device integration.",
           technologies: ["React Native", "Node.js", "MongoDB", "WebSockets"],
-          url: "https://github.com/Mayedi007/health-tracker"
+          url: "https://github.com/Mayedi007/health-tracker",
         },
         {
           name: "CloudBudget",
-          description: "An AWS cost management and optimization platform for businesses.",
-          technologies: ["React", "AWS Lambda", "DynamoDB", "Serverless Framework"],
-          url: "https://github.com/Mayedi007/cloud-budget"
-        }
-      ]
+          description:
+            "An AWS cost management and optimization platform for businesses.",
+          technologies: [
+            "React",
+            "AWS Lambda",
+            "DynamoDB",
+            "Serverless Framework",
+          ],
+          url: "https://github.com/Mayedi007/cloud-budget",
+        },
+      ],
     };
 
     // Multilingual CVs
@@ -181,44 +217,48 @@ export class MemStorage implements IStorage {
       en: this.cv,
       de: {
         ...this.cv,
-        summary: "Erfahrener Full-Stack-Entwickler mit über 7 Jahren Expertise im Aufbau leistungsstarker Anwendungen. Fachkundig in TypeScript, React, Node.js und Cloud-Technologien.",
+        summary:
+          "Erfahrener Full-Stack-Entwickler mit über 7 Jahren Expertise im Aufbau leistungsstarker Anwendungen. Fachkundig in TypeScript, React, Node.js und Cloud-Technologien.",
         experience: [
           {
             company: "TechVision GmbH",
             position: "Senior Full-Stack-Entwickler",
             startDate: "2022-03",
             endDate: "Gegenwärtig",
-            description: "Leitung der Entwicklung von Cloud-nativen Anwendungen mit React, Node.js und AWS. Implementierung von CI/CD-Pipelines und Mentoring von Junior-Entwicklern.",
+            description:
+              "Leitung der Entwicklung von Cloud-nativen Anwendungen mit React, Node.js und AWS. Implementierung von CI/CD-Pipelines und Mentoring von Junior-Entwicklern.",
             highlights: [
               "Reduzierung der API-Antwortzeit um 40% durch Leistungsoptimierung",
               "Implementierung einer serverlosen Architektur, die die Betriebskosten um 30% reduzierte",
-              "Leitung eines Teams von 5 Entwicklern, um Projekte konsequent vor dem Zeitplan zu liefern"
-            ]
+              "Leitung eines Teams von 5 Entwicklern, um Projekte konsequent vor dem Zeitplan zu liefern",
+            ],
           },
           {
             company: "InnoSoft Solutions",
             position: "Full-Stack-Entwickler",
             startDate: "2019-01",
             endDate: "2022-02",
-            description: "Entwicklung und Wartung von Webanwendungen für Unternehmenskunden. Arbeit mit React, Express, MongoDB und Docker.",
+            description:
+              "Entwicklung und Wartung von Webanwendungen für Unternehmenskunden. Arbeit mit React, Express, MongoDB und Docker.",
             highlights: [
               "Erstellung von responsiven Dashboards für Datenvisualisierung",
               "Integration von Drittanbieter-APIs für Zahlungsabwicklung und Authentifizierung",
-              "Migration von Legacy-Anwendungen zu modernen Technologie-Stacks"
-            ]
+              "Migration von Legacy-Anwendungen zu modernen Technologie-Stacks",
+            ],
           },
           {
             company: "DataFlow Systems",
             position: "Frontend-Entwickler",
             startDate: "2017-07",
             endDate: "2018-12",
-            description: "Erstellung von Benutzeroberflächen für datenintensive Anwendungen. Spezialisierung auf Angular und D3.js für Datenvisualisierung.",
+            description:
+              "Erstellung von Benutzeroberflächen für datenintensive Anwendungen. Spezialisierung auf Angular und D3.js für Datenvisualisierung.",
             highlights: [
               "Entwicklung interaktiver Diagramme und Grafiken für Finanzdatenanalyse",
               "Implementierung von Zugänglichkeitsverbesserungen für alle Anwendungen",
-              "Reduzierung der Paketgröße um 35% durch Codeoptimierung"
-            ]
-          }
+              "Reduzierung der Paketgröße um 35% durch Codeoptimierung",
+            ],
+          },
         ],
         education: [
           {
@@ -226,57 +266,63 @@ export class MemStorage implements IStorage {
             degree: "Master of Science in Informatik",
             startDate: "2015",
             endDate: "2017",
-            description: "Spezialisierung auf verteilte Systeme und Webtechnologien. Thesis: 'Skalierbare Mikroservice-Architektur für Echtzeit-Anwendungen'."
+            description:
+              "Spezialisierung auf verteilte Systeme und Webtechnologien. Thesis: 'Skalierbare Mikroservice-Architektur für Echtzeit-Anwendungen'.",
           },
           {
             institution: "Universität Tunis",
             degree: "Bachelor of Science in Computer Engineering",
             startDate: "2012",
             endDate: "2015",
-            description: "Mit Auszeichnung abgeschlossen. Schwerpunkt auf Software Engineering und Datenbanksystemen."
-          }
-        ]
+            description:
+              "Mit Auszeichnung abgeschlossen. Schwerpunkt auf Software Engineering und Datenbanksystemen.",
+          },
+        ],
       },
       fr: {
         ...this.cv,
-        summary: "Développeur Full Stack expérimenté avec plus de 7 ans d'expertise dans la création d'applications à haute performance. Compétent en TypeScript, React, Node.js et technologies cloud.",
+        summary:
+          "Développeur Full Stack expérimenté avec plus de 7 ans d'expertise dans la création d'applications à haute performance. Compétent en TypeScript, React, Node.js et technologies cloud.",
         experience: [
           {
             company: "TechVision GmbH",
             position: "Développeur Full Stack Senior",
             startDate: "2022-03",
             endDate: "Présent",
-            description: "Direction du développement d'applications cloud-natives utilisant React, Node.js et AWS. Mise en œuvre de pipelines CI/CD et mentorat de développeurs juniors.",
+            description:
+              "Direction du développement d'applications cloud-natives utilisant React, Node.js et AWS. Mise en œuvre de pipelines CI/CD et mentorat de développeurs juniors.",
             highlights: [
               "Réduction du temps de réponse de l'API de 40% grâce à l'optimisation des performances",
               "Mise en œuvre d'une architecture serverless qui a réduit les coûts opérationnels de 30%",
-              "Direction d'une équipe de 5 développeurs pour livrer systématiquement les projets avant l'échéance"
-            ]
+              "Direction d'une équipe de 5 développeurs pour livrer systématiquement les projets avant l'échéance",
+            ],
           },
           {
             company: "InnoSoft Solutions",
             position: "Développeur Full Stack",
             startDate: "2019-01",
             endDate: "2022-02",
-            description: "Développement et maintenance d'applications web pour des clients entreprises. Travail avec React, Express, MongoDB et Docker.",
+            description:
+              "Développement et maintenance d'applications web pour des clients entreprises. Travail avec React, Express, MongoDB et Docker.",
             highlights: [
               "Création de tableaux de bord responsifs pour la visualisation de données",
               "Intégration d'APIs tierces pour le traitement des paiements et l'authentification",
-              "Migration d'applications héritées vers des stacks technologiques modernes"
-            ]
+              "Migration d'applications héritées vers des stacks technologiques modernes",
+            ],
           },
           {
             company: "DataFlow Systems",
             position: "Développeur Frontend",
             startDate: "2017-07",
             endDate: "2018-12",
-            description: "Création d'interfaces utilisateur pour des applications à forte intensité de données. Spécialisation en Angular et D3.js pour la visualisation de données.",
+            description:
+              "Création d'interfaces utilisateur pour des applications à forte intensité de données. Spécialisation en Angular et D3.js pour la visualisation de données.",
             highlights: [
               "Développement de graphiques interactifs pour l'analyse de données financières",
               "Mise en œuvre d'améliorations d'accessibilité pour toutes les applications",
-              "Réduction de la taille des bundles de 35% grâce à l'optimisation du code"
-            ]
-          }
+              "Réduction de la taille des bundles de 35% grâce à l'optimisation du code",
+            ],
+          },
         ],
         education: [
           {
@@ -284,19 +330,21 @@ export class MemStorage implements IStorage {
             degree: "Master of Science en Informatique",
             startDate: "2015",
             endDate: "2017",
-            description: "Spécialisation en Systèmes Distribués et Technologies Web. Thèse: 'Architecture de Microservices Évolutive pour Applications en Temps Réel'."
+            description:
+              "Spécialisation en Systèmes Distribués et Technologies Web. Thèse: 'Architecture de Microservices Évolutive pour Applications en Temps Réel'.",
           },
           {
             institution: "Université de Tunis",
             degree: "Licence en Génie Informatique",
             startDate: "2012",
             endDate: "2015",
-            description: "Diplômé avec mention. Spécialisation en Génie Logiciel et Systèmes de Bases de Données."
-          }
-        ]
-      }
+            description:
+              "Diplômé avec mention. Spécialisation en Génie Logiciel et Systèmes de Bases de Données.",
+          },
+        ],
+      },
     };
-    
+
     this.addSampleArticles();
   }
 
@@ -322,144 +370,180 @@ export class MemStorage implements IStorage {
 
   async getArticles(limit?: number, language?: string): Promise<Article[]> {
     let articles = Array.from(this.articles.values());
-    
+
     // If language is specified, try to find translated content
-    if (language && ['en', 'de', 'fr'].includes(language)) {
-      articles = articles.map(article => {
+    if (language && ["en", "de", "fr"].includes(language)) {
+      articles = articles.map((article) => {
         if (article.translations && article.translations[language]) {
           return {
             ...article,
             title: article.translations[language].title,
             excerpt: article.translations[language].excerpt,
-            content: article.translations[language].content
+            content: article.translations[language].content,
           };
         }
         return article;
       });
     }
-    
+
     // Sort by date, newest first
     articles.sort((a, b) => {
       const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
       const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
       return dateB - dateA;
     });
-    
+
     if (limit && limit > 0) {
       return articles.slice(0, limit);
     }
-    
+
     return articles;
   }
 
-  async getArticleById(id: number, language?: string): Promise<Article | undefined> {
+  async getArticleById(
+    id: number,
+    language?: string,
+  ): Promise<Article | undefined> {
     const article = this.articles.get(id);
-    
+
     if (!article) {
       return undefined;
     }
-    
+
     // For SQL Window Functions article (id 1), ensure full translations are loaded in both languages
     if (id === 1) {
       // This is a special case for the SQL Window Functions article
       try {
-        const fs = require('fs');
-        const path = require('path');
-        
+        const fs = require("fs");
+        const path = require("path");
+
         // If German or French, load from separate complete translation files
-        if (language === 'de') {
-          const germanContent = fs.readFileSync(path.join(__dirname, 'data/sql-article-de.txt'), 'utf8');
+        if (language === "de") {
+          const germanContent = fs.readFileSync(
+            path.join(__dirname, "data/sql-article-de.txt"),
+            "utf8",
+          );
           return {
             ...article,
-            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
-            excerpt: "SQL-Fensterfunktionen gehören zu den leistungsstärksten und flexibelsten Werkzeugen für Analysten und Entwickler. Lernen Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen einsetzen können, um Ihre Datenanalyse zu transformieren.",
-            content: germanContent
+            title:
+              "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt:
+              "SQL-Fensterfunktionen gehören zu den leistungsstärksten und flexibelsten Werkzeugen für Analysten und Entwickler. Lernen Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen einsetzen können, um Ihre Datenanalyse zu transformieren.",
+            content: germanContent,
           };
-        } else if (language === 'fr') {
-          const frenchContent = fs.readFileSync(path.join(__dirname, 'data/sql-article-fr.txt'), 'utf8');
+        } else if (language === "fr") {
+          const frenchContent = fs.readFileSync(
+            path.join(__dirname, "data/sql-article-fr.txt"),
+            "utf8",
+          );
           return {
             ...article,
-            title: "Maîtriser les Fonctions de Fenêtrage SQL : Un Guide Complet",
-            excerpt: "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
-            content: frenchContent
+            title:
+              "Maîtriser les Fonctions de Fenêtrage SQL : Un Guide Complet",
+            excerpt:
+              "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            content: frenchContent,
           };
         } else {
           // For English, use the original content
           const articleData = JSON.parse(
-            fs.readFileSync(path.join(__dirname, 'data/articles/mastering-sql-window-functions.json'), 'utf8')
+            fs.readFileSync(
+              path.join(
+                __dirname,
+                "data/articles/mastering-sql-window-functions.json",
+              ),
+              "utf8",
+            ),
           );
-          
+
           return {
             ...article,
             title: articleData.translations.en.title,
             excerpt: articleData.translations.en.excerpt,
-            content: articleData.translations.en.content
+            content: articleData.translations.en.content,
           };
         }
       } catch (error) {
         console.error("Error loading SQL Window Functions article:", error);
       }
     }
-    
+
     // Default behavior for other articles
-    if (language && ['en', 'de', 'fr'].includes(language) && article.translations && article.translations[language]) {
+    if (
+      language &&
+      ["en", "de", "fr"].includes(language) &&
+      article.translations &&
+      article.translations[language]
+    ) {
       return {
         ...article,
         title: article.translations[language].title,
         excerpt: article.translations[language].excerpt,
-        content: article.translations[language].content
+        content: article.translations[language].content,
       };
     }
-    
+
     return article;
   }
 
   async getCV(language?: string): Promise<CV> {
-    if (language && ['en', 'de', 'fr'].includes(language) && this.cvs[language]) {
+    if (
+      language &&
+      ["en", "de", "fr"].includes(language) &&
+      this.cvs[language]
+    ) {
       return this.cvs[language];
     }
     return this.cv;
   }
-  
+
   // Contact form
   async saveContactMessage(message: ContactMessage): Promise<void> {
     this.contactMessages.push(message);
     console.log("New contact message:", message);
   }
-  
+
   // Newsletter
   async subscribeToNewsletter(email: string): Promise<void> {
     this.newsletterSubscriptions.add(email);
     console.log("New newsletter subscription:", email);
   }
-  
+
   // Helper method to add sample articles
   private addSampleArticles(): void {
     // We'll use hard-coded content for all languages instead of loading from a file
     // This ensures all translations have the complete content
     const sqlArticleData = {
-        title: "Mastering SQL Window Functions: A Comprehensive Guide",
-        excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
-        slug: "mastering-sql-window-functions",
-        tags: ["SQL", "Database", "Data Analysis", "Development", "Programming"],
-        createdAt: "2025-04-21T10:00:00.000Z",
-        updatedAt: "2025-04-21T10:00:00.000Z",
-        featured: true,
-        publishedAt: "2025-04-21T10:00:00.000Z",
-        author: {
-          name: "Mohamed Ayadi",
-          avatar: "/images/avatar.png",
-          bio: "A passionate Full Stack Developer with over 7 years of experience."
-        }
-      };
-    
+      title: "Mastering SQL Window Functions: A Comprehensive Guide",
+      excerpt:
+        "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+      slug: "mastering-sql-window-functions",
+      tags: ["SQL", "Database", "Data Analysis", "Development", "Programming"],
+      createdAt: "2025-04-21T10:00:00.000Z",
+      updatedAt: "2025-04-21T10:00:00.000Z",
+      featured: true,
+      publishedAt: "2025-04-21T10:00:00.000Z",
+      author: {
+        name: "Mohamed Ayadi",
+        avatar: "/images/avatar.png",
+        bio: "A passionate Full Stack Developer with over 7 years of experience.",
+      },
+    };
+
     const articles: Omit<Article, "id">[] = [
       {
         ...sqlArticleData,
         title: "Mastering SQL Window Functions: A Comprehensive Guide",
-        excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+        excerpt:
+          "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
         slug: "mastering-sql-window-functions",
-        tags: ["SQL", "Database", "Data Analysis", "Development", "Programming"],
+        tags: [
+          "SQL",
+          "Database",
+          "Data Analysis",
+          "Development",
+          "Programming",
+        ],
         createdAt: "2025-04-21T10:00:00.000Z",
         updatedAt: "2025-04-21T10:00:00.000Z",
         featured: true,
@@ -467,12 +551,13 @@ export class MemStorage implements IStorage {
         author: {
           name: "Mohamed Ayadi",
           avatar: "/images/avatar.png",
-          bio: "A passionate Full Stack Developer with over 7 years of experience."
+          bio: "A passionate Full Stack Developer with over 7 years of experience.",
         },
         translations: {
           en: {
             title: "Mastering SQL Window Functions: A Comprehensive Guide",
-            excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+            excerpt:
+              "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
             content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL Window Functions Diagram" class="article-featured-image" /><p class="article-date">April 21, 2025</p></div><p>SQL window functions are one of the most powerful and flexible tools available to analysts and developers. They allow for sophisticated calculations across rows of data while preserving the individual rows, which makes them ideal for a wide range of use cases, from ranking and cumulative sums to moving averages and comparisons.</p><p>This blog post provides a detailed overview of all major window functions using the Employees table as an example.</p><div class="code-block"><pre><code>-- Create the table
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
@@ -552,11 +637,13 @@ FROM Employees;</code></pre></div></div><div class="table-container"><table><the
     Name,
     Salary,
     AVG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS MovingAvg
-FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`,
           },
           de: {
-            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
-            excerpt: "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
+            title:
+              "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt:
+              "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
             content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL-Fensterfunktionen Diagramm" class="article-featured-image" /><p class="article-date">21. April 2025</p></div><p>SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Sie ermöglichen anspruchsvolle Berechnungen über Datenzeilen hinweg, wobei die einzelnen Zeilen erhalten bleiben, was sie ideal für eine Vielzahl von Anwendungsfällen macht, von Ranking und kumulativen Summen bis hin zu gleitenden Durchschnitten und Vergleichen.</p><p>Dieser Blogbeitrag bietet einen detaillierten Überblick über alle wichtigen Fensterfunktionen am Beispiel der Employees-Tabelle.</p><div class="code-block"><pre><code>-- Tabelle erstellen
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
@@ -595,11 +682,13 @@ FROM Employees;</code></pre></div><p>Wenn zwei Mitarbeiter das gleiche Gehalt ha
     Name,
     Salary,
     DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
-FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`
+FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
           },
           fr: {
-            title: "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
-            excerpt: "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            title:
+              "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
+            excerpt:
+              "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
             content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="Diagramme des fonctions de fenêtrage SQL" class="article-featured-image" /><p class="article-date">21 avril 2025</p></div><p>Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Elles permettent d'effectuer des calculs sophistiqués sur des lignes de données tout en préservant les lignes individuelles, ce qui les rend idéales pour une large gamme de cas d'utilisation, du classement et des sommes cumulatives aux moyennes mobiles et aux comparaisons.</p><p>Ce billet de blog fournit un aperçu détaillé de toutes les principales fonctions de fenêtrage en utilisant la table Employees comme exemple.</p><div class="code-block"><pre><code>-- Créer la table
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
@@ -638,17 +727,19 @@ FROM Employees;</code></pre></div><p>Si deux employés ont le même salaire, ils
     Name,
     Salary,
     DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
-FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`
-          }
-        }
+FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
+          },
+        },
       },
       {
         title: "Setting Up a Custom Domain for Your Website",
-        excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
+        excerpt:
+          "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
         translations: {
           en: {
             title: "Setting Up a Custom Domain for Your Website",
-            excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
+            excerpt:
+              "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
             content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">A custom domain is essential for establishing your professional online identity. This comprehensive guide walks you through the process of setting up, configuring, and troubleshooting a custom domain for your website.</p>
@@ -668,11 +759,13 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
               <li><strong>Email consistency</strong> - Ability to create professional email addresses (you@yourdomain.com)</li>
               <li><strong>SEO advantages</strong> - May help with search engine optimization and ranking</li>
             </ul>
-          </div>`
+          </div>`,
           },
           de: {
-            title: "Einrichten einer benutzerdefinierten Domain für Ihre Website",
-            excerpt: "Erfahren Sie, wie Sie eine professionelle benutzerdefinierte Domain für Ihre Website konfigurieren, einschließlich DNS-Einrichtung, Domain-Anbieter, SSL-Zertifikate und Fehlerbehebung.",
+            title:
+              "Einrichten einer benutzerdefinierten Domain für Ihre Website",
+            excerpt:
+              "Erfahren Sie, wie Sie eine professionelle benutzerdefinierte Domain für Ihre Website konfigurieren, einschließlich DNS-Einrichtung, Domain-Anbieter, SSL-Zertifikate und Fehlerbehebung.",
             content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">Eine benutzerdefinierte Domain ist essenziell für den Aufbau Ihrer professionellen Online-Identität. Dieser umfassende Leitfaden führt Sie durch den Prozess der Einrichtung, Konfiguration und Fehlerbehebung einer benutzerdefinierten Domain für Ihre Website.</p>
@@ -692,11 +785,13 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
               <li><strong>E-Mail-Konsistenz</strong> - Möglichkeit, professionelle E-Mail-Adressen zu erstellen (sie@ihredomain.com)</li>
               <li><strong>SEO-Vorteile</strong> - Kann bei der Suchmaschinenoptimierung und Rangfolge helfen</li>
             </ul>
-          </div>`
+          </div>`,
           },
           fr: {
-            title: "Configuration d'un domaine personnalisé pour votre site web",
-            excerpt: "Apprenez à configurer un domaine personnalisé professionnel pour votre site web, y compris la configuration DNS, les fournisseurs de domaines, les certificats SSL et le dépannage.",
+            title:
+              "Configuration d'un domaine personnalisé pour votre site web",
+            excerpt:
+              "Apprenez à configurer un domaine personnalisé professionnel pour votre site web, y compris la configuration DNS, les fournisseurs de domaines, les certificats SSL et le dépannage.",
             content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">Un domaine personnalisé est essentiel pour établir votre identité professionnelle en ligne. Ce guide complet vous accompagne dans le processus de configuration et de dépannage d'un domaine personnalisé pour votre site web.</p>
@@ -716,8 +811,8 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
               <li><strong>Cohérence des emails</strong> - Possibilité de créer des adresses email professionnelles (vous@votredomaine.com)</li>
               <li><strong>Avantages SEO</strong> - Peut aider à l'optimisation pour les moteurs de recherche et au classement</li>
             </ul>
-          </div>`
-          }
+          </div>`,
+          },
         },
         content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
@@ -742,15 +837,17 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
         `,
         coverImage: "/images/custom-domain.svg",
         category: "Technology",
-        publishedAt: new Date("2025-03-15")
+        publishedAt: new Date("2025-03-15"),
       },
       {
         title: "How to Deploy Your Website to GitHub Pages",
-        excerpt: "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
+        excerpt:
+          "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
         translations: {
           en: {
             title: "How to Deploy Your Website to GitHub Pages",
-            excerpt: "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
+            excerpt:
+              "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
             content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
   <p class="text-xl leading-relaxed mb-8">
@@ -936,11 +1033,12 @@ $ git push</code></pre>
       <a href="/blog/1" class="text-primary-700 underline">Setting Up a Custom Domain for Your Website</a> for a detailed guide.
     </p>
   </div>
-</div>`
+</div>`,
           },
           de: {
             title: "So veröffentlichen Sie Ihre Website auf GitHub Pages",
-            excerpt: "Eine Schritt-für-Schritt-Anleitung zur Veröffentlichung Ihrer statischen Website auf GitHub Pages für kostenloses Hosting mit kontinuierlicher Bereitstellung.",
+            excerpt:
+              "Eine Schritt-für-Schritt-Anleitung zur Veröffentlichung Ihrer statischen Website auf GitHub Pages für kostenloses Hosting mit kontinuierlicher Bereitstellung.",
             content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
   <p class="text-xl leading-relaxed mb-8">
@@ -1126,11 +1224,12 @@ $ git push</code></pre>
       Schauen Sie sich meinen Artikel <a href="/blog/1" class="text-primary-700 underline">Einrichten einer benutzerdefinierten Domain für Ihre Website</a> für eine detaillierte Anleitung an.
     </p>
   </div>
-</div>`
+</div>`,
           },
           fr: {
             title: "Comment déployer votre site web sur GitHub Pages",
-            excerpt: "Un guide étape par étape pour déployer votre site web statique sur GitHub Pages pour un hébergement gratuit avec déploiement continu.",
+            excerpt:
+              "Un guide étape par étape pour déployer votre site web statique sur GitHub Pages pour un hébergement gratuit avec déploiement continu.",
             content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
   <p class="text-xl leading-relaxed mb-8">
@@ -1316,8 +1415,8 @@ $ git push</code></pre>
       <a href="/blog/1" class="text-primary-700 underline">Configuration d'un domaine personnalisé pour votre site web</a> pour un guide détaillé.
     </p>
   </div>
-</div>`
-          }
+</div>`,
+          },
         },
         content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
@@ -1507,15 +1606,17 @@ $ git push</code></pre>
 </div>`,
         coverImage: "/images/github-pages.svg",
         category: "Technology",
-        publishedAt: new Date("2025-02-08")
+        publishedAt: new Date("2025-02-08"),
       },
       {
         title: "Mastering SQL Window Functions: A Comprehensive Guide",
-        excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+        excerpt:
+          "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
         translations: {
           en: {
             title: "Mastering SQL Window Functions: A Comprehensive Guide",
-            excerpt: "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+            excerpt:
+              "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
             content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL Window Functions Diagram" class="article-featured-image" /><p class="article-date">April 21, 2025</p></div><p>SQL window functions are one of the most powerful and flexible tools available to analysts and developers. They allow for sophisticated calculations across rows of data while preserving the individual rows, which makes them ideal for a wide range of use cases, from ranking and cumulative sums to moving averages and comparisons.</p><p>This blog post provides a detailed overview of all major window functions using the Employees table as an example.</p><div class="code-block"><pre><code>-- Create the table
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
@@ -1595,11 +1696,13 @@ FROM Employees;</code></pre></div></div><div class="table-container"><table><the
     Name,
     Salary,
     AVG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS MovingAvg
-FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`,
           },
           de: {
-            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
-            excerpt: "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
+            title:
+              "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt:
+              "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
             content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL-Fensterfunktionen Diagramm" class="article-featured-image" /><p class="article-date">21. April 2025</p></div><p>SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Sie ermöglichen anspruchsvolle Berechnungen über Datenzeilen hinweg, wobei die einzelnen Zeilen erhalten bleiben, was sie ideal für eine Vielzahl von Anwendungsfällen macht, von Ranking und kumulativen Summen bis hin zu gleitenden Durchschnitten und Vergleichen.</p><p>Dieser Blogbeitrag bietet einen detaillierten Überblick über alle wichtigen Fensterfunktionen am Beispiel der Employees-Tabelle.</p><div class="code-block"><pre><code>-- Tabelle erstellen
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
@@ -1638,11 +1741,13 @@ FROM Employees;</code></pre></div><p>Wenn zwei Mitarbeiter das gleiche Gehalt ha
     Name,
     Salary,
     DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
-FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`
+FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
           },
           fr: {
-            title: "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
-            excerpt: "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            title:
+              "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
+            excerpt:
+              "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
             content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="Diagramme des fonctions de fenêtrage SQL" class="article-featured-image" /><p class="article-date">21 avril 2025</p></div><p>Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Elles permettent d'effectuer des calculs sophistiqués sur des lignes de données tout en préservant les lignes individuelles, ce qui les rend idéales pour une large gamme de cas d'utilisation, du classement et des sommes cumulatives aux moyennes mobiles et aux comparaisons.</p><p>Ce billet de blog fournit un aperçu détaillé de toutes les principales fonctions de fenêtrage en utilisant la table Employees comme exemple.</p><div class="code-block"><pre><code>-- Créer la table
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
@@ -1681,8 +1786,8 @@ FROM Employees;</code></pre></div><p>Si deux employés ont le même salaire, ils
     Name,
     Salary,
     DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
-FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`
-          }
+FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
+          },
         },
         slug: "mastering-sql-window-functions",
         tags: [
@@ -1690,7 +1795,7 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
           "Database",
           "Data Analysis",
           "Development",
-          "Programming"
+          "Programming",
         ],
         createdAt: new Date("2025-04-21T10:00:00.000Z"),
         updatedAt: new Date("2025-04-21T10:00:00.000Z"),
@@ -1699,19 +1804,19 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
         author: {
           name: "Mohamed Ayadi",
           avatar: "/images/avatar.png",
-          bio: "A passionate Full Stack Developer with over 7 years of experience."
+          bio: "A passionate Full Stack Developer with over 7 years of experience.",
         },
         coverImage: "/images/sql-window-functions.svg",
-        category: "Database"
-      }
+        category: "Database",
+      },
     ];
-    
+
     // Add articles
-    articles.forEach(article => {
+    articles.forEach((article) => {
       const id = this.currentArticleId++;
       this.articles.set(id, {
         ...article,
-        id
+        id,
       });
     });
   }
