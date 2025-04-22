@@ -362,47 +362,38 @@ export class MemStorage implements IStorage {
     // For SQL Window Functions article (id 1), ensure full translations are loaded in both languages
     if (id === 1) {
       // This is a special case for the SQL Window Functions article
-      // The translations are explicitly loaded from a JSON file
       try {
         const fs = require('fs');
         const path = require('path');
         
-        // Read the article data from the JSON file
-        const articleData = JSON.parse(
-          fs.readFileSync(path.join(__dirname, 'data/articles/mastering-sql-window-functions.json'), 'utf8')
-        );
-        
-        // Always return the full article from the JSON file
-        if (language && ['en', 'de', 'fr'].includes(language) && articleData.translations && articleData.translations[language]) {
+        // If German or French, load from separate complete translation files
+        if (language === 'de') {
+          const germanContent = fs.readFileSync(path.join(__dirname, 'data/sql-article-de.txt'), 'utf8');
           return {
             ...article,
-            id: article.id,
-            title: articleData.translations[language].title,
-            excerpt: articleData.translations[language].excerpt,
-            content: articleData.translations[language].content,
-            slug: article.slug,
-            tags: article.tags,
-            createdAt: article.createdAt,
-            updatedAt: article.updatedAt,
-            featured: article.featured,
-            publishedAt: article.publishedAt,
-            author: article.author
+            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt: "SQL-Fensterfunktionen gehören zu den leistungsstärksten und flexibelsten Werkzeugen für Analysten und Entwickler. Lernen Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen einsetzen können, um Ihre Datenanalyse zu transformieren.",
+            content: germanContent
           };
-        } else if (!language || language === 'en') {
-          // Default to English if no language is specified or language is English
+        } else if (language === 'fr') {
+          const frenchContent = fs.readFileSync(path.join(__dirname, 'data/sql-article-fr.txt'), 'utf8');
           return {
             ...article,
-            id: article.id,
+            title: "Maîtriser les Fonctions de Fenêtrage SQL : Un Guide Complet",
+            excerpt: "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            content: frenchContent
+          };
+        } else {
+          // For English, use the original content
+          const articleData = JSON.parse(
+            fs.readFileSync(path.join(__dirname, 'data/articles/mastering-sql-window-functions.json'), 'utf8')
+          );
+          
+          return {
+            ...article,
             title: articleData.translations.en.title,
             excerpt: articleData.translations.en.excerpt,
-            content: articleData.translations.en.content,
-            slug: article.slug,
-            tags: article.tags,
-            createdAt: article.createdAt,
-            updatedAt: article.updatedAt,
-            featured: article.featured,
-            publishedAt: article.publishedAt,
-            author: article.author
+            content: articleData.translations.en.content
           };
         }
       } catch (error) {
