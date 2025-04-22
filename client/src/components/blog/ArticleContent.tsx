@@ -96,9 +96,11 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
       
       {/* Article Content */}
       <div 
-        className="article-content prose prose-slate max-w-none prose-headings:text-purple-900 prose-p:text-slate-800 prose-li:text-slate-800 prose-strong:text-purple-800 prose-a:text-purple-700 prose-a:no-underline hover:prose-a:text-purple-800 hover:prose-a:underline"
+        className="article-content prose prose-slate max-w-none prose-headings:text-blue-900 prose-p:text-slate-800 prose-li:text-slate-800 prose-strong:text-blue-800 prose-a:text-blue-700 prose-a:no-underline hover:prose-a:text-blue-800 hover:prose-a:underline"
         dangerouslySetInnerHTML={{ 
-          __html: article.content || (article.translations && article.translations[language] && article.translations[language].content) || ''
+          __html: article.content || (article.translations && article.translations[language] && article.translations[language].content) || 
+            // If all else fails, fallback to the English content
+            (article.translations && article.translations['en'] && article.translations['en'].content) || ''
         }}
       />
       
