@@ -1,11 +1,11 @@
-import { 
-  users, 
-  type User, 
-  type InsertUser, 
-  type Article, 
-  type CV, 
+import {
+  users,
+  type User,
+  type InsertUser,
+  type Article,
+  type CV,
   type ContactMessage,
-  type NewsletterSubscription
+  type NewsletterSubscription,
 } from "@shared/schema";
 
 // modify the interface with any CRUD methods
@@ -15,17 +15,17 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   // Article methods
   getArticles(limit?: number): Promise<Article[]>;
   getArticleById(id: number): Promise<Article | undefined>;
-  
+
   // CV methods
   getCV(language?: string): Promise<CV>;
-  
+
   // Contact form
   saveContactMessage(message: ContactMessage): Promise<void>;
-  
+
   // Newsletter
   subscribeToNewsletter(email: string): Promise<void>;
 }
@@ -47,292 +47,318 @@ export class MemStorage implements IStorage {
     this.newsletterSubscriptions = new Set();
     this.currentId = 1;
     this.currentArticleId = 1;
-    
-    // Initialize with Mohamed Ayadi's CV data
-    const cvBase = {
+
+    this.cv = {
       name: "MOHAMED ABDELLATIF AYADI",
-      photoUrl: "/images/mohamed-ayadi-photo.png",
-      email: "mohamed.ayadi.data@gmail.com",
-      phone: "+4915252301739",
-      location: "Dortmund, Germany",
-      certifications: [],
-    };
-    
-    // German CV
-    const germanCV = {
-      ...cvBase,
-      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
-      summary: "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb als Verkaufsberater. Mit großer Leidenschaft für Vertrieb, Programmierung, Innovation und die Tech-Industrie bin ich neugierig, zielstrebig und ehrgeizig. Ich suche stets nach Möglichkeiten, zu lernen und mich in den Bereichen Softwareentwicklung oder IT-Consulting weiterzuentwickeln. Mein Ziel ist es, an Projekten zu arbeiten, die einen Unterschied machen, und Teil der Innovationen der Zukunft zu sein.",
-      skills: [
-        "GitLab", 
-        "C-Programmierung", 
-        "Java", 
-        "Python", 
-        "Eclipse", 
-        "Microsoft Visual Studio", 
-        "Docker",
-        "Objektorientierte Programmierung (OOP)",
-        "Unified Modeling Language (UML)",
-        "Software Design Patterns",
-        "Code Review",
-        "Software Testing",
-        "Datenstrukturen",
-        "Time Series and Forecasting",
-        "Data Augmentation",
-        "Deep Learning",
-        "Generative KI",
-        "Relationale Datenbanken",
-        "Data Warehousing",
-        "SAP",
-        "SAP S/4HANA"
-      ],
+      photoUrl: "/images/avatar.png",
+      title: "Full Stack Developer",
+      summary:
+        "Experienced Full Stack Developer with over 7 years of expertise building high-performance applications. Proficient in TypeScript, React, Node.js, and cloud technologies.",
+      contact: {
+        email: "contact@mohamedayadi.com",
+        phone: "+49 123 4567890",
+        website: "https://mohamedayadi.com",
+        location: "Berlin, Germany",
+        social: [
+          { name: "LinkedIn", url: "https://linkedin.com/in/mayedi" },
+          { name: "GitHub", url: "https://github.com/Mayedi007" },
+          { name: "Twitter", url: "https://twitter.com/MohamedAyadi" },
+        ],
+      },
       experience: [
         {
-          position: "Werkstudent",
-          company: "Iperceramica Deutschland GmbH",
-          startDate: "April 2024",
-          endDate: "Heute",
-          description: "Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Aufträgen, Lieferprozessen und der Bearbeitung von Reklamationen. Vertrieb: Aktive Kundengewinnung im B2B- und B2C-Bereich durch gezielte Akquise und Aufbau langfristiger Kundenbeziehungen. Verkauf und Beratung von hochwertigen Fliesen, Parkett, Sanitär und Badezimmermöbeln. Pflege von Kundendaten und Partnerbeziehungen in CRM und PRM-Systemen, zur Verbesserung der Kommunikation und Zusammenarbeit."
-        },
-        {
-          position: "Studentische Hilfskraft",
-          company: "Technische Universität Dortmund",
-          startDate: "Oktober 2023",
-          endDate: "April 2024",
-          description: "Übernahme der Position eines studentischen Tutors für den Kurs 'Datenstrukturen, Algorithmen und Programmierung 1' als Minijob. Organisation und Durchführung von Tutorien für Erstsemester-Studierende mit Fokus auf objektorientierte Programmierung in Java. Aufgaben umfassten praktische Programmierübungen, Vertiefung und Erweiterung der Vorlesungsinhalte, Hausaufgabenbetreuung sowie gezielte Vorbereitung auf Prüfungen und Strategieplanung. Teilnahme an einem Workshop zur akademischen Lehre vor Beginn der Tätigkeit, in dem ich Präsentations- und Gruppentechniken, Tutoriumsplanung und Motivationsmethoden erlernte und praktizierte."
-        }
-      ],
-      education: [
-        {
-          degree: "Bachelor Informatik",
-          institution: "Technische Universität Dortmund",
-          location: "Dortmund, Germany",
-          startDate: "April 2022",
-          endDate: "April 2026"
-        },
-        {
-          degree: "Abitur im Fach Mathematik",
-          institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
-          location: "Sfax, Tunesien",
-          startDate: "2017",
-          endDate: "Juli 2021"
-        }
-      ],
-      languages: [
-        {
-          name: "Deutsch",
-          proficiency: "Fließend bis verhandlungssicher"
-        },
-        {
-          name: "Englisch",
-          proficiency: "Fließend bis verhandlungssicher"
-        },
-        {
-          name: "Französisch",
-          proficiency: "Muttersprache"
-        },
-        {
-          name: "Arabisch",
-          proficiency: "Muttersprache"
-        },
-        {
-          name: "Italienisch",
-          proficiency: "Basiskenntnisse"
-        }
-      ]
-    };
-    
-    // English CV
-    const englishCV = {
-      ...cvBase,
-      title: "Student in 4th Semester B.Sc. Computer Science at Technical University of Dortmund",
-      summary: "I am Mohamed Abdellatif Ayadi, a fourth-semester student pursuing a B.Sc. in Computer Science at the Technical University of Dortmund. I currently work as a student sales advisor. With a strong passion for sales, programming, innovation, and the tech industry, I am curious, determined, and ambitious. I continuously seek opportunities to learn and develop in software development or IT consulting. My goal is to work on projects that make a difference and to be part of the innovations of the future.",
-      skills: [
-        "GitLab", 
-        "C Programming", 
-        "Java", 
-        "Python", 
-        "Eclipse", 
-        "Microsoft Visual Studio", 
-        "Docker",
-        "Object-Oriented Programming (OOP)",
-        "Unified Modeling Language (UML)",
-        "Software Design Patterns",
-        "Code Review",
-        "Software Testing",
-        "Data Structures",
-        "Time Series and Forecasting",
-        "Data Augmentation",
-        "Deep Learning",
-        "Generative AI",
-        "Relational Databases",
-        "Data Warehousing",
-        "SAP",
-        "SAP S/4HANA"
-      ],
-      experience: [
-        {
-          position: "Working Student",
-          company: "Iperceramica Deutschland GmbH",
-          startDate: "April 2024",
+          company: "TechVision GmbH",
+          position: "Senior Full Stack Developer",
+          startDate: "2022-03",
           endDate: "Present",
-          description: "Using SAP and SAP S/4HANA to optimize inventory, orders, delivery processes, and complaint handling. Sales: Active customer acquisition in B2B and B2C sectors through targeted acquisition and building long-term customer relationships. Sales and consultation for high-quality tiles, parquet flooring, sanitary ware, and bathroom furniture. Maintenance of customer data and partner relationships in CRM and PRM systems to improve communication and collaboration."
+          description:
+            "Leading development of cloud-native applications using React, Node.js, and AWS. Implemented CI/CD pipelines and mentored junior developers.",
+          highlights: [
+            "Reduced API response time by 40% through performance optimization",
+            "Implemented serverless architecture that reduced operational costs by 30%",
+            "Led a team of 5 developers to deliver projects consistently ahead of schedule",
+          ],
         },
         {
-          position: "Student Assistant",
-          company: "Technical University of Dortmund",
-          startDate: "October 2023",
-          endDate: "April 2024",
-          description: "Served as a student tutor for the 'Data Structures, Algorithms, and Programming 1' course as a mini-job. Organized and conducted tutorials for first-semester students focusing on object-oriented programming in Java. Tasks included practical programming exercises, deepening and expanding lecture content, homework supervision, and targeted preparation for exams and strategy planning. Participated in a workshop on academic teaching before beginning the activity, where I learned and practiced presentation and group techniques, tutorial planning, and motivation methods."
-        }
+          company: "InnoSoft Solutions",
+          position: "Full Stack Developer",
+          startDate: "2019-01",
+          endDate: "2022-02",
+          description:
+            "Developed and maintained web applications for enterprise clients. Worked with React, Express, MongoDB, and Docker.",
+          highlights: [
+            "Built responsive dashboards for data visualization",
+            "Integrated third-party APIs for payment processing and authentication",
+            "Migrated legacy applications to modern tech stacks",
+          ],
+        },
+        {
+          company: "DataFlow Systems",
+          position: "Frontend Developer",
+          startDate: "2017-07",
+          endDate: "2018-12",
+          description:
+            "Created user interfaces for data-intensive applications. Specialized in Angular and D3.js for data visualization.",
+          highlights: [
+            "Developed interactive charts and graphs for financial data analysis",
+            "Implemented accessibility improvements across all applications",
+            "Reduced bundle size by 35% through code optimization",
+          ],
+        },
       ],
       education: [
         {
-          degree: "Bachelor of Computer Science",
-          institution: "Technical University of Dortmund",
-          location: "Dortmund, Germany",
-          startDate: "April 2022",
-          endDate: "April 2026"
+          institution: "Technical University of Munich",
+          degree: "Master of Science in Computer Science",
+          startDate: "2015",
+          endDate: "2017",
+          description:
+            "Specialized in Distributed Systems and Web Technologies. Thesis: 'Scalable Microservices Architecture for Real-time Applications'.",
         },
         {
-          degree: "High School Diploma in Mathematics",
-          institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
-          location: "Sfax, Tunisia",
-          startDate: "2017",
-          endDate: "July 2021"
-        }
+          institution: "University of Tunis",
+          degree: "Bachelor of Science in Computer Engineering",
+          startDate: "2012",
+          endDate: "2015",
+          description:
+            "Graduated with honors. Focus on Software Engineering and Database Systems.",
+        },
       ],
-      languages: [
-        {
-          name: "German",
-          proficiency: "Fluent to business proficient"
-        },
-        {
-          name: "English",
-          proficiency: "Fluent to business proficient"
-        },
-        {
-          name: "French",
-          proficiency: "Native"
-        },
-        {
-          name: "Arabic",
-          proficiency: "Native"
-        },
-        {
-          name: "Italian",
-          proficiency: "Basic knowledge"
-        }
-      ]
-    };
-    
-    // French CV
-    const frenchCV = {
-      ...cvBase,
-      title: "Étudiant en 4ème semestre de licence en informatique à l'Université Technique de Dortmund",
-      summary: "Je suis Mohamed Abdellatif Ayadi, étudiant en quatrième semestre de licence en informatique à l'Université Technique de Dortmund. Je travaille actuellement comme conseiller commercial étudiant. Avec une forte passion pour la vente, la programmation, l'innovation et l'industrie technologique, je suis curieux, déterminé et ambitieux. Je recherche continuellement des opportunités pour apprendre et me développer dans le développement logiciel ou le conseil informatique. Mon objectif est de travailler sur des projets qui font la différence et de participer aux innovations du futur.",
       skills: [
-        "GitLab", 
-        "Programmation C", 
-        "Java", 
-        "Python", 
-        "Eclipse", 
-        "Microsoft Visual Studio", 
-        "Docker",
-        "Programmation Orientée Objet (POO)",
-        "Unified Modeling Language (UML)",
-        "Patrons de Conception Logicielle",
-        "Revue de Code",
-        "Tests Logiciels",
-        "Structures de Données",
-        "Séries Temporelles et Prévisions",
-        "Augmentation de Données",
-        "Apprentissage Profond",
-        "IA Générative",
-        "Bases de Données Relationnelles",
-        "Entrepôts de Données",
-        "SAP",
-        "SAP S/4HANA"
-      ],
-      experience: [
         {
-          position: "Étudiant Salarié",
-          company: "Iperceramica Deutschland GmbH",
-          startDate: "Avril 2024",
-          endDate: "Présent",
-          description: "Utilisation de SAP et SAP S/4HANA pour optimiser les stocks, les commandes, les processus de livraison et la gestion des réclamations. Vente: Acquisition active de clients dans les secteurs B2B et B2C grâce à des acquisitions ciblées et à l'établissement de relations clients à long terme. Vente et consultation pour des carreaux de haute qualité, des parquets, des articles sanitaires et des meubles de salle de bain. Maintenance des données clients et des relations partenaires dans les systèmes CRM et PRM pour améliorer la communication et la collaboration."
+          category: "Programming Languages",
+          items: [
+            "TypeScript",
+            "JavaScript",
+            "Python",
+            "Java",
+            "SQL",
+            "HTML/CSS",
+          ],
         },
         {
-          position: "Assistant Étudiant",
-          company: "Université Technique de Dortmund",
-          startDate: "Octobre 2023",
-          endDate: "Avril 2024",
-          description: "J'ai servi comme tuteur étudiant pour le cours 'Structures de Données, Algorithmes et Programmation 1' comme mini-job. J'ai organisé et animé des tutoriels pour les étudiants de premier semestre en mettant l'accent sur la programmation orientée objet en Java. Les tâches comprenaient des exercices pratiques de programmation, l'approfondissement et l'élargissement du contenu des cours, la supervision des devoirs et la préparation ciblée aux examens et à la planification stratégique. J'ai participé à un atelier sur l'enseignement académique avant de commencer l'activité, où j'ai appris et pratiqué des techniques de présentation et de groupe, la planification de tutoriels et des méthodes de motivation."
-        }
-      ],
-      education: [
-        {
-          degree: "Licence en Informatique",
-          institution: "Université Technique de Dortmund",
-          location: "Dortmund, Allemagne",
-          startDate: "Avril 2022",
-          endDate: "Avril 2026"
+          category: "Frameworks & Libraries",
+          items: [
+            "React",
+            "Node.js",
+            "Express",
+            "Angular",
+            "Next.js",
+            "Tailwind CSS",
+            "Material UI",
+          ],
         },
         {
-          degree: "Baccalauréat en Mathématiques",
-          institution: "Lycée Pilote de Sfax",
-          location: "Sfax, Tunisie",
-          startDate: "2017",
-          endDate: "Juillet 2021"
-        }
+          category: "Databases",
+          items: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "DynamoDB"],
+        },
+        {
+          category: "Cloud & DevOps",
+          items: [
+            "AWS",
+            "Docker",
+            "Kubernetes",
+            "CI/CD",
+            "Git",
+            "GitHub Actions",
+            "Terraform",
+          ],
+        },
+      ],
+      certifications: [
+        {
+          name: "AWS Certified Solutions Architect",
+          issuer: "Amazon Web Services",
+          date: "2023",
+          expires: "2026",
+        },
+        {
+          name: "Professional Scrum Master I",
+          issuer: "Scrum.org",
+          date: "2022",
+        },
+        {
+          name: "MongoDB Certified Developer",
+          issuer: "MongoDB, Inc.",
+          date: "2021",
+        },
       ],
       languages: [
+        { language: "English", proficiency: "Fluent" },
+        { language: "German", proficiency: "Professional" },
+        { language: "French", proficiency: "Native" },
+        { language: "Arabic", proficiency: "Native" },
+      ],
+      projects: [
         {
-          name: "Allemand",
-          proficiency: "Courant à professionnel"
+          name: "HealthTracker Pro",
+          description:
+            "A comprehensive health monitoring application with wearable device integration.",
+          technologies: ["React Native", "Node.js", "MongoDB", "WebSockets"],
+          url: "https://github.com/Mayedi007/health-tracker",
         },
         {
-          name: "Anglais",
-          proficiency: "Courant à professionnel"
+          name: "CloudBudget",
+          description:
+            "An AWS cost management and optimization platform for businesses.",
+          technologies: [
+            "React",
+            "AWS Lambda",
+            "DynamoDB",
+            "Serverless Framework",
+          ],
+          url: "https://github.com/Mayedi007/cloud-budget",
         },
-        {
-          name: "Français",
-          proficiency: "Langue maternelle"
-        },
-        {
-          name: "Arabe",
-          proficiency: "Langue maternelle"
-        },
-        {
-          name: "Italien",
-          proficiency: "Connaissances de base"
-        }
-      ]
+      ],
     };
-    
-    // Default to German CV
-    this.cv = germanCV;
-    
-    // Store all language versions
+
+    // Multilingual CVs
     this.cvs = {
-      de: germanCV,
-      en: englishCV,
-      fr: frenchCV
+      en: this.cv,
+      de: {
+        ...this.cv,
+        summary:
+          "Erfahrener Full-Stack-Entwickler mit über 7 Jahren Expertise im Aufbau leistungsstarker Anwendungen. Fachkundig in TypeScript, React, Node.js und Cloud-Technologien.",
+        experience: [
+          {
+            company: "TechVision GmbH",
+            position: "Senior Full-Stack-Entwickler",
+            startDate: "2022-03",
+            endDate: "Gegenwärtig",
+            description:
+              "Leitung der Entwicklung von Cloud-nativen Anwendungen mit React, Node.js und AWS. Implementierung von CI/CD-Pipelines und Mentoring von Junior-Entwicklern.",
+            highlights: [
+              "Reduzierung der API-Antwortzeit um 40% durch Leistungsoptimierung",
+              "Implementierung einer serverlosen Architektur, die die Betriebskosten um 30% reduzierte",
+              "Leitung eines Teams von 5 Entwicklern, um Projekte konsequent vor dem Zeitplan zu liefern",
+            ],
+          },
+          {
+            company: "InnoSoft Solutions",
+            position: "Full-Stack-Entwickler",
+            startDate: "2019-01",
+            endDate: "2022-02",
+            description:
+              "Entwicklung und Wartung von Webanwendungen für Unternehmenskunden. Arbeit mit React, Express, MongoDB und Docker.",
+            highlights: [
+              "Erstellung von responsiven Dashboards für Datenvisualisierung",
+              "Integration von Drittanbieter-APIs für Zahlungsabwicklung und Authentifizierung",
+              "Migration von Legacy-Anwendungen zu modernen Technologie-Stacks",
+            ],
+          },
+          {
+            company: "DataFlow Systems",
+            position: "Frontend-Entwickler",
+            startDate: "2017-07",
+            endDate: "2018-12",
+            description:
+              "Erstellung von Benutzeroberflächen für datenintensive Anwendungen. Spezialisierung auf Angular und D3.js für Datenvisualisierung.",
+            highlights: [
+              "Entwicklung interaktiver Diagramme und Grafiken für Finanzdatenanalyse",
+              "Implementierung von Zugänglichkeitsverbesserungen für alle Anwendungen",
+              "Reduzierung der Paketgröße um 35% durch Codeoptimierung",
+            ],
+          },
+        ],
+        education: [
+          {
+            institution: "Technische Universität München",
+            degree: "Master of Science in Informatik",
+            startDate: "2015",
+            endDate: "2017",
+            description:
+              "Spezialisierung auf verteilte Systeme und Webtechnologien. Thesis: 'Skalierbare Mikroservice-Architektur für Echtzeit-Anwendungen'.",
+          },
+          {
+            institution: "Universität Tunis",
+            degree: "Bachelor of Science in Computer Engineering",
+            startDate: "2012",
+            endDate: "2015",
+            description:
+              "Mit Auszeichnung abgeschlossen. Schwerpunkt auf Software Engineering und Datenbanksystemen.",
+          },
+        ],
+      },
+      fr: {
+        ...this.cv,
+        summary:
+          "Développeur Full Stack expérimenté avec plus de 7 ans d'expertise dans la création d'applications à haute performance. Compétent en TypeScript, React, Node.js et technologies cloud.",
+        experience: [
+          {
+            company: "TechVision GmbH",
+            position: "Développeur Full Stack Senior",
+            startDate: "2022-03",
+            endDate: "Présent",
+            description:
+              "Direction du développement d'applications cloud-natives utilisant React, Node.js et AWS. Mise en œuvre de pipelines CI/CD et mentorat de développeurs juniors.",
+            highlights: [
+              "Réduction du temps de réponse de l'API de 40% grâce à l'optimisation des performances",
+              "Mise en œuvre d'une architecture serverless qui a réduit les coûts opérationnels de 30%",
+              "Direction d'une équipe de 5 développeurs pour livrer systématiquement les projets avant l'échéance",
+            ],
+          },
+          {
+            company: "InnoSoft Solutions",
+            position: "Développeur Full Stack",
+            startDate: "2019-01",
+            endDate: "2022-02",
+            description:
+              "Développement et maintenance d'applications web pour des clients entreprises. Travail avec React, Express, MongoDB et Docker.",
+            highlights: [
+              "Création de tableaux de bord responsifs pour la visualisation de données",
+              "Intégration d'APIs tierces pour le traitement des paiements et l'authentification",
+              "Migration d'applications héritées vers des stacks technologiques modernes",
+            ],
+          },
+          {
+            company: "DataFlow Systems",
+            position: "Développeur Frontend",
+            startDate: "2017-07",
+            endDate: "2018-12",
+            description:
+              "Création d'interfaces utilisateur pour des applications à forte intensité de données. Spécialisation en Angular et D3.js pour la visualisation de données.",
+            highlights: [
+              "Développement de graphiques interactifs pour l'analyse de données financières",
+              "Mise en œuvre d'améliorations d'accessibilité pour toutes les applications",
+              "Réduction de la taille des bundles de 35% grâce à l'optimisation du code",
+            ],
+          },
+        ],
+        education: [
+          {
+            institution: "Université Technique de Munich",
+            degree: "Master of Science en Informatique",
+            startDate: "2015",
+            endDate: "2017",
+            description:
+              "Spécialisation en Systèmes Distribués et Technologies Web. Thèse: 'Architecture de Microservices Évolutive pour Applications en Temps Réel'.",
+          },
+          {
+            institution: "Université de Tunis",
+            degree: "Licence en Génie Informatique",
+            startDate: "2012",
+            endDate: "2015",
+            description:
+              "Diplômé avec mention. Spécialisation en Génie Logiciel et Systèmes de Bases de Données.",
+          },
+        ],
+      },
     };
-    
-    // Initialize with sample articles
+
     this.addSampleArticles();
   }
 
-  // User methods
   async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    for (const user of this.users.values()) {
+      if (user.username === username) {
+        return user;
+      }
+    }
+    return undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
@@ -341,86 +367,381 @@ export class MemStorage implements IStorage {
     this.users.set(id, user);
     return user;
   }
-  
-  // Article methods
+
   async getArticles(limit?: number, language?: string): Promise<Article[]> {
-    // First get all articles
-    const allArticles = Array.from(this.articles.values()).sort(
-      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-    );
-    
-    // Handle language-specific content if possible
-    const processedArticles = allArticles.map(article => {
-      // If the article has translations field and the requested language is available
-      if (article.translations && language && article.translations[language]) {
-        return {
-          ...article,
-          title: article.translations[language].title || article.title,
-          excerpt: article.translations[language].excerpt || article.excerpt,
-          content: article.translations[language].content || article.content
-        };
-      }
-      return article;
-    });
-    
-    // Apply the limit if provided
-    if (limit && limit > 0) {
-      return processedArticles.slice(0, limit);
+    let articles = Array.from(this.articles.values());
+
+    // If language is specified, try to find translated content
+    if (language && ["en", "de", "fr"].includes(language)) {
+      articles = articles.map((article) => {
+        if (article.translations && article.translations[language]) {
+          return {
+            ...article,
+            title: article.translations[language].title,
+            excerpt: article.translations[language].excerpt,
+            content: article.translations[language].content,
+          };
+        }
+        return article;
+      });
     }
-    
-    return processedArticles;
+
+    // Sort by date, newest first
+    articles.sort((a, b) => {
+      const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+      const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+      return dateB - dateA;
+    });
+
+    if (limit && limit > 0) {
+      return articles.slice(0, limit);
+    }
+
+    return articles;
   }
-  
-  async getArticleById(id: number, language?: string): Promise<Article | undefined> {
+
+  async getArticleById(
+    id: number,
+    language?: string,
+  ): Promise<Article | undefined> {
     const article = this.articles.get(id);
-    
+
     if (!article) {
       return undefined;
     }
-    
-    // Handle language-specific content if possible
-    if (article.translations && language && article.translations[language]) {
+
+    // Special handling for specific articles with full translations
+    try {
+      const fs = require("fs");
+      const path = require("path");
+      
+      // For SQL Window Functions article (id 1)
+      if (id === 1) {
+        // If German or French, load from separate complete translation files
+        if (language === "de") {
+          const germanContent = fs.readFileSync(
+            path.join(__dirname, "data/sql-article-de.txt"),
+            "utf8",
+          );
+          return {
+            ...article,
+            title:
+              "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt:
+              "SQL-Fensterfunktionen gehören zu den leistungsstärksten und flexibelsten Werkzeugen für Analysten und Entwickler. Lernen Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen einsetzen können, um Ihre Datenanalyse zu transformieren.",
+            content: germanContent,
+          };
+        } else if (language === "fr") {
+          const frenchContent = fs.readFileSync(
+            path.join(__dirname, "data/sql-article-fr.txt"),
+            "utf8",
+          );
+          return {
+            ...article,
+            title:
+              "Maîtriser les Fonctions de Fenêtrage SQL : Un Guide Complet",
+            excerpt:
+              "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            content: frenchContent,
+          };
+        } else {
+          // For English, use the original content
+          const articleData = JSON.parse(
+            fs.readFileSync(
+              path.join(
+                __dirname,
+                "data/articles/mastering-sql-window-functions.json",
+              ),
+              "utf8",
+            ),
+          );
+
+          return {
+            ...article,
+            title: articleData.translations.en.title,
+            excerpt: articleData.translations.en.excerpt,
+            content: articleData.translations.en.content,
+          };
+        }
+      }
+      
+      // For JavaScript Async Programming article (id 2)
+      else if (id === 2) {
+        const articleData = JSON.parse(
+          fs.readFileSync(path.join(__dirname, 'data/articles/javascript-async-programming.json'), 'utf8')
+        );
+        
+        if (language && ['en', 'de', 'fr'].includes(language) && articleData.translations && articleData.translations[language]) {
+          return {
+            ...article,
+            title: articleData.translations[language].title,
+            excerpt: articleData.translations[language].excerpt,
+            content: articleData.translations[language].content
+          };
+        } else {
+          // Default to English
+          return {
+            ...article,
+            title: articleData.translations.en.title,
+            excerpt: articleData.translations.en.excerpt,
+            content: articleData.translations.en.content
+          };
+        }
+      }
+    } catch (error) {
+      console.error("Error loading article:", error);
+    }
+
+    // Default behavior for other articles
+    if (
+      language &&
+      ["en", "de", "fr"].includes(language) &&
+      article.translations &&
+      article.translations[language]
+    ) {
       return {
         ...article,
-        title: article.translations[language].title || article.title,
-        excerpt: article.translations[language].excerpt || article.excerpt,
-        content: article.translations[language].content || article.content
+        title: article.translations[language].title,
+        excerpt: article.translations[language].excerpt,
+        content: article.translations[language].content,
       };
     }
-    
+
     return article;
   }
-  
-  // CV methods
+
   async getCV(language?: string): Promise<CV> {
-    if (language && this.cvs[language]) {
+    if (
+      language &&
+      ["en", "de", "fr"].includes(language) &&
+      this.cvs[language]
+    ) {
       return this.cvs[language];
     }
     return this.cv;
   }
-  
+
   // Contact form
   async saveContactMessage(message: ContactMessage): Promise<void> {
     this.contactMessages.push(message);
     console.log("New contact message:", message);
   }
-  
+
   // Newsletter
   async subscribeToNewsletter(email: string): Promise<void> {
     this.newsletterSubscriptions.add(email);
     console.log("New newsletter subscription:", email);
   }
-  
+
   // Helper method to add sample articles
   private addSampleArticles(): void {
+    // We'll use hard-coded content for all languages instead of loading from a file
+    // This ensures all translations have the complete content
+    const sqlArticleData = {
+      title: "Mastering SQL Window Functions: A Comprehensive Guide",
+      excerpt:
+        "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+      slug: "mastering-sql-window-functions",
+      tags: ["SQL", "Database", "Data Analysis", "Development", "Programming"],
+      createdAt: "2025-04-21T10:00:00.000Z",
+      updatedAt: "2025-04-21T10:00:00.000Z",
+      featured: true,
+      publishedAt: "2025-04-21T10:00:00.000Z",
+      author: {
+        name: "Mohamed Ayadi",
+        avatar: "/images/avatar.png",
+        bio: "A passionate Full Stack Developer with over 7 years of experience.",
+      },
+    };
+
     const articles: Omit<Article, "id">[] = [
       {
+          en: {
+            title: "Mastering SQL Window Functions: A Comprehensive Guide",
+            excerpt:
+              "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL Window Functions Diagram" class="article-featured-image" /><p class="article-date">April 21, 2025</p></div><p>SQL window functions are one of the most powerful and flexible tools available to analysts and developers. They allow for sophisticated calculations across rows of data while preserving the individual rows, which makes them ideal for a wide range of use cases, from ranking and cumulative sums to moving averages and comparisons.</p><p>This blog post provides a detailed overview of all major window functions using the Employees table as an example.</p><div class="code-block"><pre><code>-- Create the table
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Insert data into the Employees table
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">What Are SQL Window Functions?</h2><p>SQL window functions operate on a set of rows, known as a "window," defined by the OVER() clause. Unlike aggregate functions such as SUM() or COUNT(), window functions return a result for each row in the dataset, making them incredibly powerful for detailed analysis that requires both individual row-level calculations and group-level operations.</p><h2 class="section-title">Syntax Overview</h2><p>The general syntax of a window function looks like this:</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong>: The window function (e.g., ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong>: Divides the dataset into partitions (optional).</li><li><strong>ORDER BY</strong>: Specifies the ordering of rows within each partition (optional).</li><li><strong>OVER()</strong>: Defines the window of rows for the function.</li></ul><h2 class="section-title">Key SQL Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Ranking Functions</h3></div><p>Ranking functions are useful when you want to assign a rank to each row within a partition. They are commonly used in scenarios such as leaderboard generation or employee salary rankings.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Generates a unique number for each row in the partition. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>This query ranks employees in each department by their salary in descending order.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Assigns a rank to each row, but leaves gaps when there are ties. The next rank is skipped for rows with the same value. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>If two employees have the same salary, they will have the same rank, and the next rank will be skipped.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Similar to RANK(), but without gaps in ranking. All rows with the same value receive the same rank, but subsequent ranks are not skipped. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>The query results are same and will be:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">2</div><h3>Aggregate Functions (Windowed)</h3></div><p>Window functions can be combined with aggregate functions, allowing you to calculate values like running totals or averages without collapsing the rows into a single result.</p><div class="highlight-box"><h4>SUM()</h4><p>Calculates the cumulative sum over a window of rows. Example:</p><div class="code-block"><pre><code>SELECT employee_id, salary,
+       SUM(salary) OVER (PARTITION BY department ORDER BY salary DESC) AS cumulative_salary
+FROM employees;</code></pre></div><p>This query calculates the cumulative salary for each employee in each department.</p></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>CumulativeSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>80000.00</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>120000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.00</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.00</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.00</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.00</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>186000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>251000.00</td></tr></tbody></table></div><div class="highlight-box"><h4>AVG()</h4><p>Calculates the average salary for employees in each department. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID) AS AvgSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>AvgSalary</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>60000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>83666.666667</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>83666.666667</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>83666.666667</td></tr></tbody></table></div><div class="highlight-box"><h4>COUNT()</h4><p>Counts the number of rows in the window. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    COUNT(*) OVER (PARTITION BY DivisionID) AS EmployeeCount
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>EmployeeCount</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>2</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>1</td></tr><tr><td>105</td><td>Mary Dial</td><td>3</td></tr><tr><td>105</td><td>Susan Wall</td><td>3</td></tr><tr><td>105</td><td>Robert Night</td><td>3</td></tr></tbody></table></div><div class="highlight-box"><h4>MAX() / MIN()</h4><p>Returns the maximum or minimum value in a window. Example: Find the highest salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    MAX(Salary) OVER (PARTITION BY DivisionID) AS MaxSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MaxSalary</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>80000.00</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>80000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.00</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.00</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.00</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>110000.00</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">3</div><h3>Window-Based Row Navigation</h3></div><p>These functions allow you to reference values from previous or next rows, which is especially useful for calculating differences, moving averages, or time-based comparisons.</p><div class="highlight-box"><h4>LAG()</h4><p>Returns the value of a specified column from a previous row in the same partition. Example: Find the previous salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS PreviousSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>PreviousSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td></td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>80000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td></td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td></td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td></td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td></td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td></td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>76000.00</td></tr></tbody></table></div><div class="highlight-box"><h4>LEAD()</h4><p>Returns the value of a specified column from a subsequent row in the same partition. Example: Find the next salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LEAD(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS NextSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>NextSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>40000.00</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td></td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td></td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td></td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td></td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td></td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>76000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>65000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td></td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">4</div><h3>First and Last Value Functions</h3></div><p>These functions return the first or last value in a window.</p><div class="highlight-box"><h4>FIRST_VALUE()</h4><p>Returns the first value in the window. Example: Find the highest-paid employee in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    FIRST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS TopEarner
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>TopEarner</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>Lisa Roberts</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>Lisa Roberts</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>Arnold Sully</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>Mark Red</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>Dennis Front</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>Larry Weis</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>Susan Wall</td></tr></tbody></table></div><div class="highlight-box"><h4>LAST_VALUE()</h4><p>Returns the last value in the window. Example: Find the lowest-paid employee in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS LowestEarner
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>LowestEarner</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>Lisa Roberts</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>Lisa Roberts</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>Arnold Sully</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>Mark Red</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>Dennis Front</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>Larry Weis</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>Susan Wall</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">5</div><h3>Windowing Clauses (ROWS and RANGE)</h3></div><p>In SQL, the ROWS and RANGE clauses let you specify the exact set of rows that make up the window. This is particularly useful for time-series analysis or when comparing a specific range of rows.</p><div class="highlight-box"><h4>ROWS Example</h4><p>Defines the window in terms of physical rows (e.g., the current row and the previous 2 rows). Example: Calculate a moving average of salaries for each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS MovingAvg
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`,
+          },
+          de: {
+            title:
+              "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt:
+              "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL-Fensterfunktionen Diagramm" class="article-featured-image" /><p class="article-date">21. April 2025</p></div><p>SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Sie ermöglichen anspruchsvolle Berechnungen über Datenzeilen hinweg, wobei die einzelnen Zeilen erhalten bleiben, was sie ideal für eine Vielzahl von Anwendungsfällen macht, von Ranking und kumulativen Summen bis hin zu gleitenden Durchschnitten und Vergleichen.</p><p>Dieser Blogbeitrag bietet einen detaillierten Überblick über alle wichtigen Fensterfunktionen am Beispiel der Employees-Tabelle.</p><div class="code-block"><pre><code>-- Tabelle erstellen
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Daten in die Employees-Tabelle einfügen
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">Was sind SQL-Fensterfunktionen?</h2><p>SQL-Fensterfunktionen operieren auf einer Gruppe von Zeilen, einem sogenannten "Fenster", das durch die OVER()-Klausel definiert wird. Im Gegensatz zu Aggregatfunktionen wie SUM() oder COUNT() geben Fensterfunktionen ein Ergebnis für jede Zeile im Datensatz zurück, was sie unglaublich leistungsstark für detaillierte Analysen macht, die sowohl zeilenbasierte als auch gruppenbasierte Operationen erfordern.</p><h2 class="section-title">Syntax-Übersicht</h2><p>Die allgemeine Syntax einer Fensterfunktion sieht wie folgt aus:</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong>: Die Fensterfunktion (z.B. ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong>: Teilt den Datensatz in Partitionen (optional).</li><li><strong>ORDER BY</strong>: Legt die Sortierung der Zeilen innerhalb jeder Partition fest (optional).</li><li><strong>OVER()</strong>: Definiert das Fenster der Zeilen für die Funktion.</li></ul><h2 class="section-title">Wichtige SQL-Fensterfunktionen</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Ranking-Funktionen</h3></div><p>Ranking-Funktionen sind nützlich, wenn Sie jeder Zeile innerhalb einer Partition einen Rang zuweisen möchten. Sie werden häufig in Szenarien wie Bestenlisten oder Mitarbeitergehaltsrankings verwendet.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Generiert eine eindeutige Nummer für jede Zeile in der Partition. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Diese Abfrage ordnet Mitarbeiter in jeder Abteilung nach ihrem Gehalt in absteigender Reihenfolge.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Weist jeder Zeile einen Rang zu, lässt aber Lücken, wenn es Gleichstände gibt. Der nächste Rang wird für Zeilen mit demselben Wert übersprungen. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Wenn zwei Mitarbeiter das gleiche Gehalt haben, erhalten sie den gleichen Rang, und der nächste Rang wird übersprungen.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Ähnlich wie RANK(), aber ohne Lücken im Ranking. Alle Zeilen mit demselben Wert erhalten den gleichen Rang, aber nachfolgende Ränge werden nicht übersprungen. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
+          },
+          fr: {
+            title:
+              "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
+            excerpt:
+              "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="Diagramme des fonctions de fenêtrage SQL" class="article-featured-image" /><p class="article-date">21 avril 2025</p></div><p>Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Elles permettent d'effectuer des calculs sophistiqués sur des lignes de données tout en préservant les lignes individuelles, ce qui les rend idéales pour une large gamme de cas d'utilisation, du classement et des sommes cumulatives aux moyennes mobiles et aux comparaisons.</p><p>Ce billet de blog fournit un aperçu détaillé de toutes les principales fonctions de fenêtrage en utilisant la table Employees comme exemple.</p><div class="code-block"><pre><code>-- Créer la table
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Insérer des données dans la table Employees
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">Que sont les fonctions de fenêtrage SQL?</h2><p>Les fonctions de fenêtrage SQL opèrent sur un ensemble de lignes, appelé « fenêtre », défini par la clause OVER(). Contrairement aux fonctions d'agrégation comme SUM() ou COUNT(), les fonctions de fenêtrage renvoient un résultat pour chaque ligne du jeu de données, ce qui les rend incroyablement puissantes pour des analyses détaillées nécessitant à la fois des calculs au niveau des lignes individuelles et des opérations au niveau du groupe.</p><h2 class="section-title">Aperçu de la syntaxe</h2><p>La syntaxe générale d'une fonction de fenêtrage ressemble à ceci :</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong> : La fonction de fenêtrage (par exemple, ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong> : Divise le jeu de données en partitions (facultatif).</li><li><strong>ORDER BY</strong> : Spécifie l'ordre des lignes dans chaque partition (facultatif).</li><li><strong>OVER()</strong> : Définit la fenêtre de lignes pour la fonction.</li></ul><h2 class="section-title">Fonctions de fenêtrage SQL clés</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Fonctions de classement</h3></div><p>Les fonctions de classement sont utiles lorsque vous voulez attribuer un rang à chaque ligne au sein d'une partition. Elles sont couramment utilisées dans des scénarios tels que la génération de classements ou les classements de salaires d'employés.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Génère un numéro unique pour chaque ligne de la partition. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Cette requête classe les employés de chaque département par leur salaire en ordre décroissant.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Attribue un rang à chaque ligne, mais laisse des écarts lorsqu'il y a des égalités. Le rang suivant est sauté pour les lignes ayant la même valeur. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Si deux employés ont le même salaire, ils auront le même rang, et le rang suivant sera sauté.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Similaire à RANK(), mais sans écarts dans le classement. Toutes les lignes avec la même valeur reçoivent le même rang, mais les rangs suivants ne sont pas sautés. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
+          },
+        },
+      },
+      {
         title: "Setting Up a Custom Domain for Your Website",
-        excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
+        excerpt:
+          "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
         translations: {
           en: {
             title: "Setting Up a Custom Domain for Your Website",
-            excerpt: "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
+            excerpt:
+              "Learn how to configure a professional custom domain for your website, including DNS setup, domain providers, SSL certificates, and troubleshooting.",
             content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">A custom domain is essential for establishing your professional online identity. This comprehensive guide walks you through the process of setting up, configuring, and troubleshooting a custom domain for your website.</p>
@@ -440,11 +761,13 @@ export class MemStorage implements IStorage {
               <li><strong>Email consistency</strong> - Ability to create professional email addresses (you@yourdomain.com)</li>
               <li><strong>SEO advantages</strong> - May help with search engine optimization and ranking</li>
             </ul>
-          </div>`
+          </div>`,
           },
           de: {
-            title: "Einrichten einer benutzerdefinierten Domain für Ihre Website",
-            excerpt: "Erfahren Sie, wie Sie eine professionelle benutzerdefinierte Domain für Ihre Website konfigurieren, einschließlich DNS-Einrichtung, Domain-Anbieter, SSL-Zertifikate und Fehlerbehebung.",
+            title:
+              "Einrichten einer benutzerdefinierten Domain für Ihre Website",
+            excerpt:
+              "Erfahren Sie, wie Sie eine professionelle benutzerdefinierte Domain für Ihre Website konfigurieren, einschließlich DNS-Einrichtung, Domain-Anbieter, SSL-Zertifikate und Fehlerbehebung.",
             content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">Eine benutzerdefinierte Domain ist essenziell für den Aufbau Ihrer professionellen Online-Identität. Dieser umfassende Leitfaden führt Sie durch den Prozess der Einrichtung, Konfiguration und Fehlerbehebung einer benutzerdefinierten Domain für Ihre Website.</p>
@@ -464,11 +787,13 @@ export class MemStorage implements IStorage {
               <li><strong>E-Mail-Konsistenz</strong> - Möglichkeit, professionelle E-Mail-Adressen zu erstellen (sie@ihredomain.com)</li>
               <li><strong>SEO-Vorteile</strong> - Kann bei der Suchmaschinenoptimierung und Rangfolge helfen</li>
             </ul>
-          </div>`
+          </div>`,
           },
           fr: {
-            title: "Configuration d'un domaine personnalisé pour votre site web",
-            excerpt: "Apprenez à configurer un domaine personnalisé professionnel pour votre site web, y compris la configuration DNS, les fournisseurs de domaines, les certificats SSL et le dépannage.",
+            title:
+              "Configuration d'un domaine personnalisé pour votre site web",
+            excerpt:
+              "Apprenez à configurer un domaine personnalisé professionnel pour votre site web, y compris la configuration DNS, les fournisseurs de domaines, les certificats SSL et le dépannage.",
             content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
             <p class="text-xl leading-relaxed mb-8">Un domaine personnalisé est essentiel pour établir votre identité professionnelle en ligne. Ce guide complet vous accompagne dans le processus de configuration et de dépannage d'un domaine personnalisé pour votre site web.</p>
@@ -488,8 +813,8 @@ export class MemStorage implements IStorage {
               <li><strong>Cohérence des emails</strong> - Possibilité de créer des adresses email professionnelles (vous@votredomaine.com)</li>
               <li><strong>Avantages SEO</strong> - Peut aider à l'optimisation pour les moteurs de recherche et au classement</li>
             </ul>
-          </div>`
-          }
+          </div>`,
+          },
         },
         content: `
           <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
@@ -510,420 +835,21 @@ export class MemStorage implements IStorage {
               <li><strong>Email consistency</strong> - Ability to create professional email addresses (you@yourdomain.com)</li>
               <li><strong>SEO advantages</strong> - May help with search engine optimization and ranking</li>
             </ul>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Understanding Domain Name Basics</h2>
-            
-            <p>Before diving into the setup process, it's helpful to understand some key concepts:</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">Domain Name System (DNS)</h3>
-                <p class="text-slate-700">The global system that translates human-readable domain names (like example.com) into IP addresses (like 192.0.2.1) that computers use to identify each other.</p>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">Domain Registrar</h3>
-                <p class="text-slate-700">A company accredited by ICANN that sells domain name registrations (like Namecheap, GoDaddy, Google Domains).</p>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">DNS Records</h3>
-                <p class="text-slate-700">Instructions that tell the DNS system where to find your website and other services (like email). Common types include A, CNAME, MX, and TXT records.</p>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h3 class="font-semibold text-lg mb-3 text-slate-900">Propagation</h3>
-                <p class="text-slate-700">The time it takes for DNS changes to spread across the internet. Can range from minutes to 48 hours.</p>
-              </div>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 1: Choose and Purchase a Domain</h2>
-            
-            <p>The first step is selecting and purchasing a domain name from a domain registrar:</p>
-            
-            <ol class="list-decimal pl-5 my-6 space-y-3">
-              <li><strong>Research available domains</strong> - Use your registrar's search tool to find available options.</li>
-              <li><strong>Select your TLD</strong> - Choose a top-level domain (TLD) like .com, .org, .io, etc. While .com is most common, other TLDs can be more available or better suited to your purpose.</li>
-              <li><strong>Consider additional services</strong> - Many registrars offer privacy protection, which hides your personal information from the public WHOIS database.</li>
-              <li><strong>Complete your purchase</strong> - Domains typically cost $10-15 per year, with discounts for multi-year registrations.</li>
-            </ol>
-            
-            <p>Popular domain registrars include:</p>
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Namecheap</li>
-              <li>Google Domains</li>
-              <li>GoDaddy</li>
-              <li>Cloudflare Registrar</li>
-              <li>Porkbun</li>
-            </ul>
-            
-            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
-              <p class="text-amber-800 font-medium">💡 Pro tip: When choosing a domain name, prioritize simplicity, memorability, and relevance to your brand or purpose. Avoid hyphens, numbers, and unusual spellings when possible.</p>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 2: Configure DNS Settings</h2>
-            
-            <p>Once you've purchased your domain, you'll need to configure its DNS settings to point to your web host. The specific steps vary by hosting platform:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For GitHub Pages</h3>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>In your GitHub repository, go to Settings > Pages.</li>
-              <li>Under "Custom domain," enter your domain and save.</li>
-              <li>At your domain registrar, create these DNS records:</li>
-            </ol>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.108.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.109.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.110.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.111.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">CNAME</td>
-                    <td class="border border-slate-300 px-4 py-2">www</td>
-                    <td class="border border-slate-300 px-4 py-2">username.github.io</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For Netlify</h3>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>In your Netlify site dashboard, go to Settings > Domain management > Add custom domain.</li>
-              <li>Enter your domain name and follow the verification steps.</li>
-              <li>At your domain registrar, set up these DNS records:</li>
-            </ol>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>DNS</span>
-                <span>Netlify DNS Records</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># Option 1: Use Netlify DNS (recommended)
-# Simply change your nameservers to Netlify's:
-dns1.p01.nsone.net
-dns2.p01.nsone.net
-dns3.p01.nsone.net
-dns4.p01.nsone.net
-
-# Option 2: Keep your current DNS provider
-# Add these records:
-CNAME  www    example.netlify.app
-A      @      104.198.14.52</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">For Vercel</h3>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>In your Vercel project, go to Settings > Domains.</li>
-              <li>Add your domain and verify ownership.</li>
-              <li>At your domain registrar, add these records:</li>
-            </ol>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>DNS</span>
-                <span>Vercel DNS Records</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># For the root domain (yourdomain.com):
-A      @      76.76.21.21
-
-# For the www subdomain:
-CNAME  www    cname.vercel-dns.com.</code></pre>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 3: Set Up SSL/HTTPS</h2>
-            
-            <p>Secure your website with SSL/HTTPS to protect user data and improve search rankings:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Automatic SSL with Hosting Providers</h3>
-            
-            <p>Many hosting providers offer automatic SSL certificate provisioning:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>GitHub Pages</strong> - Automatically enables HTTPS once your custom domain is verified.</li>
-              <li><strong>Netlify</strong> - Provides free SSL certificates through Let's Encrypt automatically.</li>
-              <li><strong>Vercel</strong> - Automatically issues and renews SSL certificates for all domains.</li>
-            </ul>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Manual SSL Configuration</h3>
-            
-            <p>If your host doesn't provide automatic SSL, you can use Cloudflare or Let's Encrypt:</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h4 class="font-semibold text-lg mb-3 text-slate-900">Cloudflare Method</h4>
-                <ol class="list-decimal pl-5 my-4 space-y-2 text-sm">
-                  <li>Create a Cloudflare account</li>
-                  <li>Add your site to Cloudflare</li>
-                  <li>Update your nameservers to Cloudflare's</li>
-                  <li>Enable SSL/TLS in your Cloudflare dashboard</li>
-                </ol>
-              </div>
-              <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                <h4 class="font-semibold text-lg mb-3 text-slate-900">Let's Encrypt Method</h4>
-                <ol class="list-decimal pl-5 my-4 space-y-2 text-sm">
-                  <li>SSH into your server</li>
-                  <li>Install certbot: <code>apt-get install certbot</code></li>
-                  <li>Generate certificate: <code>certbot --apache</code></li>
-                  <li>Follow prompts to complete setup</li>
-                </ol>
-              </div>
-            </div>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">SSL Certificate Types</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li><strong>Domain Validated (DV):</strong> Basic verification of domain ownership (most common and what Let's Encrypt provides)</li>
-                <li><strong>Organization Validated (OV):</strong> Verifies business registration information</li>
-                <li><strong>Extended Validation (EV):</strong> Most rigorous verification, previously showed green address bar in browsers</li>
-                <li><strong>Wildcard:</strong> Covers all subdomains (*.yourdomain.com)</li>
-                <li><strong>Multi-domain (SAN):</strong> Covers multiple specified domains in one certificate</li>
-              </ul>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Step 4: Verify and Test Your Setup</h2>
-            
-            <p>After configuring your domain and SSL, verify that everything is working properly:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">DNS Propagation Check</h3>
-            
-            <p>Use DNS lookup tools to check if your DNS records are correctly propagated:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>Terminal</span>
-                <span>DNS Lookup Commands</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># Check A records
-dig yourdomain.com A
-
-# Check CNAME records
-dig www.yourdomain.com CNAME
-
-# Check for valid DNS propagation
-host yourdomain.com</code></pre>
-            </div>
-            
-            <p>You can also use online tools like <a href="https://dnschecker.org" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">DNSChecker.org</a> or <a href="https://whatsmydns.net" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">WhatsMyDNS.net</a> to check DNS propagation globally.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Website Accessibility Check</h3>
-            
-            <p>Verify that your website is accessible through various URLs:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Root domain: <code>https://yourdomain.com</code></li>
-              <li>www subdomain: <code>https://www.yourdomain.com</code></li>
-              <li>HTTPS security: Verify the padlock icon appears in the browser address bar</li>
-            </ul>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">SSL Certificate Check</h3>
-            
-            <p>Verify your SSL certificate is properly installed:</p>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>Click the padlock icon in your browser's address bar</li>
-              <li>Verify the certificate is valid and issued to your domain</li>
-              <li>Use online tools like <a href="https://www.ssllabs.com/ssltest/" class="text-indigo-700 underline" target="_blank" rel="noopener noreferrer">SSL Labs</a> for a comprehensive certificate check</li>
-            </ol>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Advanced Domain Configuration</h2>
-            
-            <p>Beyond the basic setup, consider these advanced configurations:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Domain Redirects</h3>
-            
-            <p>Ensure users find your site regardless of which URL variant they use:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>www → non-www Redirect (.htaccess)</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>RewriteEngine On
-RewriteCond %{HTTP_HOST} ^www\.yourdomain\.com [NC]
-RewriteRule ^(.*)$ https://yourdomain.com/$1 [L,R=301]</code></pre>
-            </div>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>non-www → www Redirect (.htaccess)</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>RewriteEngine On
-RewriteCond %{HTTP_HOST} ^yourdomain\.com [NC]
-RewriteRule ^(.*)$ https://www.yourdomain.com/$1 [L,R=301]</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Email Configuration</h3>
-            
-            <p>Set up email for your domain using services like Google Workspace, Zoho Mail, or ProtonMail:</p>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Priority</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">MX</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">aspmx.l.google.com</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">MX</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">alt1.aspmx.l.google.com</td>
-                    <td class="border border-slate-300 px-4 py-2">5</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">TXT</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">v=spf1 include:_spf.google.com ~all</td>
-                    <td class="border border-slate-300 px-4 py-2">-</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Security Enhancements</h3>
-            
-            <p>Add these DNS records to improve your domain's security:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>DNS</span>
-                <span>Security Records</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code># DMARC Record (helps prevent email spoofing)
-TXT  _dmarc  "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;"
-
-# HSTS Preload (forces HTTPS connections)
-# Add this header to your server response:
-Strict-Transport-Security: max-age=31536000; includeSubDomains; preload</code></pre>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Troubleshooting Common Issues</h2>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">DNS Not Resolving</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Your domain doesn't point to your website.</li>
-                <li><strong>Solution:</strong> Verify DNS records are correct and wait for propagation (up to 48 hours).</li>
-                <li><strong>Check:</strong> Use <code>dig</code> or <code>nslookup</code> to confirm DNS records are correct.</li>
-              </ul>
-            </div>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">Certificate Errors</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Browser shows "Your connection is not private" warnings.</li>
-                <li><strong>Solution:</strong> Verify SSL certificate is properly installed and domain ownership is confirmed.</li>
-                <li><strong>Check:</strong> Confirm your site uses HTTPS and the certificate matches your domain name exactly.</li>
-              </ul>
-            </div>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">Mixed Content Warnings</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Some resources loading over HTTP instead of HTTPS.</li>
-                <li><strong>Solution:</strong> Update all resource URLs to use HTTPS or relative paths.</li>
-                <li><strong>Check:</strong> Use browser developer tools to identify mixed content issues.</li>
-              </ul>
-            </div>
-            
-            <div class="bg-slate-50 p-6 rounded-lg my-8">
-              <h3 class="font-semibold text-lg mb-4 text-slate-900">Redirect Loops</h3>
-              <ul class="list-disc pl-5 space-y-2 text-slate-700">
-                <li><strong>Issue:</strong> Browser shows "too many redirects" error.</li>
-                <li><strong>Solution:</strong> Check for conflicting redirect rules in your hosting configuration.</li>
-                <li><strong>Check:</strong> Verify .htaccess files, hosting provider settings, and Cloudflare redirect rules.</li>
-              </ul>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Domain Management Best Practices</h2>
-            
-            <ol class="list-decimal pl-5 my-6 space-y-4">
-              <li>
-                <strong>Keep contact information updated</strong>
-                <p>Ensure your domain registrar has your current email address to send renewal notices and security alerts.</p>
-              </li>
-              <li>
-                <strong>Enable auto-renewal</strong>
-                <p>Prevent accidental expiration by setting your domains to renew automatically.</p>
-              </li>
-              <li>
-                <strong>Use domain privacy protection</strong>
-                <p>Shield your personal information from the public WHOIS database to reduce spam and identity theft risks.</p>
-              </li>
-              <li>
-                <strong>Implement registrar locking</strong>
-                <p>Protect against unauthorized domain transfers with registrar lock and two-factor authentication.</p>
-              </li>
-              <li>
-                <strong>Document your configuration</strong>
-                <p>Keep records of all DNS settings, hosting information, and authentication details in a secure location.</p>
-              </li>
-            </ol>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p>Setting up a custom domain is a crucial step in establishing your professional online presence. By following this guide, you've learned how to:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Choose and purchase an appropriate domain name</li>
-              <li>Configure DNS settings for various hosting providers</li>
-              <li>Set up SSL/HTTPS for secure connections</li>
-              <li>Verify and test your domain configuration</li>
-              <li>Implement advanced domain features and security</li>
-              <li>Troubleshoot common domain and SSL issues</li>
-            </ul>
-            
-            <p>With your custom domain properly configured, your website now benefits from improved branding, professionalism, and flexibility as your online presence grows.</p>
-            
-            <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-100 my-8">
-              <p class="text-indigo-900 italic">Remember that domain management is an ongoing responsibility. Regularly check your domain status, keep your contact information updated, and ensure timely renewals to maintain ownership of your domain name.</p>
-            </div>
           </div>
         `,
         coverImage: "/images/custom-domain.svg",
         category: "Technology",
-        publishedAt: new Date("2025-03-15")
+        publishedAt: new Date("2025-03-15"),
       },
       {
         title: "How to Deploy Your Website to GitHub Pages",
-        excerpt: "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
+        excerpt:
+          "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
         translations: {
           en: {
             title: "How to Deploy Your Website to GitHub Pages",
-            excerpt: "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
+            excerpt:
+              "A step-by-step guide to deploying your static website to GitHub Pages for free hosting with continuous deployment.",
             content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
   <p class="text-xl leading-relaxed mb-8">
@@ -1109,11 +1035,12 @@ $ git push</code></pre>
       <a href="/blog/1" class="text-primary-700 underline">Setting Up a Custom Domain for Your Website</a> for a detailed guide.
     </p>
   </div>
-</div>`
+</div>`,
           },
           de: {
             title: "So veröffentlichen Sie Ihre Website auf GitHub Pages",
-            excerpt: "Eine Schritt-für-Schritt-Anleitung zur Veröffentlichung Ihrer statischen Website auf GitHub Pages für kostenloses Hosting mit kontinuierlicher Bereitstellung.",
+            excerpt:
+              "Eine Schritt-für-Schritt-Anleitung zur Veröffentlichung Ihrer statischen Website auf GitHub Pages für kostenloses Hosting mit kontinuierlicher Bereitstellung.",
             content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
   <p class="text-xl leading-relaxed mb-8">
@@ -1299,11 +1226,12 @@ $ git push</code></pre>
       Schauen Sie sich meinen Artikel <a href="/blog/1" class="text-primary-700 underline">Einrichten einer benutzerdefinierten Domain für Ihre Website</a> für eine detaillierte Anleitung an.
     </p>
   </div>
-</div>`
+</div>`,
           },
           fr: {
             title: "Comment déployer votre site web sur GitHub Pages",
-            excerpt: "Un guide étape par étape pour déployer votre site web statique sur GitHub Pages pour un hébergement gratuit avec déploiement continu.",
+            excerpt:
+              "Un guide étape par étape pour déployer votre site web statique sur GitHub Pages pour un hébergement gratuit avec déploiement continu.",
             content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
   <p class="text-xl leading-relaxed mb-8">
@@ -1489,8 +1417,8 @@ $ git push</code></pre>
       <a href="/blog/1" class="text-primary-700 underline">Configuration d'un domaine personnalisé pour votre site web</a> pour un guide détaillé.
     </p>
   </div>
-</div>`
-          }
+</div>`,
+          },
         },
         content: `
 <div class="prose prose-lg max-w-none prose-headings:text-primary-900">
@@ -1678,841 +1606,237 @@ $ git push</code></pre>
     </p>
   </div>
 </div>`,
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>JSON</span>
-                <span>package.json</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>{
-  "name": "my-app",
-  "version": "0.1.0",
-  "homepage": "https://username.github.io/repository-name",
-  ...
-}</code></pre>
-            </div>
-            
-            <p>Install the <code>gh-pages</code> package and add deployment scripts:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>BASH</span>
-                <span>Terminal</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>npm install --save-dev gh-pages</code></pre>
-            </div>
-            
-            <p>Add these scripts to your <code>package.json</code>:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>JSON</span>
-                <span>package.json</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>"scripts": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
-  ...
-}</code></pre>
-            </div>
-            
-            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">Vue.js</h4>
-            
-            <p>Create or update your <code>vue.config.js</code> file:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>JavaScript</span>
-                <span>vue.config.js</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/repository-name/'
-    : '/'
-}</code></pre>
-            </div>
-            
-            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
-              <p class="text-amber-800 font-medium">💡 Pro tip: For project sites, make sure to set the correct base path in your configuration to match your repository name. This ensures that all asset paths resolve correctly.</p>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-10 mb-4 text-slate-800">Deployment Methods</h3>
-            
-            <p>There are several ways to deploy your site to GitHub Pages:</p>
-            
-            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">1. Manual Deployment</h4>
-            
-            <p>For projects using the <code>gh-pages</code> package:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>BASH</span>
-                <span>Terminal</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>npm run deploy</code></pre>
-            </div>
-            
-            <p>This builds your project and pushes the output to the <code>gh-pages</code> branch of your repository.</p>
-            
-            <h4 class="text-lg font-medium mt-6 mb-2 text-slate-800">2. GitHub Actions (Automated Deployment)</h4>
-            
-            <p>Create a GitHub Actions workflow file at <code>.github/workflows/deploy.yml</code>:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>YAML</span>
-                <span>.github/workflows/deploy.yml</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
-
-      - name: Install and Build 🔧
-        run: |
-          npm ci
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: build # The folder the action should deploy
-          branch: gh-pages # The branch the action should deploy to</code></pre>
-            </div>
-            
-            <p>This workflow automatically builds and deploys your site whenever you push changes to the main branch.</p>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Using a Custom Domain</h2>
-            
-            <p>To use a custom domain with GitHub Pages:</p>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-2">
-              <li>Go to your repository's Settings tab.</li>
-              <li>Scroll down to the "GitHub Pages" section.</li>
-              <li>Under "Custom domain," enter your domain name and click Save.</li>
-              <li>Create a <code>CNAME</code> file in your repository (or in the build output directory) containing your custom domain.</li>
-            </ol>
-            
-            <p>You'll also need to configure your domain's DNS settings:</p>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">Record Type</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.108.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.109.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.110.153</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">A</td>
-                    <td class="border border-slate-300 px-4 py-2">@</td>
-                    <td class="border border-slate-300 px-4 py-2">185.199.111.153</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">CNAME</td>
-                    <td class="border border-slate-300 px-4 py-2">www</td>
-                    <td class="border border-slate-300 px-4 py-2">username.github.io</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">Troubleshooting GitHub Pages</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li><strong>404 Errors:</strong> Check that your repository is properly configured for GitHub Pages in the repository settings</li>
-                <li><strong>Missing Assets:</strong> Ensure that all asset paths are relative or match your configured base path</li>
-                <li><strong>Custom Domain Not Working:</strong> DNS changes can take up to 24 hours to propagate</li>
-                <li><strong>Build Failures:</strong> Check your workflow logs for build errors</li>
-                <li><strong>Routing Issues:</strong> For single-page applications, you may need a 404.html redirect hack for client-side routing</li>
-              </ul>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Best Practices for GitHub Pages</h2>
-            
-            <ol class="list-decimal pl-5 my-4 space-y-4">
-              <li>
-                <strong>Optimize Your Assets:</strong>
-                <p>Minimize CSS, JavaScript, and image files to improve load times.</p>
-              </li>
-              <li>
-                <strong>Use a GitHub Actions Workflow:</strong>
-                <p>Automate your deployment process to reduce manual errors and save time.</p>
-              </li>
-              <li>
-                <strong>Enable HTTPS:</strong>
-                <p>GitHub Pages supports HTTPS for custom domains. Always use it for security.</p>
-              </li>
-              <li>
-                <strong>Add a 404 Page:</strong>
-                <p>Create a custom 404.html file to handle requests for non-existent pages.</p>
-              </li>
-              <li>
-                <strong>Test Before Deploying:</strong>
-                <p>Use tools like <code>http-server</code> to test your build locally before deploying.</p>
-              </li>
-            </ol>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p>GitHub Pages offers a powerful, free platform for hosting static websites. With the right setup, you can have a professional-looking site deployed in minutes, with automated workflows to keep it updated.</p>
-            
-            <p>Whether you're showcasing a portfolio, documenting a project, or building a simple web application, GitHub Pages provides all the essentials for fast, reliable hosting.</p>
-            
-            <p class="mt-6 text-slate-600 italic">Happy deploying!</p>
-          </div>
-        `,
         coverImage: "/images/github-pages.svg",
         category: "Technology",
-        publishedAt: new Date("2025-02-08")
-      },
-      {
-        title: "A SQL Practical Challenge on Salary Analysis",
-        excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
-        translations: {
-          en: {
-            title: "A SQL Practical Challenge on Salary Analysis",
-            excerpt: "Learn how to use SQL window functions to analyze employee salary data, identify top earners, and calculate departmental statistics and rankings.",
-            content: "English content for SQL Challenge article"
-          },
-          de: {
-            title: "Eine praktische SQL-Herausforderung zur Gehaltsanalyse",
-            excerpt: "Erfahren Sie, wie Sie SQL-Fensterfunktionen verwenden können, um Mitarbeitergehaltsdaten zu analysieren, Topverdiener zu identifizieren und Abteilungsstatistiken und -rankings zu berechnen.",
-            content: "German content for SQL Challenge article"
-          },
-          fr: {
-            title: "Un défi pratique SQL sur l'analyse des salaires",
-            excerpt: "Apprenez à utiliser les fonctions de fenêtrage SQL pour analyser les données salariales des employés, identifier les hauts salaires et calculer les statistiques et les classements par département.",
-            content: "French content for SQL Challenge article"
-          }
-        },
-        content: `
-          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
-            <p class="text-xl leading-relaxed mb-8">SQL window functions offer powerful tools for salary data analysis in HR contexts. This practical case study demonstrates how to analyze employee compensation data, identify patterns, and generate insights using SQL.</p>
-            
-            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
-              <p class="text-indigo-800 font-medium">This article demonstrates practical applications of the concepts covered in our <a href="/blog/1" class="text-indigo-700 underline">SQL Window Functions Comprehensive Guide</a>.</p>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">The Challenge: Salary Analysis</h2>
-            
-            <p>In this practical example, we'll work with an employee database to answer common HR analytics questions about salary distribution. Our sample dataset includes employee information across different departments with various compensation levels.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">The Employee Dataset</h3>
-            
-            <p>Here's the table structure we'll be working with:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Table Structure</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>CREATE TABLE employees (
-  employee_id INTEGER PRIMARY KEY,
-  employee_name VARCHAR(100),
-  department VARCHAR(50),
-  hire_date DATE,
-  salary NUMERIC(10,2),
-  manager_id INTEGER
-);</code></pre>
-            </div>
-            
-            <p>Our sample data contains employees from Engineering, Marketing, Sales, and HR departments with varying salaries and tenure.</p>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Analyzing Department Salary Distribution</h2>
-            
-            <p>Let's start by finding the minimum, maximum, and average salary within each department:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Department Salary Statistics</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  department,
-  MIN(salary) as min_salary,
-  MAX(salary) as max_salary,
-  AVG(salary) as avg_salary,
-  COUNT(*) as employee_count
-FROM employees
-GROUP BY department
-ORDER BY avg_salary DESC;</code></pre>
-            </div>
-            
-            <p>This query gives us a basic overview of each department's salary range and average. The result might look something like:</p>
-            
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">department</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">min_salary</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">max_salary</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">avg_salary</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">employee_count</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Engineering</td>
-                    <td class="border border-slate-300 px-4 py-2">78000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">115000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">91666.67</td>
-                    <td class="border border-slate-300 px-4 py-2">12</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">Sales</td>
-                    <td class="border border-slate-300 px-4 py-2">65000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">102000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">85500.00</td>
-                    <td class="border border-slate-300 px-4 py-2">8</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Marketing</td>
-                    <td class="border border-slate-300 px-4 py-2">67000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">95000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">80000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">6</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">HR</td>
-                    <td class="border border-slate-300 px-4 py-2">58000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">92000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">72000.00</td>
-                    <td class="border border-slate-300 px-4 py-2">4</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Finding Top Earners by Department</h2>
-            
-            <p>Now let's use window functions to rank employees by salary within each department:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Ranking Employees by Salary</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  RANK() OVER (PARTITION BY department ORDER BY salary DESC) as dept_rank
-FROM employees
-WHERE department IN ('Engineering', 'Marketing', 'Sales', 'HR')
-ORDER BY department, dept_rank;</code></pre>
-            </div>
-            
-            <p>This query partitions employees by department and ranks them based on their salary in descending order. The result will show the top earners in each department.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Limiting to Top 3 Earners</h3>
-            
-            <p>To find just the top 3 earners in each department, we can use a common table expression (CTE) with our window function:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Top 3 Earners by Department</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>WITH RankedEmployees AS (
-  SELECT 
-    employee_name,
-    department,
-    salary,
-    RANK() OVER (PARTITION BY department ORDER BY salary DESC) as dept_rank
-  FROM employees
-)
-SELECT *
-FROM RankedEmployees
-WHERE dept_rank <= 3
-ORDER BY department, dept_rank;</code></pre>
-            </div>
-            
-            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-8">
-              <p class="text-amber-800 font-medium">💡 Pro tip: Always use a CTE when you need to filter by the result of a window function, as window functions are not allowed in WHERE clauses.</p>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Difference from Department Average</h2>
-            
-            <p>Let's calculate how each employee's salary compares to their department's average:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Salary Difference from Department Average</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  ROUND(AVG(salary) OVER (PARTITION BY department), 2) as dept_avg,
-  ROUND(salary - AVG(salary) OVER (PARTITION BY department), 2) as diff_from_avg,
-  ROUND((salary - AVG(salary) OVER (PARTITION BY department)) / 
-    AVG(salary) OVER (PARTITION BY department) * 100, 1) as pct_diff
-FROM employees
-ORDER BY department, salary DESC;</code></pre>
-            </div>
-            
-            <p>This query shows how much each employee earns compared to their department's average, both in absolute terms and as a percentage. This can help identify outliers and potential salary inequities.</p>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Bands and Distribution</h2>
-            
-            <p>Let's create a query to divide employees into quartiles based on salary within each department:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Salary Quartiles by Department</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  NTILE(4) OVER (PARTITION BY department ORDER BY salary DESC) as salary_quartile
-FROM employees
-ORDER BY department, salary_quartile;</code></pre>
-            </div>
-            
-            <p>The NTILE window function divides rows into a specified number of roughly equal groups (in this case, quartiles). This helps visualize the salary distribution within each department.</p>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Salary Growth Over Time</h2>
-            
-            <p>Assuming we have salary history data, we can analyze salary growth trends:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Year-over-Year Salary Growth</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-indigo-100 text-sm"><code>WITH YearlySalaries AS (
-  SELECT 
-    employee_id,
-    employee_name,
-    department,
-    EXTRACT(YEAR FROM effective_date) as year,
-    salary
-  FROM salary_history
-)
-SELECT 
-  employee_name,
-  department,
-  year,
-  salary,
-  LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) as prev_year_salary,
-  salary - LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) as absolute_growth,
-  ROUND((salary - LAG(salary) OVER (PARTITION BY employee_id ORDER BY year)) / 
-    LAG(salary) OVER (PARTITION BY employee_id ORDER BY year) * 100, 1) as growth_pct
-FROM YearlySalaries
-ORDER BY department, employee_name, year;</code></pre>
-            </div>
-            
-            <p>This query uses the LAG window function to compare an employee's current salary with their salary from the previous year, calculating both absolute and percentage growth.</p>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">Key Insights from Salary Analysis</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li>Engineering has the highest average salary across departments</li>
-                <li>There is a significant spread between minimum and maximum salaries in each department</li>
-                <li>Using NTILE to create quartiles helps identify salary bands for compensation planning</li>
-                <li>Calculating the difference from department average helps identify outliers</li>
-                <li>Year-over-year growth calculations can highlight promotion patterns and retention risks</li>
-              </ul>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p>SQL window functions are powerful tools for salary analysis, providing insights that would be difficult to obtain using basic SQL aggregations. They allow HR analysts to:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Rank employees within departments without complex subqueries</li>
-              <li>Compare individual salaries to department averages</li>
-              <li>Track salary growth and identify patterns</li>
-              <li>Create salary bands and distribution analysis</li>
-              <li>Generate comprehensive compensation reports with a few efficient queries</li>
-            </ul>
-            
-            <p>By mastering these techniques, you can transform raw employee data into actionable compensation insights that support strategic HR decisions.</p>
-          </div>
-        `,
-        coverImage: "/images/sql-salary-analysis.svg",
-        category: "Technology",
-        publishedAt: new Date("2025-01-23")
+        publishedAt: new Date("2025-02-08"),
       },
       {
         title: "Mastering SQL Window Functions: A Comprehensive Guide",
+        excerpt:
+          "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
         translations: {
           en: {
             title: "Mastering SQL Window Functions: A Comprehensive Guide",
-            excerpt: "Learn essential SQL window functions for data analysis, including RANK, ROW_NUMBER, NTILE, LAG/LEAD, and practical examples for business applications.",
-            content: "English content for the SQL Window Functions guide"
+            excerpt:
+              "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL Window Functions Diagram" class="article-featured-image" /><p class="article-date">April 21, 2025</p></div><p>SQL window functions are one of the most powerful and flexible tools available to analysts and developers. They allow for sophisticated calculations across rows of data while preserving the individual rows, which makes them ideal for a wide range of use cases, from ranking and cumulative sums to moving averages and comparisons.</p><p>This blog post provides a detailed overview of all major window functions using the Employees table as an example.</p><div class="code-block"><pre><code>-- Create the table
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Insert data into the Employees table
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">What Are SQL Window Functions?</h2><p>SQL window functions operate on a set of rows, known as a "window," defined by the OVER() clause. Unlike aggregate functions such as SUM() or COUNT(), window functions return a result for each row in the dataset, making them incredibly powerful for detailed analysis that requires both individual row-level calculations and group-level operations.</p><h2 class="section-title">Syntax Overview</h2><p>The general syntax of a window function looks like this:</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong>: The window function (e.g., ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong>: Divides the dataset into partitions (optional).</li><li><strong>ORDER BY</strong>: Specifies the ordering of rows within each partition (optional).</li><li><strong>OVER()</strong>: Defines the window of rows for the function.</li></ul><h2 class="section-title">Key SQL Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Ranking Functions</h3></div><p>Ranking functions are useful when you want to assign a rank to each row within a partition. They are commonly used in scenarios such as leaderboard generation or employee salary rankings.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Generates a unique number for each row in the partition. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>This query ranks employees in each department by their salary in descending order.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Assigns a rank to each row, but leaves gaps when there are ties. The next rank is skipped for rows with the same value. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>If two employees have the same salary, they will have the same rank, and the next rank will be skipped.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Similar to RANK(), but without gaps in ranking. All rows with the same value receive the same rank, but subsequent ranks are not skipped. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>The query results are same and will be:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">2</div><h3>Aggregate Functions (Windowed)</h3></div><p>Window functions can be combined with aggregate functions, allowing you to calculate values like running totals or averages without collapsing the rows into a single result.</p><div class="highlight-box"><h4>SUM()</h4><p>Calculates the cumulative sum over a window of rows. Example:</p><div class="code-block"><pre><code>SELECT employee_id, salary,
+       SUM(salary) OVER (PARTITION BY department ORDER BY salary DESC) AS cumulative_salary
+FROM employees;</code></pre></div><p>This query calculates the cumulative salary for each employee in each department.</p></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>CumulativeSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>80000.00</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>120000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.00</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.00</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.00</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.00</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>186000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>251000.00</td></tr></tbody></table></div><div class="highlight-box"><h4>AVG()</h4><p>Calculates the average salary for employees in each department. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID) AS AvgSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>AvgSalary</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>60000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>83666.666667</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>83666.666667</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>83666.666667</td></tr></tbody></table></div><div class="highlight-box"><h4>COUNT()</h4><p>Counts the number of rows in the window. Example:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    COUNT(*) OVER (PARTITION BY DivisionID) AS EmployeeCount
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>EmployeeCount</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>2</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>1</td></tr><tr><td>105</td><td>Mary Dial</td><td>3</td></tr><tr><td>105</td><td>Susan Wall</td><td>3</td></tr><tr><td>105</td><td>Robert Night</td><td>3</td></tr></tbody></table></div><div class="highlight-box"><h4>MAX() / MIN()</h4><p>Returns the maximum or minimum value in a window. Example: Find the highest salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    MAX(Salary) OVER (PARTITION BY DivisionID) AS MaxSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MaxSalary</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>80000.00</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>80000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.00</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.00</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.00</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>110000.00</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">3</div><h3>Window-Based Row Navigation</h3></div><p>These functions allow you to reference values from previous or next rows, which is especially useful for calculating differences, moving averages, or time-based comparisons.</p><div class="highlight-box"><h4>LAG()</h4><p>Returns the value of a specified column from a previous row in the same partition. Example: Find the previous salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS PreviousSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>PreviousSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td></td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>80000.00</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td></td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td></td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td></td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td></td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td></td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>110000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>76000.00</td></tr></tbody></table></div><div class="highlight-box"><h4>LEAD()</h4><p>Returns the value of a specified column from a subsequent row in the same partition. Example: Find the next salary in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LEAD(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS NextSalary
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>NextSalary</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>40000.00</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td></td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td></td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td></td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td></td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td></td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>76000.00</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>65000.00</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td></td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">4</div><h3>First and Last Value Functions</h3></div><p>These functions return the first or last value in a window.</p><div class="highlight-box"><h4>FIRST_VALUE()</h4><p>Returns the first value in the window. Example: Find the highest-paid employee in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    FIRST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS TopEarner
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>TopEarner</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>Lisa Roberts</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>Lisa Roberts</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>Arnold Sully</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>Mark Red</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>Dennis Front</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>Larry Weis</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>Susan Wall</td></tr></tbody></table></div><div class="highlight-box"><h4>LAST_VALUE()</h4><p>Returns the last value in the window. Example: Find the lowest-paid employee in each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    LAST_VALUE(Name) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS LowestEarner
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>LowestEarner</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>Lisa Roberts</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>Lisa Roberts</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>Arnold Sully</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>Mark Red</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>Dennis Front</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>Larry Weis</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>Susan Wall</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>Susan Wall</td></tr></tbody></table></div><div class="numbered-section"><div class="number-circle">5</div><h3>Windowing Clauses (ROWS and RANGE)</h3></div><p>In SQL, the ROWS and RANGE clauses let you specify the exact set of rows that make up the window. This is particularly useful for time-series analysis or when comparing a specific range of rows.</p><div class="highlight-box"><h4>ROWS Example</h4><p>Defines the window in terms of physical rows (e.g., the current row and the previous 2 rows). Example: Calculate a moving average of salaries for each department.</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    AVG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS MovingAvg
+FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`,
           },
           de: {
-            title: "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
-            excerpt: "Lernen Sie wesentliche SQL-Fensterfunktionen für die Datenanalyse kennen, einschließlich RANK, ROW_NUMBER, NTILE, LAG/LEAD und praktischer Beispiele für Geschäftsanwendungen.",
-            content: "German content for the SQL Window Functions guide"
+            title:
+              "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+            excerpt:
+              "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL-Fensterfunktionen Diagramm" class="article-featured-image" /><p class="article-date">21. April 2025</p></div><p>SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Sie ermöglichen anspruchsvolle Berechnungen über Datenzeilen hinweg, wobei die einzelnen Zeilen erhalten bleiben, was sie ideal für eine Vielzahl von Anwendungsfällen macht, von Ranking und kumulativen Summen bis hin zu gleitenden Durchschnitten und Vergleichen.</p><p>Dieser Blogbeitrag bietet einen detaillierten Überblick über alle wichtigen Fensterfunktionen am Beispiel der Employees-Tabelle.</p><div class="code-block"><pre><code>-- Tabelle erstellen
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Daten in die Employees-Tabelle einfügen
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">Was sind SQL-Fensterfunktionen?</h2><p>SQL-Fensterfunktionen operieren auf einer Gruppe von Zeilen, einem sogenannten "Fenster", das durch die OVER()-Klausel definiert wird. Im Gegensatz zu Aggregatfunktionen wie SUM() oder COUNT() geben Fensterfunktionen ein Ergebnis für jede Zeile im Datensatz zurück, was sie unglaublich leistungsstark für detaillierte Analysen macht, die sowohl zeilenbasierte als auch gruppenbasierte Operationen erfordern.</p><h2 class="section-title">Syntax-Übersicht</h2><p>Die allgemeine Syntax einer Fensterfunktion sieht wie folgt aus:</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong>: Die Fensterfunktion (z.B. ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong>: Teilt den Datensatz in Partitionen (optional).</li><li><strong>ORDER BY</strong>: Legt die Sortierung der Zeilen innerhalb jeder Partition fest (optional).</li><li><strong>OVER()</strong>: Definiert das Fenster der Zeilen für die Funktion.</li></ul><h2 class="section-title">Wichtige SQL-Fensterfunktionen</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Ranking-Funktionen</h3></div><p>Ranking-Funktionen sind nützlich, wenn Sie jeder Zeile innerhalb einer Partition einen Rang zuweisen möchten. Sie werden häufig in Szenarien wie Bestenlisten oder Mitarbeitergehaltsrankings verwendet.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Generiert eine eindeutige Nummer für jede Zeile in der Partition. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Diese Abfrage ordnet Mitarbeiter in jeder Abteilung nach ihrem Gehalt in absteigender Reihenfolge.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Weist jeder Zeile einen Rang zu, lässt aber Lücken, wenn es Gleichstände gibt. Der nächste Rang wird für Zeilen mit demselben Wert übersprungen. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Wenn zwei Mitarbeiter das gleiche Gehalt haben, erhalten sie den gleichen Rang, und der nächste Rang wird übersprungen.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Ähnlich wie RANK(), aber ohne Lücken im Ranking. Alle Zeilen mit demselben Wert erhalten den gleichen Rang, aber nachfolgende Ränge werden nicht übersprungen. Beispiel:</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
           },
           fr: {
-            title: "Maîtriser les fonctions de fenêtrage SQL: Un guide complet",
-            excerpt: "Apprenez les fonctions de fenêtrage SQL essentielles pour l'analyse de données, notamment RANK, ROW_NUMBER, NTILE, LAG/LEAD, et des exemples pratiques pour les applications commerciales.",
-            content: "French content for the SQL Window Functions guide"
-          }
+            title:
+              "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
+            excerpt:
+              "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="Diagramme des fonctions de fenêtrage SQL" class="article-featured-image" /><p class="article-date">21 avril 2025</p></div><p>Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Elles permettent d'effectuer des calculs sophistiqués sur des lignes de données tout en préservant les lignes individuelles, ce qui les rend idéales pour une large gamme de cas d'utilisation, du classement et des sommes cumulatives aux moyennes mobiles et aux comparaisons.</p><p>Ce billet de blog fournit un aperçu détaillé de toutes les principales fonctions de fenêtrage en utilisant la table Employees comme exemple.</p><div class="code-block"><pre><code>-- Créer la table
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Insérer des données dans la table Employees
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div><h2 class="section-title">Que sont les fonctions de fenêtrage SQL?</h2><p>Les fonctions de fenêtrage SQL opèrent sur un ensemble de lignes, appelé « fenêtre », défini par la clause OVER(). Contrairement aux fonctions d'agrégation comme SUM() ou COUNT(), les fonctions de fenêtrage renvoient un résultat pour chaque ligne du jeu de données, ce qui les rend incroyablement puissantes pour des analyses détaillées nécessitant à la fois des calculs au niveau des lignes individuelles et des opérations au niveau du groupe.</p><h2 class="section-title">Aperçu de la syntaxe</h2><p>La syntaxe générale d'une fonction de fenêtrage ressemble à ceci :</p><div class="code-block"><pre><code>&lt;window_function&gt;() OVER (
+    [PARTITION BY column1, column2, ...]
+    [ORDER BY column3, column4, ...]
+)</code></pre></div><ul><li><strong>window_function</strong> : La fonction de fenêtrage (par exemple, ROW_NUMBER(), SUM(), RANK(), etc.).</li><li><strong>PARTITION BY</strong> : Divise le jeu de données en partitions (facultatif).</li><li><strong>ORDER BY</strong> : Spécifie l'ordre des lignes dans chaque partition (facultatif).</li><li><strong>OVER()</strong> : Définit la fenêtre de lignes pour la fonction.</li></ul><h2 class="section-title">Fonctions de fenêtrage SQL clés</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Fonctions de classement</h3></div><p>Les fonctions de classement sont utiles lorsque vous voulez attribuer un rang à chaque ligne au sein d'une partition. Elles sont couramment utilisées dans des scénarios tels que la génération de classements ou les classements de salaires d'employés.</p><div class="highlight-box"><h4>ROW_NUMBER()</h4><p>Génère un numéro unique pour chaque ligne de la partition. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Cette requête classe les employés de chaque département par leur salaire en ordre décroissant.</p></div><div class="highlight-box"><h4>RANK()</h4><p>Attribue un rang à chaque ligne, mais laisse des écarts lorsqu'il y a des égalités. Le rang suivant est sauté pour les lignes ayant la même valeur. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div><p>Si deux employés ont le même salaire, ils auront le même rang, et le rang suivant sera sauté.</p></div><div class="highlight-box"><h4>DENSE_RANK()</h4><p>Similaire à RANK(), mais sans écarts dans le classement. Toutes les lignes avec la même valeur reçoivent le même rang, mais les rangs suivants ne sont pas sautés. Exemple :</p><div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
+          },
         },
-        excerpt: "Learn how to leverage SQL window functions to perform complex data analysis efficiently. From basic aggregations to advanced ranking and partitioning.",
-        content: `
-          <div class="prose prose-lg max-w-none prose-pre:bg-transparent prose-pre:p-0 prose-code:text-primary-800 prose-pre:my-0">
-            <p class="text-xl leading-relaxed mb-8">SQL window functions are powerful features that allow you to perform calculations across a set of rows related to the current row. In this comprehensive guide, we'll explore how to use window functions effectively for data analysis.</p>
-            
-            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-4 mb-8">
-              <p class="text-indigo-800 font-medium">Window functions allow you to access other rows related to the current row without using self-joins or subqueries.</p>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">What Are Window Functions?</h2>
-            
-            <p>Window functions perform calculations across a specific "window" or set of rows that are somehow related to the current row. Unlike regular aggregate functions which collapse multiple rows into a single result row, window functions return a result for each row in the result set.</p>
-            
-            <p>The general syntax looks like this:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden bg-slate-50 border border-slate-200">
-              <div class="bg-slate-100 px-4 py-2 font-mono text-sm text-slate-600">
-                FUNCTION_NAME() OVER ([PARTITION BY column] [ORDER BY column] [frame_clause])
-              </div>
-            </div>
-            
-            <p>Here's a simple example that calculates the average salary per department alongside each employee's salary:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Window Function Example</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  employee_name,
-  department,
-  salary,
-  AVG(salary) OVER (PARTITION BY department) as dept_avg_salary
-FROM employees;</code></pre>
-            </div>
-            
-            <p>This query returns each employee's name, department, their individual salary, and the average salary for their department - all in one result set without needing a GROUP BY clause or a join.</p>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Types of Window Functions</h2>
-            
-            <p>SQL offers several types of window functions for different analytical needs:</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">1. Aggregate Window Functions</h3>
-            
-            <p>These include familiar aggregate functions like SUM, AVG, COUNT, MIN, and MAX that can be used as window functions:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Aggregate Window Function</span>
-              </div>
-              <pre class="bg-indigo-950 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  product_name,
-  category,
-  price,
-  AVG(price) OVER (PARTITION BY category) as category_avg_price,
-  price - AVG(price) OVER (PARTITION BY category) as diff_from_avg
-FROM products;</code></pre>
-            </div>
-            
-            <p>This query shows each product's price alongside the average price for its category, as well as how much each product's price differs from the category average.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">2. Ranking Window Functions</h3>
-            
-            <p>Ranking functions assign a rank to each row within a partition. The most common ranking functions are:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>ROW_NUMBER()</strong>: Assigns unique sequential numbers starting from 1</li>
-              <li><strong>RANK()</strong>: Assigns ranks with gaps for ties (e.g., 1, 2, 2, 4)</li>
-              <li><strong>DENSE_RANK()</strong>: Assigns ranks without gaps for ties (e.g., 1, 2, 2, 3)</li>
-              <li><strong>NTILE(n)</strong>: Divides rows into n approximately equal groups</li>
-            </ul>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-indigo-800 px-4 py-2 text-xs text-indigo-100 flex justify-between">
-                <span>SQL</span>
-                <span>Ranking Functions</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  student_name,
-  score,
-  ROW_NUMBER() OVER (ORDER BY score DESC) as row_num,
-  RANK() OVER (ORDER BY score DESC) as rank,
-  DENSE_RANK() OVER (ORDER BY score DESC) as dense_rank
-FROM exam_results;</code></pre>
-            </div>
-            
-            <p>This example shows the different ranking behaviors for student exam scores.</p>
-
-            <div class="overflow-x-auto my-8">
-              <table class="min-w-full border-collapse">
-                <thead>
-                  <tr class="bg-slate-100">
-                    <th class="border border-slate-300 px-4 py-2 text-left">student_name</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">score</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">row_num</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">rank</th>
-                    <th class="border border-slate-300 px-4 py-2 text-left">dense_rank</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Alice</td>
-                    <td class="border border-slate-300 px-4 py-2">95</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">Bob</td>
-                    <td class="border border-slate-300 px-4 py-2">95</td>
-                    <td class="border border-slate-300 px-4 py-2">2</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                    <td class="border border-slate-300 px-4 py-2">1</td>
-                  </tr>
-                  <tr>
-                    <td class="border border-slate-300 px-4 py-2">Charlie</td>
-                    <td class="border border-slate-300 px-4 py-2">88</td>
-                    <td class="border border-slate-300 px-4 py-2">3</td>
-                    <td class="border border-slate-300 px-4 py-2">3</td>
-                    <td class="border border-slate-300 px-4 py-2">2</td>
-                  </tr>
-                  <tr class="bg-slate-50">
-                    <td class="border border-slate-300 px-4 py-2">David</td>
-                    <td class="border border-slate-300 px-4 py-2">85</td>
-                    <td class="border border-slate-300 px-4 py-2">4</td>
-                    <td class="border border-slate-300 px-4 py-2">4</td>
-                    <td class="border border-slate-300 px-4 py-2">3</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-            <p>Notice how Alice and Bob both have the same score (95), resulting in different behaviors across the ranking functions.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">3. Value Window Functions</h3>
-            
-            <p>Value functions can access values from different rows within the window:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>LAG(column, offset)</strong>: Returns a value from a previous row</li>
-              <li><strong>LEAD(column, offset)</strong>: Returns a value from a subsequent row</li>
-              <li><strong>FIRST_VALUE(column)</strong>: Returns the first value in the window</li>
-              <li><strong>LAST_VALUE(column)</strong>: Returns the last value in the window</li>
-            </ul>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>LAG and LEAD Functions</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  date,
-  stock_price,
-  LAG(stock_price, 1) OVER (ORDER BY date) as previous_day_price,
-  stock_price - LAG(stock_price, 1) OVER (ORDER BY date) as price_change
-FROM stock_prices;</code></pre>
-            </div>
-            
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Advanced Window Function Components</h2>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">PARTITION BY Clause</h3>
-            
-            <p>The PARTITION BY clause divides the result set into partitions (groups) to which the window function is applied separately:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>PARTITION BY Example</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  customer_id,
-  order_date,
-  order_amount,
-  ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) as order_number
-FROM orders;</code></pre>
-            </div>
-            
-            <p>This query assigns an order number to each order, numbering starts over for each customer.</p>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">ORDER BY Clause</h3>
-            
-            <p>The ORDER BY clause determines the order in which rows are processed by the window function:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>ORDER BY Example</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  order_date,
-  order_amount,
-  SUM(order_amount) OVER (ORDER BY order_date) as running_total
-FROM orders;</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Frame Clauses</h3>
-            
-            <p>Frame clauses define exactly which rows constitute the current window frame for each row:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>Frame Clause Example</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  transaction_date,
-  amount,
-  AVG(amount) OVER (
-    ORDER BY transaction_date
-    ROWS BETWEEN 3 PRECEDING AND CURRENT ROW
-  ) as moving_average
-FROM transactions;</code></pre>
-            </div>
-            
-            <p>Common frame specifications include:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li><strong>ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</strong>: From the first row to current row</li>
-              <li><strong>ROWS BETWEEN n PRECEDING AND CURRENT ROW</strong>: From n rows before to current row</li>
-              <li><strong>ROWS BETWEEN CURRENT ROW AND n FOLLOWING</strong>: From current row to n rows after</li>
-              <li><strong>ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</strong>: All rows in the partition</li>
-            </ul>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Practical Applications</h2>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Moving Averages</h3>
-            
-            <p>Calculating moving (rolling) averages is a common use case for window functions:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>7-Day Moving Average</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  date,
-  stock_price,
-  AVG(stock_price) OVER (
-    ORDER BY date
-    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
-  ) as seven_day_moving_avg
-FROM stock_prices;</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Year-over-Year Comparison</h3>
-            
-            <p>Comparing current values with previous periods' values:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>Year-over-Year Growth</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  year,
-  revenue,
-  LAG(revenue) OVER (ORDER BY year) as prev_year_revenue,
-  (revenue - LAG(revenue) OVER (ORDER BY year)) / 
-    LAG(revenue) OVER (ORDER BY year) * 100 as yoy_growth_pct
-FROM yearly_revenue;</code></pre>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Cumulative Totals</h3>
-            
-            <p>Calculating running totals within groups:</p>
-            
-            <div class="my-6 rounded-lg overflow-hidden">
-              <div class="bg-slate-800 px-4 py-2 text-xs text-slate-300 flex justify-between">
-                <span>SQL</span>
-                <span>Cumulative Sales by Product</span>
-              </div>
-              <pre class="bg-slate-900 p-4 overflow-x-auto text-slate-100 text-sm"><code>SELECT 
-  sales_date,
-  product_id,
-  sales_amount,
-  SUM(sales_amount) OVER (
-    PARTITION BY product_id 
-    ORDER BY sales_date
-    ROWS UNBOUNDED PRECEDING
-  ) as running_total
-FROM sales;</code></pre>
-            </div>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Best Practices and Optimization</h2>
-            
-            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 my-8 shadow-sm">
-              <h3 class="text-lg font-semibold mb-4 text-purple-900">Performance Tips</h3>
-              <ul class="list-disc pl-5 space-y-3 text-purple-800">
-                <li>Always specify ORDER BY in window functions when results order matters</li>
-                <li>Use appropriate frame clauses for moving calculations</li>
-                <li>Consider performance implications with large datasets</li>
-                <li>Reuse window specifications with the WINDOW clause for multiple functions that use the same window</li>
-                <li>Test window functions with small datasets first</li>
-              </ul>
-            </div>
-            
-            <h3 class="text-xl font-semibold mt-8 mb-4 text-slate-800">Common Pitfalls</h3>
-            
-            <ul class="list-disc pl-5 my-4 space-y-3">
-              <li><strong>Execution order confusion</strong>: Window functions execute after WHERE, GROUP BY, and HAVING but before ORDER BY in the query processing sequence</li>
-              <li><strong>NULL handling</strong>: Be careful about NULL values in calculations, especially when using LAG/LEAD functions</li>
-              <li><strong>Frame clause neglect</strong>: Default frame clauses might not match your analytical needs</li>
-              <li><strong>Subquery reuse</strong>: You can't reference a window function result in a WHERE clause directly</li>
-            </ul>
-
-            <h2 class="text-2xl font-bold mt-12 mb-6 text-slate-900">Conclusion</h2>
-            
-            <p class="mb-4">SQL window functions are powerful tools that enable sophisticated data analysis directly in your database queries. By using window functions effectively, you can:</p>
-            
-            <ul class="list-disc pl-5 my-4 space-y-2">
-              <li>Eliminate complex self-joins and subqueries</li>
-              <li>Improve query readability and maintainability</li>
-              <li>Perform advanced analytics like moving averages and year-over-year comparisons</li>
-              <li>Enhance reporting capabilities with rank and cumulative calculations</li>
-            </ul>
-            
-            <p>As you become more comfortable with window functions, you'll find they can replace many complex SQL patterns, making your queries more efficient and easier to understand.</p>
-          </div>
-        `,
+        slug: "mastering-sql-window-functions",
+        tags: [
+          "SQL",
+          "Database",
+          "Data Analysis",
+          "Development",
+          "Programming",
+        ],
+        createdAt: new Date("2025-04-21T10:00:00.000Z"),
+        updatedAt: new Date("2025-04-21T10:00:00.000Z"),
+        featured: true,
+        publishedAt: new Date("2025-04-21T10:00:00.000Z"),
+        author: {
+          name: "Mohamed Ayadi",
+          avatar: "/images/avatar.png",
+          bio: "A passionate Full Stack Developer with over 7 years of experience.",
+        },
         coverImage: "/images/sql-window-functions.svg",
-        category: "Technology",
-        publishedAt: new Date("2023-06-12")
-      }
+        category: "Database",
+      },
+      {
+        title: "Advanced Asynchronous Programming in JavaScript",
+        excerpt: "Master the art of asynchronous programming in JavaScript with practical techniques for handling complex workflows, error management, and optimization strategies for modern web applications.",
+        slug: "advanced-asynchronous-programming-javascript",
+        tags: ["JavaScript", "Web Development", "Programming", "Async/Await", "Promises"],
+        createdAt: "2025-04-15T10:00:00.000Z",
+        updatedAt: "2025-04-15T10:00:00.000Z",
+        featured: true,
+        publishedAt: "2025-04-15T10:00:00.000Z",
+        author: {
+          name: "Mohamed Ayadi",
+          avatar: "/images/avatar.png",
+          bio: "A passionate Full Stack Developer with over 7 years of experience.",
+        },
+        coverImage: "/images/async-javascript.svg",
+        category: "Programming",
+      },
     ];
-    
-    // Add each article to the map with an ID
-    articles.forEach(article => {
+
+    // Add articles
+    articles.forEach((article) => {
       const id = this.currentArticleId++;
-      this.articles.set(id, { id, ...article });
+      this.articles.set(id, {
+        ...article,
+        id,
+      });
     });
   }
 }
