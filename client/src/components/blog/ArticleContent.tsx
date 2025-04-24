@@ -24,14 +24,16 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
 
   const keywords = getKeywords(article);
   
-  // Replace 2023 with 2025 in the date display
-  const formattedDate = formatDate(article.publishedAt.toString()).replace("2023", "2025");
+  // Format the date safely
+  const formattedDate = article.publishedAt 
+    ? formatDate(article.publishedAt instanceof Date ? article.publishedAt : new Date(article.publishedAt)).replace("2023", "2025")
+    : "April 2025";
 
   return (
     <article className="max-w-3xl mx-auto px-4 py-8">
       {/* Category Heading */}
       <div className="uppercase tracking-wider font-medium mb-2">
-        <span className="bg-purple-700 text-white px-3 py-1 rounded-md font-medium tracking-wider text-sm shadow-sm">
+        <span className="bg-blue-700 text-white px-3 py-1 rounded-md font-medium tracking-wider text-sm shadow-sm">
           {article.category}
         </span> /
       </div>
@@ -81,13 +83,13 @@ const ArticleContent = ({ article }: ArticleContentProps) => {
           <div className="font-medium text-lg text-white">Mohamed Abdellatif Ayadi</div>
           <div className="text-white text-sm font-medium mt-1">{t('blog.authorDescription')}</div>
           <div className="flex mt-2 space-x-3">
-            <a href="https://linkedin.com/in/mohamed-abdellatif-ayadi" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-300">
+            <a href="https://linkedin.com/in/mohamed-abdellatif-ayadi" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300">
               <FaLinkedin size={18} />
             </a>
-            <a href="https://github.com/Mayedi007" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-300">
+            <a href="https://github.com/Mayedi007" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-300">
               <FaGithub size={18} />
             </a>
-            <a href="mailto:mohamed.ayadi.data@gmail.com" className="text-white hover:text-purple-300">
+            <a href="mailto:mohamed.ayadi.data@gmail.com" className="text-white hover:text-blue-300">
               <FaEnvelope size={18} />
             </a>
           </div>

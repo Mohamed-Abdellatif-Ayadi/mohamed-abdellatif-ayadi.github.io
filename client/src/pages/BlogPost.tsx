@@ -67,11 +67,9 @@ const BlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>
-          {article.translations && article.translations[language] 
+        <title>{`${article.translations && article.translations[language] 
             ? article.translations[language].title 
-            : article.title} - Mohamed Abdellatif Ayadi
-        </title>
+            : article.title} - Mohamed Abdellatif Ayadi`}</title>
         <meta 
           name="description" 
           content={article.translations && article.translations[language] 
@@ -90,7 +88,7 @@ const BlogPost = () => {
             ? article.translations[language].excerpt 
             : article.excerpt}
         />
-        <meta property="og:image" content={article.coverImage} />
+        <meta property="og:image" content={article.coverImage || ''} />
         <meta property="og:type" content="article" />
       </Helmet>
       <ArticleContent article={article} />

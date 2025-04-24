@@ -9,33 +9,56 @@ type ArticleCardProps = {
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
   const { t, language } = useLanguage();
+  
+  // If article is undefined or missing critical properties, show a placeholder
+  if (!article || !article.id) {
+    return (
+      <article className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full">
+        <div className="w-full h-48 bg-gray-200"></div>
+        <div className="p-6 flex flex-col flex-grow">
+          <div className="h-20 bg-gray-100 mb-4"></div>
+        </div>
+      </article>
+    );
+  }
+  
+  // Get the title and excerpt based on the current language or fallback
+  const title = article.translations && article.translations[language]?.title 
+    ? article.translations[language].title 
+    : (article.title || 'Untitled Article');
+    
+  const excerpt = article.translations && article.translations[language]?.excerpt 
+    ? article.translations[language].excerpt 
+    : (article.excerpt || 'No excerpt available');
+    
+  // Ensure we have a date to format
+  const publishDate = article.publishedAt ? formatDate(article.publishedAt) : '';
+  
   return (
     <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
       <img 
-        src={article.coverImage} 
-        alt={article.title} 
+        src={article.coverImage || '/images/default-cover.svg'} 
+        alt={title} 
         className="w-full h-48 object-cover"
       />
       <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-center mb-4">
           <span className="text-xs font-medium px-3 py-1 tracking-wider rounded-md bg-purple-700 text-white shadow-sm">
-            {article.category}
+            {article.category || 'Uncategorized'}
           </span>
-          <span className="ml-2 text-xs text-slate-500">
-            {formatDate(article.publishedAt)}
-          </span>
+          {publishDate && (
+            <span className="ml-2 text-xs text-slate-500">
+              {publishDate}
+            </span>
+          )}
         </div>
         <Link href={`/blog/${article.id}`}>
           <h3 className="text-xl font-bold mb-2 text-purple-900 hover:text-purple-700 transition-colors">
-            {article.translations && article.translations[language] 
-              ? article.translations[language].title 
-              : article.title}
+            {title}
           </h3>
         </Link>
         <p className="text-slate-800 mb-4 line-clamp-3 font-medium">
-          {article.translations && article.translations[language] 
-            ? truncateText(article.translations[language].excerpt, 150) 
-            : truncateText(article.excerpt, 150)}
+          {truncateText(excerpt, 150)}
         </p>
         <div className="mt-auto pt-2">
           <Link 

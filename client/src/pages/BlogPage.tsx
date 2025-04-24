@@ -24,6 +24,11 @@ const BlogPage = () => {
   });
 
   const filteredArticles = articles?.filter((article) => {
+    // Check if article and its properties exist before using toLowerCase
+    if (!article || !article.title || !article.excerpt) {
+      return false;
+    }
+    
     const matchesSearch = 
       article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
