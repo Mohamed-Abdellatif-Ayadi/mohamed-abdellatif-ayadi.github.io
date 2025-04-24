@@ -412,15 +412,15 @@ export class MemStorage implements IStorage {
 
     // Special handling for specific articles with full translations
     try {
-      const fs = require("fs");
-      const path = require("path");
+      const { promises: fs } = await import("fs");
+      const { join } = await import("path");
       
       // For SQL Window Functions article (id 1)
       if (id === 1) {
         // If German or French, load from separate complete translation files
         if (language === "de") {
-          const germanContent = fs.readFileSync(
-            path.join(__dirname, "data/sql-article-de.txt"),
+          const germanContent = await fs.readFile(
+            join(__dirname, "data/sql-article-de.txt"),
             "utf8",
           );
           return {
@@ -432,8 +432,8 @@ export class MemStorage implements IStorage {
             content: germanContent,
           };
         } else if (language === "fr") {
-          const frenchContent = fs.readFileSync(
-            path.join(__dirname, "data/sql-article-fr.txt"),
+          const frenchContent = await fs.readFile(
+            join(__dirname, "data/sql-article-fr.txt"),
             "utf8",
           );
           return {
@@ -447,8 +447,8 @@ export class MemStorage implements IStorage {
         } else {
           // For English, use the original content
           const articleData = JSON.parse(
-            fs.readFileSync(
-              path.join(
+            await fs.readFile(
+              join(
                 __dirname,
                 "data/articles/mastering-sql-window-functions.json",
               ),
