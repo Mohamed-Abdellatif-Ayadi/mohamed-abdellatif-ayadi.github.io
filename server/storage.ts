@@ -554,7 +554,347 @@ export class MemStorage implements IStorage {
       },
     };
 
+    // Add a new article about SQL Practical Challenge on Salary Analysis
+    const sqlChallengeArticleData = {
+      title: "SQL Practical Challenge: Salary Analysis Using Window Functions",
+      excerpt:
+        "Explore a real-world SQL challenge involving salary analysis across departments. Learn how to leverage window functions like RANK(), ROW_NUMBER(), and LEAD() to solve complex data analysis problems.",
+      slug: "sql-practical-challenge-salary-analysis",
+      tags: ["SQL", "Database", "Data Analysis", "Window Functions", "Salary Analysis"],
+      createdAt: "2025-04-24T10:00:00.000Z",
+      updatedAt: "2025-04-24T10:00:00.000Z",
+      featured: true,
+      publishedAt: "2025-04-24T10:00:00.000Z",
+      author: {
+        name: "Mohamed Ayadi",
+        avatar: "/images/avatar.png",
+        bio: "A passionate Full Stack Developer with over 7 years of experience.",
+      },
+    };
+
     const articles: Omit<Article, "id">[] = [
+      // New SQL Practical Challenge article
+      {
+        title: sqlChallengeArticleData.title,
+        excerpt: sqlChallengeArticleData.excerpt,
+        slug: sqlChallengeArticleData.slug,
+        category: "Technology",
+        coverImage: "/images/sql-salary-analysis.svg",
+        publishedAt: sqlChallengeArticleData.publishedAt,
+        author: sqlChallengeArticleData.author,
+        tags: sqlChallengeArticleData.tags,
+        featured: sqlChallengeArticleData.featured,
+        translations: {
+          en: {
+            title: "SQL Practical Challenge: Salary Analysis Using Window Functions",
+            excerpt: "Explore a real-world SQL challenge involving salary analysis across departments. Learn how to leverage window functions like RANK(), ROW_NUMBER(), and LEAD() to solve complex data analysis problems.",
+            content: `<div class="article-header"><img src="/images/sql-salary-analysis.svg" alt="SQL Salary Analysis Diagram" class="article-featured-image" /><p class="article-date">April 24, 2025</p></div>
+<p>Recently, I encountered an interesting SQL challenge. The task required using window functions to analyze employee salaries within departments. This is a powerful yet sometimes tricky feature in SQL.</p>
+<p>Here is the problem description and how I solved it.</p>
+
+<h2 class="section-title">Problem Description</h2>
+
+<p>In this MySQL challenge, your task is to analyze salary rankings within each company department. Construct a query that accomplishes the following objectives:</p>
+
+<ul>
+  <li><strong>Individual Salary Rankings:</strong> For each department represented by 'DivisionID', rank the employees based on their salaries in descending order.</li>
+  <li><strong>Salary Comparisons:</strong> Calculate the difference in salary (SalaryDifference) between each employee and the next lower-paid employee in the same department. For the lowest-paid employee in each department, the 'SalaryDifference should be displayed as 'NULL'.</li>
+  <li><strong>Highlight Top Earners:</strong> Include a column titled 'IsTopEarner' that displays "Yes" for the highest-paid employee in each department and "No" for all other employees.</li>
+</ul>
+
+<div class="table-container">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>DivisionID</th>
+      <th>ManagerID</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>356</td>
+      <td>Daniel Smith</td>
+      <td>100</td>
+      <td>133</td>
+      <td>40000</td>
+    </tr>
+    <tr>
+      <td>122</td>
+      <td>Arnold Sully</td>
+      <td>101</td>
+      <td>null</td>
+      <td>60000</td>
+    </tr>
+    <tr>
+      <td>467</td>
+      <td>Lisa Roberts</td>
+      <td>100</td>
+      <td>null</td>
+      <td>80000</td>
+    </tr>
+    <tr>
+      <td>112</td>
+      <td>Mary Dial</td>
+      <td>105</td>
+      <td>467</td>
+      <td>65000</td>
+    </tr>
+    <tr>
+      <td>775</td>
+      <td>Dennis Front</td>
+      <td>103</td>
+      <td>null</td>
+      <td>90000</td>
+    </tr>
+    <tr>
+      <td>111</td>
+      <td>Larry Weis</td>
+      <td>104</td>
+      <td>35534</td>
+      <td>75000</td>
+    </tr>
+    <tr>
+      <td>222</td>
+      <td>Mark Red</td>
+      <td>102</td>
+      <td>133</td>
+      <td>86000</td>
+    </tr>
+    <tr>
+      <td>577</td>
+      <td>Robert Night</td>
+      <td>105</td>
+      <td>12353</td>
+      <td>76000</td>
+    </tr>
+    <tr>
+      <td>133</td>
+      <td>Susan Wall</td>
+      <td>105</td>
+      <td>577</td>
+      <td>110000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>Table name:</strong> Employees</p>
+<p><strong>Notice:</strong> The result should include the following columns (ordered by SalaryRank in ascending order):</p>
+<ul>
+  <li>DivisionID (ID of the department)</li>
+  <li>Name (Name of the employee)</li>
+  <li>Salary (Salary of the employee)</li>
+  <li>SalaryRank (Rank of the employee's salary within the department, with 1 being the highest salary)</li>
+  <li>SalaryDifference (Difference in salary between the employee and the next lower-paid employee in the same department)</li>
+  <li>IsTopEarner (Indicates if the employee is the top earner in their department)</li>
+</ul>
+
+<div class="code-block"><pre><code>-- Create the table
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DivisionID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2)
+);
+
+-- Insert data into the Employees table
+INSERT INTO Employees (ID, Name, DivisionID, ManagerID, Salary)
+VALUES
+(356, 'Daniel Smith', 100, 133, 40000),
+(122, 'Arnold Sully', 101, NULL, 60000),
+(467, 'Lisa Roberts', 100, NULL, 80000),
+(112, 'Mary Dial', 105, 467, 65000),
+(775, 'Dennis Front', 103, NULL, 90000),
+(111, 'Larry Weis', 104, 35534, 75000),
+(222, 'Mark Red', 102, 133, 86000),
+(577, 'Robert Night', 105, 12353, 76000),
+(133, 'Susan Wall', 105, 577, 110000);</code></pre></div>
+
+<h2 class="section-title">Solution & Analysis</h2>
+
+<div class="numbered-section">
+  <div class="number-circle">1</div>
+  <h3>Analyze the Problem</h3>
+</div>
+
+<p>This is a typical application of SQL window functions, which involves:</p>
+
+<ul>
+  <li>Grouping the data by department (PARTITION BY DivisionID).</li>
+  <li>Ranking rows based on a specific condition (RANK() or ROW_NUMBER()).</li>
+  <li>Comparing the current row to adjacent rows (LEAD()).</li>
+  <li>Identifying the first row in each group (FIRST_VALUE() or using conditional logic).</li>
+</ul>
+
+<div class="numbered-section">
+  <div class="number-circle">2</div>
+  <h3>Writing the Query</h3>
+</div>
+
+<p>Here is the complete query that satisfies the requirements:</p>
+
+<div class="code-block"><pre><code>SELECT
+    DivisionID,
+    Name,
+    Salary,
+    ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank,
+    Salary - LEAD(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryDifference,
+    CASE
+        WHEN RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) = 1 THEN 'Yes'
+        ELSE 'No'
+    END AS IsTopEarner
+FROM Employees
+ORDER BY DivisionID, SalaryRank;</code></pre></div>
+
+<div class="numbered-section">
+  <div class="number-circle">3</div>
+  <h3>Query Explanation</h3>
+</div>
+
+<div class="highlight-box">
+  <h4>Salary Ranking</h4>
+  <p>We use RANK() or ROW_NUMBER() to rank employees by salary within each department (PARTITION BY DivisionID), ordered by salary in descending order:</p>
+  <div class="code-block"><pre><code>RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
+# or
+ROW_NUMBER() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank</code></pre></div>
+</div>
+
+<div class="highlight-box">
+  <h4>Salary Difference Calculation</h4>
+  <p>The LEAD() function retrieves the salary of the next row (lower-paid employee) within the same department (PARTITION BY DivisionID), and calculates the difference between the current and next employee's salary:</p>
+  <div class="code-block"><pre><code>Salary - LEAD(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryDifference</code></pre></div>
+  <p>For the lowest-paid employee, since LEAD() cannot fetch the next row, the difference will be NULL.</p>
+</div>
+
+<div class="highlight-box">
+  <h4>Highlight Top Earners</h4>
+  <p>Using a CASE statement, we check if the employee has the highest salary in their department (SalaryRank = 1). If so, mark as "Yes", otherwise "No":</p>
+  <div class="code-block"><pre><code>CASE
+    WHEN RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) = 1 THEN 'Yes'
+    ELSE 'No'
+END AS IsTopEarner</code></pre></div>
+</div>
+
+<h2 class="section-title">Expected Results</h2>
+
+<div class="table-container">
+<table>
+  <thead>
+    <tr>
+      <th>DivisionID</th>
+      <th>Name</th>
+      <th>Salary</th>
+      <th>SalaryRank</th>
+      <th>SalaryDifference</th>
+      <th>IsTopEarner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100</td>
+      <td>Lisa Roberts</td>
+      <td>80000.00</td>
+      <td>1</td>
+      <td>40000.00</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>Daniel Smith</td>
+      <td>40000.00</td>
+      <td>2</td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>Arnold Sully</td>
+      <td>60000.00</td>
+      <td>1</td>
+      <td>NULL</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>Mark Red</td>
+      <td>86000.00</td>
+      <td>1</td>
+      <td>NULL</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>Dennis Front</td>
+      <td>90000.00</td>
+      <td>1</td>
+      <td>NULL</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>Larry Weis</td>
+      <td>75000.00</td>
+      <td>1</td>
+      <td>NULL</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>Susan Wall</td>
+      <td>110000.00</td>
+      <td>1</td>
+      <td>34000.00</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>Robert Night</td>
+      <td>76000.00</td>
+      <td>2</td>
+      <td>11000.00</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>Mary Dial</td>
+      <td>65000.00</td>
+      <td>3</td>
+      <td>NULL</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="section-title">Key Takeaways</h2>
+
+<div class="highlight-box">
+  <h4>Powerful Window Functions</h4>
+  <p>Window functions like RANK(), ROW_NUMBER(), and LEAD() are very effective when performing calculations within groups of data.</p>
+</div>
+
+<div class="highlight-box">
+  <h4>Modular Query Writing</h4>
+  <p>Breaking down the task into smaller parts (such as ranking, calculating differences, and conditional logic) helps simplify the problem-solving process and ensures the query's clarity and maintainability.</p>
+</div>
+
+<div class="highlight-box">
+  <h4>Efficient Debugging</h4>
+  <p>Testing individual parts of the query (such as first checking the output of RANK(), then adding the LEAD() calculation) can speed up the debugging process.</p>
+</div>
+
+<h2 class="section-title">Conclusion</h2>
+
+<p>This challenge was a great practice to help me apply SQL window functions to solve a real-world problem. From ranking salaries to comparing adjacent row values, and identifying top earners, this query demonstrates how window functions can simplify complex tasks into concise solutions.</p>
+
+<p>If you are facing similar challenges, mastering these window functions will greatly improve your SQL skills and data analysis abilities. I've written an in-depth article on window functions, feel free to read and share your thoughts!</p>`
+          }
+        }
+      },
       {
           en: {
             title: "Mastering SQL Window Functions: A Comprehensive Guide",
