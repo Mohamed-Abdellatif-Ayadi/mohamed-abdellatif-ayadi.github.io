@@ -18,6 +18,7 @@ const contactFormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   subject: z.string().min(5, { message: "Subject must be at least 5 characters" }),
   message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  file: z.instanceof(FileList).optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -197,6 +198,25 @@ const Contact = () => {
                             placeholder={t('contact.form.messagePlaceholder')} 
                             className="min-h-32" 
                             {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="file"
+                    render={({ field: { onChange, ...field } }) => (
+                      <FormItem>
+                        <FormLabel>{t('contact.form.resume')}</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="file" 
+                            accept=".pdf"
+                            onChange={(e) => onChange(e.target.files)}
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
