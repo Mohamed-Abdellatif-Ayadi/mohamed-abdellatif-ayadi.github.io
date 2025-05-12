@@ -29,14 +29,14 @@ const BlogPage = () => {
     if (!article || !article.title || !article.excerpt) {
       return false;
     }
-    
+
     const matchesSearch = 
       article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     const matchesCategory = 
       selectedCategory === "" || article.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
