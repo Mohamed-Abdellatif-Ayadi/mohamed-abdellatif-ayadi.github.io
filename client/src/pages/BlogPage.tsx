@@ -12,8 +12,9 @@ const BlogPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const { data: articles, isLoading } = useQuery<Article[]>({
+  const { data: articles, isLoading, error } = useQuery<Article[]>({
     queryKey: ["/api/articles", language],
+    retry: 3,
     queryFn: async () => {
       const response = await fetch(`/api/articles?language=${language}`);
       if (!response.ok) {
@@ -77,7 +78,7 @@ const BlogPage = () => {
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="w-full p-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-white font-medium bg-slate-800"
             >
-              <option value="">{t('blog.allCategories')}</option>
+              <option key="all" value="">{t('blog.allCategories')}</option>
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category}
