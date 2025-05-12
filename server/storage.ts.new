@@ -61,9 +61,9 @@ export class MemStorage implements IStorage {
     // German CV
     const germanCV = {
       ...cvBase,
-      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
-      summary: "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb als Verkaufsberater. Mit großer Leidenschaft für Vertrieb, Programmierung, Innovation und die Tech-Industrie bin ich neugierig, zielstrebig und ehrgeizig. Ich suche stets nach Möglichkeiten, zu lernen und mich in den Bereichen Softwareentwicklung oder IT-Consulting weiterzuentwickeln. Mein Ziel ist es, an Projekten zu arbeiten, die einen Unterschied machen, und Teil der Innovationen der Zukunft zu sein.",
-      skills: [
+      Titel: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
+      Über mich: "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb als Verkaufsberater. Mit großer Leidenschaft für Vertrieb, Programmierung, Innovation und die Tech-Industrie bin ich neugierig, zielstrebig und ehrgeizig. Ich suche stets nach Möglichkeiten, zu lernen und mich in den Bereichen Softwareentwicklung oder IT-Consulting weiterzuentwickeln. Mein Ziel ist es, an Projekten zu arbeiten, die einen Unterschied machen, und Teil der Innovationen der Zukunft zu sein.",
+      Fähigkeiten: [
         "GitLab", 
         "C-Programmierung", 
         "Java", 
@@ -86,7 +86,7 @@ export class MemStorage implements IStorage {
         "SAP",
         "SAP S/4HANA"
       ],
-      experience: [
+      Berufserfahrung: [
         {
           position: "Werkstudent",
           company: "Iperceramica Deutschland GmbH",
@@ -102,7 +102,7 @@ export class MemStorage implements IStorage {
           description: "Übernahme der Position eines studentischen Tutors für den Kurs 'Datenstrukturen, Algorithmen und Programmierung 1' als Minijob. Organisation und Durchführung von Tutorien für Erstsemester-Studierende mit Fokus auf objektorientierte Programmierung in Java. Aufgaben umfassten praktische Programmierübungen, Vertiefung und Erweiterung der Vorlesungsinhalte, Hausaufgabenbetreuung sowie gezielte Vorbereitung auf Prüfungen und Strategieplanung. Teilnahme an einem Workshop zur akademischen Lehre vor Beginn der Tätigkeit, in dem ich Präsentations- und Gruppentechniken, Tutoriumsplanung und Motivationsmethoden erlernte und praktizierte."
         }
       ],
-      education: [
+      Ausbildung: [
         {
           degree: "Bachelor Informatik",
           institution: "Technische Universität Dortmund",
@@ -118,7 +118,7 @@ export class MemStorage implements IStorage {
           endDate: "Juli 2021"
         }
       ],
-      languages: [
+     Sprachkenntnisse: [
         {
           name: "Deutsch",
           proficiency: "Fließend bis verhandlungssicher"
@@ -140,6 +140,11 @@ export class MemStorage implements IStorage {
           proficiency: "Basiskenntnisse"
         }
       ]
+      Interessen: "Begeisterter Leser von Fachbüchern über Finanzen, Technologie und Innovationen. Regelmäßiger Besuch von
+Messen und Veranstaltungen, um technologische Neuheiten zu entdecken und mein Wissen über aktuelle
+Entwicklungen zu erweitern. Erfahrungen und Eindrücke aus diesen Besuchen teile ich regelmäßig in Beiträgen
+auf LinkedIn. Sportlich aktiv, insbesondere durch regelmäßiges Padelspielen.",
+      
     };
     
     // English CV
