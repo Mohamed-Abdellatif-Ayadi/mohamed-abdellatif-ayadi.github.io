@@ -216,9 +216,9 @@ export class MemStorage implements IStorage {
     this.cvs = {
       en: this.cv,
       de: {
-        ...this.cv,
         name: "MOHAMED ABDELLATIF AYADI",
         title: "Student der Informatik (B.Sc.) an der Technischen Universität Dortmund",
+        photoUrl: "/images/avatar.png",
         contact: {
           email: "mohamed.ayadi.data@gmail.com",
           phone: "0152 5230 1739",
@@ -383,71 +383,180 @@ export class MemStorage implements IStorage {
             url: "https://github.com/Mayedi007/uml-visualization-plugin"
           }
         ],
+        certifications: [],
+        interests: "Begeisterter Leser von Fachbüchern über Finanzen, Technologie und Innovationen. Regelmäßiger Besuch von Messen und Veranstaltungen, um technologische Neuheiten zu entdecken und mein Wissen über aktuelle Entwicklungen zu erweitern. Erfahrungen und Eindrücke aus diesen Besuchen teile ich regelmäßig in Beiträgen auf LinkedIn. Sportlich aktiv, insbesondere durch regelmäßiges Padelspielen."
       },
       fr: {
-        ...this.cv,
+        name: "MOHAMED ABDELLATIF AYADI",
+        title: "Étudiant en Informatique (B.Sc.) à l'Université Technique de Dortmund",
+        photoUrl: "/images/avatar.png",
+        contact: {
+          email: "mohamed.ayadi.data@gmail.com",
+          phone: "0152 5230 1739",
+          location: "Dortmund, Allemagne",
+          website: "github.com/Mayedi007",
+          social: [
+            {
+              name: "LinkedIn",
+              url: "linkedin.com/in/mohamed-abdellatif-ayadi"
+            },
+            {
+              name: "GitHub",
+              url: "github.com/Mayedi007"
+            }
+          ]
+        },
         summary:
-          "Développeur Full Stack expérimenté avec plus de 7 ans d'expertise dans la création d'applications à haute performance. Compétent en TypeScript, React, Node.js et technologies cloud.",
+          "Je suis Mohamed Abdellatif Ayadi, étudiant en informatique à l'Université Technique de Dortmund avec une expérience pratique en tant qu'étudiant salarié dans les ventes et le développement de logiciels. Vente avec passion, études avec ambition, engagement social avec cœur - cette devise m'accompagne tant sur le plan académique que professionnel. Avec un grand enthousiasme pour le développement de logiciels, l'intelligence artificielle et les innovations technologiques, je recherche actuellement un poste d'étudiant salarié afin d'approfondir mes connaissances de manière pratique et de me développer spécifiquement dans les domaines du développement ou du conseil informatique.",
         experience: [
           {
-            company: "TechVision GmbH",
-            position: "Développeur Full Stack Senior",
-            startDate: "2022-03",
-            endDate: "Présent",
+            company: "Iperceramica Deutschland GmbH",
+            position: "Étudiant salarié",
+            startDate: "2024-04",
+            endDate: "Aujourd'hui",
             description:
-              "Direction du développement d'applications cloud-natives utilisant React, Node.js et AWS. Mise en œuvre de pipelines CI/CD et mentorat de développeurs juniors.",
-            highlights: [
-              "Réduction du temps de réponse de l'API de 40% grâce à l'optimisation des performances",
-              "Mise en œuvre d'une architecture serverless qui a réduit les coûts opérationnels de 30%",
-              "Direction d'une équipe de 5 développeurs pour livrer systématiquement les projets avant l'échéance",
-            ],
+              "• Utilisation de SAP et SAP S/4HANA pour optimiser les stocks, les commandes, les processus de livraison et le traitement des réclamations.\n• Ventes: Acquisition active de clients dans les secteurs B2B et B2C par le biais d'une acquisition ciblée et l'établissement de relations clients à long terme. Vente et conseil en carrelage de haute qualité, parquet, sanitaires et meubles de salle de bain.\n• Maintenance des données clients et des relations partenaires dans les systèmes CRM et PRM, pour améliorer la communication et la collaboration."
           },
           {
-            company: "InnoSoft Solutions",
-            position: "Développeur Full Stack",
-            startDate: "2019-01",
-            endDate: "2022-02",
+            company: "Université Technique de Dortmund",
+            position: "Assistant étudiant",
+            startDate: "2023-10",
+            endDate: "2024-04",
             description:
-              "Développement et maintenance d'applications web pour des clients entreprises. Travail avec React, Express, MongoDB et Docker.",
-            highlights: [
-              "Création de tableaux de bord responsifs pour la visualisation de données",
-              "Intégration d'APIs tierces pour le traitement des paiements et l'authentification",
-              "Migration d'applications héritées vers des stacks technologiques modernes",
-            ],
-          },
-          {
-            company: "DataFlow Systems",
-            position: "Développeur Frontend",
-            startDate: "2017-07",
-            endDate: "2018-12",
-            description:
-              "Création d'interfaces utilisateur pour des applications à forte intensité de données. Spécialisation en Angular et D3.js pour la visualisation de données.",
-            highlights: [
-              "Développement de graphiques interactifs pour l'analyse de données financières",
-              "Mise en œuvre d'améliorations d'accessibilité pour toutes les applications",
-              "Réduction de la taille des bundles de 35% grâce à l'optimisation du code",
-            ],
-          },
+              "• Assurer le rôle de tuteur étudiant pour le cours \"Structures de données, algorithmes et programmation 1\" comme mini-job.\n• Organisation et réalisation de tutoriels pour les étudiants de première année avec un accent sur la programmation orientée objet en Java.\n• Les tâches comprenaient des exercices pratiques de programmation, l'approfondissement et l'élargissement du contenu des cours, l'encadrement des devoirs, ainsi que la préparation ciblée aux examens et la planification stratégique."
+          }
         ],
         education: [
           {
-            institution: "Université Technique de Munich",
-            degree: "Master of Science en Informatique",
-            startDate: "2015",
-            endDate: "2017",
-            description:
-              "Spécialisation en Systèmes Distribués et Technologies Web. Thèse: 'Architecture de Microservices Évolutive pour Applications en Temps Réel'.",
+            institution: "Université Technique de Dortmund",
+            degree: "B.Sc. Informatique",
+            startDate: "2022-09",
+            endDate: "2027",
+            location: "Dortmund, Allemagne",
+            description: "Diplôme prévu pour 2027"
           },
           {
-            institution: "Université de Tunis",
-            degree: "Licence en Génie Informatique",
-            startDate: "2012",
-            endDate: "2015",
-            description:
-              "Diplômé avec mention. Spécialisation en Génie Logiciel et Systèmes de Bases de Données.",
+            institution: "Institut Goethe de Düsseldorf",
+            degree: "Cours intensif d'allemand",
+            startDate: "2021-07",
+            endDate: "2022-09",
+            location: "Düsseldorf, Allemagne",
+            description: "Diplôme de niveau C1"
           },
+          {
+            institution: "Lycée Pilote de Sfax",
+            degree: "Baccalauréat en Mathématiques",
+            startDate: "2018-09",
+            endDate: "2021-07",
+            location: "Sfax, Tunisie"
+          }
         ],
-      },
+        skills: [
+          {
+            category: "IA Générative et Intelligence Artificielle",
+            items: [
+              "Développement d'applications IA avec l'API OpenAI",
+              "Développement de chatbots",
+              "Augmentation de données",
+              "Deep Learning",
+              "Prévision",
+              "Apprentissage automatique"
+            ]
+          },
+          {
+            category: "Développement logiciel et technologies backend",
+            items: [
+              "Programmation orientée objet (POO)",
+              "Java",
+              "Python",
+              "Programmation en C",
+              "Spring Boot",
+              "Docker",
+              "Développement d'API",
+              "Conception de bases de données (MySQL)"
+            ]
+          },
+          {
+            category: "Ingénierie et analyse de données",
+            items: [
+              "Pipelines de données en temps réel",
+              "Data Warehousing",
+              "Analyse de séries temporelles",
+              "Processus ETL",
+              "Connaissances de base en Big Data"
+            ]
+          },
+          {
+            category: "Outils et plateformes",
+            items: [
+              "GitLab",
+              "Eclipse",
+              "Microsoft Visual Studio",
+              "Administration de systèmes Linux"
+            ]
+          },
+          {
+            category: "Ventes et compétences commerciales",
+            items: [
+              "SAP",
+              "SAP S/4HANA",
+              "Systèmes CRM",
+              "Acquisition de clients B2B/B2C",
+              "Communication et gestion des relations"
+            ]
+          }
+        ],
+        languages: [
+          {
+            name: "Allemand",
+            proficiency: "Courant à niveau de négociation"
+          },
+          {
+            name: "Anglais",
+            proficiency: "Courant à niveau de négociation"
+          },
+          {
+            name: "Français",
+            proficiency: "Langue maternelle"
+          },
+          {
+            name: "Arabe",
+            proficiency: "Langue maternelle"
+          },
+          {
+            name: "Italien",
+            proficiency: "Connaissances de base"
+          }
+        ],
+        projects: [
+          {
+            name: "Chatbot basé sur l'IA",
+            description: "Intégration de l'API OpenAI dans mon portfolio personnel, pour créer une expérience utilisateur interactive et démontrer des compétences pratiques en intégration d'API et développement web.",
+            technologies: ["API OpenAI", "React", "Node.js", "Express"],
+            url: "https://github.com/Mayedi007/personal-portfolio-chatbot"
+          },
+          {
+            name: "Plateforme de ventes flash",
+            description: "Développement d'une plateforme backend évolutive pour gérer les événements de ventes flash avec une charge utilisateur élevée. Accent sur la modélisation des données, la sécurité des transactions et l'optimisation des performances.",
+            technologies: ["Java", "Spring Boot", "MySQL", "Redis", "Docker"],
+            url: "https://github.com/Mayedi007/flash-sale-platform"
+          },
+          {
+            name: "Pipeline de données Reddit",
+            description: "Mise en œuvre d'un pipeline de données en temps réel pour capturer et analyser les flux de données Reddit. Utilisation de technologies modernes d'ingénierie de données.",
+            technologies: ["Python", "Apache Kafka", "Apache Spark", "MongoDB", "AWS"],
+            url: "https://github.com/Mayedi007/reddit-data-pipeline"
+          },
+          {
+            name: "Plugin de visualisation UML",
+            description: "Création d'un plugin Eclipse pour analyser et visualiser l'architecture d'un système de gestion de vol. Accent sur l'identification des dépendances de modules critiques et l'amélioration de la maintenabilité du système.",
+            technologies: ["Java", "Eclipse RCP", "UML", "GraphViz"],
+            url: "https://github.com/Mayedi007/uml-visualization-plugin"
+          }
+        ],
+        certifications: [],
+        interests: "Lecteur passionné de livres professionnels sur la finance, la technologie et l'innovation. Visites régulières de salons et d'événements pour découvrir les nouveautés technologiques et élargir mes connaissances sur les développements actuels. Je partage régulièrement mes expériences et impressions de ces visites dans des posts sur LinkedIn. Actif sportivement, notamment par la pratique régulière du padel."
+      }
     };
 
     this.addSampleArticles();
