@@ -6,7 +6,7 @@ import path from "path";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
+app.use("/images", express.static(path.join(process.cwd(), "public/images")));
 
 app.use((req, res, next) => {
   const start = Date.now();

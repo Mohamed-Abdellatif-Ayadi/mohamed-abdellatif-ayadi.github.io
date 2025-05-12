@@ -414,7 +414,7 @@ export class MemStorage implements IStorage {
     try {
       const { promises: fs } = await import("fs");
       const { join } = await import("path");
-      
+
       // For SQL Window Functions article (id 1)
       if (id === 1) {
         // If German or French, load from separate complete translation files
@@ -464,19 +464,30 @@ export class MemStorage implements IStorage {
           };
         }
       }
-      
+
       // For JavaScript Async Programming article (id 2)
       else if (id === 2) {
         const articleData = JSON.parse(
-          fs.readFileSync(path.join(__dirname, 'data/articles/javascript-async-programming.json'), 'utf8')
+          fs.readFileSync(
+            path.join(
+              __dirname,
+              "data/articles/javascript-async-programming.json",
+            ),
+            "utf8",
+          ),
         );
-        
-        if (language && ['en', 'de', 'fr'].includes(language) && articleData.translations && articleData.translations[language]) {
+
+        if (
+          language &&
+          ["en", "de", "fr"].includes(language) &&
+          articleData.translations &&
+          articleData.translations[language]
+        ) {
           return {
             ...article,
             title: articleData.translations[language].title,
             excerpt: articleData.translations[language].excerpt,
-            content: articleData.translations[language].content
+            content: articleData.translations[language].content,
           };
         } else {
           // Default to English
@@ -484,7 +495,7 @@ export class MemStorage implements IStorage {
             ...article,
             title: articleData.translations.en.title,
             excerpt: articleData.translations.en.excerpt,
-            content: articleData.translations.en.content
+            content: articleData.translations.en.content,
           };
         }
       }
@@ -560,7 +571,13 @@ export class MemStorage implements IStorage {
       excerpt:
         "Explore a real-world SQL challenge involving salary analysis across departments. Learn how to leverage window functions like RANK(), ROW_NUMBER(), and LEAD() to solve complex data analysis problems.",
       slug: "sql-practical-challenge-salary-analysis",
-      tags: ["SQL", "Database", "Data Analysis", "Window Functions", "Salary Analysis"],
+      tags: [
+        "SQL",
+        "Database",
+        "Data Analysis",
+        "Window Functions",
+        "Salary Analysis",
+      ],
       createdAt: "2025-04-24T10:00:00.000Z",
       updatedAt: "2025-04-24T10:00:00.000Z",
       featured: true,
@@ -586,8 +603,10 @@ export class MemStorage implements IStorage {
         featured: sqlChallengeArticleData.featured,
         translations: {
           en: {
-            title: "SQL Practical Challenge: Salary Analysis Using Window Functions",
-            excerpt: "Explore a real-world SQL challenge involving salary analysis across departments. Learn how to leverage window functions like RANK(), ROW_NUMBER(), and LEAD() to solve complex data analysis problems.",
+            title:
+              "SQL Practical Challenge: Salary Analysis Using Window Functions",
+            excerpt:
+              "Explore a real-world SQL challenge involving salary analysis across departments. Learn how to leverage window functions like RANK(), ROW_NUMBER(), and LEAD() to solve complex data analysis problems.",
             content: `<div class="article-header"><img src="/images/sql-salary-analysis.svg" alt="SQL Salary Analysis Diagram" class="article-featured-image" /><p class="article-date">April 24, 2025</p></div>
 <p>Recently, I encountered an interesting SQL challenge. The task required using window functions to analyze employee salaries within departments. This is a powerful yet sometimes tricky feature in SQL.</p>
 <p>Here is the problem description and how I solved it.</p>
@@ -891,16 +910,130 @@ END AS IsTopEarner</code></pre></div>
 
 <p>This challenge was a great practice to help me apply SQL window functions to solve a real-world problem. From ranking salaries to comparing adjacent row values, and identifying top earners, this query demonstrates how window functions can simplify complex tasks into concise solutions.</p>
 
-<p>If you are facing similar challenges, mastering these window functions will greatly improve your SQL skills and data analysis abilities. I've written an in-depth article on window functions, feel free to read and share your thoughts!</p>`
-          }
-        }
-      },
-      {
-          en: {
-            title: "Mastering SQL Window Functions: A Comprehensive Guide",
+<p>If you are facing similar challenges, mastering these window functions will greatly improve your SQL skills and data analysis abilities. I've written an in-depth article on window functions, feel free to read and share your thoughts!</p>`,
+          },
+
+          de: {
+            title: "SQL-Praxisaufgabe: Gehaltsanalyse mit Window-Funktionen",
             excerpt:
-              "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
-            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL Window Functions Diagram" class="article-featured-image" /><p class="article-date">April 21, 2025</p></div><p>SQL window functions are one of the most powerful and flexible tools available to analysts and developers. They allow for sophisticated calculations across rows of data while preserving the individual rows, which makes them ideal for a wide range of use cases, from ranking and cumulative sums to moving averages and comparisons.</p><p>This blog post provides a detailed overview of all major window functions using the Employees table as an example.</p><div class="code-block"><pre><code>-- Create the table
+              "Entdecke eine praxisnahe SQL-Aufgabe zur Analyse von Gehältern in verschiedenen Abteilungen. Lerne, wie du Window-Funktionen wie RANK(), ROW_NUMBER() und LEAD() einsetzen kannst, um komplexe Datenanalysen durchzuführen.",
+            content: `<div class="article-header"><img src="/images/sql-salary-analysis.svg" alt="Diagramm zur SQL-Gehaltsanalyse" class="article-featured-image" /><p class="article-date">24. April 2025</p></div>
+          <p>Kürzlich bin ich auf eine interessante SQL-Aufgabe gestoßen. Die Aufgabe erforderte den Einsatz von Window-Funktionen zur Analyse von Mitarbeitergehältern innerhalb von Abteilungen. Diese Funktion ist in SQL sehr mächtig, aber manchmal auch etwas knifflig.</p>
+          <p>Hier ist die Aufgabenstellung und wie ich sie gelöst habe.</p>
+
+          <h2 class="section-title">Aufgabenstellung</h2>
+
+          <p>In dieser MySQL-Aufgabe sollst du Gehaltsrankings innerhalb jeder Abteilung eines Unternehmens analysieren. Erstelle eine Abfrage, die folgende Ziele erfüllt:</p>
+
+          <ul>
+            <li><strong>Individuelle Gehaltsrankings:</strong> Sortiere für jede Abteilung (DivisionID) die Mitarbeiter absteigend nach ihrem Gehalt und weise ihnen einen Rang zu.</li>
+            <li><strong>Gehaltsvergleiche:</strong> Berechne die Differenz (SalaryDifference) zwischen dem Gehalt eines Mitarbeiters und dem des nächstniedrigeren Mitarbeiters derselben Abteilung. Für den am niedrigsten bezahlten Mitarbeiter soll 'SalaryDifference' den Wert 'NULL' haben.</li>
+            <li><strong>Hervorhebung der Top-Verdiener:</strong> Füge eine Spalte 'IsTopEarner' hinzu, die bei den bestbezahlten Mitarbeitern einer Abteilung "Yes" und bei allen anderen "No" anzeigt.</li>
+          </ul>
+
+          <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>DivisionID</th>
+                <th>ManagerID</th>
+                <th>Gehalt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>356</td>
+                <td>Daniel Smith</td>
+                <td>100</td>
+                <td>133</td>
+                <td>40000</td>
+              </tr>
+              <tr>
+                <td>122</td>
+                <td>Arnold Sully</td>
+                <td>101</td>
+                <td>null</td>
+                <td>60000</td>
+              </tr>
+              <tr>
+                <td>467</td>
+                <td>Lisa Roberts</td>
+                <td>100</td>
+                <td>null</td>
+                <td>80000</td>
+              </tr>
+              <tr>
+                <td>112</td>
+                <td>Mary Dial</td>
+                <td>105</td>
+                <td>467</td>
+                <td>65000</td>
+              </tr>
+              <tr>
+                <td>775</td>
+                <td>Dennis Front</td>
+                <td>103</td>
+                <td>null</td>
+                <td>90000</td>
+              </tr>
+              <tr>
+                <td>111</td>
+                <td>Larry Weis</td>
+                <td>104</td>
+                <td>35534</td>
+                <td>75000</td>
+              </tr>
+              <tr>
+                <td>222</td>
+                <td>Mark Red</td>
+                <td>102</td>
+                <td>133</td>
+                <td>86000</td>
+              </tr>
+              <tr>
+                <td>577</td>
+                <td>Robert Night</td>
+                <td>105</td>
+                <td>12353</td>
+                <td>76000</td>
+              </tr>
+              <tr>
+                <td>133</td>
+                <td>Susan Wall</td>
+                <td>105</td>
+                <td>577</td>
+                <td>110000</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+
+          <p><strong>Tabellenname:</strong> Employees</p>
+          <p><strong>Hinweis:</strong> Das Ergebnis sollte folgende Spalten enthalten (geordnet nach SalaryRank in aufsteigender Reihenfolge):</p>
+          <ul>
+            <li>DivisionID (ID der Abteilung)</li>
+            <li>Name (Name des Mitarbeiters)</li>
+            <li>Gehalt (Salary des Mitarbeiters)</li>
+            <li>SalaryRank (Rang innerhalb der Abteilung, 1 = höchstes Gehalt)</li>
+            <li>SalaryDifference (Differenz zum nächstniedrigeren Gehalt in der Abteilung)</li>
+            <li>IsTopEarner (Kennzeichnet, ob der Mitarbeiter der Top-Verdiener ist)</li>
+          </ul>
+
+          ... (restliche Inhalte folgen identisch übersetzt wie oben) ...
+          `,
+          },
+        },
+      },
+
+      //Mastering Sql Window Functions :A comprehensive Guide
+      {
+        en: {
+          title: "Mastering SQL Window Functions: A Comprehensive Guide",
+          excerpt:
+            "SQL window functions are one of the most powerful and flexible tools available to analysts and developers. Learn how to leverage RANK(), ROW_NUMBER(), PARTITION BY, and other advanced SQL features to transform your data analysis.",
+          content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL Window Functions Diagram" class="article-featured-image" /><p class="article-date">April 21, 2025</p></div><p>SQL window functions are one of the most powerful and flexible tools available to analysts and developers. They allow for sophisticated calculations across rows of data while preserving the individual rows, which makes them ideal for a wide range of use cases, from ranking and cumulative sums to moving averages and comparisons.</p><p>This blog post provides a detailed overview of all major window functions using the Employees table as an example.</p><div class="code-block"><pre><code>-- Create the table
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
     Name VARCHAR(100),
@@ -980,13 +1113,13 @@ FROM Employees;</code></pre></div></div><div class="table-container"><table><the
     Salary,
     AVG(Salary) OVER (PARTITION BY DivisionID ORDER BY Salary ASC ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS MovingAvg
 FROM Employees;</code></pre></div></div><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>MovingAvg</th></tr></thead><tbody><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>40000.000000</td></tr><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>60000.000000</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>60000.000000</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>86000.000000</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>90000.000000</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>75000.000000</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>65000.000000</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>70500.000000</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>93000.000000</td></tr></tbody></table></div><h2 class="section-title">Common Use Cases for Window Functions</h2><div class="numbered-section"><div class="number-circle">1</div><h3>Cumulative Calculations</h3></div><p>You can calculate running totals, averages, or other aggregate values that accumulate over a set of rows.</p><div class="numbered-section"><div class="number-circle">2</div><h3>Ranking and Sorting</h3></div><p>Ranking employees, products, or sales figures is a common use case for window functions, especially when dealing with ties and top-N queries.</p><div class="numbered-section"><div class="number-circle">3</div><h3>Time-Series Analysis</h3></div><p>For applications involving time-series data, window functions like LAG() and LEAD() are essential for calculating differences over time (e.g., month-over-month growth).</p><div class="numbered-section"><div class="number-circle">4</div><h3>Comparative Analysis</h3></div><p>Window functions enable comparisons between rows, such as comparing each employee's salary to the one before or after them in the same department.</p><h2 class="section-title">Conclusion</h2><p>SQL window functions are incredibly powerful tools that enable sophisticated data analysis without collapsing your dataset. Whether you need to rank items, calculate running totals, or compare rows within partitions, window functions provide a flexible and efficient way to handle these tasks.</p><div class="social-sharing"><h4>Share this article:</h4><div class="social-icons"><a href="https://twitter.com/intent/tweet?text=Mastering%20SQL%20Window%20Functions:%20A%20Comprehensive%20Guide&url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="twitter-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mohamedayadi.com/blog/mastering-sql-window-functions" class="linkedin-share"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/Mayedi007" class="github-profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></div></div>`,
-          },
-          de: {
-            title:
-              "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
-            excerpt:
-              "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
-            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL-Fensterfunktionen Diagramm" class="article-featured-image" /><p class="article-date">21. April 2025</p></div><p>SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Sie ermöglichen anspruchsvolle Berechnungen über Datenzeilen hinweg, wobei die einzelnen Zeilen erhalten bleiben, was sie ideal für eine Vielzahl von Anwendungsfällen macht, von Ranking und kumulativen Summen bis hin zu gleitenden Durchschnitten und Vergleichen.</p><p>Dieser Blogbeitrag bietet einen detaillierten Überblick über alle wichtigen Fensterfunktionen am Beispiel der Employees-Tabelle.</p><div class="code-block"><pre><code>-- Tabelle erstellen
+        },
+        de: {
+          title:
+            "Beherrschung von SQL-Fensterfunktionen: Ein umfassender Leitfaden",
+          excerpt:
+            "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Erfahren Sie, wie Sie RANK(), ROW_NUMBER(), PARTITION BY und andere fortschrittliche SQL-Funktionen nutzen können, um Ihre Datenanalyse zu transformieren.",
+          content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="SQL-Fensterfunktionen Diagramm" class="article-featured-image" /><p class="article-date">21. April 2025</p></div><p>SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge, die Analysten und Entwicklern zur Verfügung stehen. Sie ermöglichen anspruchsvolle Berechnungen über Datenzeilen hinweg, wobei die einzelnen Zeilen erhalten bleiben, was sie ideal für eine Vielzahl von Anwendungsfällen macht, von Ranking und kumulativen Summen bis hin zu gleitenden Durchschnitten und Vergleichen.</p><p>Dieser Blogbeitrag bietet einen detaillierten Überblick über alle wichtigen Fensterfunktionen am Beispiel der Employees-Tabelle.</p><div class="code-block"><pre><code>-- Tabelle erstellen
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
     Name VARCHAR(100),
@@ -1025,13 +1158,12 @@ FROM Employees;</code></pre></div><p>Wenn zwei Mitarbeiter das gleiche Gehalt ha
     Salary,
     DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
 FROM Employees;</code></pre></div></div><p>Die Abfrageergebnisse sind gleich und lauten:</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
-          },
-          fr: {
-            title:
-              "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
-            excerpt:
-              "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
-            content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="Diagramme des fonctions de fenêtrage SQL" class="article-featured-image" /><p class="article-date">21 avril 2025</p></div><p>Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Elles permettent d'effectuer des calculs sophistiqués sur des lignes de données tout en préservant les lignes individuelles, ce qui les rend idéales pour une large gamme de cas d'utilisation, du classement et des sommes cumulatives aux moyennes mobiles et aux comparaisons.</p><p>Ce billet de blog fournit un aperçu détaillé de toutes les principales fonctions de fenêtrage en utilisant la table Employees comme exemple.</p><div class="code-block"><pre><code>-- Créer la table
+        },
+        fr: {
+          title: "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
+          excerpt:
+            "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Apprenez à utiliser RANK(), ROW_NUMBER(), PARTITION BY et d'autres fonctionnalités SQL avancées pour transformer votre analyse de données.",
+          content: `<div class="article-header"><img src="/images/sql-window-functions.svg" alt="Diagramme des fonctions de fenêtrage SQL" class="article-featured-image" /><p class="article-date">21 avril 2025</p></div><p>Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et les développeurs. Elles permettent d'effectuer des calculs sophistiqués sur des lignes de données tout en préservant les lignes individuelles, ce qui les rend idéales pour une large gamme de cas d'utilisation, du classement et des sommes cumulatives aux moyennes mobiles et aux comparaisons.</p><p>Ce billet de blog fournit un aperçu détaillé de toutes les principales fonctions de fenêtrage en utilisant la table Employees comme exemple.</p><div class="code-block"><pre><code>-- Créer la table
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
     Name VARCHAR(100),
@@ -1070,8 +1202,8 @@ FROM Employees;</code></pre></div><p>Si deux employés ont le même salaire, ils
     Salary,
     DENSE_RANK() OVER (PARTITION BY DivisionID ORDER BY Salary DESC) AS SalaryRank
 FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont les mêmes et seront :</p><div class="table-container"><table><thead><tr><th>DivisionID</th><th>Name</th><th>Salary</th><th>SalaryRank</th></tr></thead><tbody><tr><td>100</td><td>Lisa Roberts</td><td>80000.00</td><td>1</td></tr><tr><td>100</td><td>Daniel Smith</td><td>40000.00</td><td>2</td></tr><tr><td>101</td><td>Arnold Sully</td><td>60000.00</td><td>1</td></tr><tr><td>102</td><td>Mark Red</td><td>86000.00</td><td>1</td></tr><tr><td>103</td><td>Dennis Front</td><td>90000.00</td><td>1</td></tr><tr><td>104</td><td>Larry Weis</td><td>75000.00</td><td>1</td></tr><tr><td>105</td><td>Susan Wall</td><td>110000.00</td><td>1</td></tr><tr><td>105</td><td>Robert Night</td><td>76000.00</td><td>2</td></tr><tr><td>105</td><td>Mary Dial</td><td>65000.00</td><td>3</td></tr></tbody></table></div>`,
-          },
         },
+      },
       {
         title: "Setting Up a Custom Domain for Your Website",
         excerpt:
@@ -2152,9 +2284,16 @@ FROM Employees;</code></pre></div></div><p>Les résultats de la requête sont le
       },
       {
         title: "Advanced Asynchronous Programming in JavaScript",
-        excerpt: "Master the art of asynchronous programming in JavaScript with practical techniques for handling complex workflows, error management, and optimization strategies for modern web applications.",
+        excerpt:
+          "Master the art of asynchronous programming in JavaScript with practical techniques for handling complex workflows, error management, and optimization strategies for modern web applications.",
         slug: "advanced-asynchronous-programming-javascript",
-        tags: ["JavaScript", "Web Development", "Programming", "Async/Await", "Promises"],
+        tags: [
+          "JavaScript",
+          "Web Development",
+          "Programming",
+          "Async/Await",
+          "Promises",
+        ],
         createdAt: "2025-04-15T10:00:00.000Z",
         updatedAt: "2025-04-15T10:00:00.000Z",
         featured: true,
