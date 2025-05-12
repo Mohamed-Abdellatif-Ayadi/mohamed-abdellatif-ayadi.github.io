@@ -1,0 +1,71 @@
+MOHAMED ABDELLATIF AYADI
+Student der Informatik (B.Sc.) an der Technischen Universität Dortmund
+mohamed.ayadi.data@gmail.com 0152 5230 1739 github.com/Mayedi007 Personal Portfolio
+linkedin.com/in/mohamed-abdellatif-ayadi
+Über mich
+Ich bin Mohamed Abdellatif Ayadi, Informatikstudent an der Technischen Universität Dortmund mit praktischer
+Erfahrung als Werkstudent im Vertrieb sowie in der Softwareentwicklung.
+Vertrieb mit Leidenschaft, Studium mit Ehrgeiz, sozialer Einsatz mit Herz – dieses Motto begleitet mich sowohl
+akademisch als auch beruflich.
+Mit großer Begeisterung für Softwareentwicklung, Künstliche Intelligenz und technologische Innovationen strebe
+ich aktuell eine Werkstudentenstelle an, um meine Kenntnisse praxisnah zu vertiefen und mich gezielt in den
+Bereichen Entwicklung oder IT-Consulting weiterzuentwickeln.
+Akademische Ausbildung
+Technische Universität Dortmund, B.Sc.Informatik Goethe-Institut Düsseldorf
+Besuch eines intensiven Deutsch-Sprachkurses mit Abschluss auf C1-Niveau
+Pioneer High School of Sfax (Lycée Pilote de Sfax)
+Abitur im Fach Mathematik
+Berufserfahrung
+voraussichtlich 2027
+September 2022
+Juli 2021, Sfax, Tunesien
+Werkstudent, Iperceramica Deutschland GmbH, April 2024 – Heute
+• Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Aufträgen, Lieferprozessen und der
+Bearbeitung von Reklamationen.
+• Vertrieb: Aktive Kundengewinnung im B2B- und B2C-Bereich durch gezielte Akquise und Aufbau langfristiger
+Kundenbeziehungen. Verkauf und Beratung von hochwertigen Fliesen, Parkett, Sanitär und Badezimmermöbeln.
+• Pflege von Kundendaten und Partnerbeziehungen in CRM und PRM-Systemen, zur Verbesserung der
+Kommunikation und Zusammenarbeit.
+Studentische Hilfskraft, Technische Universität Dortmund, October 2023 – April 2024
+• Übernahme der Position eines studentischen Tutors für den Kurs "Datenstrukturen, Algorithmen und
+Programmierung 1" als Minijob.
+• Organisation und Durchführung von Tutorien für Erstsemester-Studierende mit Fokus auf objektorientierte
+Programmierung in Java.
+• Aufgaben umfassten praktische Programmierübungen, Vertiefung und Erweiterung der Vorlesungsinhalte,
+Hausaufgabenbetreuung sowie gezielte Vorbereitung auf Prüfungen und Strategieplanung.
+Projekte
+• Entwicklung eines KI-gestützten Chatbots: Integration der OpenAI API in mein persönliches Portfolio
+(Chatbot ansehen), um ein interaktives Nutzererlebnis zu schaffen und praktische Fähigkeiten in API-Integration
+und Webentwicklung unter Beweis zu stellen.
+• Flash Sale Plattform: Entwicklung einer skalierbaren Backend-Plattform zur Verwaltung von
+Flash-Sales-Ereignissen mit hoher Benutzerlast. Fokus auf Datenmodellierung, Transaktionssicherheit und
+Performance-Optimierung (GitHub-Projekt ansehen).
+• Reddit Data Streaming Pipeline: Implementierung einer Echtzeit-Datenpipeline zur Erfassung und Analyse von
+Reddit-Datenströmen. Einsatz moderner Data Engineering-Technologien (GitHub-Projekt ansehen).
+• Teilnahme am Kaggle-Wettbewerb "Corporación Favorita Grocery Sales Forecasting": Entwicklung eines
+Frameworks für On-the-Fly Data Augmentation zur Verbesserung der Prognosegenauigkeit bei saisonalen
+Schwankungen und unvollständigen Daten.
+• Entwicklung eines UML-Visualisierungs-Plugins: Erstellung eines Eclipse-Plugins zur Analyse und
+Visualisierung der Architektur eines Flugmanagementsystems. Fokus auf die Identifikation kritischer
+Modulabhängigkeiten und die Verbesserung der Systemwartbarkeit.
+Fähigkeiten
+Generative KI und Künstliche Intelligenz: Entwicklung von KI-Anwendungen mit OpenAI-API,
+Chatbot-Entwicklung, Data Augmentation, Deep Learning, Forecasting, Maschinelles Lernen.
+Softwareentwicklung und Backend-Technologien: Objektorientierte Programmierung (OOP), Java, Python,
+C-Programmierung, Spring Boot, Docker, API-Entwicklung, Datenbankdesign (MySQl).
+Datenengineering und Datenanalyse: Echtzeit-Datenpipelines, Data Warehousing, Zeitreihenanalyse (Time
+Series Forecasting), ETL-Prozesse, Grundkenntnisse in Big Data
+Werkzeuge und Plattformen: GitLab, Eclipse, Microsoft Visual Studio, Linux-Systemadministration.
+Vertrieb und Business-Kompetenzen: SAP, SAP S/4HANA, CRM-Systeme, Kundenakquise B2B/B2C,
+Kommunikation und Beziehungsmanagement.
+Sprachkenntnisse
+Deutsch : Fließend bis verhandlungssicher
+Englisch : Fließend bis verhandlungssicher
+Französisch : Muttersprache
+Arabisch : Muttersprache
+Italienisch : Basiskenntnisse
+Interessen
+Begeisterter Leser von Fachbüchern über Finanzen, Technologie und Innovationen. Regelmäßiger Besuch von
+Messen und Veranstaltungen, um technologische Neuheiten zu entdecken und mein Wissen über aktuelle
+Entwicklungen zu erweitern. Erfahrungen und Eindrücke aus diesen Besuchen teile ich regelmäßig in Beiträgen
+auf LinkedIn. Sportlich aktiv, insbesondere durch regelmäßiges Padelspielen.

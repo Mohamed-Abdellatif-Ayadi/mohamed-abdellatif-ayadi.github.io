@@ -217,66 +217,171 @@ export class MemStorage implements IStorage {
       en: this.cv,
       de: {
         ...this.cv,
+        name: "MOHAMED ABDELLATIF AYADI",
+        title: "Student der Informatik (B.Sc.) an der Technischen Universität Dortmund",
+        contact: {
+          email: "mohamed.ayadi.data@gmail.com",
+          phone: "0152 5230 1739",
+          location: "Dortmund, Deutschland",
+          website: "github.com/Mayedi007",
+          social: [
+            {
+              name: "LinkedIn",
+              url: "linkedin.com/in/mohamed-abdellatif-ayadi"
+            },
+            {
+              name: "GitHub",
+              url: "github.com/Mayedi007"
+            }
+          ]
+        },
         summary:
-          "Erfahrener Full-Stack-Entwickler mit über 7 Jahren Expertise im Aufbau leistungsstarker Anwendungen. Fachkundig in TypeScript, React, Node.js und Cloud-Technologien.",
+          "Ich bin Mohamed Abdellatif Ayadi, Informatikstudent an der Technischen Universität Dortmund mit praktischer Erfahrung als Werkstudent im Vertrieb sowie in der Softwareentwicklung. Vertrieb mit Leidenschaft, Studium mit Ehrgeiz, sozialer Einsatz mit Herz – dieses Motto begleitet mich sowohl akademisch als auch beruflich. Mit großer Begeisterung für Softwareentwicklung, Künstliche Intelligenz und technologische Innovationen strebe ich aktuell eine Werkstudentenstelle an, um meine Kenntnisse praxisnah zu vertiefen und mich gezielt in den Bereichen Entwicklung oder IT-Consulting weiterzuentwickeln.",
         experience: [
           {
-            company: "TechVision GmbH",
-            position: "Senior Full-Stack-Entwickler",
-            startDate: "2022-03",
-            endDate: "Gegenwärtig",
+            company: "Iperceramica Deutschland GmbH",
+            position: "Werkstudent",
+            startDate: "2024-04",
+            endDate: "Heute",
             description:
-              "Leitung der Entwicklung von Cloud-nativen Anwendungen mit React, Node.js und AWS. Implementierung von CI/CD-Pipelines und Mentoring von Junior-Entwicklern.",
-            highlights: [
-              "Reduzierung der API-Antwortzeit um 40% durch Leistungsoptimierung",
-              "Implementierung einer serverlosen Architektur, die die Betriebskosten um 30% reduzierte",
-              "Leitung eines Teams von 5 Entwicklern, um Projekte konsequent vor dem Zeitplan zu liefern",
-            ],
+              "• Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Aufträgen, Lieferprozessen und der Bearbeitung von Reklamationen.\n• Vertrieb: Aktive Kundengewinnung im B2B- und B2C-Bereich durch gezielte Akquise und Aufbau langfristiger Kundenbeziehungen. Verkauf und Beratung von hochwertigen Fliesen, Parkett, Sanitär und Badezimmermöbeln.\n• Pflege von Kundendaten und Partnerbeziehungen in CRM und PRM-Systemen, zur Verbesserung der Kommunikation und Zusammenarbeit."
           },
           {
-            company: "InnoSoft Solutions",
-            position: "Full-Stack-Entwickler",
-            startDate: "2019-01",
-            endDate: "2022-02",
+            company: "Technische Universität Dortmund",
+            position: "Studentische Hilfskraft",
+            startDate: "2023-10",
+            endDate: "2024-04",
             description:
-              "Entwicklung und Wartung von Webanwendungen für Unternehmenskunden. Arbeit mit React, Express, MongoDB und Docker.",
-            highlights: [
-              "Erstellung von responsiven Dashboards für Datenvisualisierung",
-              "Integration von Drittanbieter-APIs für Zahlungsabwicklung und Authentifizierung",
-              "Migration von Legacy-Anwendungen zu modernen Technologie-Stacks",
-            ],
-          },
-          {
-            company: "DataFlow Systems",
-            position: "Frontend-Entwickler",
-            startDate: "2017-07",
-            endDate: "2018-12",
-            description:
-              "Erstellung von Benutzeroberflächen für datenintensive Anwendungen. Spezialisierung auf Angular und D3.js für Datenvisualisierung.",
-            highlights: [
-              "Entwicklung interaktiver Diagramme und Grafiken für Finanzdatenanalyse",
-              "Implementierung von Zugänglichkeitsverbesserungen für alle Anwendungen",
-              "Reduzierung der Paketgröße um 35% durch Codeoptimierung",
-            ],
-          },
+              "• Übernahme der Position eines studentischen Tutors für den Kurs \"Datenstrukturen, Algorithmen und Programmierung 1\" als Minijob.\n• Organisation und Durchführung von Tutorien für Erstsemester-Studierende mit Fokus auf objektorientierte Programmierung in Java.\n• Aufgaben umfassten praktische Programmierübungen, Vertiefung und Erweiterung der Vorlesungsinhalte, Hausaufgabenbetreuung sowie gezielte Vorbereitung auf Prüfungen und Strategieplanung."
+          }
         ],
         education: [
           {
-            institution: "Technische Universität München",
-            degree: "Master of Science in Informatik",
-            startDate: "2015",
-            endDate: "2017",
-            description:
-              "Spezialisierung auf verteilte Systeme und Webtechnologien. Thesis: 'Skalierbare Mikroservice-Architektur für Echtzeit-Anwendungen'.",
+            institution: "Technische Universität Dortmund",
+            degree: "B.Sc. Informatik",
+            startDate: "2022-09",
+            endDate: "2027",
+            location: "Dortmund, Deutschland",
+            description: "Voraussichtlicher Abschluss 2027"
           },
           {
-            institution: "Universität Tunis",
-            degree: "Bachelor of Science in Computer Engineering",
-            startDate: "2012",
-            endDate: "2015",
-            description:
-              "Mit Auszeichnung abgeschlossen. Schwerpunkt auf Software Engineering und Datenbanksystemen.",
+            institution: "Goethe-Institut Düsseldorf",
+            degree: "Intensiver Deutsch-Sprachkurs",
+            startDate: "2021-07",
+            endDate: "2022-09",
+            location: "Düsseldorf, Deutschland",
+            description: "Abschluss auf C1-Niveau"
           },
+          {
+            institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
+            degree: "Abitur im Fach Mathematik",
+            startDate: "2018-09",
+            endDate: "2021-07",
+            location: "Sfax, Tunesien"
+          }
+        ],
+        skills: [
+          {
+            category: "Generative KI und Künstliche Intelligenz",
+            items: [
+              "Entwicklung von KI-Anwendungen mit OpenAI-API",
+              "Chatbot-Entwicklung",
+              "Data Augmentation",
+              "Deep Learning",
+              "Forecasting",
+              "Maschinelles Lernen"
+            ]
+          },
+          {
+            category: "Softwareentwicklung und Backend-Technologien",
+            items: [
+              "Objektorientierte Programmierung (OOP)",
+              "Java",
+              "Python",
+              "C-Programmierung",
+              "Spring Boot",
+              "Docker",
+              "API-Entwicklung",
+              "Datenbankdesign (MySQL)"
+            ]
+          },
+          {
+            category: "Datenengineering und Datenanalyse",
+            items: [
+              "Echtzeit-Datenpipelines",
+              "Data Warehousing",
+              "Zeitreihenanalyse (Time Series Forecasting)",
+              "ETL-Prozesse",
+              "Grundkenntnisse in Big Data"
+            ]
+          },
+          {
+            category: "Werkzeuge und Plattformen",
+            items: [
+              "GitLab",
+              "Eclipse",
+              "Microsoft Visual Studio",
+              "Linux-Systemadministration"
+            ]
+          },
+          {
+            category: "Vertrieb und Business-Kompetenzen",
+            items: [
+              "SAP",
+              "SAP S/4HANA",
+              "CRM-Systeme",
+              "Kundenakquise B2B/B2C",
+              "Kommunikation und Beziehungsmanagement"
+            ]
+          }
+        ],
+        languages: [
+          {
+            name: "Deutsch",
+            proficiency: "Fließend bis verhandlungssicher"
+          },
+          {
+            name: "Englisch",
+            proficiency: "Fließend bis verhandlungssicher"
+          },
+          {
+            name: "Französisch",
+            proficiency: "Muttersprache"
+          },
+          {
+            name: "Arabisch",
+            proficiency: "Muttersprache"
+          },
+          {
+            name: "Italienisch",
+            proficiency: "Basiskenntnisse"
+          }
+        ],
+        projects: [
+          {
+            name: "KI-gestützter Chatbot",
+            description: "Integration der OpenAI API in mein persönliches Portfolio, um ein interaktives Nutzererlebnis zu schaffen und praktische Fähigkeiten in API-Integration und Webentwicklung unter Beweis zu stellen.",
+            technologies: ["OpenAI API", "React", "Node.js", "Express"],
+            url: "https://github.com/Mayedi007/personal-portfolio-chatbot"
+          },
+          {
+            name: "Flash Sale Plattform",
+            description: "Entwicklung einer skalierbaren Backend-Plattform zur Verwaltung von Flash-Sales-Ereignissen mit hoher Benutzerlast. Fokus auf Datenmodellierung, Transaktionssicherheit und Performance-Optimierung.",
+            technologies: ["Java", "Spring Boot", "MySQL", "Redis", "Docker"],
+            url: "https://github.com/Mayedi007/flash-sale-platform"
+          },
+          {
+            name: "Reddit Data Streaming Pipeline",
+            description: "Implementierung einer Echtzeit-Datenpipeline zur Erfassung und Analyse von Reddit-Datenströmen. Einsatz moderner Data Engineering-Technologien.",
+            technologies: ["Python", "Apache Kafka", "Apache Spark", "MongoDB", "AWS"],
+            url: "https://github.com/Mayedi007/reddit-data-pipeline"
+          },
+          {
+            name: "UML-Visualisierungs-Plugin",
+            description: "Erstellung eines Eclipse-Plugins zur Analyse und Visualisierung der Architektur eines Flugmanagementsystems. Fokus auf die Identifikation kritischer Modulabhängigkeiten und die Verbesserung der Systemwartbarkeit.",
+            technologies: ["Java", "Eclipse RCP", "UML", "GraphViz"],
+            url: "https://github.com/Mayedi007/uml-visualization-plugin"
+          }
         ],
       },
       fr: {
