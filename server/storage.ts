@@ -51,165 +51,152 @@ export class MemStorage implements IStorage {
     this.cv = {
       name: "MOHAMED ABDELLATIF AYADI",
       photoUrl: "/images/avatar.png",
-      title: "Full Stack Developer",
+      title: "Computer Science Student (B.Sc.) at the Technical University of Dortmund",
       summary:
-        "Experienced Full Stack Developer with over 7 years of expertise building high-performance applications. Proficient in TypeScript, React, Node.js, and cloud technologies.",
+        "I am Mohamed Abdellatif Ayadi, a Computer Science student at the Technical University of Dortmund with practical experience as a working student in sales and software development. Selling with passion, studying with ambition, social commitment with heart - this motto accompanies me both academically and professionally. With great enthusiasm for software development, artificial intelligence, and technological innovations, I am currently looking for a working student position to deepen my knowledge in a practical way and specifically develop in the areas of development or IT consulting.",
       contact: {
-        email: "contact@mohamedayadi.com",
-        phone: "+49 123 4567890",
-        website: "https://mohamedayadi.com",
-        location: "Berlin, Germany",
+        email: "mohamed.ayadi.data@gmail.com",
+        phone: "0152 5230 1739",
+        location: "Dortmund, Germany",
+        website: "github.com/Mayedi007",
         social: [
-          { name: "LinkedIn", url: "https://linkedin.com/in/mayedi" },
-          { name: "GitHub", url: "https://github.com/Mayedi007" },
-          { name: "Twitter", url: "https://twitter.com/MohamedAyadi" },
+          { name: "LinkedIn", url: "linkedin.com/in/mohamed-abdellatif-ayadi" },
+          { name: "GitHub", url: "github.com/Mayedi007" }
         ],
       },
       experience: [
         {
-          company: "TechVision GmbH",
-          position: "Senior Full Stack Developer",
-          startDate: "2022-03",
+          company: "Iperceramica Deutschland GmbH",
+          position: "Working Student",
+          startDate: "2024-04",
           endDate: "Present",
           description:
-            "Leading development of cloud-native applications using React, Node.js, and AWS. Implemented CI/CD pipelines and mentored junior developers.",
-          highlights: [
-            "Reduced API response time by 40% through performance optimization",
-            "Implemented serverless architecture that reduced operational costs by 30%",
-            "Led a team of 5 developers to deliver projects consistently ahead of schedule",
-          ],
+            "• Using SAP and SAP S/4HANA to optimize inventory, orders, delivery processes, and complaint handling.\n• Sales: Active customer acquisition in B2B and B2C sectors through targeted acquisition and establishing long-term customer relationships. Sales and consulting on high-quality tiles, parquet flooring, sanitary ware, and bathroom furniture.\n• Maintenance of customer data and partner relationships in CRM and PRM systems to improve communication and collaboration."
         },
         {
-          company: "InnoSoft Solutions",
-          position: "Full Stack Developer",
-          startDate: "2019-01",
-          endDate: "2022-02",
+          company: "Technical University of Dortmund",
+          position: "Student Assistant",
+          startDate: "2023-10",
+          endDate: "2024-04",
           description:
-            "Developed and maintained web applications for enterprise clients. Worked with React, Express, MongoDB, and Docker.",
-          highlights: [
-            "Built responsive dashboards for data visualization",
-            "Integrated third-party APIs for payment processing and authentication",
-            "Migrated legacy applications to modern tech stacks",
-          ],
-        },
-        {
-          company: "DataFlow Systems",
-          position: "Frontend Developer",
-          startDate: "2017-07",
-          endDate: "2018-12",
-          description:
-            "Created user interfaces for data-intensive applications. Specialized in Angular and D3.js for data visualization.",
-          highlights: [
-            "Developed interactive charts and graphs for financial data analysis",
-            "Implemented accessibility improvements across all applications",
-            "Reduced bundle size by 35% through code optimization",
-          ],
-        },
+            "• Serving as a student tutor for the 'Data Structures, Algorithms and Programming 1' course as a mini-job.\n• Organization and implementation of tutorials for first-year students with a focus on object-oriented programming in Java.\n• Tasks included practical programming exercises, deepening and broadening course content, supervision of homework, as well as targeted exam preparation and strategic planning."
+        }
       ],
       education: [
         {
-          institution: "Technical University of Munich",
-          degree: "Master of Science in Computer Science",
-          startDate: "2015",
-          endDate: "2017",
-          description:
-            "Specialized in Distributed Systems and Web Technologies. Thesis: 'Scalable Microservices Architecture for Real-time Applications'.",
+          institution: "Technical University of Dortmund",
+          degree: "B.Sc. Computer Science",
+          startDate: "2022-09",
+          endDate: "2027",
+          location: "Dortmund, Germany",
+          description: "Degree expected in 2027"
         },
         {
-          institution: "University of Tunis",
-          degree: "Bachelor of Science in Computer Engineering",
-          startDate: "2012",
-          endDate: "2015",
-          description:
-            "Graduated with honors. Focus on Software Engineering and Database Systems.",
+          institution: "Goethe Institute Düsseldorf",
+          degree: "Intensive German Course",
+          startDate: "2021-07",
+          endDate: "2022-09",
+          location: "Düsseldorf, Germany",
+          description: "C1 level diploma"
         },
+        {
+          institution: "Lycée Pilote de Sfax",
+          degree: "Mathematics Baccalaureate",
+          startDate: "2018-09",
+          endDate: "2021-07",
+          location: "Sfax, Tunisia"
+        }
       ],
       skills: [
         {
-          category: "Programming Languages",
+          category: "Generative AI and Artificial Intelligence",
           items: [
-            "TypeScript",
-            "JavaScript",
-            "Python",
+            "OpenAI API Application Development",
+            "Chatbot Development",
+            "Data Augmentation",
+            "Deep Learning",
+            "Forecasting",
+            "Machine Learning"
+          ]
+        },
+        {
+          category: "Software Development and Backend Technologies",
+          items: [
+            "Object-Oriented Programming (OOP)",
             "Java",
-            "SQL",
-            "HTML/CSS",
-          ],
-        },
-        {
-          category: "Frameworks & Libraries",
-          items: [
-            "React",
-            "Node.js",
-            "Express",
-            "Angular",
-            "Next.js",
-            "Tailwind CSS",
-            "Material UI",
-          ],
-        },
-        {
-          category: "Databases",
-          items: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "DynamoDB"],
-        },
-        {
-          category: "Cloud & DevOps",
-          items: [
-            "AWS",
+            "Python",
+            "C Programming",
+            "Spring Boot",
             "Docker",
-            "Kubernetes",
-            "CI/CD",
-            "Git",
-            "GitHub Actions",
-            "Terraform",
-          ],
+            "API Development",
+            "Database Design (MySQL)"
+          ]
         },
+        {
+          category: "Data Engineering and Analysis",
+          items: [
+            "Real-time Data Pipelines",
+            "Data Warehousing",
+            "Time Series Analysis",
+            "ETL Processes",
+            "Basic Big Data Knowledge"
+          ]
+        },
+        {
+          category: "Tools and Platforms",
+          items: [
+            "GitLab",
+            "Eclipse",
+            "Microsoft Visual Studio",
+            "Linux System Administration"
+          ]
+        },
+        {
+          category: "Sales and Business Skills",
+          items: [
+            "SAP",
+            "SAP S/4HANA",
+            "CRM Systems",
+            "B2B/B2C Customer Acquisition",
+            "Communication and Relationship Management"
+          ]
+        }
       ],
-      certifications: [
-        {
-          name: "AWS Certified Solutions Architect",
-          issuer: "Amazon Web Services",
-          date: "2023",
-          expires: "2026",
-        },
-        {
-          name: "Professional Scrum Master I",
-          issuer: "Scrum.org",
-          date: "2022",
-        },
-        {
-          name: "MongoDB Certified Developer",
-          issuer: "MongoDB, Inc.",
-          date: "2021",
-        },
-      ],
+      certifications: [],
       languages: [
-        { language: "English", proficiency: "Fluent" },
-        { language: "German", proficiency: "Professional" },
-        { language: "French", proficiency: "Native" },
-        { language: "Arabic", proficiency: "Native" },
+        { name: "German", proficiency: "Fluent at negotiation level" },
+        { name: "English", proficiency: "Fluent at negotiation level" },
+        { name: "French", proficiency: "Native language" },
+        { name: "Arabic", proficiency: "Native language" },
+        { name: "Italian", proficiency: "Basic knowledge" }
       ],
       projects: [
         {
-          name: "HealthTracker Pro",
-          description:
-            "A comprehensive health monitoring application with wearable device integration.",
-          technologies: ["React Native", "Node.js", "MongoDB", "WebSockets"],
-          url: "https://github.com/Mayedi007/health-tracker",
+          name: "AI-based Chatbot",
+          description: "Integration of the OpenAI API into my personal portfolio to create an interactive user experience and demonstrate practical skills in API integration and web development.",
+          technologies: ["OpenAI API", "React", "Node.js", "Express"],
+          url: "https://github.com/Mayedi007/personal-portfolio-chatbot"
         },
         {
-          name: "CloudBudget",
-          description:
-            "An AWS cost management and optimization platform for businesses.",
-          technologies: [
-            "React",
-            "AWS Lambda",
-            "DynamoDB",
-            "Serverless Framework",
-          ],
-          url: "https://github.com/Mayedi007/cloud-budget",
+          name: "Flash Sale Platform",
+          description: "Development of a scalable backend platform to manage flash sale events with high user load. Focus on data modeling, transaction security, and performance optimization.",
+          technologies: ["Java", "Spring Boot", "MySQL", "Redis", "Docker"],
+          url: "https://github.com/Mayedi007/flash-sale-platform"
         },
+        {
+          name: "Reddit Data Pipeline",
+          description: "Implementation of a real-time data pipeline to capture and analyze Reddit data streams. Utilization of modern data engineering technologies.",
+          technologies: ["Python", "Apache Kafka", "Apache Spark", "MongoDB", "AWS"],
+          url: "https://github.com/Mayedi007/reddit-data-pipeline"
+        },
+        {
+          name: "UML Visualization Plugin",
+          description: "Creation of an Eclipse plugin to analyze and visualize the architecture of a flight management system. Focus on identifying critical module dependencies and improving system maintainability.",
+          technologies: ["Java", "Eclipse RCP", "UML", "GraphViz"],
+          url: "https://github.com/Mayedi007/uml-visualization-plugin"
+        }
       ],
+      interests: "Passionate reader of professional books on finance, technology, and innovation. Regular visits to trade shows and events to discover technological innovations and expand my knowledge of current developments. I regularly share my experiences and impressions from these visits in posts on LinkedIn. Actively involved in sports, particularly through regular padel playing."
     };
 
     // Multilingual CVs
