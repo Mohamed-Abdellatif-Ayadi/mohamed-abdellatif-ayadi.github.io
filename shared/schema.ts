@@ -59,6 +59,7 @@ export const educationSchema = z.object({
   location: z.string(),
   startDate: z.string(),
   endDate: z.string(),
+  description: z.string().optional(),
 });
 
 export type Education = z.infer<typeof educationSchema>;
@@ -80,6 +81,14 @@ export const languageSchema = z.object({
 export type Language = z.infer<typeof languageSchema>;
 
 // CV schema
+// Skill category schema for CV
+export const skillCategorySchema = z.object({
+  category: z.string(),
+  items: z.array(z.string()),
+});
+
+export type SkillCategory = z.infer<typeof skillCategorySchema>;
+
 export const cvSchema = z.object({
   name: z.string(),
   title: z.string(),
@@ -88,7 +97,7 @@ export const cvSchema = z.object({
   phone: z.string(),
   location: z.string(),
   summary: z.string(),
-  skills: z.array(z.string()),
+  skills: z.array(skillCategorySchema),
   experience: z.array(experienceSchema),
   education: z.array(educationSchema),
   certifications: z.array(certificationSchema).optional(),

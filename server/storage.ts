@@ -109,34 +109,59 @@ export class MemStorage implements IStorage {
         }
       ],
       skills: [
-        "OpenAI API Application Development",
-        "Chatbot Development",
-        "Data Augmentation",
-        "Deep Learning",
-        "Forecasting",
-        "Machine Learning",
-        "Object-Oriented Programming (OOP)",
-        "Java",
-        "Python",
-        "C Programming",
-        "Spring Boot",
-        "Docker",
-        "API Development",
-        "Database Design (MySQL)",
-        "Real-time Data Pipelines",
-        "Data Warehousing",
-        "Time Series Analysis",
-        "ETL Processes",
-        "Basic Big Data Knowledge",
-        "GitLab",
-        "Eclipse",
-        "Microsoft Visual Studio",
-        "Linux System Administration",
-        "SAP",
-        "SAP S/4HANA",
-        "CRM Systems",
-        "B2B/B2C Customer Acquisition",
-        "Communication and Relationship Management"
+        {
+          category: "Generative AI and Artificial Intelligence",
+          items: [
+            "OpenAI API Application Development",
+            "Chatbot Development",
+            "Data Augmentation",
+            "Deep Learning",
+            "Forecasting",
+            "Machine Learning"
+          ]
+        },
+        {
+          category: "Software Development and Backend Technologies",
+          items: [
+            "Object-Oriented Programming (OOP)",
+            "Java",
+            "Python",
+            "C Programming",
+            "Spring Boot",
+            "Docker",
+            "API Development",
+            "Database Design (MySQL)"
+          ]
+        },
+        {
+          category: "Data Engineering and Analysis",
+          items: [
+            "Real-time Data Pipelines",
+            "Data Warehousing",
+            "Time Series Analysis",
+            "ETL Processes",
+            "Basic Big Data Knowledge"
+          ]
+        },
+        {
+          category: "Tools and Platforms",
+          items: [
+            "GitLab",
+            "Eclipse",
+            "Microsoft Visual Studio",
+            "Linux System Administration"
+          ]
+        },
+        {
+          category: "Sales and Business Skills",
+          items: [
+            "SAP",
+            "SAP S/4HANA",
+            "CRM Systems",
+            "B2B/B2C Customer Acquisition",
+            "Communication and Relationship Management"
+          ]
+        }
       ],
       certifications: [],
       languages: [
@@ -244,34 +269,59 @@ export class MemStorage implements IStorage {
           }
         ],
         skills: [
-          "Entwicklung von KI-Anwendungen mit der OpenAI API",
-          "Chatbot-Entwicklung",
-          "Datenerweiterung",
-          "Deep Learning",
-          "Prognose",
-          "Maschinelles Lernen",
-          "Objektorientierte Programmierung (OOP)",
-          "Java",
-          "Python",
-          "C-Programmierung",
-          "Spring Boot",
-          "Docker",
-          "API-Entwicklung",
-          "Datenbankdesign (MySQL)",
-          "Echtzeit-Datenpipelines",
-          "Data Warehousing",
-          "Zeitreihenanalyse",
-          "ETL-Prozesse",
-          "Grundlegende Big-Data-Kenntnisse",
-          "GitLab",
-          "Eclipse",
-          "Microsoft Visual Studio",
-          "Linux-Systemadministration",
-          "SAP",
-          "SAP S/4HANA",
-          "CRM-Systeme",
-          "B2B/B2C-Kundenakquise",
-          "Kommunikation und Beziehungsmanagement"
+          {
+            category: "Generative KI und Künstliche Intelligenz",
+            items: [
+              "Entwicklung von KI-Anwendungen mit der OpenAI API",
+              "Chatbot-Entwicklung",
+              "Datenerweiterung",
+              "Deep Learning",
+              "Prognose",
+              "Maschinelles Lernen"
+            ]
+          },
+          {
+            category: "Softwareentwicklung und Backend-Technologien",
+            items: [
+              "Objektorientierte Programmierung (OOP)",
+              "Java",
+              "Python",
+              "C-Programmierung",
+              "Spring Boot",
+              "Docker",
+              "API-Entwicklung",
+              "Datenbankdesign (MySQL)"
+            ]
+          },
+          {
+            category: "Datenengineering und -analyse",
+            items: [
+              "Echtzeit-Datenpipelines",
+              "Data Warehousing",
+              "Zeitreihenanalyse",
+              "ETL-Prozesse",
+              "Grundlegende Big-Data-Kenntnisse"
+            ]
+          },
+          {
+            category: "Tools und Plattformen",
+            items: [
+              "GitLab",
+              "Eclipse",
+              "Microsoft Visual Studio",
+              "Linux-Systemadministration"
+            ]
+          },
+          {
+            category: "Vertriebs- und Geschäftsfähigkeiten",
+            items: [
+              "SAP",
+              "SAP S/4HANA",
+              "CRM-Systeme",
+              "B2B/B2C-Kundenakquise",
+              "Kommunikation und Beziehungsmanagement"
+            ]
+          }
         ],
         languages: [
           {
@@ -390,34 +440,59 @@ export class MemStorage implements IStorage {
           }
         ],
         skills: [
-          "Développement d'applications IA avec l'API OpenAI",
-          "Développement de chatbots",
-          "Augmentation de données",
-          "Deep Learning",
-          "Prévision",
-          "Apprentissage automatique",
-          "Programmation orientée objet (POO)",
-          "Java",
-          "Python",
-          "Programmation en C",
-          "Spring Boot",
-          "Docker",
-          "Développement d'API",
-          "Conception de bases de données (MySQL)",
-          "Pipelines de données en temps réel",
-          "Data Warehousing",
-          "Analyse de séries temporelles",
-          "Processus ETL",
-          "Connaissances de base en Big Data",
-          "GitLab",
-          "Eclipse",
-          "Microsoft Visual Studio",
-          "Administration de systèmes Linux",
-          "SAP",
-          "SAP S/4HANA",
-          "Systèmes CRM",
-          "Acquisition de clients B2B/B2C",
-          "Communication et gestion des relations"
+          {
+            category: "IA Générative et Intelligence Artificielle",
+            items: [
+              "Développement d'applications IA avec l'API OpenAI",
+              "Développement de chatbots",
+              "Augmentation de données",
+              "Deep Learning",
+              "Prévision",
+              "Apprentissage automatique"
+            ]
+          },
+          {
+            category: "Développement logiciel et technologies backend",
+            items: [
+              "Programmation orientée objet (POO)",
+              "Java",
+              "Python",
+              "Programmation en C",
+              "Spring Boot",
+              "Docker",
+              "Développement d'API",
+              "Conception de bases de données (MySQL)"
+            ]
+          },
+          {
+            category: "Ingénierie et analyse de données",
+            items: [
+              "Pipelines de données en temps réel",
+              "Data Warehousing",
+              "Analyse de séries temporelles",
+              "Processus ETL",
+              "Connaissances de base en Big Data"
+            ]
+          },
+          {
+            category: "Outils et plateformes",
+            items: [
+              "GitLab",
+              "Eclipse",
+              "Microsoft Visual Studio",
+              "Administration de systèmes Linux"
+            ]
+          },
+          {
+            category: "Ventes et compétences commerciales",
+            items: [
+              "SAP",
+              "SAP S/4HANA",
+              "Systèmes CRM",
+              "Acquisition de clients B2B/B2C",
+              "Communication et gestion des relations"
+            ]
+          }
         ],
         languages: [
           {
