@@ -1,0 +1,87 @@
+# MOHAMED ABDELLATIF AYADI
+
+## Student der Informatik (B.Sc.) an der Technischen Universität Dortmund
+
+**Kontakt:**  
+E-Mail: mohamed.ayadi.data@gmail.com  
+Telefon: 0152 5230 1739  
+Standort: Dortmund, Deutschland  
+GitHub: github.com/Mayedi007  
+LinkedIn: linkedin.com/in/mohamed-abdellatif-ayadi
+
+## Über mich
+
+Ich bin Mohamed Abdellatif Ayadi, Informatikstudent an der Technischen Universität Dortmund mit praktischer Erfahrung als Werkstudent im Vertrieb sowie in der Softwareentwicklung. Vertrieb mit Leidenschaft, Studium mit Ehrgeiz, sozialer Einsatz mit Herz – dieses Motto begleitet mich sowohl akademisch als auch beruflich. Mit großer Begeisterung für Softwareentwicklung, Künstliche Intelligenz und technologische Innovationen strebe ich aktuell eine Werkstudentenstelle an, um meine Kenntnisse praxisnah zu vertiefen und mich gezielt in den Bereichen Entwicklung oder IT-Consulting weiterzuentwickeln.
+
+## Ausbildung
+
+**Technische Universität Dortmund**  
+B.Sc. Informatik  
+September 2022 - Heute  
+Schwerpunkt: Softwareentwicklung, Algorithmen, KI
+
+**Höheres Institut für Informatik und Multimedia von Sfax**  
+B.Sc. Informatik  
+September 2018 - Juli 2021  
+Schwerpunkt: Webentwicklung, Datenbankmanagement
+
+## Berufserfahrung
+
+**Werkstudent** | Iperceramica Deutschland GmbH  
+April 2024 - Heute
+- Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Aufträgen, Lieferprozessen und der Bearbeitung von Reklamationen.
+- Vertrieb: Aktive Kundengewinnung im B2B- und B2C-Bereich durch gezielte Akquise und Aufbau langfristiger Kundenbeziehungen. Verkauf und Beratung zu hochwertigen Fliesen, Parkett, Sanitärwaren und Badmöbeln.
+- Pflege von Kundendaten und Partnerbeziehungen in CRM- und PRM-Systemen zur Verbesserung der Kommunikation und Zusammenarbeit.
+
+**Studentische Hilfskraft** | Technische Universität Dortmund  
+Oktober 2023 - April 2024
+- Tätigkeit als studentischer Tutor für den Kurs "Datenstrukturen, Algorithmen und Programmierung 1" als Minijob.
+- Organisation und Durchführung von Übungen für Erstsemester mit Schwerpunkt auf objektorientierter Programmierung in Java.
+- Zu den Aufgaben gehörten praktische Programmierübungen, Vertiefung und Erweiterung der Kursinhalte, Betreuung von Hausaufgaben sowie gezielte Klausurvorbereitung und strategische Planung.
+
+## Projekte
+
+**KI-basierter Chatbot**
+- Integration der OpenAI API in mein persönliches Portfolio, um eine interaktive Benutzererfahrung zu schaffen und praktische Fähigkeiten in API-Integration und Webentwicklung zu demonstrieren.
+- Technologien: OpenAI API, React, Node.js, Express
+- GitHub: https://github.com/Mayedi007/personal-portfolio-chatbot
+
+**Flash-Sale-Plattform**
+- Entwicklung einer skalierbaren Backend-Plattform zur Abwicklung von Flash-Sale-Events mit hoher Benutzerauslastung. Fokus auf Datenmodellierung, Transaktionssicherheit und Leistungsoptimierung.
+- Technologien: Java, Spring Boot, MySQL, Redis, Docker
+- GitHub: https://github.com/Mayedi007/flash-sale-platform
+
+**Reddit-Datenpipeline**
+- Implementierung einer Echtzeit-Datenpipeline zur Erfassung und Analyse von Reddit-Datenströmen. Einsatz moderner Datenengineering-Technologien.
+- Technologien: Python, Apache Kafka, Apache Spark, MongoDB, AWS
+- GitHub: https://github.com/Mayedi007/reddit-data-pipeline
+
+**UML-Visualisierungs-Plugin**
+- Erstellung eines Eclipse-Plugins zur Analyse und Visualisierung der Architektur eines Flugmanagementsystems. Fokus auf die Identifizierung kritischer Modulabhängigkeiten und die Verbesserung der Wartbarkeit des Systems.
+- Technologien: Java, Eclipse RCP, UML, GraphViz
+- GitHub: https://github.com/Mayedi007/uml-visualization-plugin
+
+## Fähigkeiten
+
+**Generative KI und Künstliche Intelligenz:**
+Entwicklung von KI-Anwendungen mit der OpenAI API, Chatbot-Entwicklung, Data Augmentation, Deep Learning, Forecasting, Maschinelles Lernen
+
+**Softwareentwicklung und Backend-Technologien:**
+Objektorientierte Programmierung (OOP), Java, Python, C-Programmierung, Spring Boot, Docker, API-Entwicklung, Datenbankdesign (MySQL)
+
+**Datenengineering und Datenanalyse:**
+Echtzeit-Datenpipelines, Data Warehousing, Zeitreihenanalyse, ETL-Prozesse, Grundkenntnisse in Big Data
+
+**Werkzeuge und Plattformen:**
+GitLab, Eclipse, Microsoft Visual Studio, Linux-Systemadministration
+
+**Vertrieb und Business-Kompetenzen:**
+SAP, SAP S/4HANA, CRM-Systeme, Kundenakquise B2B/B2C, Kommunikation und Beziehungsmanagement
+
+## Sprachkenntnisse
+
+- **Deutsch:** Fließend bis verhandlungssicher
+- **Englisch:** Fließend bis verhandlungssicher
+- **Französisch:** Muttersprache
+- **Arabisch:** Muttersprache
+- **Italienisch:** Basiskenntnisse
