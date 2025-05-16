@@ -372,6 +372,10 @@ export class MemStorage implements IStorage {
       ]
     };
 
+      };
+
+    const germanCV = {
+      ...cvBase,
       projects: [
         {
           name: "KI-basierter Chatbot",
