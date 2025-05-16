@@ -1,0 +1,329 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{graphicx} 
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\usepackage{fontawesome5}
+\usepackage{xcolor}
+\definecolor{portfolioColor}{RGB}{0, 102, 204} % nice strong blue
+
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Mohamed Abdellatif Ayadi - CV},
+    pdfauthor={Mohamed Abdellatif Ayadi},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+\usepackage{parskip} % For spacing between paragraphs
+\usepackage[margin=1cm]{geometry}
+
+\usepackage{tikz} % For circular clipping
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4,5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Dernière mise à jour en septembre 2024}\hspace{\widthof{Dernière mise à jour en septembre 2024}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+   \begin{center}
+    % Circular photo using tikz
+    \begin{tikzpicture}
+        \clip (1.4,2.8) circle(2.4cm); % Circle with a radius of 2.5cm
+        \node at (1,1) {\includegraphics[width=7.5cm]{image-cv.jpg}}; % Adjust the width
+    \end{tikzpicture}
+
+    \vspace{0.5cm} % Add spacing between the photo and text
+    {\fontsize{20pt}{24pt}\selectfont \textbf{MOHAMED ABDELLATIF AYADI}}
+\end{center}
+        
+\vspace{5 pt}
+
+    \normalsize
+    \textit{Étudiant en Informatique (B.Sc.) à l'Université Technique de Dortmund}
+
+        \vspace{5 pt}
+
+      \faEnvelope\ \href{mailto:mohamed.ayadi.data@gmail.com}{\textcolor{primaryColor}{mohamed.ayadi.data@gmail.com}} \quad
+\faPhone\ \href{tel:+49-152-5230-1739}{\textcolor{primaryColor}{0152 5230 1739}} \quad
+\faGithub\ \href{https://github.com/Mayedi007}{\textcolor{primaryColor}{github.com/Mayedi007}} \quad
+\faGlobe\ \href{https://personal-portfolio-mohamedayadidat.replit.app}{\textcolor{portfolioColor}{Portfolio Personnel}} \quad
+
+\faLinkedin\ \href{https://linkedin.com/in/mohamed-abdellatif-ayadi}{\textcolor{primaryColor}{linkedin.com/in/mohamed-abdellatif-ayadi}}
+
+    \end{header}
+
+    \vspace{1cm}
+
+\section*{À propos de moi}
+
+Je suis Mohamed Abdellatif Ayadi, étudiant en informatique à l'Université Technique de Dortmund avec une expérience pratique en tant qu'étudiant salarié dans la vente et le développement logiciel.
+
+Vendre avec passion, étudier avec ambition, engagement social avec cœur – cette devise m'accompagne tant sur le plan académique que professionnel.
+
+Avec un grand enthousiasme pour le développement logiciel, l'intelligence artificielle et les innovations technologiques, je recherche actuellement un poste d'étudiant salarié pour approfondir mes connaissances de manière pratique et me développer spécifiquement dans les domaines du développement ou du conseil en informatique.
+
+\section{Formation}
+
+\begin{twocolentry}{
+      prévu 2027
+}
+    \textbf{Université Technique de Dortmund}, B.Sc. Informatique
+
+    \vspace{0.10 cm}
+   
+        
+       \end{twocolentry}
+             
+             
+\vspace{0.2 cm}
+\begin{twocolentry}{
+    Septembre 2022
+}
+    \textbf{Institut Goethe de Düsseldorf} \\
+   Cours intensif de langue allemande avec certification niveau C1 
+\end{twocolentry}
+\vspace{0.2cm}
+
+\begin{twocolentry}{
+    Juillet 2021, Sfax, Tunisie}
+
+    \textbf{Lycée Pilote de Sfax}\\
+
+   
+     
+             Baccalauréat en Mathématiques 
+
+
+\end{twocolentry}
+
+    
+    \section{Expérience Professionnelle}
+        
+        \begin{twocolentry}{
+            Avril 2024 – Présent 
+        }
+            \textbf{Étudiant salarié}, Iperceramica Deutschland GmbH, \end{twocolentry}
+
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Utilisation de SAP et SAP S/4HANA pour optimiser les stocks, les commandes, les processus de livraison et la gestion des réclamations.
+
+               \item Vente : Acquisition active de clients dans les secteurs B2B et B2C par le biais d'une acquisition ciblée et l'établissement de relations clients à long terme. Vente et conseil sur des carrelages de haute qualité, parquets, articles sanitaires et meubles de salle de bain.
+
+                \item Maintenance des données clients et des relations partenaires dans les systèmes CRM et PRM pour améliorer la communication et la collaboration.
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{1 cm}
+ 
+        \begin{twocolentry}{
+            Octobre 2023 – Avril 2024
+        }
+            \textbf{Assistant étudiant}, Université Technique de Dortmund, \end{twocolentry}
+
+       \vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Fonction de tuteur étudiant pour le cours "Structures de données, algorithmes et programmation 1" en tant que mini-job.
+        \item Organisation et mise en œuvre de tutoriels pour les étudiants de première année avec un accent sur la programmation orientée objet en Java.
+        \item Les tâches comprenaient des exercices pratiques de programmation, l'approfondissement et l'élargissement du contenu des cours, la supervision des devoirs, ainsi que la préparation ciblée aux examens et la planification stratégique.
+    \end{highlights}
+\end{onecolentry}
+    
+\section{Projets}
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Développement d'un chatbot basé sur l'IA}:  
+Intégration de l'API OpenAI dans mon portfolio personnel (\href{https://personal-portfolio-mohamedayadidat.replit.app/chat}{Voir le chatbot}), pour créer une expérience utilisateur interactive et démontrer des compétences pratiques en intégration d'API et développement web.
+
+\item \textbf{Plateforme de ventes flash}:  
+Développement d'une plateforme backend évolutive pour gérer les événements de ventes flash avec une charge utilisateur élevée. Accent sur la modélisation des données, la sécurité des transactions et l'optimisation des performances (\href{https://github.com/Mayedi007/flash-sale-platform}{Voir le projet GitHub}).
+
+\item \textbf{Pipeline de données Reddit}:  
+Mise en œuvre d'un pipeline de données en temps réel pour capturer et analyser les flux de données Reddit. Utilisation de technologies modernes d'ingénierie de données (\href{https://github.com/Mayedi007/reddit-data-streaming-pipeline}{Voir le projet GitHub}).
+
+\item \textbf{Participation au concours Kaggle "Corporación Favorita Grocery Sales Forecasting"}:  
+Développement d'un framework pour l'augmentation de données à la volée afin d'améliorer la précision des prévisions lors de fluctuations saisonnières et de données incomplètes.
+
+\item \textbf{Développement d'un plugin de visualisation UML}:  
+Création d'un plugin Eclipse pour analyser et visualiser l'architecture d'un système de gestion de vol. Accent sur l'identification des dépendances de modules critiques et l'amélioration de la maintenabilité du système.
+\end{itemize}
+
+\vspace{0.2 cm}
+
+\section{Compétences}
+
+\textbf{IA Générative et Intelligence Artificielle:}  
+Développement d'applications IA avec l'API OpenAI, Développement de chatbots, Augmentation de données, Deep Learning, Prévision, Apprentissage automatique.
+
+\textbf{Développement logiciel et technologies backend:}  
+Programmation orientée objet (POO), Java, Python, Programmation en C, Spring Boot, Docker, Développement d'API, Conception de bases de données (MySQL).
+
+\textbf{Ingénierie et analyse de données:}  
+Pipelines de données en temps réel, Data Warehousing, Analyse de séries temporelles (Prévision de séries temporelles), Processus ETL, Connaissances de base en Big Data.
+
+\textbf{Outils et plateformes:}  
+GitLab, Eclipse, Microsoft Visual Studio, Administration de systèmes Linux.
+
+\textbf{Ventes et compétences commerciales:}  
+SAP, SAP S/4HANA, Systèmes CRM, Acquisition de clients B2B/B2C, Communication et gestion des relations.
+
+\section{Langues}
+
+\begin{onecolentry}
+    \textbf{Allemand :} Courant à niveau de négociation \\
+    \textbf{Anglais :} Courant à niveau de négociation \\
+    \textbf{Français :} Langue maternelle \\
+    \textbf{Arabe :} Langue maternelle \\
+    \textbf{Italien :} Connaissances de base
+\end{onecolentry}
+
+\section{Centres d'intérêt}
+
+Lecteur passionné de livres professionnels sur la finance, la technologie et l'innovation.  
+Visites régulières de salons et d'événements pour découvrir les nouveautés technologiques et élargir mes connaissances sur les développements actuels.  
+Je partage régulièrement mes expériences et impressions de ces visites dans des posts sur LinkedIn.  
+Actif sportivement, notamment par la pratique régulière du padel.
+    
+\end{document}
