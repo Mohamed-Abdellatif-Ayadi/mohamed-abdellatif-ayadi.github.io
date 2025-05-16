@@ -533,11 +533,10 @@ export class MemStorage implements IStorage {
       location: "Dortmund, Allemagne"
     };
 
-    // Store different language versions
+    // Store only English and German language versions
     this.cvs = {
       en: this.cv,
-      de: germanCV,
-      fr: frenchCV
+      de: germanCV
     };
 
     this.addSampleArticles();
