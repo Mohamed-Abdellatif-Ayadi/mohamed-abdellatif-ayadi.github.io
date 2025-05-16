@@ -101,15 +101,23 @@ export class MemStorage implements IStorage {
           startDate: "2022-09",
           endDate: "Present",
           location: "Dortmund, Germany",
-          description: "Focus: Software Development, Algorithms, AI"
+          description: "Expected graduation in 2027"
         },
         {
-          institution: "Higher Institute of Computer Science and Multimedia of Sfax",
-          degree: "B.Sc. Computer Science",
+          institution: "Goethe Institute Düsseldorf",
+          degree: "German Language Certificate",
+          startDate: "2022-09",
+          endDate: "2022-09",
+          location: "Düsseldorf, Germany",
+          description: "Intensive German language course with C1 level certification"
+        },
+        {
+          institution: "Pioneer High School of Sfax (Lycée Pilote de Sfax)",
+          degree: "High School Diploma in Mathematics",
           startDate: "2018-09",
           endDate: "2021-07",
           location: "Sfax, Tunisia",
-          description: "Focus: Web Development, Database Management"
+          description: "Mathematics specialization"
         }
       ],
       skills: [
