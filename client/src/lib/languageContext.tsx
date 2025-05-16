@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Define supported languages
-export type Language = 'en' | 'de' | 'fr';
+export type Language = 'en' | 'de';
 
 type LanguageContextType = {
   language: Language;
@@ -209,104 +209,6 @@ const translations: Record<Language, Record<string, string>> = {
     'chat.questions.experience': 'Erzählen Sie mir von Ihrer Arbeitserfahrung',
     'chat.questions.blog': 'Über welche Themen schreiben Sie?',
     'chat.questions.languages': 'Welche Sprachen sprechen Sie?'
-  },
-  fr: {
-    // Navigation
-    'nav.home': 'Accueil',
-    'nav.blog': 'Blog',
-    'nav.cv': 'CV',
-    'nav.about': 'À Propos',
-    'nav.contact': 'Contact',
-    'nav.projects': 'Projets',
-    'nav.chat': 'Chat',
-
-    // Hero section
-    'home.hero.name': 'Mohamed Abdellatif Ayadi',
-    'home.hero.subtitle': 'Ingénieur Logiciel & Passionné de Data Science',
-    'hero.welcome': 'Bienvenue sur mon site personnel, où je partage mon expertise, mes expériences et mes réflexions sur l\'informatique, le développement logiciel et mon parcours professionnel',
-    'hero.blog': 'Mes Articles',
-    'hero.cv': 'Mon CV',
-    'hero.projects': 'Mes Projets',
-    
-    // Home page sections
-    'home.latestArticles.title': 'Derniers Articles',
-    'home.latestArticles.subtitle': 'Lisez mes publications et réflexions les plus récentes',
-
-    // CV page
-    'cv.title': 'Mon Curriculum Vitae',
-    'cv.subtitle': 'Un aperçu complet de mon parcours académique, mes expériences professionnelles et mes compétences techniques',
-    'cv.print': 'Imprimer le CV',
-    'cv.cta.title': 'Intéressé par une collaboration?',
-    'cv.cta.text': 'Je suis toujours ouvert à discuter de nouveaux projets, d\'idées créatives ou d\'opportunités pour faire partie de votre vision',
-    'cv.cta.button': 'Me Contacter',
-
-    // About page
-    'about.title': 'À Propos de Moi',
-    'about.subtitle': 'Apprenez à me connaître et ce qui alimente ma passion pour la technologie',
-
-    // Contact
-    'contact.title': 'Contactez-moi',
-    'contact.subtitle': 'Vous avez une question ou souhaitez collaborer? Contactez-moi!',
-    'contact.name': 'Votre Nom',
-    'contact.email': 'Votre Email',
-    'contact.subject': 'Sujet',
-    'contact.message': 'Votre Message',
-    'contact.send': 'Envoyer le Message',
-    'contact.success': 'Merci! Votre message a été envoyé',
-
-    // Blog
-    'blog.title': 'Articles de Blog',
-    'blog.subtitle': 'Réflexions, idées et expériences de mon parcours dans la <span style="color: white; font-weight: bold; background-color: #8B5CF6; padding: 2px 6px; border-radius: 4px; box-shadow: 0 0 5px #A855F7;">technologie</span>',
-    'blog.readMore': 'Lire Plus',
-    'blog.search': 'Rechercher',
-    'blog.categories': 'Catégories',
-    'blog.allCategories': 'Toutes les Catégories',
-    'blog.share': 'Partager cet article',
-    'blog.publishedOn': 'Publié le',
-    'blog.category.programming': 'Programmation',
-    'blog.category.datascience': 'Data Science',
-    'blog.category.webdev': 'Développement Web',
-    'blog.category.career': 'Carrière',
-    'blog.backToList': 'Retour à tous les articles',
-
-    // Newsletter
-    'newsletter.title': 'Abonnez-vous à ma Newsletter',
-    'newsletter.text': 'Restez informé de mes derniers articles et projets',
-    'newsletter.placeholder': 'Votre adresse email',
-    'newsletter.button': 'S\'abonner',
-    'newsletter.success': 'Merci pour votre abonnement!',
-    
-    // Projects
-    'projects.title': 'Mes Projets',
-    'projects.metaDescription': 'Découvrez les projets développés par Mohamed Abdellatif Ayadi, notamment des applications web, des analyses de données et plus encore',
-    'projects.heading': 'Mes Projets',
-    'projects.subheading': 'Une présentation de mon travail technique et de mes projets',
-    'projects.filters.all': 'Tous',
-    'projects.filters.web': 'Web',
-    'projects.filters.aiData': 'IA/Données',
-    'projects.filters.other': 'Autres',
-    'projects.noProjectsFound': 'Aucun projet trouvé dans cette catégorie. Revenez plus tard!',
-    'projects.viewOnGitHub': 'Dépôt GitHub',
-    'projects.liveDemo': 'Démo en Direct',
-    'projects.backToProjects': 'Retour aux Projets',
-    'projects.githubRepository': 'Dépôt GitHub',
-    'projects.notFound': 'Projet Non Trouvé',
-    'projects.notFoundDescription': 'Le projet que vous recherchez n\'existe pas ou a été supprimé',
-    
-    // Chat
-    'chat.title': 'Assistant Interactif',
-    'chat.subtitle': 'Posez-moi des questions sur le parcours de Mohamed, ses compétences, projets ou articles de blog',
-    'chat.assistantName': 'Mohamed IA',
-    'chat.assistantDescription': 'Assistant Personnel',
-    'chat.badge': 'Alimenté par IA',
-    'chat.messagePlaceholder': 'Écrivez votre message ici...',
-    'chat.suggestedQuestions': 'Questions Suggérées',
-    'chat.you': 'Vous',
-    'chat.questions.education': 'Quelle est votre formation?',
-    'chat.questions.programming': 'Quels langages de programmation connaissez-vous?',
-    'chat.questions.experience': 'Parlez-moi de votre expérience professionnelle',
-    'chat.questions.blog': 'Sur quels sujets écrivez-vous?',
-    'chat.questions.languages': 'Quelles langues parlez-vous?'
   }
 };
 
@@ -319,7 +221,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   useEffect(() => {
     try {
       const savedLanguage = localStorage.getItem('language');
-      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'de' || savedLanguage === 'fr')) {
+      if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'de')) {
         setLanguageState(savedLanguage as Language);
       }
     } catch (error) {
