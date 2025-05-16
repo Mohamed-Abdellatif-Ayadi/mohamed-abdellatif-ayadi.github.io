@@ -461,11 +461,7 @@ export class MemStorage implements IStorage {
             content: "SQL-Fensterfunktionen sind eines der leistungsstärksten und flexibelsten Werkzeuge für Analysten und Entwickler, die mit relationalen Datenbanken arbeiten. Sie ermöglichen Berechnungen über eine Menge von Zeilen, die in irgendeiner Weise mit der aktuellen Zeile verwandt sind, ohne dass Self-Joins oder Subqueries verwendet werden müssen. Dies macht sie unglaublich effizient und ausdrucksstark für viele gängige Datenanalyseaufgaben.\n\nIn diesem umfassenden Leitfaden werden wir untersuchen, was Fensterfunktionen sind, wie sie funktionieren und wie man sie effektiv in SQL-Abfragen einsetzen kann. Wir werden alles von den Grundlagen bis hin zu fortgeschrittenen Techniken behandeln, mit praktischen Beispielen, die Sie auf Ihre eigenen Datenanalyse-Herausforderungen anwenden können.",
             excerpt: "Lernen Sie, wie Sie SQL-Fensterfunktionen für fortgeschrittene Datenanalysen nutzen können."
           },
-          fr: {
-            title: "Maîtriser les fonctions de fenêtrage SQL : Un guide complet",
-            content: "Les fonctions de fenêtrage SQL sont l'un des outils les plus puissants et flexibles disponibles pour les analystes et développeurs travaillant avec des bases de données relationnelles. Elles permettent d'effectuer des calculs sur un ensemble de lignes qui sont d'une certaine manière liées à la ligne en cours, sans avoir à utiliser des auto-jointures ou des sous-requêtes. Cela les rend incroyablement efficaces et expressives pour de nombreuses tâches courantes d'analyse de données.\n\nDans ce guide complet, nous explorerons ce que sont les fonctions de fenêtrage, comment elles fonctionnent et comment les utiliser efficacement dans vos requêtes SQL. Nous couvrirons tout, des bases aux techniques avancées, avec des exemples pratiques que vous pourrez appliquer à vos propres défis d'analyse de données.",
-            excerpt: "Apprenez à exploiter les fonctions de fenêtrage SQL pour l'analyse de données avancée."
-          }
+          
         }
       },
       {

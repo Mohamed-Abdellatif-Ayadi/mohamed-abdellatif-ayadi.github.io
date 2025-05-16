@@ -23,16 +23,15 @@ const BlogPage = () => {
       return response.json();
     }
   });
-
   const filteredArticles = articles?.filter((article) => {
-    // Check if article and its properties exist before using toLowerCase
-    if (!article || !article.title || !article.excerpt) {
-      return false;
-    }
+    const translation = article.translations?.[language];
+
+    const title = translation?.title || article.title;
+    const excerpt = translation?.excerpt || article.excerpt;
 
     const matchesSearch = 
-      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesCategory = 
       selectedCategory === "" || article.category === selectedCategory;
