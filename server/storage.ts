@@ -176,9 +176,10 @@ export class MemStorage implements IStorage {
     const germanCV: CV = {
       name: "MOHAMED ABDELLATIF AYADI",
       photoUrl: "/images/avatar.png",
-      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
-      summary:
-        "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb bei Iperceramica Deutschland GmbH. Mit großer Leidenschaft für Programmierung, künstliche Intelligenz, Innovation und Vertrieb strebe ich danach, meine Kenntnisse praxisnah zu vertiefen. Mein Ziel ist es, an Projekten mit echtem Mehrwert zu arbeiten und mich im Bereich Softwareentwicklung oder IT-Consulting weiterzuentwickeln.",
+      title: "Informatikstudent an der Technischen Universität Dortmund",
+      summary: `Ich bin Mohamed Abdellatif Ayadi, Informatikstudent an der Technischen Universität Dortmund mit praktischer Erfahrung als Werkstudent im Vertrieb sowie in der Softwareentwicklung.
+    Vertrieb mit Leidenschaft, Studium mit Ehrgeiz, sozialer Einsatz mit Herz – dieses Motto begleitet mich sowohl akademisch als auch beruflich.
+    Mit großer Begeisterung für Softwareentwicklung, Künstliche Intelligenz und technologische Innovationen strebe ich aktuell eine Werkstudentenstelle an, um meine Kenntnisse praxisnah zu vertiefen und mich gezielt in den Bereichen Entwicklung oder IT-Consulting weiterzuentwickeln.`,
       email: "mohamed.ayadi.data@gmail.com",
       phone: "0152 5230 1739",
       location: "Dortmund, Deutschland",
@@ -186,9 +187,9 @@ export class MemStorage implements IStorage {
         {
           category: "Generative KI und Künstliche Intelligenz",
           items: [
-            "Entwicklung von KI-Anwendungen mit der OpenAI API",
+            "Entwicklung von KI-Anwendungen mit OpenAI-API",
             "Chatbot-Entwicklung",
-            "Datenaugmentation",
+            "Data Augmentation",
             "Deep Learning",
             "Forecasting",
             "Maschinelles Lernen"
@@ -200,7 +201,7 @@ export class MemStorage implements IStorage {
             "Objektorientierte Programmierung (OOP)",
             "Java",
             "Python",
-            "C",
+            "C-Programmierung",
             "Spring Boot",
             "Docker",
             "API-Entwicklung",
@@ -212,9 +213,9 @@ export class MemStorage implements IStorage {
           items: [
             "Echtzeit-Datenpipelines",
             "Data Warehousing",
-            "Zeitreihenanalyse",
+            "Zeitreihenanalyse (Time Series Forecasting)",
             "ETL-Prozesse",
-            "Grundlagen von Big Data"
+            "Grundkenntnisse in Big Data"
           ]
         },
         {
@@ -227,13 +228,13 @@ export class MemStorage implements IStorage {
           ]
         },
         {
-          category: "Vertriebs- und Geschäftskompetenzen",
+          category: "Vertrieb und Business-Kompetenzen",
           items: [
             "SAP",
             "SAP S/4HANA",
             "CRM-Systeme",
-            "B2B/B2C-Kundenakquise",
-            "Kommunikation & Beziehungsmanagement"
+            "Kundenakquise B2B/B2C",
+            "Kommunikation und Beziehungsmanagement"
           ]
         }
       ],
@@ -243,16 +244,40 @@ export class MemStorage implements IStorage {
           position: "Werkstudent",
           startDate: "2024-04",
           endDate: "Present",
-          description:
-            "• Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Bestellungen, Lieferprozessen und Reklamationen.\n• Vertrieb: Aktive Kundenakquise im B2B- und B2C-Bereich, Verkauf und Beratung zu hochwertigen Fliesen, Parkett, Sanitärprodukten und Badmöbeln.\n• Pflege von Kundendaten in CRM- und PRM-Systemen zur Verbesserung der Kommunikation und Zusammenarbeit."
+          description: `• Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Aufträgen, Lieferprozessen und der Bearbeitung von Reklamationen.
+    • Aktive Kundengewinnung im B2B- und B2C-Bereich durch gezielte Akquise und Aufbau langfristiger Kundenbeziehungen. Verkauf und Beratung von hochwertigen Fliesen, Parkett, Sanitär und Badezimmermöbeln.
+    • Pflege von Kundendaten und Partnerbeziehungen in CRM und PRM-Systemen zur Verbesserung der Kommunikation und Zusammenarbeit.`
         },
         {
           company: "Technische Universität Dortmund",
-          position: "Studentische Hilfskraft",
+          position: "Studentischer Tutor",
           startDate: "2023-10",
           endDate: "2024-04",
-          description:
-            "• Tutor im Kurs 'Datenstrukturen, Algorithmen und Programmierung 1'.\n• Durchführung von Übungen zur objektorientierten Programmierung mit Java.\n• Betreuung von Hausaufgaben, Prüfungsvorbereitung und individuelle Unterstützung von Erstsemestern."
+          description: `• Tutor im Kurs "Datenstrukturen, Algorithmen und Programmierung 1" (Minijob).
+    • Durchführung von Tutorien für Erstsemester mit Fokus auf objektorientierte Programmierung in Java.
+    • Aufgaben: Programmierübungen, Vertiefung der Vorlesungsinhalte, Hausaufgabenbetreuung, Prüfungsvorbereitung.`
+        }
+      ],
+      projects: [
+        {
+          title: "KI-gestützter Chatbot",
+          description: "Integration der OpenAI API in ein persönliches Web-Portfolio zur Schaffung eines interaktiven Nutzererlebnisses."
+        },
+        {
+          title: "Flash Sale Plattform",
+          description: "Entwicklung einer skalierbaren Backend-Plattform für Flash-Sales mit Fokus auf Performance und Transaktionssicherheit."
+        },
+        {
+          title: "Reddit Data Streaming Pipeline",
+          description: "Echtzeit-Datenpipeline zur Analyse von Reddit-Datenströmen unter Einsatz moderner Data Engineering-Technologien."
+        },
+        {
+          title: "Kaggle-Wettbewerb: Corporación Favorita",
+          description: "Entwicklung eines Frameworks für On-the-Fly Data Augmentation zur Verbesserung der Prognosegenauigkeit."
+        },
+        {
+          title: "UML-Visualisierungs-Plugin",
+          description: "Entwicklung eines Eclipse-Plugins zur Analyse der Architektur eines Flugmanagementsystems zur Wartbarkeitsverbesserung."
         }
       ],
       education: [
@@ -260,7 +285,7 @@ export class MemStorage implements IStorage {
           institution: "Technische Universität Dortmund",
           degree: "B.Sc. Informatik",
           startDate: "2022-09",
-          endDate: "Present",
+          endDate: "2027-09",
           location: "Dortmund, Deutschland",
           description: "Schwerpunkte: Softwareentwicklung, Algorithmen, Künstliche Intelligenz"
         },
@@ -283,13 +308,20 @@ export class MemStorage implements IStorage {
       ],
       certifications: [],
       languages: [
-        { name: "Deutsch", proficiency: "Fließend auf Verhandlungsniveau" },
-        { name: "Englisch", proficiency: "Fließend auf Verhandlungsniveau" },
+        { name: "Deutsch", proficiency: "Fließend bis verhandlungssicher" },
+        { name: "Englisch", proficiency: "Fließend bis verhandlungssicher" },
         { name: "Französisch", proficiency: "Muttersprache" },
         { name: "Arabisch", proficiency: "Muttersprache" },
-        { name: "Italienisch", proficiency: "Grundkenntnisse" }
+        { name: "Italienisch", proficiency: "Basiskenntnisse" }
+      ],
+      interests: [
+        "Lesen von Fachbüchern über Finanzen, Technologie und Innovationen",
+        "Teilnahme an Fachmessen und Veranstaltungen zur Technologieneuheiten",
+        "Teilen von Eindrücken und Wissen auf LinkedIn",
+        "Sportlich aktiv, insbesondere regelmäßiges Padelspielen"
       ]
     };
+
 
     // French CV
     const frenchCV: CV = {
