@@ -35,7 +35,7 @@ const translations: Record<Language, Record<string, string>> = {
     "home.hero.name": "Mohamed Abdellatif Ayadi",
     "home.hero.subtitle": "Software Engineer & Data Science Enthusiast",
     "hero.welcome":
-      "Welcome to my personal website, where I share my expertise, experiences, and insights about computer science, software development, and my professional journey",
+      "Welcome to my personal website, where I share my expertise, experiences, and insights about computer science, software development, AI and my professional journey",
     "hero.blog": "My Articles",
     "hero.cv": "My Resume",
     "hero.projects": "My Projects",
@@ -144,7 +144,7 @@ const translations: Record<Language, Record<string, string>> = {
     "home.hero.name": "Mohamed Abdellatif Ayadi",
     "home.hero.subtitle": "Softwareingenieur & Data Science Enthusiast",
     "hero.welcome":
-      "Willkommen auf meiner persönlichen Website, wo ich meine Fachkenntnisse, Erfahrungen und Einsichten über Informatik, Softwareentwicklung und meine berufliche Laufbahn teile",
+      "Willkommen auf meiner persönlichen Website, wo ich meine Fachkenntnisse, Erfahrungen und Einsichten über Informatik, Softwareentwicklung, KI und meine berufliche Laufbahn teile",
     "hero.blog": "Meine Artikel",
     "hero.cv": "Mein Lebenslauf",
     "hero.projects": "Meine Projekte",

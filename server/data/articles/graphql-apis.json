@@ -1,0 +1,26 @@
+{
+  "id": 2,
+  "title": "Building Scalable APIs with GraphQL and Node.js",
+  "excerpt": "A comprehensive guide to designing efficient, flexible APIs using GraphQL with Node.js.",
+  "content": "REST APIs have been the standard for building web services for years, but GraphQL offers a compelling alternative with significant benefits for both frontend and backend developers. This article explores how to build scalable, efficient APIs using GraphQL with Node.js.",
+  "coverImage": "/images/graphql.svg",
+  "category": "APIs",
+  "publishedAt": "2025-04-25",
+  "translations": {
+    "en": {
+      "title": "Building Scalable APIs with GraphQL and Node.js",
+      "content": "REST APIs have been the standard for building web services for years, but GraphQL offers a compelling alternative with significant benefits for both frontend and backend developers. This article explores how to build scalable, efficient APIs using GraphQL with Node.js.\n\nWe'll cover setting up a GraphQL server, defining schemas, resolvers, and mutations, as well as implementing authentication, error handling, and caching. Through practical examples, you'll learn how GraphQL addresses common API development challenges such as over-fetching and under-fetching of data, versioning, and documentation.",
+      "excerpt": "A comprehensive guide to designing efficient, flexible APIs using GraphQL with Node.js."
+    },
+    "de": {
+      "title": "Skalierbare APIs mit GraphQL und Node.js entwickeln",
+      "content": "REST-APIs waren jahrelang der Standard für den Aufbau von Webdiensten, aber GraphQL bietet eine überzeugende Alternative mit erheblichen Vorteilen für Frontend- und Backend-Entwickler. Dieser Artikel untersucht, wie man skalierbare, effiziente APIs mit GraphQL und Node.js erstellt.\n\nWir behandeln das Einrichten eines GraphQL-Servers, das Definieren von Schemas, Resolvern und Mutationen sowie die Implementierung von Authentifizierung, Fehlerbehandlung und Caching. Anhand praktischer Beispiele erfahren Sie, wie GraphQL häufige Herausforderungen bei der API-Entwicklung wie das Über- und Unterabrufen von Daten, die Versionierung und die Dokumentation angeht.",
+      "excerpt": "Entdecken Sie, wie GraphQL Ihre API-Entwicklung für bessere Flexibilität und Leistung transformieren kann."
+    },
+    "fr": {
+      "title": "Construction d'APIs évolutives avec GraphQL et Node.js",
+      "content": "Les API REST ont été la norme pour la construction de services web pendant des années, mais GraphQL offre une alternative convaincante avec des avantages significatifs tant pour les développeurs frontend que backend. Cet article explore comment construire des API évolutives et efficaces en utilisant GraphQL avec Node.js.\n\nNous couvrirons la mise en place d'un serveur GraphQL, la définition des schémas, des résolveurs et des mutations, ainsi que l'implémentation de l'authentification, la gestion des erreurs et la mise en cache. À travers des exemples pratiques, vous apprendrez comment GraphQL répond aux défis courants du développement d'API tels que la sur-récupération et la sous-récupération de données, le versioning et la documentation.",
+      "excerpt": "Explorez comment GraphQL peut transformer votre développement d'API pour une meilleure flexibilité et performance."
+    }
+  }
+}
