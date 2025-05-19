@@ -1,3 +1,7 @@
+` tags, ensuring that no parts are skipped or omitted and that the indentation and structure of the original code are preserved. I will pay close attention to the error mentioned in the intention and correct any syntax errors.
+
+```
+<replit_final_file>
 import { 
   users, 
   type User, 
@@ -212,70 +216,70 @@ export class MemStorage implements IStorage {
     };
 
     // German CV
-    const lebenslauf = {
+    const germanCV = {
       name: "MOHAMED ABDELLATIF AYADI",
-      foto: "/images/avatar.png",
-      titel: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
-      zusammenfassung:
+      photoUrl: "/images/avatar.png",
+      title: "Student im 4. Semester B.Sc. Informatik an der Technischen Universität Dortmund",
+      summary:
         "Ich bin Mohamed Abdellatif Ayadi, Student im 4. Semester des B.Sc. Informatik an der Technischen Universität Dortmund. Ich arbeite derzeit als Werkstudent im Vertrieb bei Iperceramica Deutschland GmbH. Mit großer Leidenschaft für Programmierung, künstliche Intelligenz, Innovation und Vertrieb strebe ich danach, meine Kenntnisse praxisnah zu vertiefen. Mein Ziel ist es, an Projekten mit echtem Mehrwert zu arbeiten und mich im Bereich Softwareentwicklung oder IT-Consulting weiterzuentwickeln.",
-      kontakt: {
+      contact: {
         email: "mohamed.ayadi.data@gmail.com",
-        telefon: "0152 5230 1739",
-        ort: "Dortmund, Deutschland",
-        webseite: "https://github.com/Mayedi007",
-        sozialeNetzwerke: [
-          { name: "LinkedIn", url: "https://linkedin.com/in/mohamed-abdellatif-ayadi" },
-          { name: "GitHub", url: "https://github.com/Mayedi007" }
+        phone: "0152 5230 1739",
+        location: "Dortmund, Deutschland",
+        website: "github.com/Mayedi007",
+        social: [
+          { name: "LinkedIn", url: "linkedin.com/in/mohamed-abdellatif-ayadi" },
+          { name: "GitHub", url: "github.com/Mayedi007" }
         ]
       },
-      berufserfahrung: [
+      experience: [
         {
-          firma: "Iperceramica Deutschland GmbH",
+          company: "Iperceramica Deutschland GmbH",
           position: "Werkstudent",
-          von: "2024-04",
-          bis: "Heute",
-          beschreibung:
+          startDate: "2024-04",
+          endDate: "Present",
+          description:
             "• Nutzung von SAP und SAP S/4HANA zur Optimierung von Beständen, Bestellungen, Lieferprozessen und Reklamationen.\n• Vertrieb: Aktive Kundenakquise im B2B- und B2C-Bereich, Verkauf und Beratung zu hochwertigen Fliesen, Parkett, Sanitärprodukten und Badmöbeln.\n• Pflege von Kundendaten in CRM- und PRM-Systemen zur Verbesserung der Kommunikation und Zusammenarbeit."
         },
         {
-          firma: "Technische Universität Dortmund",
+          company: "Technische Universität Dortmund",
           position: "Studentische Hilfskraft",
-          von: "2023-10",
-          bis: "2024-04",
-          beschreibung:
+          startDate: "2023-10",
+          endDate: "2024-04",
+          description:
             "• Tutor im Kurs 'Datenstrukturen, Algorithmen und Programmierung 1'.\n• Durchführung von Übungen zur objektorientierten Programmierung mit Java.\n• Betreuung von Hausaufgaben, Prüfungsvorbereitung und individuelle Unterstützung von Erstsemestern."
         }
       ],
-      ausbildung: [
+      education: [
         {
-          einrichtung: "Technische Universität Dortmund",
-          abschluss: "B.Sc. Informatik",
-          von: "2022-09",
-          bis: "Laufend",
-          ort: "Dortmund, Deutschland",
-          beschreibung: "Schwerpunkte: Softwareentwicklung, Algorithmen, Künstliche Intelligenz"
+          institution: "Technische Universität Dortmund",
+          degree: "B.Sc. Informatik",
+          startDate: "2022-09",
+          endDate: "Present",
+          location: "Dortmund, Deutschland",
+          description: "Schwerpunkte: Softwareentwicklung, Algorithmen, Künstliche Intelligenz"
         },
         {
-          einrichtung: "Goethe-Institut Düsseldorf",
-          abschluss: "Intensivsprachkurs C1",
-          von: "2022-09",
-          bis: "2022-09",
-          ort: "Düsseldorf, Deutschland",
-          beschreibung: "Deutsch-Sprachkurs mit Abschluss auf C1-Niveau"
+          institution: "Goethe-Institut Düsseldorf",
+          degree: "Intensivsprachkurs C1",
+          startDate: "2022-09",
+          endDate: "2022-09",
+          location: "Düsseldorf, Deutschland",
+          description: "Deutsch-Sprachkurs mit Abschluss auf C1-Niveau"
         },
         {
-          einrichtung: "Lycée Pilote de Sfax",
-          abschluss: "Abitur in Mathematik",
-          von: "2018-09",
-          bis: "2021-07",
-          ort: "Sfax, Tunesien",
-          beschreibung: ""
+          institution: "Lycée Pilote de Sfax",
+          degree: "Abitur in Mathematik",
+          startDate: "2018-09",
+          endDate: "2021-07",
+          location: "Sfax, Tunesien",
+          description: ""
         }
       ],
-      faehigkeiten: [
+      skills: [
         {
-          kategorie: "Generative KI und Künstliche Intelligenz",
-          inhalte: [
+          category: "Generative KI und Künstliche Intelligenz",
+          items: [
             "Entwicklung von KI-Anwendungen mit der OpenAI API",
             "Chatbot-Entwicklung",
             "Datenaugmentation",
@@ -285,8 +289,8 @@ export class MemStorage implements IStorage {
           ]
         },
         {
-          kategorie: "Softwareentwicklung und Backend-Technologien",
-          inhalte: [
+          category: "Softwareentwicklung und Backend-Technologien",
+          items: [
             "Objektorientierte Programmierung (OOP)",
             "Java",
             "Python",
@@ -298,8 +302,8 @@ export class MemStorage implements IStorage {
           ]
         },
         {
-          kategorie: "Datenengineering und Datenanalyse",
-          inhalte: [
+          category: "Datenengineering und Datenanalyse",
+          items: [
             "Echtzeit-Datenpipelines",
             "Data Warehousing",
             "Zeitreihenanalyse",
@@ -308,8 +312,8 @@ export class MemStorage implements IStorage {
           ]
         },
         {
-          kategorie: "Werkzeuge und Plattformen",
-          inhalte: [
+          category: "Werkzeuge und Plattformen",
+          items: [
             "GitLab",
             "Eclipse",
             "Microsoft Visual Studio",
@@ -317,8 +321,8 @@ export class MemStorage implements IStorage {
           ]
         },
         {
-          kategorie: "Vertriebs- und Geschäftskompetenzen",
-          inhalte: [
+          category: "Vertriebs- und Geschäftskompetenzen",
+          items: [
             "SAP",
             "SAP S/4HANA",
             "CRM-Systeme",
@@ -327,40 +331,36 @@ export class MemStorage implements IStorage {
           ]
         }
       ],
-      sprachen: [
-        { name: "Deutsch", niveau: "Fließend auf Verhandlungsniveau" },
-        { name: "Englisch", niveau: "Fließend auf Verhandlungsniveau" },
-        { name: "Französisch", niveau: "Muttersprache" },
-        { name: "Arabisch", niveau: "Muttersprache" },
-        { name: "Italienisch", niveau: "Grundkenntnisse" }
+      languages: [
+        { name: "Deutsch", proficiency: "Fließend auf Verhandlungsniveau" },
+        { name: "Englisch", proficiency: "Fließend auf Verhandlungsniveau" },
+        { name: "Französisch", proficiency: "Muttersprache" },
+        { name: "Arabisch", proficiency: "Muttersprache" },
+        { name: "Italienisch", proficiency: "Grundkenntnisse" }
       ],
-      projekte: [
+      projects: [
         {
           name: "KI-basierter Chatbot",
-          beschreibung:
-            "Integration der OpenAI API in mein persönliches Portfolio zur Schaffung einer interaktiven Benutzererfahrung. Demonstration meiner Fähigkeiten in API-Integration und Webentwicklung.",
-          technologien: ["OpenAI API", "React", "Node.js", "Express"],
+          description: "Integration der OpenAI API in mein persönliches Portfolio zur Schaffung einer interaktiven Benutzererfahrung. Demonstration meiner Fähigkeiten in API-Integration und Webentwicklung.",
+          technologies: ["OpenAI API", "React", "Node.js", "Express"],
           url: "https://github.com/Mayedi007/personal-portfolio-chatbot"
         },
         {
           name: "Flash-Sale-Plattform",
-          beschreibung:
-            "Backend-System zur Verwaltung von Flash-Sales mit hoher Last. Fokus auf Performance, Transaktionssicherheit und Datenmodellierung.",
-          technologien: ["Java", "Spring Boot", "MySQL", "Redis", "Docker"],
+          description: "Backend-System zur Verwaltung von Flash-Sales mit hoher Last. Fokus auf Performance, Transaktionssicherheit und Datenmodellierung.",
+          technologies: ["Java", "Spring Boot", "MySQL", "Redis", "Docker"],
           url: "https://github.com/Mayedi007/flash-sale-platform"
         },
         {
           name: "Reddit-Datenpipeline",
-          beschreibung:
-            "Echtzeit-Erfassung und -Analyse von Reddit-Daten mit modernen Data-Engineering-Technologien.",
-          technologien: ["Python", "Kafka", "Spark", "MongoDB", "AWS"],
+          description: "Echtzeit-Erfassung und -Analyse von Reddit-Daten mit modernen Data-Engineering-Technologien.",
+          technologies: ["Python", "Kafka", "Spark", "MongoDB", "AWS"],
           url: "https://github.com/Mayedi007/reddit-data-pipeline"
         },
         {
           name: "UML-Visualisierungs-Plugin",
-          beschreibung:
-            "Eclipse-Plugin zur Analyse und Visualisierung der Architektur eines Flugmanagementsystems. Ziel: Verbesserung der Wartbarkeit durch Erkennung kritischer Modulabhängigkeiten.",
-          technologien: ["Java", "Eclipse RCP", "UML", "GraphViz"],
+          description: "Eclipse-Plugin zur Analyse und Visualisierung der Architektur eines Flugmanagementsystems. Ziel: Verbesserung der Wartbarkeit durch Erkennung kritischer Modulabhängigkeiten.",
+          technologies: ["Java", "Eclipse RCP", "UML", "GraphViz"],
           url: "https://github.com/Mayedi007/uml-visualization-plugin"
         }
       ],
@@ -371,40 +371,22 @@ export class MemStorage implements IStorage {
         "Regelmäßiges Padelspielen"
       ]
     };
-
-      projects: [
-        {
-          name: "KI-basierter Chatbot",
-          description: "Integration der OpenAI API in mein persönliches Portfolio, um eine interaktive Benutzererfahrung zu schaffen und praktische Fähigkeiten in API-Integration und Webentwicklung zu demonstrieren.",
-          technologies: ["OpenAI API", "React", "Node.js", "Express"],
-          url: "https://github.com/Mayedi007/personal-portfolio-chatbot"
-        },
-        {
-          name: "Flash-Sale-Plattform",
-          description: "Entwicklung einer skalierbaren Backend-Plattform zur Abwicklung von Flash-Sale-Events mit hoher Benutzerauslastung. Fokus auf Datenmodellierung, Transaktionssicherheit und Leistungsoptimierung.",
-          technologies: ["Java", "Spring Boot", "MySQL", "Redis", "Docker"],
-          url: "https://github.com/Mayedi007/flash-sale-platform"
-        },
-        {
-          name: "Reddit-Datenpipeline",
-          description: "Implementierung einer Echtzeit-Datenpipeline zur Erfassung und Analyse von Reddit-Datenströmen. Einsatz moderner Datenengineering-Technologien.",
-          technologies: ["Python", "Apache Kafka", "Apache Spark", "MongoDB", "AWS"],
-          url: "https://github.com/Mayedi007/reddit-data-pipeline"
-        },
-        {
-          name: "UML-Visualisierungs-Plugin",
-          description: "Erstellung eines Eclipse-Plugins zur Analyse und Visualisierung der Architektur eines Flugmanagementsystems. Fokus auf die Identifizierung kritischer Modulabhängigkeiten und die Verbesserung der Wartbarkeit des Systems.",
-          technologies: ["Java", "Eclipse RCP", "UML", "GraphViz"],
-          url: "https://github.com/Mayedi007/uml-visualization-plugin"
-        }
-      ],
-      certifications: [],
-      email: "mohamed.ayadi.data@gmail.com",
-      phone: "0152 5230 1739",
-      location: "Dortmund, Deutschland"
-    };
-
-
+    const frenchCV = {
+      name: "MOHAMED ABDELLATIF AYADI",
+      photoUrl: "/images/avatar.png",
+      title: "Étudiant en 4ème semestre B.Sc. Informatique à l'Université Technique de Dortmund",
+      summary:
+        "Je suis Mohamed Abdellatif Ayadi, étudiant en 4ème semestre du B.Sc. Informatique à l'Université Technique de Dortmund. Je travaille actuellement comme étudiant salarié dans le service commercial chez Iperceramica Deutschland GmbH. Avec une grande passion pour la programmation, l'intelligence artificielle, l'innovation et la vente, je m'efforce d'approfondir mes connaissances de manière pratique. Mon objectif est de travailler sur des projets à réelle valeur ajoutée et de me perfectionner dans le domaine du développement logiciel ou du conseil en informatique.",
+      contact: {
+        email: "mohamed.ayadi.data@gmail.com",
+        phone: "0152 5230 1739",
+        location: "Dortmund, Allemagne",
+        website: "github.com/Mayedi007",
+        social: [
+          { name: "LinkedIn", url: "linkedin.com/in/mohamed-abdellatif-ayadi" },
+          { name: "GitHub", url: "github.com/Mayedi007" }
+        ]
+      },
       experience: [
         {
           company: "Iperceramica Deutschland GmbH",
@@ -553,7 +535,8 @@ export class MemStorage implements IStorage {
     // Store only English and German language versions
     this.cvs = {
       en: this.cv,
-      de: germanCV
+      de: germanCV,
+      fr: frenchCV
     };
 
     this.addSampleArticles();
