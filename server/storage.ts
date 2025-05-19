@@ -530,8 +530,76 @@ export class MemStorage implements IStorage {
     this.newsletterSubscriptions.add(email);
   }
 
-  // Helper method to add sample articles
+  // Helper method to load articles from files
   private addSampleArticles(): void {
+    import('fs').then(fs => {
+      import('path').then(async path => {
+        try {
+          // Define dirname equivalent for ESM
+          const __dirname = path.dirname(new URL(import.meta.url).pathname);
+          
+          // Get directory path for articles
+          const articlesDir = path.join(__dirname, 'data', 'articles');
+          
+          // Check if directory exists
+          if (!fs.existsSync(articlesDir)) {
+            console.warn('Articles directory not found:', articlesDir);
+            this.addFallbackArticles();
+            return;
+          }
+          
+          // Read all article files
+          const files = fs.readdirSync(articlesDir);
+          
+          // Process each article file
+          for (const file of files) {
+            if (file.endsWith('.json')) {
+              try {
+                const filePath = path.join(articlesDir, file);
+                const fileContent = await fs.promises.readFile(filePath, 'utf8');
+                const articleData = JSON.parse(fileContent);
+                
+                // Convert publishedAt string to Date object
+                if (typeof articleData.publishedAt === 'string') {
+                  articleData.publishedAt = new Date(articleData.publishedAt);
+                }
+                
+                // Set article in the map
+                this.articles.set(articleData.id, articleData);
+                
+                // Update currentArticleId if needed
+                if (articleData.id >= this.currentArticleId) {
+                  this.currentArticleId = articleData.id + 1;
+                }
+                
+                console.log(`Loaded article: ${articleData.title}`);
+              } catch (err) {
+                console.error(`Error loading article file ${file}:`, err);
+              }
+            }
+          }
+          
+          // If no articles were loaded, add fallback articles
+          if (this.articles.size === 0) {
+            console.warn('No articles loaded from files, using fallback articles');
+            this.addFallbackArticles();
+          }
+        } catch (err) {
+          console.error('Error loading articles:', err);
+          this.addFallbackArticles();
+        }
+      }).catch(err => {
+        console.error('Error importing path module:', err);
+        this.addFallbackArticles();
+      });
+    }).catch(err => {
+      console.error('Error importing fs module:', err);
+      this.addFallbackArticles();
+    });
+  }
+  
+  // Fallback method for adding sample articles if file loading fails
+  private addFallbackArticles(): void {
     // Multilingual Article 1: JavaScript Async Programming
     this.articles.set(this.currentArticleId, {
       id: this.currentArticleId++,
@@ -544,77 +612,13 @@ export class MemStorage implements IStorage {
       translations: {
         en: {
           title: "Modern JavaScript Async Programming",
-          content: "JavaScript's approach to asynchronous programming has evolved significantly over the years, from callback functions to Promises, and now to the elegant async/await syntax. This article explores modern patterns, best practices, and advanced techniques to master asynchronous JavaScript in 2025.\n\nWe'll cover error handling strategies, concurrency patterns, timeout mechanisms, and performance optimization techniques. You'll learn how to structure your code for maximum readability and maintainability, and how to avoid common pitfalls that lead to race conditions, memory leaks, or unhandled rejections.",
+          content: "JavaScript's approach to asynchronous programming has evolved significantly over the years, from callback functions to Promises, and now to the elegant async/await syntax. This article explores modern patterns, best practices, and advanced techniques to master asynchronous JavaScript in 2025.",
           excerpt: "Explore the evolution of asynchronous programming patterns in JavaScript and best practices for 2025."
-        },
-        de: {
-          title: "Moderne asynchrone Programmierung in JavaScript",
-          content: "JavaScripts Ansatz zur asynchronen Programmierung hat sich im Laufe der Jahre erheblich weiterentwickelt, von Callback-Funktionen über Promises bis hin zur eleganten async/await-Syntax. Dieser Artikel untersucht moderne Muster, Best Practices und fortgeschrittene Techniken zur Beherrschung von asynchronem JavaScript im Jahr 2025.\n\nWir behandeln Strategien zur Fehlerbehandlung, Nebenläufigkeitsmuster, Timeout-Mechanismen und Techniken zur Leistungsoptimierung. Sie lernen, wie Sie Ihren Code für maximale Lesbarkeit und Wartbarkeit strukturieren und wie Sie häufige Fallstricke vermeiden, die zu Race Conditions, Speicherlecks oder nicht behandelten Ablehnungen führen.",
-          excerpt: "Entdecken Sie die Entwicklung asynchroner Programmiermuster in JavaScript und Best Practices für 2025."
-        },
-        fr: {
-          title: "Programmation Asynchrone Moderne en JavaScript",
-          content: "L'approche de JavaScript pour la programmation asynchrone a considérablement évolué au fil des ans, des fonctions de rappel aux Promesses, et maintenant à l'élégante syntaxe async/await. Cet article explore les modèles modernes, les meilleures pratiques et les techniques avancées pour maîtriser le JavaScript asynchrone en 2025.\n\nNous couvrirons les stratégies de gestion des erreurs, les modèles de concurrence, les mécanismes de timeout et les techniques d'optimisation des performances. Vous apprendrez comment structurer votre code pour une lisibilité et une maintenabilité maximales, et comment éviter les pièges courants qui mènent à des conditions de course, des fuites de mémoire ou des rejets non gérés.",
-          excerpt: "Explorez l'évolution des modèles de programmation asynchrone en JavaScript et les meilleures pratiques pour 2025."
         }
       }
     });
 
-    // Multilingual Article 2: GraphQL APIs
-    this.articles.set(this.currentArticleId, {
-      id: this.currentArticleId++,
-      title: "Building Scalable APIs with GraphQL and Node.js",
-      excerpt: "A comprehensive guide to designing efficient, flexible APIs using GraphQL with Node.js.",
-      content: "REST APIs have been the standard for building web services for years, but GraphQL offers a compelling alternative...",
-      coverImage: "/images/graphql.svg",
-      category: "APIs",
-      publishedAt: new Date("2025-04-25"),
-      translations: {
-        en: {
-          title: "Building Scalable APIs with GraphQL and Node.js",
-          content: "REST APIs have been the standard for building web services for years, but GraphQL offers a compelling alternative with significant benefits for both frontend and backend developers. This article explores how to build scalable, efficient APIs using GraphQL with Node.js.\n\nWe'll cover setting up a GraphQL server, defining schemas, resolvers, and mutations, as well as implementing authentication, error handling, and caching. Through practical examples, you'll learn how GraphQL addresses common API development challenges such as over-fetching and under-fetching of data, versioning, and documentation.",
-          excerpt: "A comprehensive guide to designing efficient, flexible APIs using GraphQL with Node.js."
-        },
-        de: {
-          title: "Skalierbare APIs mit GraphQL und Node.js entwickeln",
-          content: "REST-APIs waren jahrelang der Standard für den Aufbau von Webdiensten, aber GraphQL bietet eine überzeugende Alternative mit erheblichen Vorteilen für Frontend- und Backend-Entwickler. Dieser Artikel untersucht, wie man skalierbare, effiziente APIs mit GraphQL und Node.js erstellt.\n\nWir behandeln das Einrichten eines GraphQL-Servers, das Definieren von Schemas, Resolvern und Mutationen sowie die Implementierung von Authentifizierung, Fehlerbehandlung und Caching. Anhand praktischer Beispiele erfahren Sie, wie GraphQL häufige Herausforderungen bei der API-Entwicklung wie das Über- und Unterabrufen von Daten, die Versionierung und die Dokumentation angeht.",
-          excerpt: "Entdecken Sie, wie GraphQL Ihre API-Entwicklung für bessere Flexibilität und Leistung transformieren kann."
-        },
-        fr: {
-          title: "Construction d'APIs évolutives avec GraphQL et Node.js",
-          content: "Les API REST ont été la norme pour la construction de services web pendant des années, mais GraphQL offre une alternative convaincante avec des avantages significatifs tant pour les développeurs frontend que backend. Cet article explore comment construire des API évolutives et efficaces en utilisant GraphQL avec Node.js.\n\nNous couvrirons la mise en place d'un serveur GraphQL, la définition des schémas, des résolveurs et des mutations, ainsi que l'implémentation de l'authentification, la gestion des erreurs et la mise en cache. À travers des exemples pratiques, vous apprendrez comment GraphQL répond aux défis courants du développement d'API tels que la sur-récupération et la sous-récupération de données, le versioning et la documentation.",
-          excerpt: "Explorez comment GraphQL peut transformer votre développement d'API pour une meilleure flexibilité et performance."
-        }
-      }
-    });
-
-    // Multilingual Article 3: Microservices
-    this.articles.set(this.currentArticleId, {
-      id: this.currentArticleId++,
-      title: "Microservices Architecture: Patterns and Best Practices",
-      excerpt: "A deep dive into effective microservices architecture strategies for complex applications.",
-      content: "Microservices architecture has become the go-to approach for building complex, scalable applications...",
-      coverImage: "/images/microservices.svg",
-      category: "Software Architecture",
-      publishedAt: new Date("2025-05-05"),
-      translations: {
-        en: {
-          title: "Microservices Architecture: Patterns and Best Practices",
-          content: "Microservices architecture has become the go-to approach for building complex, scalable applications. This article presents essential patterns and best practices for designing, implementing, and maintaining effective microservices systems. We'll explore service decomposition strategies, inter-service communication patterns, data management approaches, and deployment models.\n\nThe discussion will cover critical aspects like service discovery, API gateways, event-driven architecture, circuit breakers, and observability. We'll also address common challenges in microservices adoption and provide practical advice for organizations transitioning from monolithic applications.",
-          excerpt: "A deep dive into effective microservices architecture strategies for complex applications."
-        },
-        de: {
-          title: "Mikroservices-Architektur: Muster und Best Practices",
-          content: "Die Mikroservices-Architektur ist zum bevorzugten Ansatz für den Aufbau komplexer, skalierbarer Anwendungen geworden. Dieser Artikel präsentiert wesentliche Muster und Best Practices für das Design, die Implementierung und die Wartung effektiver Mikroservices-Systeme. Wir werden Strategien zur Service-Dekomposition, Muster für die Kommunikation zwischen Services, Ansätze zum Datenmanagement und Bereitstellungsmodelle untersuchen.\n\nDie Diskussion wird kritische Aspekte wie Service Discovery, API-Gateways, ereignisgesteuerte Architektur, Circuit Breaker und Beobachtbarkeit behandeln. Wir werden auch auf häufige Herausforderungen bei der Einführung von Mikroservices eingehen und praktische Ratschläge für Organisationen geben, die von monolithischen Anwendungen umsteigen.",
-          excerpt: "Ein tiefer Einblick in effektive Mikroservices-Architekturstrategien für komplexe Anwendungen."
-        },
-        fr: {
-          title: "Architecture Microservices : Modèles et Meilleures Pratiques",
-          content: "L'architecture microservices est devenue l'approche privilégiée pour construire des applications complexes et évolutives. Cet article présente des modèles essentiels et des meilleures pratiques pour concevoir, mettre en œuvre et maintenir des systèmes de microservices efficaces. Nous explorerons les stratégies de décomposition des services, les modèles de communication inter-services, les approches de gestion des données et les modèles de déploiement.\n\nLa discussion couvrira des aspects critiques comme la découverte de services, les passerelles API, l'architecture événementielle, les disjoncteurs et l'observabilité. Nous aborderons également les défis courants dans l'adoption des microservices et fournirons des conseils pratiques pour les organisations en transition depuis des applications monolithiques.",
-          excerpt: "Une plongée profonde dans les stratégies d'architecture microservices efficaces pour les applications complexes."
-        }
-      }
-    });
+    // Add more fallback articles if needed
   }
 }
 
