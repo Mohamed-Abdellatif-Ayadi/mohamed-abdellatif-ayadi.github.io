@@ -1,4 +1,3 @@
-
 import { Link } from "wouter";
 import { useLanguage } from "@/lib/languageContext";
 
@@ -18,12 +17,14 @@ const PublicationsSection = () => {
     <section id="publications" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Publications & Research</h2>
-          <p className="text-lg text-slate-600">
-            Academic contributions in robotics, AI, and software engineering
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            {t('home.publications.title')}
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            {t('home.publications.subtitle')}
           </p>
         </div>
-        
+
         <div className="max-w-4xl mx-auto">
           <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow">
             {/* Featured Publication */}
@@ -35,21 +36,21 @@ const PublicationsSection = () => {
                   </svg>
                 </div>
               </div>
-              
+
               <div className="flex-1">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">
                   {publication.title}
                 </h3>
-                
+
                 <div className="space-y-2 text-sm text-slate-600 mb-4">
                   <p><span className="font-medium">Journal:</span> <span className="italic">{publication.journal}</span></p>
                   <p><span className="font-medium">Date:</span> {publication.date}</p>
                 </div>
-                
+
                 <p className="text-slate-700 mb-6 leading-relaxed">
                   {publication.description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-6">
                   {publication.tags.map((tag, index) => (
                     <span key={index} className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
@@ -57,7 +58,7 @@ const PublicationsSection = () => {
                     </span>
                   ))}
                 </div>
-                
+
                 <div className="flex flex-wrap gap-3">
                   <a 
                     href={publication.pdfUrl} 
@@ -74,7 +75,7 @@ const PublicationsSection = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="text-center mt-12">
             <Link 
               href="/publications" 

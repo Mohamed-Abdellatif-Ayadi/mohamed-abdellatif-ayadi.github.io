@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/lib/languageContext";
@@ -24,7 +23,7 @@ interface Project {
 
 const ProjectsSection = () => {
   const { t, language } = useLanguage();
-  
+
   const projects: Project[] = [
     {
       id: 1,
@@ -90,21 +89,23 @@ const ProjectsSection = () => {
       category: "ai"
     }
   ];
-  
+
   const getTranslation = (project: Project) => {
     return project.translations[language as keyof typeof project.translations] || project.translations.en;
   };
-  
+
   return (
     <section id="projects" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Featured Projects</h2>
-          <p className="text-lg text-slate-600">
-            Explore some of my recent work in software development, data engineering, and AI
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            {t('home.projects.title')}
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            {t('home.projects.subtitle')}
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {projects.map(project => {
             const translation = getTranslation(project);
@@ -126,7 +127,7 @@ const ProjectsSection = () => {
                     {translation.title}
                   </h3>
                   <p className="text-slate-600 mb-4 line-clamp-3">{translation.description}</p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.techStack.slice(0, 3).map(tech => (
                       <span key={tech} className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full">
@@ -139,7 +140,7 @@ const ProjectsSection = () => {
                       </span>
                     )}
                   </div>
-                  
+
                   <div className="flex justify-between items-center">
                     <a 
                       href={project.githubUrl} 
@@ -164,13 +165,13 @@ const ProjectsSection = () => {
             );
           })}
         </div>
-        
+
         <div className="text-center mt-12">
           <Link 
             href="/projects" 
             className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary-600 transition-all"
           >
-            View All Projects
+            {t('home.projects.viewAll')}
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

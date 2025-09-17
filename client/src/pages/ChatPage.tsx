@@ -354,6 +354,49 @@ const ChatPage = () => {
       }
     }
 
+    // Projects and portfolio keywords
+    const projectKeywords = {
+      en: ["project", "portfolio", "work", "built", "developed", "created", "github"],
+      de: ["projekt", "portfolio", "arbeit", "gebaut", "entwickelt", "erstellt", "github"],
+    };
+
+    if (checkKeywords(projectKeywords)) {
+      const responses = {
+        en: "I've worked on several exciting projects including data pipelines, web applications, and AI systems. You can explore my GitHub repositories or visit the Projects section of my website to see detailed descriptions of my work.",
+        de: "Ich habe an mehreren spannenden Projekten gearbeitet, darunter Datenpipelines, Webanwendungen und KI-Systeme. Sie können meine GitHub-Repositories erkunden oder den Projektbereich meiner Website besuchen, um detaillierte Beschreibungen meiner Arbeit zu sehen.",
+      };
+      return responses[language as keyof typeof responses] || responses.en;
+    }
+
+    // Technology stack keywords
+    const techKeywords = {
+      en: ["technology", "tech", "stack", "framework", "library", "tool", "software"],
+      de: ["technologie", "tech", "stack", "framework", "bibliothek", "werkzeug", "software"],
+    };
+
+    if (checkKeywords(techKeywords)) {
+      const techStack = "Java, Spring Boot, Python, JavaScript, React, Docker, AWS, SQL, PostgreSQL, MongoDB, Git";
+      const responses = {
+        en: `My technology stack includes: ${techStack}. I'm experienced in both backend and frontend development, with a focus on building scalable and efficient solutions.`,
+        de: `Mein Technologie-Stack umfasst: ${techStack}. Ich habe Erfahrung sowohl in der Backend- als auch in der Frontend-Entwicklung, mit einem Fokus auf dem Aufbau skalierbarer und effizienter Lösungen.`,
+      };
+      return responses[language as keyof typeof responses] || responses.en;
+    }
+
+    // Career and goals keywords
+    const careerKeywords = {
+      en: ["career", "goal", "future", "plan", "aspiration", "ambition"],
+      de: ["karriere", "ziel", "zukunft", "plan", "streben", "ambition"],
+    };
+
+    if (checkKeywords(careerKeywords)) {
+      const responses = {
+        en: "I'm passionate about software engineering and data science. My goal is to work on innovative projects that solve real-world problems using cutting-edge technology. I'm particularly interested in AI, machine learning, and scalable system architecture.",
+        de: "Ich bin leidenschaftlich für Softwareentwicklung und Data Science. Mein Ziel ist es, an innovativen Projekten zu arbeiten, die reale Probleme mit modernster Technologie lösen. Ich interessiere mich besonders für KI, maschinelles Lernen und skalierbare Systemarchitektur.",
+      };
+      return responses[language as keyof typeof responses] || responses.en;
+    }
+
     // Default responses for common phrases
     const greetingKeywords = {
       en: ["hello", "hi", "hey", "morning", "afternoon", "evening"],
@@ -362,8 +405,8 @@ const ChatPage = () => {
 
     if (checkKeywords(greetingKeywords)) {
       const responses = {
-        en: "Hello! How can I help you learn more about Mohamed?",
-        de: "Hallo! Wie kann ich Ihnen helfen, mehr über Mohamed zu erfahren?",
+        en: "Hello! How can I help you learn more about Mohamed? You can ask me about his education, work experience, technical skills, projects, or career goals.",
+        de: "Hallo! Wie kann ich Ihnen helfen, mehr über Mohamed zu erfahren? Sie können mich nach seiner Ausbildung, Arbeitserfahrung, technischen Fähigkeiten, Projekten oder Karrierezielen fragen.",
       };
       return responses[language as keyof typeof responses] || responses.en;
     }

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -41,17 +40,19 @@ const ContactSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-              Have a project in mind or want to collaborate? I'd love to hear from you.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {t('home.contact.title')}
+          </h2>
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            {t('home.contact.subtitle')}
+          </p>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div>
               <h3 className="text-2xl font-bold mb-8">Let's Connect</h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center mr-4">
@@ -66,7 +67,7 @@ const ContactSection = () => {
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,7 +80,7 @@ const ContactSection = () => {
                     <p className="text-slate-300">Dortmund, Germany</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -100,7 +101,7 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Contact Form */}
             <div>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -118,7 +119,7 @@ const ContactSection = () => {
                     placeholder="John Doe"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
                     Your Email
@@ -133,7 +134,7 @@ const ContactSection = () => {
                     placeholder="john@example.com"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Your Message
@@ -148,13 +149,13 @@ const ContactSection = () => {
                     placeholder="Tell me about your project or idea..."
                   />
                 </div>
-                
+
                 <Button
                   type="submit"
                   disabled={contactMutation.isPending}
                   className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-all"
                 >
-                  {contactMutation.isPending ? "Sending..." : "Send Message"}
+                  {contactMutation.isPending ? "Sending..." : t('home.contact.getInTouch')}
                 </Button>
               </form>
             </div>
