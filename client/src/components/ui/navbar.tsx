@@ -17,6 +17,7 @@ const Navbar = () => {
   };
 
   const navLinks = [
+    { title: t('nav.home'), path: "/" },
     { title: t('nav.projects'), path: "/projects" },
     { title: t('nav.cv'), path: "/cv" },
     { title: t('nav.publications'), path: "/publications" },
