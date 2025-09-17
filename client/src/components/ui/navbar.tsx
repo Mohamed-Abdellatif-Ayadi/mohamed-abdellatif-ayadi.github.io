@@ -17,7 +17,6 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { title: t('nav.blog'), path: "/blog" },
     { title: t('nav.projects'), path: "/projects" },
     { title: t('nav.cv'), path: "/cv" },
     { title: t('nav.chat'), path: "/chat" },

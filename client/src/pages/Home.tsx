@@ -1,5 +1,4 @@
 import Hero from "@/components/home/Hero";
-import LatestArticles from "@/components/home/LatestArticles";
 import CVPreview from "@/components/home/CVPreview";
 import AboutMe from "@/components/home/AboutMe";
 import ContactCTA from "@/components/home/ContactCTA";
@@ -18,7 +17,6 @@ const Home = () => {
         <meta name="keywords" content={t('home.meta.keywords')} />
       </Helmet>
       <Hero />
-      <LatestArticles />
       <CVPreview />
       <AboutMe />
       <ContactCTA />
