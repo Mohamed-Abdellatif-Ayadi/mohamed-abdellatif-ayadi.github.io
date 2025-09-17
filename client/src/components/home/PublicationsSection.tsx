@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { useLanguage } from "@/lib/languageContext";
 
 const PublicationsSection = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   const publication = {
     title: "Design and Implementation of an Autonomous Mobile Robot for Slug Detection and Safe Collection to Prevent Agricultural Damage",

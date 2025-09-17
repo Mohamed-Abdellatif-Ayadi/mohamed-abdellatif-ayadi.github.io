@@ -71,16 +71,9 @@ const CVPreview = () => {
           <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
             <div className="md:flex">
               <div className="md:flex-shrink-0 bg-primary-700 md:w-48 flex flex-col items-center justify-center p-6 text-white">
-                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white mb-4">
-                  <img 
-                    src={cv.photoUrl} 
-                    alt={cv.name} 
-                    className="w-full h-full object-cover" 
-                  />
-                </div>
-                <h3 className="text-xl font-bold">{cv.name}</h3>
-                <p className="text-primary-200">{cv.title}</p>
-              </div>
+                <h3 className="text-xl font-bold text-center">{cv.name}</h3>
+                <p className="text-primary-200 text-center mt-2">{cv.title}</p>
+              </div></div>
               
               <div className="p-8">
                 <div className="mb-6">
