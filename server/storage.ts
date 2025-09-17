@@ -445,7 +445,7 @@ export class MemStorage implements IStorage {
     this.cvs = {
       en: this.cv,
       de: germanCV,
-      fr: frenchCV
+      
     };
 
     this.addSampleArticles();

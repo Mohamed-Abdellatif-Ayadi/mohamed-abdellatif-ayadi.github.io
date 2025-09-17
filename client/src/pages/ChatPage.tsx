@@ -85,7 +85,7 @@ const ChatPage = () => {
       const loadingResponses = {
         en: "I'm still gathering information. Please try again in a moment.",
         de: "Ich sammle noch Informationen. Bitte versuchen Sie es in einem Moment erneut.",
-        fr: "Je suis encore en train de recueillir des informations. Veuillez réessayer dans un instant.",
+        
       };
       return (
         loadingResponses[language as keyof typeof loadingResponses] ||
@@ -109,14 +109,12 @@ const ChatPage = () => {
     const nameKeywords = {
       en: ["name", "who are you"],
       de: ["name", "wie heißt du", "wer bist du"],
-      fr: ["nom", "qui es-tu", "comment tu t'appelles"],
     };
 
     if (checkKeywords(nameKeywords)) {
       const responses = {
         en: `My name is ${cv.name}.`,
         de: `Mein Name ist ${cv.name}.`,
-        fr: `Je m'appelle ${cv.name}.`,
       };
       return responses[language as keyof typeof responses] || responses.en;
     }
@@ -124,7 +122,6 @@ const ChatPage = () => {
     const educationKeywords = {
       en: ["study", "education", "university", "degree", "school"],
       de: ["studium", "ausbildung", "universität", "abschluss", "schule"],
-      fr: ["étude", "éducation", "université", "diplôme", "école"],
     };
 
     if (checkKeywords(educationKeywords)) {
@@ -139,14 +136,12 @@ const ChatPage = () => {
         const responses = {
           en: `My educational background includes:\\n${education}`,
           de: `Meine Ausbildung umfasst:\\n${education}`,
-          fr: `Mon parcours éducatif comprend:\\n${education}`,
         };
         return responses[language as keyof typeof responses] || responses.en;
       } else {
         const noInfoResponses = {
           en: "I don't have any education information available.",
           de: "Ich habe keine Informationen zur Ausbildung verfügbar.",
-          fr: "Je n'ai pas d'informations sur l'éducation disponibles.",
         };
         return (
           noInfoResponses[language as keyof typeof noInfoResponses] ||
@@ -158,7 +153,6 @@ const ChatPage = () => {
     const skillsKeywords = {
       en: ["skills", "what can you do", "abilities", "capable"],
       de: ["fähigkeiten", "was kannst du", "kenntnisse", "kompetenz"],
-      fr: ["compétences", "que sais-tu faire", "capacités", "aptitudes"],
     };
 
     if (checkKeywords(skillsKeywords)) {
@@ -166,7 +160,6 @@ const ChatPage = () => {
       const responses = {
         en: `My technical skills include: ${skills || "No skills information available"}`,
         de: `Meine technischen Fähigkeiten umfassen: ${skills || "Keine Informationen zu Fähigkeiten verfügbar"}`,
-        fr: `Mes compétences techniques incluent: ${skills || "Aucune information sur les compétences disponible"}`,
       };
       return responses[language as keyof typeof responses] || responses.en;
     }
@@ -174,7 +167,6 @@ const ChatPage = () => {
     const languageKeywords = {
       en: ["language", "speak", "fluent"],
       de: ["sprache", "sprechen", "fließend"],
-      fr: ["langue", "parler", "couramment"],
     };
 
     if (checkKeywords(languageKeywords)) {
@@ -187,7 +179,6 @@ const ChatPage = () => {
       const responses = {
         en: `I speak: ${languages || "No language information available"}`,
         de: `Ich spreche: ${languages || "Keine Sprachinformationen verfügbar"}`,
-        fr: `Je parle: ${languages || "Aucune information linguistique disponible"}`,
       };
       return responses[language as keyof typeof responses] || responses.en;
     }
@@ -195,7 +186,6 @@ const ChatPage = () => {
     const experienceKeywords = {
       en: ["experience", "work", "job", "career", "profession"],
       de: ["erfahrung", "arbeit", "beruf", "karriere", "tätigkeit"],
-      fr: ["expérience", "travail", "emploi", "carrière", "profession"],
     };
 
     if (checkKeywords(experienceKeywords)) {
@@ -210,14 +200,12 @@ const ChatPage = () => {
         const responses = {
           en: `My work experience includes:\\n${workExp}`,
           de: `Meine Arbeitserfahrung umfasst:\\n${workExp}`,
-          fr: `Mon expérience professionnelle comprend:\\n${workExp}`,
         };
         return responses[language as keyof typeof responses] || responses.en;
       } else {
         const noInfoResponses = {
           en: "I don't have any work experience information available.",
           de: "Ich habe keine Informationen zur Arbeitserfahrung verfügbar.",
-          fr: "Je n'ai pas d'informations sur l'expérience professionnelle disponibles.",
         };
         return (
           noInfoResponses[language as keyof typeof noInfoResponses] ||
@@ -229,7 +217,6 @@ const ChatPage = () => {
     const locationKeywords = {
       en: ["location", "where", "city", "country", "live"],
       de: ["standort", "wo", "stadt", "land", "wohnen", "leben"],
-      fr: ["localisation", "où", "ville", "pays", "habiter", "vivre"],
     };
 
     if (checkKeywords(locationKeywords)) {
@@ -237,14 +224,12 @@ const ChatPage = () => {
         const responses = {
           en: `I'm located in ${cv.location}.`,
           de: `Ich befinde mich in ${cv.location}.`,
-          fr: `Je suis situé à ${cv.location}.`,
         };
         return responses[language as keyof typeof responses] || responses.en;
       } else {
         const noInfoResponses = {
           en: "My location information is not available.",
           de: "Meine Standortinformationen sind nicht verfügbar.",
-          fr: "Mes informations de localisation ne sont pas disponibles.",
         };
         return (
           noInfoResponses[language as keyof typeof noInfoResponses] ||
@@ -255,8 +240,7 @@ const ChatPage = () => {
 
     const contactKeywords = {
       en: ["contact", "email", "phone", "reach"],
-      de: ["kontakt", "email", "telefon", "erreichen"],
-      fr: ["contact", "email", "téléphone", "joindre"],
+      de: ["kontakt", "Email", "telefon", "erreichen"],
     };
 
     if (checkKeywords(contactKeywords)) {
@@ -286,7 +270,7 @@ const ChatPage = () => {
     const summaryKeywords = {
       en: ["summary", "about you", "tell me about yourself", "profile"],
       de: ["zusammenfassung", "über dich", "erzähl mir von dir", "profil"],
-      fr: ["résumé", "à propos de toi", "parle-moi de toi", "profil"],
+     
     };
 
     if (checkKeywords(summaryKeywords)) {
@@ -296,7 +280,6 @@ const ChatPage = () => {
         const noInfoResponses = {
           en: "I don't have a summary available yet.",
           de: "Ich habe noch keine Zusammenfassung verfügbar.",
-          fr: "Je n'ai pas encore de résumé disponible.",
         };
         return (
           noInfoResponses[language as keyof typeof noInfoResponses] ||
@@ -321,14 +304,12 @@ const ChatPage = () => {
         const responses = {
           en: `I've written the following articles:\n${articlesList}`,
           de: `Ich habe die folgenden Artikel geschrieben:\n${articlesList}`,
-          fr: `J'ai écrit les articles suivants:\n${articlesList}`,
         };
         return responses[language as keyof typeof responses] || responses.en;
       } else {
         const noInfoResponses = {
           en: "I don't have any blog posts yet.",
           de: "Ich habe noch keine Blogbeiträge.",
-          fr: "Je n'ai pas encore d'articles de blog.",
         };
         return (
           noInfoResponses[language as keyof typeof noInfoResponses] ||
@@ -367,7 +348,6 @@ const ChatPage = () => {
           const responses = {
             en: `I have written about "${term}". Here are some relevant articles:\n${articlesList}`,
             de: `Ich habe über "${term}" geschrieben. Hier sind einige relevante Artikel:\n${articlesList}`,
-            fr: `J'ai écrit sur "${term}". Voici quelques articles pertinents:\n${articlesList}`,
           };
           return responses[language as keyof typeof responses] || responses.en;
         }
@@ -378,14 +358,12 @@ const ChatPage = () => {
     const greetingKeywords = {
       en: ["hello", "hi", "hey", "morning", "afternoon", "evening"],
       de: ["hallo", "hi", "hey", "morgen", "tag", "abend", "servus", "moin"],
-      fr: ["bonjour", "salut", "coucou", "bonsoir"],
     };
 
     if (checkKeywords(greetingKeywords)) {
       const responses = {
         en: "Hello! How can I help you learn more about Mohamed?",
         de: "Hallo! Wie kann ich Ihnen helfen, mehr über Mohamed zu erfahren?",
-        fr: "Bonjour! Comment puis-je vous aider à en savoir plus sur Mohamed?",
       };
       return responses[language as keyof typeof responses] || responses.en;
     }
@@ -393,14 +371,12 @@ const ChatPage = () => {
     const thankKeywords = {
       en: ["thank", "thanks", "appreciate"],
       de: ["danke", "dank", "schätze"],
-      fr: ["merci", "remercie", "apprécie"],
     };
 
     if (checkKeywords(thankKeywords)) {
       const responses = {
         en: "You're welcome! Is there anything else you'd like to know?",
         de: "Gerne! Gibt es noch etwas, das Sie wissen möchten?",
-        fr: "Je vous en prie! Y a-t-il autre chose que vous aimeriez savoir?",
       };
       return responses[language as keyof typeof responses] || responses.en;
     }
@@ -408,14 +384,12 @@ const ChatPage = () => {
     const byeKeywords = {
       en: ["bye", "goodbye", "see you", "farewell"],
       de: ["tschüss", "auf wiedersehen", "bis später", "ciao"],
-      fr: ["au revoir", "adieu", "à bientôt", "salut"],
     };
 
     if (checkKeywords(byeKeywords)) {
       const responses = {
         en: "Goodbye! Feel free to return if you have more questions.",
         de: "Auf Wiedersehen! Kommen Sie gerne wieder, wenn Sie weitere Fragen haben.",
-        fr: "Au revoir! N'hésitez pas à revenir si vous avez d'autres questions.",
       };
       return responses[language as keyof typeof responses] || responses.en;
     }
@@ -424,7 +398,6 @@ const ChatPage = () => {
     const fallbackResponses = {
       en: "I don't have specific information about that. You can ask me about my education, work experience, skills, blog posts, or contact information.",
       de: "Ich habe keine spezifischen Informationen darüber. Sie können mich nach meiner Ausbildung, Arbeitserfahrung, Fähigkeiten, Blogbeiträgen oder Kontaktinformationen fragen.",
-      fr: "Je n'ai pas d'informations spécifiques à ce sujet. Vous pouvez me poser des questions sur mon éducation, mon expérience professionnelle, mes compétences, mes articles de blog ou mes coordonnées.",
     };
     return (
       fallbackResponses[language as keyof typeof fallbackResponses] ||
@@ -432,6 +405,7 @@ const ChatPage = () => {
     );
   };
 
+  
   const handleSendMessage = () => {
     if (input.trim() === "") return;
 

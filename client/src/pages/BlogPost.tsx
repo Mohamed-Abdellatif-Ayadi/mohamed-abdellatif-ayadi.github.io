@@ -23,7 +23,7 @@ const BlogPost = () => {
     queryFn: async () => {
       const response = await fetch(`/api/articles/${articleId}?language=${language}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch article');
+        throw new Error('Failed to fetch this article');
       }
       return response.json();
     },
