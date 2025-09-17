@@ -12,6 +12,7 @@ import Contact from "@/pages/Contact";
 import ChatPage from "@/pages/ChatPage";
 import Projects from "@/pages/Projects";
 import ProjectDetail from "@/pages/ProjectDetail";
+import Publications from "@/pages/Publications";
 import { LanguageProvider } from "@/lib/languageContext";
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/cv" component={CVPage} />
+      <Route path="/publications" component={Publications} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/chat" component={ChatPage} />
