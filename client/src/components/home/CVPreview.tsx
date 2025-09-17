@@ -73,7 +73,7 @@ const CVPreview = () => {
               <div className="md:flex-shrink-0 bg-primary-700 md:w-48 flex flex-col items-center justify-center p-6 text-white">
                 <h3 className="text-xl font-bold text-center">{cv.name}</h3>
                 <p className="text-primary-200 text-center mt-2">{cv.title}</p>
-              </div></div>
+              </div>
               
               <div className="p-8">
                 <div className="mb-6">

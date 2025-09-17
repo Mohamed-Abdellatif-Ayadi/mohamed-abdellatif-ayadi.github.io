@@ -1,7 +1,6 @@
 
 import { Link } from "wouter";
 import { useLanguage } from "@/lib/languageContext";
-import { useLanguage } from "@/lib/languageContext";
 import { MessageSquare, Bot, Sparkles } from "lucide-react";
 
 const ChatSection = () => {
