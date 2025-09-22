@@ -45,38 +45,38 @@ const translations: Record<Language, Record<string, string>> = {
     "home.latestArticles.title": "Latest Articles",
     "home.latestArticles.subtitle":
       "Read my most recent publications and insights",
-    
+
     // Home page meta
     "home.meta.title": "Mohamed Abdellatif Ayadi - Software Engineer & Data Science Enthusiast",
     "home.meta.description": "Welcome to my personal website where I share my expertise in computer science, software development, and AI",
     "home.meta.keywords": "Mohamed Ayadi, Software Engineer, Computer Science, AI, Data Science, Web Development",
-    
+
     // About Me section
     "home.aboutMe.title": "About Me",
     "home.aboutMe.subtitle": "Get to know my journey and passion for technology",
     "home.aboutMe.greeting": "Hello! I'm Mohamed Abdellatif Ayadi",
-    
+
     // CV Preview section
     "home.cvPreview.title": "My Professional Journey",
     "home.cvPreview.subtitle": "A glimpse into my educational background and work experience",
     "home.cvPreview.viewComplete": "View Complete CV",
     "home.cvPreview.loadError": "Failed to load CV data. Please try again later.",
-    
+
     // Projects section
     "home.projects.title": "Featured Projects",
     "home.projects.subtitle": "A showcase of my technical work and innovative solutions",
     "home.projects.viewAll": "View All Projects",
-    
+
     // Publications section
     "home.publications.title": "Recent Publications",
     "home.publications.subtitle": "Latest articles and insights from my research and experience",
     "home.publications.viewAll": "View All Publications",
-    
+
     // Contact section
     "home.contact.title": "Let's Connect",
     "home.contact.subtitle": "Ready to collaborate or have questions? I'd love to hear from you",
     "home.contact.getInTouch": "Get In Touch",
-    
+
     // Chat section
     "home.chat.title": "Ask Me Anything",
     "home.chat.subtitle": "Have questions about my background, skills, or projects? Chat with my AI assistant",
@@ -191,38 +191,38 @@ const translations: Record<Language, Record<string, string>> = {
     "home.latestArticles.title": "Neueste Artikel",
     "home.latestArticles.subtitle":
       "Lesen Sie meine neuesten Veröffentlichungen und Erkenntnisse",
-    
+
     // Home page meta
     "home.meta.title": "Mohamed Abdellatif Ayadi - Softwareingenieur & Data Science Enthusiast",
     "home.meta.description": "Willkommen auf meiner persönlichen Website, wo ich meine Expertise in Informatik, Softwareentwicklung und KI teile",
     "home.meta.keywords": "Mohamed Ayadi, Softwareingenieur, Informatik, KI, Data Science, Webentwicklung",
-    
+
     // About Me section
     "home.aboutMe.title": "Über Mich",
     "home.aboutMe.subtitle": "Lernen Sie meine Reise und Leidenschaft für Technologie kennen",
     "home.aboutMe.greeting": "Hallo! Ich bin Mohamed Abdellatif Ayadi",
-    
+
     // CV Preview section
     "home.cvPreview.title": "Meine Berufliche Laufbahn",
     "home.cvPreview.subtitle": "Ein Einblick in meinen Bildungshintergrund und meine Arbeitserfahrung",
     "home.cvPreview.viewComplete": "Vollständigen Lebenslauf anzeigen",
     "home.cvPreview.loadError": "Fehler beim Laden der CV-Daten. Bitte versuchen Sie es später erneut.",
-    
+
     // Projects section
     "home.projects.title": "Ausgewählte Projekte",
     "home.projects.subtitle": "Eine Präsentation meiner technischen Arbeit und innovativen Lösungen",
     "home.projects.viewAll": "Alle Projekte anzeigen",
-    
+
     // Publications section
     "home.publications.title": "Aktuelle Veröffentlichungen",
     "home.publications.subtitle": "Neueste Artikel und Erkenntnisse aus meiner Forschung und Erfahrung",
     "home.publications.viewAll": "Alle Veröffentlichungen anzeigen",
-    
+
     // Contact section
     "home.contact.title": "Lassen Sie uns vernetzen",
     "home.contact.subtitle": "Bereit zur Zusammenarbeit oder haben Sie Fragen? Ich würde gerne von Ihnen hören",
     "home.contact.getInTouch": "Kontakt aufnehmen",
-    
+
     // Chat section
     "home.chat.title": "Fragen Sie mich alles",
     "home.chat.subtitle": "Haben Sie Fragen zu meinem Hintergrund, meinen Fähigkeiten oder Projekten? Chatten Sie mit meinem KI-Assistenten",
@@ -244,9 +244,9 @@ const translations: Record<Language, Record<string, string>> = {
       "Lernen Sie mich besser kennen und was meine Leidenschaft für Technologie antreibt",
 
     // Contact
-    "contact.title": "Kontaktieren Sie mich",
+    "contact.title": "Contact Me",
     "contact.subtitle":
-      "Haben Sie eine Frage oder möchten Sie zusammenarbeiten? Nehmen Sie Kontakt mit mir auf!",
+      "Have a question or want to work together? Get in touch with me!",
     "contact.name": "Ihr Name",
     "contact.email": "Ihre E-Mail",
     "contact.subject": "Betreff",

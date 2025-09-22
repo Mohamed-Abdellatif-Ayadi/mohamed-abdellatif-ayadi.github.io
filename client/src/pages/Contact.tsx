@@ -98,10 +98,11 @@ const Contact = () => {
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Your Email</h3>
               </div>
-              <div className="bg-slate-50 p-4 rounded-lg border">
+              <div className="bg-slate-50 p-6 rounded-lg border min-h-[80px] flex items-center">
                 <a 
                   href="mailto:mohamed.ayadi.data@gmail.com" 
-                  className="text-slate-700 hover:text-primary-700 font-medium text-sm break-all"
+                  className="text-slate-700 hover:text-primary-700 font-medium text-base whitespace-nowrap overflow-hidden text-ellipsis w-full"
+                  title="mohamed.ayadi.data@gmail.com"
                 >
                   mohamed.ayadi.data@gmail.com
                 </a>
@@ -117,8 +118,8 @@ const Contact = () => {
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Phone Number</h3>
               </div>
-              <div className="bg-slate-50 p-4 rounded-lg border">
-                <p className="text-slate-700 font-medium">+49 152 5230 1739</p>
+              <div className="bg-slate-50 p-6 rounded-lg border min-h-[80px] flex items-center">
+                <p className="text-slate-700 font-medium text-base">+49 152 5230 1739</p>
               </div>
             </div>
 
@@ -132,8 +133,8 @@ const Contact = () => {
                 </div>
                 <h3 className="font-bold text-slate-900 text-lg">Location</h3>
               </div>
-              <div className="bg-slate-50 p-4 rounded-lg border">
-                <p className="text-slate-700 font-medium">Dortmund, Germany</p>
+              <div className="bg-slate-50 p-6 rounded-lg border min-h-[80px] flex items-center">
+                <p className="text-slate-700 font-medium text-base">Dortmund, Germany</p>
               </div>
             </div>
           </div>
