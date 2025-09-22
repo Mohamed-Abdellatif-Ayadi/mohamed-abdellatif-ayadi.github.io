@@ -88,57 +88,68 @@ const Contact = () => {
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-slate-900">{t('contact.email')}</h3>
+                <h3 className="font-bold text-slate-900 text-lg">Your Email</h3>
               </div>
-              <a 
-                href="mailto:mohamed.ayadi.data@gmail.com" 
-                className="text-slate-600 hover:text-primary-700 whitespace-nowrap overflow-hidden text-ellipsis"
-              >
-                mohamed.ayadi.data@gmail.com
-              </a>
+              <div className="bg-slate-50 p-4 rounded-lg border">
+                <a 
+                  href="mailto:mohamed.ayadi.data@gmail.com" 
+                  className="text-slate-700 hover:text-primary-700 font-medium text-sm break-all"
+                >
+                  mohamed.ayadi.data@gmail.com
+                </a>
+              </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-slate-900">{t('contact.phone')}</h3>
+                <h3 className="font-bold text-slate-900 text-lg">Phone Number</h3>
               </div>
-              <p className="text-slate-600">+4915252301739</p>
+              <div className="bg-slate-50 p-4 rounded-lg border">
+                <p className="text-slate-700 font-medium">+49 152 5230 1739</p>
+              </div>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-slate-200">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold text-slate-900">{t('contact.location')}</h3>
+                <h3 className="font-bold text-slate-900 text-lg">Location</h3>
               </div>
-              <p className="text-slate-600">Dortmund, Germany</p>
+              <div className="bg-slate-50 p-4 rounded-lg border">
+                <p className="text-slate-700 font-medium">Dortmund, Germany</p>
+              </div>
             </div>
           </div>
 
           <div className="bg-white p-8 rounded-xl shadow-md">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-8">Get In Touch With Me</h2>
 
             {isSubmitted ? (
-              <div className="p-6 bg-green-50 text-green-700 rounded-lg">
-                <h3 className="text-lg font-medium mb-2">Thank you!</h3>
-                <p>I will reply to you soon.</p>
+              <div className="p-8 bg-green-100 border-2 border-green-400 text-green-800 rounded-xl text-center">
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-3">Thank You for Your Message!</h3>
+                <p className="text-lg font-medium">I will reply to you soon</p>
               </div>
             ) : (
               <Form {...form}>
@@ -149,10 +160,11 @@ const Contact = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-medium">Name</FormLabel>
+                          <FormLabel className="text-slate-900 font-semibold text-base">Your Full Name</FormLabel>
                           <FormControl>
                             <Input 
-                              className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
+                              placeholder="Enter your full name"
+                              className="h-12 border-2 border-slate-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg text-slate-900 placeholder:text-slate-500" 
                               {...field} 
                             />
                           </FormControl>
@@ -166,11 +178,12 @@ const Contact = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-medium">Email</FormLabel>
+                          <FormLabel className="text-slate-900 font-semibold text-base">Your Email Address</FormLabel>
                           <FormControl>
                             <Input 
                               type="email"
-                              className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
+                              placeholder="Enter your email address"
+                              className="h-12 border-2 border-slate-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg text-slate-900 placeholder:text-slate-500" 
                               {...field} 
                             />
                           </FormControl>
@@ -185,10 +198,11 @@ const Contact = () => {
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">Subject</FormLabel>
+                        <FormLabel className="text-slate-900 font-semibold text-base">Message Subject</FormLabel>
                         <FormControl>
                           <Input 
-                            className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
+                            placeholder="Enter the subject of your message"
+                            className="h-12 border-2 border-slate-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg text-slate-900 placeholder:text-slate-500" 
                             {...field} 
                           />
                         </FormControl>
@@ -202,10 +216,11 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">Message</FormLabel>
+                        <FormLabel className="text-slate-900 font-semibold text-base">Your Message</FormLabel>
                         <FormControl>
                           <Textarea 
-                            className="min-h-[140px] resize-none border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
+                            placeholder="Type your message here..."
+                            className="min-h-[140px] resize-none border-2 border-slate-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg text-slate-900 placeholder:text-slate-500" 
                             {...field} 
                           />
                         </FormControl>
@@ -217,17 +232,21 @@ const Contact = () => {
                   <FormField
                     control={form.control}
                     name="file"
-                    render={({ field: { onChange, ...field } }) => (
+                    render={({ field: { onChange, value, ...field } }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">{t('contact.form.resume')}</FormLabel>
+                        <FormLabel className="text-slate-900 font-semibold text-base">Attach Your Resume (Optional)</FormLabel>
                         <FormControl>
                           <div className="relative">
                             <Input 
                               type="file" 
                               accept=".pdf,.doc,.docx"
-                              onChange={(e) => onChange(e.target.files)}
-                              className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                              onChange={(e) => {
+                                const files = e.target.files;
+                                onChange(files);
+                              }}
+                              className="h-12 border-2 border-slate-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-100 file:text-primary-700 hover:file:bg-primary-200 cursor-pointer"
                               {...field}
+                              value=""
                             />
                           </div>
                         </FormControl>
