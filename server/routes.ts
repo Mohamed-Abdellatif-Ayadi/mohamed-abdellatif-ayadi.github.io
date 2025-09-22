@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { emailService } from "./emailService";
 import { z } from "zod";
 import { ZodError } from "zod";
 
@@ -77,12 +78,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/contact", async (req, res) => {
     try {
       const data = contactSchema.parse(req.body);
+      
+      // Save to storage
       await storage.saveContactMessage(data);
-      res.status(200).json({ message: "Message sent successfully" });
+      
+      // Send notification email to you
+      const notificationSent = await emailService.sendContactNotification(data);
+      
+      // Send confirmation email to the sender
+      const confirmationSent = await emailService.sendConfirmationEmail(data);
+      
+      if (notificationSent || confirmationSent) {
+        console.log(`Contact form submission processed. Notification: ${notificationSent}, Confirmation: ${confirmationSent}`);
+      }
+      
+      res.status(200).json({ 
+        message: "Message sent successfully",
+        emailSent: notificationSent 
+      });
     } catch (error) {
       if (error instanceof ZodError) {
         return res.status(400).json({ message: error.errors[0].message });
       }
+      console.error('Contact form error:', error);
       res.status(500).json({ message: "Error sending message" });
     }
   });

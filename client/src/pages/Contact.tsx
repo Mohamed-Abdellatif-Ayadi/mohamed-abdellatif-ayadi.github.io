@@ -42,10 +42,10 @@ const Contact = () => {
     mutationFn: async (values: ContactFormValues) => {
       // Save contact message
       const response = await apiRequest('POST', '/api/contact', values);
-      
+
       // Simulate sending email notifications (to owner and confirmation to sender)
       await simulateEmailSending('contact', values);
-      
+
       return response;
     },
     onSuccess: () => {
@@ -105,7 +105,7 @@ const Contact = () => {
                 mohamed.ayadi.data@gmail.com
               </a>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3">
@@ -117,7 +117,7 @@ const Contact = () => {
               </div>
               <p className="text-slate-600">+4915252301739</p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 mr-3">
@@ -134,7 +134,7 @@ const Contact = () => {
 
           <div className="bg-white p-8 rounded-xl shadow-md">
             <h2 className="text-2xl font-bold text-slate-900 mb-6">{t('contact.formTitle')}</h2>
-            
+
             {isSubmitted ? (
               <div className="p-6 bg-green-50 text-green-700 rounded-lg">
                 <h3 className="text-lg font-medium mb-2">{t('contact.thankYouTitle')}</h3>
@@ -149,54 +149,46 @@ const Contact = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t('contact.form.name')}</FormLabel>
+                          <FormLabel className="text-slate-700 font-medium">{t('contact.form.name')}</FormLabel>
                           <FormControl>
-                            <Input placeholder={t('contact.form.namePlaceholder')} {...field} />
+                            <Input 
+                              className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
+                              {...field} 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
+
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t('contact.form.email')}</FormLabel>
+                          <FormLabel className="text-slate-700 font-medium">{t('contact.form.email')}</FormLabel>
                           <FormControl>
-                            <Input placeholder={t('contact.form.emailPlaceholder')} type="email" {...field} />
+                            <Input 
+                              type="email"
+                              className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
+                              {...field} 
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
                   </div>
-                  
+
                   <FormField
                     control={form.control}
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('contact.form.subject')}</FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">{t('contact.form.subject')}</FormLabel>
                         <FormControl>
-                          <Input placeholder={t('contact.form.subjectPlaceholder')} {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t('contact.form.message')}</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            placeholder={t('contact.form.messagePlaceholder')} 
-                            className="min-h-32" 
+                          <Input 
+                            className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
                             {...field} 
                           />
                         </FormControl>
@@ -204,34 +196,70 @@ const Contact = () => {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
-                    name="file"
-                    render={({ field: { onChange, ...field } }) => (
+                    name="message"
+                    render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('contact.form.resume')}</FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">{t('contact.form.message')}</FormLabel>
                         <FormControl>
-                          <Input 
-                            type="file" 
-                            accept=".pdf"
-                            onChange={(e) => onChange(e.target.files)}
-                            {...field}
+                          <Textarea 
+                            className="min-h-[140px] resize-none border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
+                            {...field} 
                           />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full md:w-auto" 
-                    size="lg"
-                    disabled={mutation.isPending}
-                  >
-                    {mutation.isPending ? t('contact.form.sending') : t('contact.form.submit')}
-                  </Button>
+
+                  <FormField
+                    control={form.control}
+                    name="file"
+                    render={({ field: { onChange, ...field } }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700 font-medium">{t('contact.form.resume')}</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input 
+                              type="file" 
+                              accept=".pdf,.doc,.docx"
+                              onChange={(e) => onChange(e.target.files)}
+                              className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                              {...field}
+                            />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div className="pt-4">
+                    <Button 
+                      type="submit" 
+                      className="w-full h-12 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5" 
+                      disabled={mutation.isPending}
+                    >
+                      {mutation.isPending ? (
+                        <div className="flex items-center">
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          {t('contact.form.sending')}
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center">
+                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                          </svg>
+                          {t('contact.form.submit')}
+                        </div>
+                      )}
+                    </Button>
+                  </div>
                 </form>
               </Form>
             )}
