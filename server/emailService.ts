@@ -26,7 +26,7 @@ class EmailService {
   private async initializeTransporter() {
     try {
       // Gmail SMTP configuration
-      this.transporter = nodemailer.createTransporter({
+      this.transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
           user: process.env.GMAIL_USER || 'mohamed.ayadi.data@gmail.com',

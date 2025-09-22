@@ -100,7 +100,7 @@ const Contact = () => {
               </div>
               <a 
                 href="mailto:mohamed.ayadi.data@gmail.com" 
-                className="text-slate-600 hover:text-primary-700 break-all"
+                className="text-slate-600 hover:text-primary-700 whitespace-nowrap overflow-hidden text-ellipsis"
               >
                 mohamed.ayadi.data@gmail.com
               </a>
@@ -137,8 +137,8 @@ const Contact = () => {
 
             {isSubmitted ? (
               <div className="p-6 bg-green-50 text-green-700 rounded-lg">
-                <h3 className="text-lg font-medium mb-2">{t('contact.thankYouTitle')}</h3>
-                <p>{t('contact.thankYouMessage')}</p>
+                <h3 className="text-lg font-medium mb-2">Thank you!</h3>
+                <p>I will reply to you soon.</p>
               </div>
             ) : (
               <Form {...form}>
@@ -149,7 +149,7 @@ const Contact = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-medium">{t('contact.form.name')}</FormLabel>
+                          <FormLabel className="text-slate-700 font-medium">Name</FormLabel>
                           <FormControl>
                             <Input 
                               className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
@@ -166,7 +166,7 @@ const Contact = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-medium">{t('contact.form.email')}</FormLabel>
+                          <FormLabel className="text-slate-700 font-medium">Email</FormLabel>
                           <FormControl>
                             <Input 
                               type="email"
@@ -185,7 +185,7 @@ const Contact = () => {
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">{t('contact.form.subject')}</FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">Subject</FormLabel>
                         <FormControl>
                           <Input 
                             className="h-12 border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
@@ -202,7 +202,7 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">{t('contact.form.message')}</FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">Message</FormLabel>
                         <FormControl>
                           <Textarea 
                             className="min-h-[140px] resize-none border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 rounded-lg" 
