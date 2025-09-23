@@ -108,7 +108,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Chat API
   app.post("/api/chat", async (req, res) => {
     const { message, language = 'en' } = req.body;
-    
+
     try {
       if (!message) {
         return res.status(400).json({ error: "Message is required" });
@@ -192,7 +192,7 @@ Context: ${context}`;
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        
+
         if (response.status === 429) {
           throw new Error('Rate limit exceeded. Please wait a moment before trying again.');
         } else if (response.status === 401) {
@@ -209,7 +209,7 @@ Context: ${context}`;
     } catch (error) {
       console.error('Chat API error:', error);
       const { language: reqLanguage = 'en' } = req.body;
-      
+
       let errorMessage;
       if (error.message.includes('Rate limit')) {
         errorMessage = reqLanguage === 'de' ? 
@@ -224,7 +224,7 @@ Context: ${context}`;
           "Entschuldigung, ich habe gerade Probleme zu antworten. Bitte versuchen Sie es später erneut." : 
           "Sorry, I'm having trouble responding right now. Please try again later.";
       }
-      
+
       res.status(500).json({ error: errorMessage });
     }
   });
