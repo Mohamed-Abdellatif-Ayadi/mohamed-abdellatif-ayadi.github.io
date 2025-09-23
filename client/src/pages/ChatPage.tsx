@@ -92,21 +92,25 @@ const ChatPage = () => {
         })
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Return the specific error message from the server
+        return data.error || (language === 'de' ? 
+          "Entschuldigung, es gab ein Problem mit der Anfrage." : 
+          "Sorry, there was a problem with the request.");
       }
 
-      const data = await response.json();
       return data.response || (language === 'de' ? 
         "Entschuldigung, ich konnte gerade keine Antwort generieren." : 
         "I apologize, but I couldn't generate a response at the moment.");
     } catch (error) {
       console.error('Error calling chat API:', error);
       
-      // Fallback response
+      // Network or other connection errors
       const fallbackResponses = {
-        en: "I'm having trouble connecting to my AI assistant right now. Please try again in a moment.",
-        de: "Ich habe gerade Probleme, eine Verbindung zu meinem KI-Assistenten herzustellen. Bitte versuchen Sie es in einem Moment erneut.",
+        en: "I'm having trouble connecting right now. Please check your internet connection and try again.",
+        de: "Ich habe gerade Verbindungsprobleme. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
       };
       return fallbackResponses[language as keyof typeof fallbackResponses] || fallbackResponses.en;
     }

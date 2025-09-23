@@ -174,7 +174,7 @@ Context: ${context}`;
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo",
+          model: "gpt-4o-mini",
           messages: [
             {
               role: "system",
@@ -191,7 +191,15 @@ Context: ${context}`;
       });
 
       if (!response.ok) {
-        throw new Error(`OpenAI API error: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        
+        if (response.status === 429) {
+          throw new Error('Rate limit exceeded. Please wait a moment before trying again.');
+        } else if (response.status === 401) {
+          throw new Error('Invalid API key');
+        } else {
+          throw new Error(`OpenAI API error: ${response.statusText} - ${errorData.error?.message || 'Unknown error'}`);
+        }
       }
 
       const data = await response.json();
@@ -201,9 +209,23 @@ Context: ${context}`;
     } catch (error) {
       console.error('Chat API error:', error);
       const { language: reqLanguage = 'en' } = req.body;
-      res.status(500).json({ 
-        error: reqLanguage === 'de' ? "Entschuldigung, ich habe gerade Probleme zu antworten. Bitte versuchen Sie es später erneut." : "Sorry, I'm having trouble responding right now. Please try again later." 
-      });
+      
+      let errorMessage;
+      if (error.message.includes('Rate limit')) {
+        errorMessage = reqLanguage === 'de' ? 
+          "Zu viele Anfragen. Bitte warten Sie einen Moment, bevor Sie es erneut versuchen." : 
+          "Too many requests. Please wait a moment before trying again.";
+      } else if (error.message.includes('Invalid API key')) {
+        errorMessage = reqLanguage === 'de' ? 
+          "API-Konfigurationsfehler. Bitte kontaktieren Sie den Administrator." : 
+          "API configuration error. Please contact the administrator.";
+      } else {
+        errorMessage = reqLanguage === 'de' ? 
+          "Entschuldigung, ich habe gerade Probleme zu antworten. Bitte versuchen Sie es später erneut." : 
+          "Sorry, I'm having trouble responding right now. Please try again later.";
+      }
+      
+      res.status(500).json({ error: errorMessage });
     }
   });
 
