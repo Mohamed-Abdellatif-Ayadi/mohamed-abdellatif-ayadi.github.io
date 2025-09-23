@@ -107,9 +107,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Chat API
   app.post("/api/chat", async (req, res) => {
+    const { message, language = 'en' } = req.body;
+    
     try {
-      const { message, language = 'en' } = req.body;
-
       if (!message) {
         return res.status(400).json({ error: "Message is required" });
       }
