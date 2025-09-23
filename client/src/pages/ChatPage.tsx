@@ -437,10 +437,66 @@ const ChatPage = () => {
       return responses[language as keyof typeof responses] || responses.en;
     }
 
-    // Default fallback response
+    // Personal interests and hobbies
+    const hobbiesKeywords = {
+      en: ["hobby", "hobbies", "interest", "interests", "free time", "leisure", "fun", "like to do", "enjoy"],
+      de: ["hobby", "hobbies", "interesse", "interessen", "freizeit", "spaß", "gerne", "mag"],
+    };
+
+    if (checkKeywords(hobbiesKeywords)) {
+      const responses = {
+        en: "In my free time, I enjoy reading books about technology and finance, playing padel with friends, and attending tech conferences and meetups. I'm also passionate about staying updated with the latest developments in AI and software engineering. I find great satisfaction in learning new programming languages and experimenting with innovative technologies.",
+        de: "In meiner Freizeit lese ich gerne Bücher über Technologie und Finanzen, spiele Padel mit Freunden und besuche Tech-Konferenzen und Meetups. Ich bin auch leidenschaftlich dabei, über die neuesten Entwicklungen in KI und Softwareentwicklung auf dem Laufenden zu bleiben. Ich finde große Zufriedenheit beim Erlernen neuer Programmiersprachen und beim Experimentieren mit innovativen Technologien.",
+      };
+      return responses[language as keyof typeof responses] || responses.en;
+    }
+
+    // Personality and work style
+    const personalityKeywords = {
+      en: ["personality", "character", "work style", "approach", "teamwork", "collaboration", "strengths"],
+      de: ["persönlichkeit", "charakter", "arbeitsstil", "ansatz", "teamarbeit", "zusammenarbeit", "stärken"],
+    };
+
+    if (checkKeywords(personalityKeywords)) {
+      const responses = {
+        en: "I'm a detail-oriented and analytical person who thrives in collaborative environments. I approach problems systematically and enjoy breaking down complex challenges into manageable components. I'm passionate about continuous learning and sharing knowledge with team members. My work style is structured yet flexible, always focusing on delivering high-quality solutions while maintaining clear communication with stakeholders.",
+        de: "Ich bin eine detailorientierte und analytische Person, die in kollaborativen Umgebungen aufblüht. Ich gehe Probleme systematisch an und zerlege gerne komplexe Herausforderungen in handhabbare Komponenten. Ich bin leidenschaftlich beim kontinuierlichen Lernen und beim Teilen von Wissen mit Teammitgliedern. Mein Arbeitsstil ist strukturiert, aber flexibel, wobei ich mich immer darauf konzentriere, qualitativ hochwertige Lösungen zu liefern und gleichzeitig eine klare Kommunikation mit Stakeholdern zu pflegen.",
+      };
+      return responses[language as keyof typeof responses] || responses.en;
+    }
+
+    // Motivation and inspiration
+    const motivationKeywords = {
+      en: ["motivation", "inspire", "inspiration", "drive", "passion", "why", "what motivates"],
+      de: ["motivation", "inspirieren", "inspiration", "antrieb", "leidenschaft", "warum", "was motiviert"],
+    };
+
+    if (checkKeywords(motivationKeywords)) {
+      const responses = {
+        en: "I'm motivated by the opportunity to solve real-world problems through technology. What inspires me most is seeing how innovative software solutions can improve people's lives and make complex tasks simpler. The rapidly evolving tech landscape keeps me excited about learning new technologies and contributing to meaningful projects. I'm particularly driven by the potential of AI to transform industries and create more efficient systems.",
+        de: "Ich bin motiviert durch die Möglichkeit, reale Probleme durch Technologie zu lösen. Was mich am meisten inspiriert, ist zu sehen, wie innovative Softwarelösungen das Leben der Menschen verbessern und komplexe Aufgaben vereinfachen können. Die sich schnell entwickelnde Tech-Landschaft hält mich begeistert beim Erlernen neuer Technologien und beim Beitrag zu bedeutungsvollen Projekten. Ich bin besonders angetrieben durch das Potenzial der KI, Branchen zu transformieren und effizientere Systeme zu schaffen.",
+      };
+      return responses[language as keyof typeof responses] || responses.en;
+    }
+
+    // Professional development and learning
+    const learningKeywords = {
+      en: ["learning", "development", "growth", "improve", "skills", "self-improvement", "courses"],
+      de: ["lernen", "entwicklung", "wachstum", "verbessern", "fähigkeiten", "selbstverbesserung", "kurse"],
+    };
+
+    if (checkKeywords(learningKeywords)) {
+      const responses = {
+        en: "I'm committed to continuous learning and professional development. I regularly take online courses, participate in coding challenges, and contribute to open-source projects. I stay updated with industry trends through tech blogs, podcasts, and conferences. I believe in learning by doing, which is why I work on personal projects that challenge me to apply new technologies and methodologies. I'm also interested in obtaining relevant certifications to validate my expertise.",
+        de: "Ich bin dem kontinuierlichen Lernen und der beruflichen Entwicklung verpflichtet. Ich nehme regelmäßig an Online-Kursen teil, beteilige mich an Programmier-Herausforderungen und trage zu Open-Source-Projekten bei. Ich bleibe über Branchentrends durch Tech-Blogs, Podcasts und Konferenzen auf dem Laufenden. Ich glaube an Learning by Doing, deshalb arbeite ich an persönlichen Projekten, die mich herausfordern, neue Technologien und Methoden anzuwenden. Ich interessiere mich auch für relevante Zertifizierungen zur Validierung meiner Expertise.",
+      };
+      return responses[language as keyof typeof responses] || responses.en;
+    }
+
+    // Default fallback response that's more engaging
     const fallbackResponses = {
-      en: "I don't have specific information about that. You can ask me about my education, work experience, skills, blog posts, or contact information.",
-      de: "Ich habe keine spezifischen Informationen darüber. Sie können mich nach meiner Ausbildung, Arbeitserfahrung, Fähigkeiten, Blogbeiträgen oder Kontaktinformationen fragen.",
+      en: "That's an interesting question! While I might not have specific details about that particular topic, I'm always happy to discuss my technical expertise, career journey, or professional experiences. Feel free to ask me about my projects, programming skills, education, or anything related to software development and technology. What would you like to know more about?",
+      de: "Das ist eine interessante Frage! Auch wenn ich möglicherweise keine spezifischen Details zu diesem bestimmten Thema habe, spreche ich gerne über meine technische Expertise, meinen Karriereweg oder meine beruflichen Erfahrungen. Fragen Sie mich gerne nach meinen Projekten, Programmierkenntnissen, Ausbildung oder allem, was mit Softwareentwicklung und Technologie zu tun hat. Worüber möchten Sie mehr erfahren?",
     };
     return (
       fallbackResponses[language as keyof typeof fallbackResponses] ||
