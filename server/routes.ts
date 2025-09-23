@@ -129,7 +129,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         Skills: ${cvData.skills.map(skill => `${skill.category}: ${skill.items.join(', ')}`).join('\n')}
         Experience: ${cvData.experience.map(exp => `${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate}): ${exp.description}`).join('\n')}
         Education: ${cvData.education.map(edu => `${edu.degree} from ${edu.institution} (${edu.startDate} - ${edu.endDate})`).join('\n')}
-        Languages: ${cvData.languages.map(lang => `${lang.name}: ${lang.proficiency}`).join(', ')}
+        Languages: ${cvData.languages ? cvData.languages.map(lang => `${lang.name}: ${lang.proficiency}`).join(', ') : 'Not specified'}
 
         Recent Articles:
         ${articles.map(article => `Title: ${article.title}\nExcerpt: ${article.excerpt}`).join('\n\n')}
@@ -200,8 +200,9 @@ Context: ${context}`;
       res.json({ response: aiResponse });
     } catch (error) {
       console.error('Chat API error:', error);
+      const { language: reqLanguage = 'en' } = req.body;
       res.status(500).json({ 
-        error: language === 'de' ? "Entschuldigung, ich habe gerade Probleme zu antworten. Bitte versuchen Sie es später erneut." : "Sorry, I'm having trouble responding right now. Please try again later." 
+        error: reqLanguage === 'de' ? "Entschuldigung, ich habe gerade Probleme zu antworten. Bitte versuchen Sie es später erneut." : "Sorry, I'm having trouble responding right now. Please try again later." 
       });
     }
   });
