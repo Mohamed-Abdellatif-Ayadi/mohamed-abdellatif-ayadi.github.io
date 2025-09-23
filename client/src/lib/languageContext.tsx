@@ -80,7 +80,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Chat section
     "home.chat.title": "Ask Me Anything",
     "home.chat.subtitle": "Have questions about my background, skills, or projects? Chat with my AI assistant",
-    "home.chat.startChat": "Start Conversation",
+    "home.chat.cta": "Start Conversation",
+    "home.chat.experience.title": "Professional Experience",
+    "home.chat.experience.description": "Learn about my work experience and career journey in technology",
+    "home.chat.knowledge.title": "Technical Knowledge", 
+    "home.chat.knowledge.description": "Discover my skills in programming, AI, and software development",
+    "home.chat.ai.title": "AI & Innovation",
+    "home.chat.ai.description": "Explore my projects and expertise in artificial intelligence",
 
     // CV page
     "cv.title": "My Curriculum Vitae",
@@ -226,7 +232,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Chat section
     "home.chat.title": "Fragen Sie mich alles",
     "home.chat.subtitle": "Haben Sie Fragen zu meinem Hintergrund, meinen Fähigkeiten oder Projekten? Chatten Sie mit meinem KI-Assistenten",
-    "home.chat.startChat": "Gespräch beginnen",
+    "home.chat.cta": "Gespräch beginnen",
+    "home.chat.experience.title": "Berufserfahrung",
+    "home.chat.experience.description": "Erfahren Sie mehr über meine Arbeitserfahrung und berufliche Laufbahn in der Technologie",
+    "home.chat.knowledge.title": "Technisches Wissen",
+    "home.chat.knowledge.description": "Entdecken Sie meine Fähigkeiten in Programmierung, KI und Softwareentwicklung", 
+    "home.chat.ai.title": "KI & Innovation",
+    "home.chat.ai.description": "Erkunden Sie meine Projekte und Expertise in der künstlichen Intelligenz",
 
     // CV page
     "cv.title": "Mein Lebenslauf",
