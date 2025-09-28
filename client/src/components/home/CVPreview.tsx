@@ -68,34 +68,58 @@ const CVPreview = () => {
             </div>
           </div>
         ) : cv ? (
-          <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="p-8">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">{cv.name}</h3>
-                <p className="text-slate-600">{cv.title}</p>
+          <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+            <div className="p-10">
+              <div className="text-center mb-10">
+                <h3 className="text-3xl font-bold text-slate-900 mb-3 tracking-tight">{cv.name}</h3>
+                <p className="text-slate-600 text-lg font-light">{cv.title}</p>
+                <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mt-4 rounded-full"></div>
               </div>
               
               <div className="mb-8">
-                <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">TECHNICAL SKILLS</h3>
+                <h3 className="text-xl font-bold text-slate-900 mb-8 text-center tracking-wider">TECHNICAL SKILLS</h3>
                 
-                <div className="grid md:grid-cols-4 gap-6">
-                  {cv.skills.map((skillCategory, index) => (
-                    <div key={index} className="bg-slate-50 rounded-lg p-4">
-                      <h4 className="font-bold text-slate-800 text-sm mb-4 uppercase tracking-wide">
-                        {skillCategory.category}
-                      </h4>
-                      <ul className="space-y-2">
-                        {skillCategory.items.slice(0, 6).map((skill, skillIndex) => (
-                          <li key={skillIndex} className="flex items-center text-sm text-slate-600">
-                            <svg className="w-3 h-3 text-primary-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 8 8">
-                              <path d="M2 0l2 2-2 2-2-2 2-2z" transform="translate(2 2)" />
-                            </svg>
-                            {skill}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-2xl shadow-lg p-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    {cv.skills.slice(0, 4).map((skillCategory, index) => (
+                      <div key={index} className="space-y-4">
+                        <h4 className="font-bold text-slate-800 text-sm mb-4 uppercase tracking-wide border-b border-slate-300 pb-2">
+                          {skillCategory.category.replace(/and/gi, 'AND')}
+                        </h4>
+                        <ul className="space-y-3">
+                          {skillCategory.items.slice(0, 8).map((skill, skillIndex) => (
+                            <li key={skillIndex} className="flex items-start text-sm text-slate-700 leading-relaxed">
+                              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                              <span className="font-medium">{skill}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                    
+                    {/* Add the 5th category if it exists, distributed across remaining space */}
+                    {cv.skills.length > 4 && (
+                      <div className="lg:col-span-4 mt-6 pt-6 border-t border-slate-200">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {cv.skills.slice(4).map((skillCategory, index) => (
+                            <div key={index + 4} className="space-y-3">
+                              <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wide border-b border-slate-300 pb-2">
+                                {skillCategory.category.replace(/and/gi, 'AND')}
+                              </h4>
+                              <ul className="space-y-2">
+                                {skillCategory.items.slice(0, 6).map((skill, skillIndex) => (
+                                  <li key={skillIndex} className="flex items-start text-sm text-slate-700">
+                                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span className="font-medium">{skill}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
               
