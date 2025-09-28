@@ -187,14 +187,14 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
           {/* Summary Section */}
           <div className="mb-8">
             <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center">
-              <div className="w-8 h-8 bg-indigo-600 rounded-xl flex items-center justify-center mr-3">
+              <div className="w-8 h-8 bg-slate-600 rounded-xl flex items-center justify-center mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
               Professional Summary
             </h3>
-            <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-6 border border-indigo-200">
+            <div className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl p-6 border border-gray-200">
               <p className="text-slate-700 leading-relaxed">{cv.summary}</p>
             </div>
           </div>
@@ -202,7 +202,7 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
           {/* Experience Section */}
           <div className="mb-8">
             <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center mr-3">
+              <div className="w-8 h-8 bg-slate-600 rounded-xl flex items-center justify-center mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0h2.586a1 1 0 01.707.293L21 8" />
                 </svg>
@@ -216,11 +216,11 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
                   <div key={index} className="relative">
                     <div className="bg-gradient-to-br from-white to-slate-50 rounded-2xl border-2 border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                       {/* Header Section */}
-                      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
+                      <div className="bg-gradient-to-r from-slate-700 to-slate-800 text-white p-6">
                         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-2 lg:space-y-0">
                           <div>
                             <h4 className="text-xl font-bold mb-1">{exp.position}</h4>
-                            <p className="text-blue-100 font-medium text-lg">{exp.company}</p>
+                            <p className="text-gray-200 font-medium text-lg">{exp.company}</p>
                           </div>
                           <div className="flex items-center space-x-2">
                             <div className="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
@@ -228,7 +228,7 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
                                 <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                               </svg>
                             </div>
-                            <span className="text-blue-100 font-medium bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
+                            <span className="text-gray-200 font-medium bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
                               {exp.startDate} - {exp.endDate === 'Present' ? 'Present' : exp.endDate}
                             </span>
                           </div>
@@ -243,7 +243,7 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
                               <div key={pIndex} className="mb-3 last:mb-0">
                                 {paragraph.trim().startsWith('•') ? (
                                   <div className="flex items-start space-x-3">
-                                    <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div className="w-2 h-2 bg-slate-600 rounded-full mt-2 flex-shrink-0"></div>
                                     <p className="text-slate-700 leading-relaxed">{paragraph.replace('•', '').trim()}</p>
                                   </div>
                                 ) : (
@@ -259,7 +259,7 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
                           <div className="mt-4 pt-4 border-t border-slate-200">
                             <div className="flex flex-wrap gap-2">
                               {['SAP', 'SAP S/4HANA', 'CRM Systems', 'B2B/B2C Sales'].map((tech, techIndex) => (
-                                <span key={techIndex} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
+                                <span key={techIndex} className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full font-medium">
                                   {tech}
                                 </span>
                               ))}
@@ -271,7 +271,7 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
                           <div className="mt-4 pt-4 border-t border-slate-200">
                             <div className="flex flex-wrap gap-2">
                               {['Java Programming', 'Object-Oriented Programming', 'Teaching', 'Mentoring'].map((tech, techIndex) => (
-                                <span key={techIndex} className="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">
+                                <span key={techIndex} className="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full font-medium">
                                   {tech}
                                 </span>
                               ))}

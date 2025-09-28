@@ -19,7 +19,7 @@ const CVPreview = () => {
             {t('home.cvPreview.subtitle')}
           </p>
         </div>
-        
+
         {isLoading ? (
           <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
             <div className="md:flex">
@@ -28,14 +28,14 @@ const CVPreview = () => {
                 <Skeleton className="h-6 w-24 mb-2" />
                 <Skeleton className="h-5 w-32" />
               </div>
-              
+
               <div className="p-8 w-full">
                 <div className="mb-6">
                   <Skeleton className="h-6 w-24 mb-2" />
                   <Skeleton className="h-4 w-full" />
                   <Skeleton className="h-4 w-4/5 mt-2" />
                 </div>
-                
+
                 <div className="mb-6">
                   <Skeleton className="h-6 w-20 mb-2" />
                   <div className="flex flex-wrap gap-2">
@@ -44,7 +44,7 @@ const CVPreview = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <Skeleton className="h-6 w-28 mb-4" />
                   <div className="space-y-4">
@@ -60,7 +60,7 @@ const CVPreview = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="mt-8">
                   <Skeleton className="h-6 w-32" />
                 </div>
@@ -75,10 +75,10 @@ const CVPreview = () => {
                 <p className="text-slate-600 text-lg font-light">{cv.title}</p>
                 <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mt-4 rounded-full"></div>
               </div>
-              
+
               <div className="mb-8">
                 <h3 className="text-xl font-bold text-slate-900 mb-8 text-center tracking-wider">TECHNICAL SKILLS</h3>
-                
+
                 <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-2xl shadow-lg p-8">
                   <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {cv.skills.slice(0, 4).map((skillCategory, index) => (
@@ -89,14 +89,14 @@ const CVPreview = () => {
                         <ul className="space-y-3">
                           {skillCategory.items.slice(0, 8).map((skill, skillIndex) => (
                             <li key={skillIndex} className="flex items-start text-sm text-slate-700 leading-relaxed">
-                              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                              <div className="w-1.5 h-1.5 bg-slate-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                               <span className="font-medium">{skill}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     ))}
-                    
+
                     {/* Add the 5th category if it exists, distributed across remaining space */}
                     {cv.skills.length > 4 && (
                       <div className="lg:col-span-4 mt-6 pt-6 border-t border-slate-200">
@@ -109,7 +109,7 @@ const CVPreview = () => {
                               <ul className="space-y-2">
                                 {skillCategory.items.slice(0, 6).map((skill, skillIndex) => (
                                   <li key={skillIndex} className="flex items-start text-sm text-slate-700">
-                                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <div className="w-1.5 h-1.5 bg-slate-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                                     <span className="font-medium">{skill}</span>
                                   </li>
                                 ))}
@@ -122,7 +122,7 @@ const CVPreview = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="text-center">
                 <Link 
                   href="/cv" 
