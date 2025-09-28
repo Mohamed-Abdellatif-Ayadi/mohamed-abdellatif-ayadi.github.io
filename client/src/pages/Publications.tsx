@@ -182,19 +182,15 @@ const Publications = () => {
                       <Button
                         variant="default"
                         size="sm"
-                        asChild
                         className="bg-green-600 hover:bg-green-700 text-white"
+                        onClick={() => {
+                          window.open(publication.pdfUrl, '_blank', 'noopener,noreferrer');
+                        }}
                       >
-                        <a
-                          href={publication.pdfUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <FileText className="w-4 h-4 mr-2" />
-                          {buttonLabels.readPublication[
-                            language as keyof typeof buttonLabels.readPublication
-                          ] || buttonLabels.readPublication.en}
-                        </a>
+                        <FileText className="w-4 h-4 mr-2" />
+                        {buttonLabels.readPublication[
+                          language as keyof typeof buttonLabels.readPublication
+                        ] || buttonLabels.readPublication.en}
                       </Button>
                     )}
 
