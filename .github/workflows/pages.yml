@@ -10,22 +10,34 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+env:
+  FRONTEND_DIR: client
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: |
+          echo "Listing repo root:"; ls -la
+          echo "Listing $FRONTEND_DIR:"; ls -la "$FRONTEND_DIR"
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm ci
-        working-directory: ./client
-      - run: npm run build
-        working-directory: ./client
-      - run: cp client/dist/index.html client/dist/404.html || true
+          cache: 'npm'
+          cache-dependency-path: ${{ env.FRONTEND_DIR }}/package-lock.json
+      - name: Install deps
+        working-directory: ${{ env.FRONTEND_DIR }}
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+      - name: Build
+        working-directory: ${{ env.FRONTEND_DIR }}
+        run: npm run build
+      - name: SPA 404 fallback
+        run: cp "$FRONTEND_DIR/dist/index.html" "$FRONTEND_DIR/dist/404.html" || true
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./client/dist
+          path: ${{ env.FRONTEND_DIR }}/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
