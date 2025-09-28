@@ -68,79 +68,58 @@ const CVPreview = () => {
             </div>
           </div>
         ) : cv ? (
-          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="md:flex">
-              <div className="md:flex-shrink-0 bg-primary-700 md:w-48 flex flex-col items-center justify-center p-6 text-white">
-                <h3 className="text-xl font-bold text-center">{cv.name}</h3>
-                <p className="text-primary-200 text-center mt-2">{cv.title}</p>
+          <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="p-8">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">{cv.name}</h3>
+                <p className="text-slate-600">{cv.title}</p>
               </div>
               
-              <div className="p-8">
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{t('cv.summary')}</h3>
-                  <p className="text-slate-600">{cv.summary}</p>
-                </div>
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">TECHNICAL SKILLS</h3>
                 
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{t('cv.skills')}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {cv.skills.slice(0, 2).flatMap((skillGroup) => 
-                      skillGroup.items.slice(0, 4).map((skill, skillIndex) => (
-                        <span key={`${skillGroup.category}-${skillIndex}`} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
-                          {skill}
-                        </span>
-                      ))
-                    )}
-                  </div>
+                <div className="grid md:grid-cols-4 gap-6">
+                  {cv.skills.map((skillCategory, index) => (
+                    <div key={index} className="bg-slate-50 rounded-lg p-4">
+                      <h4 className="font-bold text-slate-800 text-sm mb-4 uppercase tracking-wide">
+                        {skillCategory.category}
+                      </h4>
+                      <ul className="space-y-2">
+                        {skillCategory.items.slice(0, 6).map((skill, skillIndex) => (
+                          <li key={skillIndex} className="flex items-center text-sm text-slate-600">
+                            <svg className="w-3 h-3 text-primary-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 8 8">
+                              <path d="M2 0l2 2-2 2-2-2 2-2z" transform="translate(2 2)" />
+                            </svg>
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
-                
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{t('cv.experience')}</h3>
-                  <div className="space-y-4">
-                    {cv.experience.slice(0, 2).map((exp, index) => (
-                      <div key={index} className="flex">
-                        <div className="flex-shrink-0 mt-1">
-                          <div className="w-3 h-3 rounded-full bg-primary-700"></div>
-                          {index < Math.min(cv.experience.length, 2) - 1 && (
-                            <div className="w-0.5 h-full bg-slate-200 ml-1.5"></div>
-                          )}
-                        </div>
-                        <div className="ml-4">
-                          <h4 className="text-base font-medium text-slate-900">
-                            {exp.position} at {exp.company}
-                          </h4>
-                          <p className="text-sm text-slate-500">
-                            {exp.startDate} - {exp.endDate || 'Present'}
-                          </p>
-                          <p className="text-slate-600 mt-1">{exp.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="mt-8">
-                  <Link 
-                    href="/cv" 
-                    className="inline-flex items-center text-primary-700 hover:text-primary-800 font-medium"
+              </div>
+              
+              <div className="text-center">
+                <Link 
+                  href="/cv" 
+                  className="inline-flex items-center text-primary-700 hover:text-primary-800 font-medium"
+                >
+                  {t('home.cvPreview.viewComplete')}
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-4 w-4 ml-1" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
                   >
-                    {t('home.cvPreview.viewComplete')}
-                    <svg 
-                      xmlns="http://www.w3.org/2000/svg" 
-                      className="h-4 w-4 ml-1" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor"
-                    >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth={2} 
-                        d="M14 5l7 7m0 0l-7 7m7-7H3" 
-                      />
-                    </svg>
-                  </Link>
-                </div>
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M14 5l7 7m0 0l-7 7m7-7H3" 
+                    />
+                  </svg>
+                </Link>
               </div>
             </div>
           </div>
