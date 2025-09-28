@@ -3,6 +3,7 @@ import { useLanguage } from "@/lib/languageContext";
 import { Helmet } from "react-helmet";
 import HeroIntro from "@/components/home/HeroIntro";
 import CVPreview from "@/components/home/CVPreview";
+import ExperienceSection from "@/components/home/ExperienceSection";
 import ProjectsSection from "@/components/home/ProjectsSection";
 import PublicationsSection from "@/components/home/PublicationsSection";
 import ChatSection from "@/components/home/ChatSection";
@@ -27,6 +28,9 @@ const Home = () => {
       <section id="experience">
         <CVPreview />
       </section>
+      
+      {/* Experience Timeline Section */}
+      <ExperienceSection />
       
       {/* Projects Section */}
       <section id="projects">
