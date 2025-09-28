@@ -149,104 +149,139 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Check if OpenAI API key is configured
-      if (!process.env.OPENAI_API_KEY) {
-        const fallbackResponse = language === 'de' ? 
-          "Entschuldigung, der Chat-Service ist derzeit nicht verfügbar. Bitte nutzen Sie das Kontaktformular oder fragen Sie mich über LinkedIn." :
-          "Sorry, the chat service is currently unavailable. Please use the contact form or reach out to me on LinkedIn.";
-        return res.json({ response: fallbackResponse });
-      }
-
       // Get CV data in the specified language
       const cvData = await storage.getCV(language);
 
       // Get articles for context
       const articles = await storage.getArticles(5, language);
 
-      // Create context from CV and articles
-      const context = `
-        CV Information:
-        Name: ${cvData.name}
-        Title: ${cvData.title}
-        Summary: ${cvData.summary}
-        Skills: ${cvData.skills.map(skill => `${skill.category}: ${skill.items.join(', ')}`).join('\n')}
-        Experience: ${cvData.experience.map(exp => `${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate}): ${exp.description}`).join('\n')}
-        Education: ${cvData.education.map(edu => `${edu.degree} from ${edu.institution} (${edu.startDate} - ${edu.endDate})`).join('\n')}
-        Languages: ${cvData.languages ? cvData.languages.map(lang => `${lang.name}: ${lang.proficiency}`).join(', ') : 'Not specified'}
+      // Smart fallback chatbot with knowledge base
+      const generateSmartResponse = (userMessage: string, lang: string) => {
+        const msg = userMessage.toLowerCase();
+        
+        // Education questions
+        if (msg.includes('education') || msg.includes('study') || msg.includes('university') || msg.includes('degree') || msg.includes('studium') || msg.includes('ausbildung')) {
+          return lang === 'de' ? 
+            `Ich studiere Informatik (B.Sc.) an der Technischen Universität Dortmund. Mein Studium umfasst Bereiche wie Softwareentwicklung, Datenstrukturen, Algorithmen, Datenbanken und künstliche Intelligenz. ${cvData.education.map(edu => `Ich habe ${edu.degree} an ${edu.institution} studiert (${edu.startDate} - ${edu.endDate})`).join('. ')}.` :
+            `I'm studying Computer Science (B.Sc.) at TU Dortmund University. My studies cover software development, data structures, algorithms, databases, and artificial intelligence. ${cvData.education.map(edu => `I studied ${edu.degree} at ${edu.institution} (${edu.startDate} - ${edu.endDate})`).join('. ')}.`;
+        }
 
-        Recent Articles:
-        ${articles.map(article => `Title: ${article.title}\nExcerpt: ${article.excerpt}`).join('\n\n')}
-      `;
+        // Programming/Skills questions
+        if (msg.includes('programming') || msg.includes('languages') || msg.includes('skills') || msg.includes('technology') || msg.includes('programmier') || msg.includes('fähigkeiten') || msg.includes('technolog')) {
+          const skillsList = cvData.skills.map(skill => `${skill.category}: ${skill.items.join(', ')}`).join('; ');
+          return lang === 'de' ? 
+            `Meine technischen Fähigkeiten umfassen: ${skillsList}. Ich arbeite hauptsächlich mit Java, Python und JavaScript, da diese Sprachen vielseitig und mächtig sind. Ich habe Erfahrung mit Backend-Entwicklung, APIs, Datenbanken und KI-Technologien.` :
+            `My technical skills include: ${skillsList}. I primarily work with Java, Python, and JavaScript as they're versatile and powerful languages. I have experience with backend development, APIs, databases, and AI technologies.`;
+        }
 
-      const systemPrompt = language === 'de' ? 
-        `Du bist ein KI-Assistent, der Mohamed Abdellatif Ayadi repräsentiert, einen Informatikstudenten und Softwareentwickler. Beantworte ALLE Fragen professionell und hilfreich, auch wenn die Information nicht in seinem Lebenslauf steht.
+        // Experience questions
+        if (msg.includes('experience') || msg.includes('work') || msg.includes('job') || msg.includes('company') || msg.includes('erfahrung') || msg.includes('arbeit') || msg.includes('unternehmen')) {
+          const expList = cvData.experience.map(exp => `${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate}): ${exp.description}`).join('. ');
+          return lang === 'de' ? 
+            `Meine Berufserfahrung: ${expList}. Seit April 2024 sammle ich praktische Erfahrungen als Werkstudent in Vertrieb und Softwareentwicklung.` :
+            `My work experience: ${expList}. Since April 2024, I've been gaining hands-on experience as a working student in sales and software development.`;
+        }
 
-WICHTIG: Du MUSST auf JEDE Frage antworten. Sage niemals "Ich habe keine Informationen" oder ähnliches.
+        // Blog/Articles questions
+        if (msg.includes('blog') || msg.includes('article') || msg.includes('write') || msg.includes('content') || msg.includes('artikel') || msg.includes('schreib')) {
+          const articleTitles = articles.map(a => a.title).join(', ');
+          return lang === 'de' ? 
+            `Ich schreibe regelmäßig Artikel über Technologie, Softwareentwicklung und Datenanalyse. Meine aktuellen Artikel umfassen: ${articleTitles}. Ich teile gerne mein Wissen über moderne Webtechnologien, Datenbanken und Best Practices.` :
+            `I regularly write articles about technology, software development, and data analysis. My recent articles include: ${articleTitles}. I enjoy sharing knowledge about modern web technologies, databases, and best practices.`;
+        }
 
-Für persönliche Fragen verwende diese realistischen Antworten:
-- Hobbys: Lesen von Fachbüchern über Technologie und Finanzen, Padel spielen, Teilnahme an Tech-Veranstaltungen, Programmier-Challenges
-- Persönlichkeit: Leidenschaftlich für Technologie, teamorientiert, lernbegierig, analytisch, problemlösungsorientiert
-- Arbeitsweise: Strukturiert, kollaborativ, fokussiert auf qualitativ hochwertige Lösungen
-- Motivation: Begeistert von der Lösung realer Probleme durch Technologie, insbesondere KI und maschinelles Lernen
-- Lieblingssprachen: Java, Python, JavaScript - weil sie vielseitig und mächtig sind
-- Zukunftspläne: Spezialisierung auf KI/ML, Beitrag zu innovativen Projekten, kontinuierliche Weiterbildung
+        // Language questions
+        if (msg.includes('language') || msg.includes('speak') || msg.includes('sprache') || msg.includes('sprech')) {
+          const langList = cvData.languages ? cvData.languages.map(lang => `${lang.name}: ${lang.proficiency}`).join(', ') : 'German, Arabic, English, French';
+          return lang === 'de' ? 
+            `Ich spreche mehrere Sprachen: ${langList}. Als gebürtiger Tunesier spreche ich fließend Deutsch, Arabisch, Englisch und Französisch.` :
+            `I speak multiple languages: ${langList}. As a native Tunisian, I'm fluent in German, Arabic, English, and French.`;
+        }
 
-Antworte immer auf Deutsch, sei gesprächig und hilfsbereit. Erfinde keine falschen Fakten über Arbeitsstellen oder Qualifikationen, aber sei kreativ bei persönlichen Aspekten.
+        // Personal/hobby questions
+        if (msg.includes('hobby') || msg.includes('interest') || msg.includes('personal') || msg.includes('free time') || msg.includes('freizeit') || msg.includes('hobby')) {
+          return lang === 'de' ? 
+            'In meiner Freizeit lese ich gerne Fachbücher über Technologie und Finanzen, spiele Padel, nehme an Tech-Veranstaltungen teil und löse Programmier-Challenges. Ich bin leidenschaftlich daran interessiert, reale Probleme durch Technologie zu lösen.' :
+            'In my free time, I enjoy reading books about technology and finance, playing padel, attending tech events, and solving coding challenges. I\'m passionate about solving real-world problems through technology.';
+        }
 
-Kontext: ${context}` :
-        `You are an AI assistant representing Mohamed Abdellatif Ayadi, a Computer Science student and software developer. Answer ALL questions professionally and helpfully, even if the information is not explicitly in his CV or resume.
+        // Projects questions
+        if (msg.includes('project') || msg.includes('portfolio') || msg.includes('build') || msg.includes('create') || msg.includes('projekt')) {
+          return lang === 'de' ? 
+            'Ich arbeite an verschiedenen Projekten, darunter skalierbare Backend-Services, KI-Chatbots und Echtzeit-Datenpipelines. Meine Projekte nutzen moderne Technologien wie Spring Boot, Docker und OpenAI APIs. Schauen Sie sich gerne meine Projektseite für weitere Details an!' :
+            'I work on various projects including scalable backend services, AI chatbots, and real-time data pipelines. My projects utilize modern technologies like Spring Boot, Docker, and OpenAI APIs. Feel free to check out my projects page for more details!';
+        }
 
-IMPORTANT: You MUST respond to EVERY question. Never say "I don't have information" or similar deflections.
+        // Contact questions
+        if (msg.includes('contact') || msg.includes('reach') || msg.includes('email') || msg.includes('phone') || msg.includes('kontakt')) {
+          return lang === 'de' ? 
+            'Sie können mich unter mohamed.ayadi.data@gmail.com erreichen oder über das Kontaktformular auf meiner Website. Ich bin auch auf LinkedIn aktiv, wo ich regelmäßig Einblicke über Tech und Finanzen teile.' :
+            'You can reach me at mohamed.ayadi.data@gmail.com or through the contact form on my website. I\'m also active on LinkedIn where I regularly share insights about tech and finance.';
+        }
 
-For personal questions, use these realistic responses:
-- Hobbies: Reading books about technology and finance, playing padel, attending tech events, coding challenges
-- Personality: Passionate about technology, team-oriented, eager to learn, analytical, problem-solving focused
-- Work style: Structured, collaborative, focused on delivering high-quality solutions
-- Motivation: Excited about solving real-world problems through technology, especially AI and machine learning
-- Favorite languages: Java, Python, JavaScript - because they're versatile and powerful
-- Future plans: Specializing in AI/ML, contributing to innovative projects, continuous learning
+        // Default response
+        return lang === 'de' ? 
+          `Hallo! Ich bin Mohamed Abdellatif Ayadi, Informatikstudent an der TU Dortmund mit praktischer Erfahrung als Werkstudent. Ich bin leidenschaftlich für Technologie, KI und Softwareentwicklung. Meine Kernkompetenzen umfassen ${cvData.skills.slice(0,2).map(s => s.items.slice(0,2).join(', ')).join(', ')}. Wie kann ich Ihnen heute helfen? Fragen Sie mich nach meiner Ausbildung, Berufserfahrung, Projekten oder allem anderen!` :
+          `Hello! I'm Mohamed Abdellatif Ayadi, a Computer Science student at TU Dortmund with practical experience as a working student. I'm passionate about technology, AI, and software development. My core skills include ${cvData.skills.slice(0,2).map(s => s.items.slice(0,2).join(', ')).join(', ')}. How can I help you today? Ask me about my education, work experience, projects, or anything else!`;
+      };
 
-Always respond in English, be conversational and helpful. Don't invent false facts about work positions or qualifications, but be creative with personal aspects.
+      // Try OpenAI first, but fallback to smart responses
+      let aiResponse = '';
+      let useOpenAI = false;
 
-Context: ${context}`;
+      if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.length > 20) {
+        try {
+          const systemPrompt = language === 'de' ? 
+            `Du bist Mohamed Abdellatif Ayadi, ein Informatikstudent und Softwareentwickler. Beantworte alle Fragen professionell und hilfreich basierend auf dem gegebenen Kontext. Antworte auf Deutsch.
 
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [
-            {
-              role: "system",
-              content: systemPrompt
+Kontext:
+Name: ${cvData.name}
+Titel: ${cvData.title}
+Zusammenfassung: ${cvData.summary}
+Fähigkeiten: ${cvData.skills.map(skill => `${skill.category}: ${skill.items.join(', ')}`).join('\n')}
+Erfahrung: ${cvData.experience.map(exp => `${exp.position} bei ${exp.company} (${exp.startDate} - ${exp.endDate}): ${exp.description}`).join('\n')}` :
+            `You are Mohamed Abdellatif Ayadi, a Computer Science student and software developer. Answer all questions professionally and helpfully based on the given context. Respond in English.
+
+Context:
+Name: ${cvData.name}
+Title: ${cvData.title}
+Summary: ${cvData.summary}
+Skills: ${cvData.skills.map(skill => `${skill.category}: ${skill.items.join(', ')}`).join('\n')}
+Experience: ${cvData.experience.map(exp => `${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate}): ${exp.description}`).join('\n')}`;
+
+          const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+              'Content-Type': 'application/json',
             },
-            {
-              role: "user",
-              content: message
-            }
-          ],
-          max_tokens: 500,
-          temperature: 0.7,
-        }),
-      });
+            body: JSON.stringify({
+              model: "gpt-4o-mini",
+              messages: [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: message }
+              ],
+              max_tokens: 400,
+              temperature: 0.7,
+            }),
+          });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-
-        if (response.status === 429) {
-          throw new Error('Rate limit exceeded. Please wait a moment before trying again.');
-        } else if (response.status === 401) {
-          throw new Error('Invalid API key');
-        } else {
-          throw new Error(`OpenAI API error: ${response.statusText} - ${errorData.error?.message || 'Unknown error'}`);
+          if (response.ok) {
+            const data = await response.json();
+            aiResponse = data.choices[0]?.message?.content || '';
+            useOpenAI = true;
+          } else {
+            console.log('OpenAI API failed, using fallback');
+          }
+        } catch (error) {
+          console.log('OpenAI error, using fallback:', error.message);
         }
       }
 
-      const data = await response.json();
-      const aiResponse = data.choices[0]?.message?.content || (language === 'de' ? "Entschuldigung, ich konnte gerade keine Antwort generieren." : "I apologize, but I couldn't generate a response at the moment.");
+      // Use fallback if OpenAI failed
+      if (!useOpenAI || !aiResponse) {
+        aiResponse = generateSmartResponse(message, language);
+      }
 
       res.json({ response: aiResponse });
     } catch (error) {
