@@ -210,31 +210,78 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
               </div>
               Professional Experience
             </h3>
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
-              
-              <div className="space-y-8">
-                {cv.experience.map((exp, index) => (
-                  <div key={index} className="relative ml-10">
-                    {/* Timeline dot */}
-                    <div className="absolute -left-7 top-2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg"></div>
-                    
-                    <div className="bg-white rounded-xl p-6 shadow-md border border-slate-200 hover:shadow-lg transition-shadow">
-                      <div className="flex flex-wrap justify-between items-start mb-3">
+            
+            <div className="grid gap-8">
+              {cv.experience.map((exp, index) => (
+                <div key={index} className="relative">
+                  <div className="bg-gradient-to-br from-white to-slate-50 rounded-2xl border-2 border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    {/* Header Section */}
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
+                      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-2 lg:space-y-0">
                         <div>
-                          <h4 className="text-lg font-semibold text-slate-900">{exp.position}</h4>
-                          <p className="text-blue-600 font-medium">{exp.company}</p>
+                          <h4 className="text-xl font-bold mb-1">{exp.position}</h4>
+                          <p className="text-blue-100 font-medium text-lg">{exp.company}</p>
                         </div>
-                        <span className="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                          {exp.startDate} - {exp.endDate || 'Present'}
-                        </span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <span className="text-blue-100 font-medium bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
+                            {exp.startDate} - {exp.endDate === 'Present' ? 'Present' : exp.endDate}
+                          </span>
+                        </div>
                       </div>
-                      <p className="text-slate-600 leading-relaxed">{exp.description}</p>
+                    </div>
+                    
+                    {/* Content Section */}
+                    <div className="p-6">
+                      <div className="prose max-w-none">
+                        {exp.description.split('\n').map((paragraph, pIndex) => (
+                          paragraph.trim() && (
+                            <div key={pIndex} className="mb-3 last:mb-0">
+                              {paragraph.trim().startsWith('•') ? (
+                                <div className="flex items-start space-x-3">
+                                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                                  <p className="text-slate-700 leading-relaxed">{paragraph.replace('•', '').trim()}</p>
+                                </div>
+                              ) : (
+                                <p className="text-slate-700 leading-relaxed">{paragraph}</p>
+                              )}
+                            </div>
+                          )
+                        ))}
+                      </div>
+                      
+                      {/* Skills/Technologies used (if available) */}
+                      {index === 0 && (
+                        <div className="mt-4 pt-4 border-t border-slate-200">
+                          <div className="flex flex-wrap gap-2">
+                            {['SAP', 'SAP S/4HANA', 'CRM Systems', 'B2B/B2C Sales'].map((tech, techIndex) => (
+                              <span key={techIndex} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {index === 1 && (
+                        <div className="mt-4 pt-4 border-t border-slate-200">
+                          <div className="flex flex-wrap gap-2">
+                            {['Java Programming', 'Object-Oriented Programming', 'Teaching', 'Mentoring'].map((tech, techIndex) => (
+                              <span key={techIndex} className="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full font-medium">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
           
