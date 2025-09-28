@@ -5,12 +5,12 @@ const PublicationsSection = () => {
   const { language, t } = useLanguage();
 
   const publication = {
-    title: "Design and Implementation of an Autonomous Mobile Robot for Slug Detection and Safe Collection to Prevent Agricultural Damage",
+    title: "Enhancing Time Series Forecasting with On-the-Fly Data Augmentation",
     journal: "International Journal of Mechanical Engineering and Robotics Research (IJMERR), Presented at IEEE ICMRE 2024, Milan, Italy.",
     date: "February 28, 2024",
-    description: "This research presents a novel, eco-friendly robotic solution to address agricultural slug damage. The robot, developed using Robot Operating System (ROS) and integrated with YOLOv5, autonomously detects and collects slugs without harming them.",
-    tags: ["ROS", "YOLOv5", "Python", "Navigation", "Object Detection"],
-    pdfUrl: "/publications/slug-detection-robot.pdf"
+    description: "Time series forecasting is pivotal across domains such as banking, healthcare, and energy systems, where accurate predictions enable proactive decision-making and optimal resource allocation. This work investigates the efficacy of innovative preprocessing techniques and deep learning architectures in enhancing the predictive performance of time series models.",
+    tags: ["Time Series Forecasting", "Deep Learning", "Data Augmentation", "Machine Learning", "Python"],
+    pdfUrl: "/publications/time-series-forecasting.pdf"
   };
 
   return (
