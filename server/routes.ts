@@ -105,13 +105,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Simple in-memory rate limiting
+  const userRequestCounts = new Map();
+  const RATE_LIMIT_WINDOW = 60000; // 1 minute
+  const RATE_LIMIT_MAX_REQUESTS = 5; // 5 requests per minute
+
   // Chat API
   app.post("/api/chat", async (req, res) => {
     const { message, language = 'en' } = req.body;
+    const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
 
     try {
-      if (!message) {
-        return res.status(400).json({ error: "Message is required" });
+      // Rate limiting
+      const now = Date.now();
+      const userKey = `${clientIP}_${language}`;
+      
+      if (!userRequestCounts.has(userKey)) {
+        userRequestCounts.set(userKey, { count: 0, resetTime: now + RATE_LIMIT_WINDOW });
+      }
+      
+      const userLimits = userRequestCounts.get(userKey);
+      
+      if (now > userLimits.resetTime) {
+        userLimits.count = 0;
+        userLimits.resetTime = now + RATE_LIMIT_WINDOW;
+      }
+      
+      if (userLimits.count >= RATE_LIMIT_MAX_REQUESTS) {
+        const waitTime = Math.ceil((userLimits.resetTime - now) / 1000);
+        return res.status(429).json({ 
+          error: language === 'de' ? 
+            `Zu viele Anfragen. Bitte warten Sie ${waitTime} Sekunden.` : 
+            `Too many requests. Please wait ${waitTime} seconds.`,
+          waitTime: waitTime
+        });
+      }
+      
+      userLimits.count++;
+
+      if (!message || message.trim().length === 0) {
+        return res.status(400).json({ 
+          error: language === 'de' ? "Nachricht ist erforderlich" : "Message is required" 
+        });
+      }
+
+      // Check if OpenAI API key is configured
+      if (!process.env.OPENAI_API_KEY) {
+        const fallbackResponse = language === 'de' ? 
+          "Entschuldigung, der Chat-Service ist derzeit nicht verfügbar. Bitte nutzen Sie das Kontaktformular oder fragen Sie mich über LinkedIn." :
+          "Sorry, the chat service is currently unavailable. Please use the contact form or reach out to me on LinkedIn.";
+        return res.json({ response: fallbackResponse });
       }
 
       // Get CV data in the specified language
@@ -213,8 +256,8 @@ Context: ${context}`;
       let errorMessage;
       if (error.message.includes('Rate limit')) {
         errorMessage = reqLanguage === 'de' ? 
-          "Zu viele Anfragen. Bitte warten Sie einen Moment, bevor Sie es erneut versuchen." : 
-          "Too many requests. Please wait a moment before trying again.";
+          "Zu viele Anfragen an OpenAI. Bitte warten Sie einen Moment und versuchen Sie es erneut." : 
+          "Too many requests to OpenAI. Please wait a moment and try again.";
       } else if (error.message.includes('Invalid API key')) {
         errorMessage = reqLanguage === 'de' ? 
           "API-Konfigurationsfehler. Bitte kontaktieren Sie den Administrator." : 

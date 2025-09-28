@@ -95,6 +95,14 @@ const ChatPage = () => {
       const data = await response.json();
 
       if (!response.ok) {
+        // Handle rate limiting specifically
+        if (response.status === 429) {
+          const waitTime = data.waitTime || 60;
+          return language === 'de' ? 
+            `Sie haben zu viele Anfragen gestellt. Bitte warten Sie ${waitTime} Sekunden und versuchen Sie es erneut.` :
+            `You've made too many requests. Please wait ${waitTime} seconds and try again.`;
+        }
+        
         // Return the specific error message from the server
         return data.error || (language === 'de' ? 
           "Entschuldigung, es gab ein Problem mit der Anfrage." : 
@@ -288,9 +296,13 @@ const ChatPage = () => {
                   onClick={handleSendMessage}
                   size="icon"
                   aria-label="Send message"
-                  disabled={input.trim() === ""}
+                  disabled={input.trim() === "" || isTyping}
                 >
-                  <SendIcon className="h-5 w-5" />
+                  {isTyping ? (
+                    <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <SendIcon className="h-5 w-5" />
+                  )}
                 </Button>
               </div>
             </div>
@@ -306,50 +318,50 @@ const ChatPage = () => {
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
-                onClick={async () => {
+                onClick={() => {
                   setInput(t("chat.questions.education"));
-                  await handleSendMessage();
                 }}
+                disabled={isTyping}
               >
                 {t("chat.questions.education")}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
-                onClick={async () => {
+                onClick={() => {
                   setInput(t("chat.questions.programming"));
-                  await handleSendMessage();
                 }}
+                disabled={isTyping}
               >
                 {t("chat.questions.programming")}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
-                onClick={async () => {
+                onClick={() => {
                   setInput(t("chat.questions.experience"));
-                  await handleSendMessage();
                 }}
+                disabled={isTyping}
               >
                 {t("chat.questions.experience")}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
-                onClick={async () => {
+                onClick={() => {
                   setInput(t("chat.questions.blog"));
-                  await handleSendMessage();
                 }}
+                disabled={isTyping}
               >
                 {t("chat.questions.blog")}
               </Button>
               <Button
                 variant="outline"
                 className="w-full justify-start text-left h-auto py-3"
-                onClick={async () => {
+                onClick={() => {
                   setInput(t("chat.questions.languages"));
-                  await handleSendMessage();
                 }}
+                disabled={isTyping}
               >
                 {t("chat.questions.languages")}
               </Button>
