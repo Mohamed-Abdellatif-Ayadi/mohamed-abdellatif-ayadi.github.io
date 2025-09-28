@@ -42,19 +42,37 @@ const ExperienceSection = () => {
           ) : cv ? (
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 hidden lg:block"></div>
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500 to-slate-500 hidden lg:block"></div>
               
               <div className="space-y-12">
-                {cv.experience.map((exp, index) => (
+                {cv.experience.map((exp, index) => {
+                  // Define color scheme for each experience
+                  const colorSchemes = [
+                    { 
+                      dot: 'bg-emerald-600', 
+                      badge: 'from-emerald-600 to-emerald-700',
+                      header: 'from-emerald-600 to-emerald-700',
+                      badgeText: 'text-emerald-100'
+                    },
+                    { 
+                      dot: 'bg-indigo-600', 
+                      badge: 'from-indigo-600 to-indigo-700',
+                      header: 'from-indigo-600 to-indigo-700',
+                      badgeText: 'text-indigo-100'
+                    }
+                  ];
+                  const colors = colorSchemes[index % colorSchemes.length];
+                  
+                  return (
                   <div key={index} className="relative">
                     {/* Timeline dot */}
-                    <div className="absolute left-6 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg hidden lg:block z-10"></div>
+                    <div className={`absolute left-6 w-4 h-4 ${colors.dot} rounded-full border-4 border-white shadow-lg hidden lg:block z-10`}></div>
                     
                     <div className="flex flex-col lg:flex-row gap-8 lg:pl-20">
                       {/* Date and Location */}
                       <div className="lg:w-1/3 lg:text-right">
                         <div className="bg-white rounded-2xl p-6 shadow-lg border border-slate-200">
-                          <div className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-3">
+                          <div className={`inline-flex items-center bg-gradient-to-r ${colors.badge} text-white px-4 py-2 rounded-full text-sm font-semibold mb-3`}>
                             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
@@ -71,9 +89,9 @@ const ExperienceSection = () => {
                       <div className="lg:w-2/3">
                         <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                           {/* Header */}
-                          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
+                          <div className={`bg-gradient-to-r ${colors.header} text-white p-6`}>
                             <h3 className="text-xl font-bold mb-2">{exp.position}</h3>
-                            <p className="text-blue-100 font-medium">{exp.company}</p>
+                            <p className={`${colors.badgeText} font-medium`}>{exp.company}</p>
                           </div>
                           
                           {/* Content */}
@@ -93,7 +111,7 @@ const ExperienceSection = () => {
                                       <div key={pIndex} className="mb-3 last:mb-0">
                                         {paragraph.trim().startsWith('•') ? (
                                           <div className="flex items-start space-x-3">
-                                            <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                                            <div className={`w-2 h-2 ${colors.dot} rounded-full mt-2 flex-shrink-0`}></div>
                                             <p className="text-slate-700 leading-relaxed">{paragraph.replace('•', '').trim()}</p>
                                           </div>
                                         ) : (
@@ -110,16 +128,16 @@ const ExperienceSection = () => {
                             <div className="flex flex-wrap gap-2 mt-4">
                               {exp.company === "Iperceramica Deutschland GmbH" && (
                                 <>
-                                  <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium">SAP</span>
-                                  <span className="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium">Sales</span>
-                                  <span className="px-3 py-1 bg-purple-100 text-purple-800 text-xs rounded-full font-medium">CRM</span>
+                                  <span className="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs rounded-full font-medium">SAP</span>
+                                  <span className="px-3 py-1 bg-teal-100 text-teal-800 text-xs rounded-full font-medium">Sales</span>
+                                  <span className="px-3 py-1 bg-cyan-100 text-cyan-800 text-xs rounded-full font-medium">CRM</span>
                                 </>
                               )}
                               {exp.company === "Technical University of Dortmund" && (
                                 <>
-                                  <span className="px-3 py-1 bg-orange-100 text-orange-800 text-xs rounded-full font-medium">Java</span>
-                                  <span className="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full font-medium">Teaching</span>
-                                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full font-medium">Algorithms</span>
+                                  <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full font-medium">Java</span>
+                                  <span className="px-3 py-1 bg-purple-100 text-purple-800 text-xs rounded-full font-medium">Teaching</span>
+                                  <span className="px-3 py-1 bg-violet-100 text-violet-800 text-xs rounded-full font-medium">Algorithms</span>
                                 </>
                               )}
                             </div>
@@ -128,7 +146,8 @@ const ExperienceSection = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ) : (
