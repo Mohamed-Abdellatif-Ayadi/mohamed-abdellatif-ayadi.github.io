@@ -185,11 +185,14 @@ const Publications = () => {
                         size="sm"
                         className="bg-green-600 hover:bg-green-700 text-white"
                         onClick={() => {
-                          window.open(
-                            publication.pdfUrl,
-                            "_blank",
-                            "noopener,noreferrer",
-                          );
+                          const link = document.createElement('a');
+                          link.href = publication.pdfUrl;
+                          link.target = '_blank';
+                          link.rel = 'noopener noreferrer';
+                          link.download = 'Enhancing-Time-Series-Forecasting.pdf';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
                         }}
                       >
                         <FileText className="w-4 h-4 mr-2" />

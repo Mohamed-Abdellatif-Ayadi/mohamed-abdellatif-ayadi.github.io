@@ -61,7 +61,16 @@ const PublicationsSection = () => {
 
                 <div className="flex flex-wrap gap-3">
                   <button
-                    onClick={() => window.open(publication.pdfUrl, '_blank', 'noopener,noreferrer')}
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      link.href = publication.pdfUrl;
+                      link.target = '_blank';
+                      link.rel = 'noopener noreferrer';
+                      link.download = 'Enhancing-Time-Series-Forecasting.pdf';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
                     className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-all"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
