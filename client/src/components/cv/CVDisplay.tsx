@@ -1,3 +1,4 @@
+
 import { CV as OriginalCV } from "@shared/schema";
 
 // Define interfaces to match the actual API response structure
@@ -63,60 +64,91 @@ type CVDisplayProps = {
 
 const CVDisplay = ({ cv }: CVDisplayProps) => {
   return (
-    <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-      <div className="md:flex">
-        <div className="md:flex-shrink-0 bg-primary-700 md:w-48 flex flex-col items-center justify-center p-6 text-white">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white mb-4">
-            <img 
-              src={cv.photoUrl} 
-              alt={cv.name} 
-              className="w-full h-full object-cover" 
-            />
-          </div>
-          <h3 className="text-xl font-bold">{cv.name}</h3>
-          <p className="text-primary-200">{cv.title}</p>
-          
-          <div className="mt-6 w-full">
-            <h4 className="font-semibold mb-2 text-white/90">Contact</h4>
-            <div className="space-y-2 text-sm">
-              <a href={`mailto:${cv.contact?.email}`} className="flex items-center text-white/80 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                {cv.contact?.email}
-              </a>
-              <div className="flex items-center text-white/80">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                {cv.contact?.phone}
+    <div className="max-w-5xl mx-auto bg-white shadow-2xl overflow-hidden">
+      {/* Modern Header Section */}
+      <div className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='9' cy='9' r='2'/%3E%3Ccircle cx='49' cy='49' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
+        </div>
+        
+        <div className="relative z-10 p-8 md:p-12">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Photo with modern styling */}
+            <div className="relative group">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl backdrop-blur-sm group-hover:scale-105 transition-transform duration-300">
+                <img 
+                  src={cv.photoUrl} 
+                  alt={cv.name} 
+                  className="w-full h-full object-cover" 
+                />
               </div>
-              <div className="flex items-center text-white/80">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                {cv.contact?.location}
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-3 border-white"></div>
+            </div>
+            
+            {/* Name and Title */}
+            <div className="flex-1 text-center md:text-left">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                {cv.name}
+              </h1>
+              <p className="text-xl md:text-2xl text-blue-200 font-light mb-4">{cv.title}</p>
+              
+              {/* Contact Info with Icons */}
+              <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
+                <a href={`mailto:${cv.contact?.email}`} className="flex items-center text-white/80 hover:text-white transition-colors group">
+                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center mr-2 group-hover:bg-white/20 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  {cv.contact?.email}
+                </a>
+                <div className="flex items-center text-white/80">
+                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  {cv.contact?.phone}
+                </div>
+                <div className="flex items-center text-white/80">
+                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  {cv.contact?.location}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        
-        <div className="p-8">
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Summary</h3>
-            <p className="text-slate-600">{cv.summary}</p>
-          </div>
-          
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Skills</h3>
+      </div>
+
+      {/* Main Content Grid */}
+      <div className="grid md:grid-cols-3 gap-0">
+        {/* Left Sidebar */}
+        <div className="md:col-span-1 bg-gradient-to-b from-slate-50 to-slate-100 p-8 border-r border-slate-200">
+          {/* Skills Section */}
+          <div className="mb-8">
+            <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
+              <div className="w-6 h-6 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              Skills
+            </h3>
             <div className="space-y-4">
               {cv.skills.map((skillCategory, catIndex) => (
-                <div key={catIndex}>
-                  <h4 className="text-base font-medium text-slate-800 mb-2">{skillCategory.category}</h4>
+                <div key={catIndex} className="bg-white rounded-xl p-4 shadow-sm border border-slate-200">
+                  <h4 className="text-sm font-semibold text-slate-800 mb-3 text-center">{skillCategory.category}</h4>
                   <div className="flex flex-wrap gap-2">
                     {skillCategory.items.map((item: string, itemIndex: number) => (
-                      <span key={`${catIndex}-${itemIndex}`} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm">
+                      <span key={`${catIndex}-${itemIndex}`} className="px-2 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs font-medium border border-blue-200">
                         {item}
                       </span>
                     ))}
@@ -125,68 +157,139 @@ const CVDisplay = ({ cv }: CVDisplayProps) => {
               ))}
             </div>
           </div>
-          
-          <div>
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Experience</h3>
-            <div className="space-y-4">
-              {cv.experience.map((exp, index) => (
-                <div key={index} className="flex">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-3 h-3 rounded-full bg-primary-700"></div>
-                    {index < cv.experience.length - 1 && (
-                      <div className="w-0.5 h-full bg-slate-200 ml-1.5"></div>
-                    )}
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="text-base font-medium text-slate-900">{exp.position} at {exp.company}</h4>
-                    <p className="text-sm text-slate-500">{exp.startDate} - {exp.endDate || 'Present'}</p>
-                    <p className="text-slate-600 mt-1">{exp.description}</p>
-                  </div>
+
+          {/* Languages Section */}
+          {cv.languages && cv.languages.length > 0 && (
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                <div className="w-6 h-6 bg-green-600 rounded-lg flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                  </svg>
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="mt-6">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">Education</h3>
-            <div className="space-y-4">
-              {cv.education.map((edu, index) => (
-                <div key={index} className="flex">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-3 h-3 rounded-full bg-primary-700"></div>
-                    {index < cv.education.length - 1 && (
-                      <div className="w-0.5 h-full bg-slate-200 ml-1.5"></div>
-                    )}
+                Languages
+              </h3>
+              <div className="space-y-3">
+                {cv.languages.map((language, index) => (
+                  <div key={index} className="bg-white rounded-lg p-3 shadow-sm border border-slate-200">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-slate-700">{language.language || language.name}</span>
+                      <span className="text-sm text-slate-600 bg-slate-100 px-2 py-1 rounded-full">{language.proficiency}</span>
+                    </div>
                   </div>
-                  <div className="ml-4">
-                    <h4 className="text-base font-medium text-slate-900">{edu.degree}</h4>
-                    <p className="text-sm text-slate-700">{edu.institution}, {edu.location}</p>
-                    <p className="text-sm text-slate-500">{edu.startDate} - {edu.endDate}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {cv.certifications && cv.certifications.length > 0 && (
-            <div className="mt-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Certifications</h3>
-              <ul className="list-disc list-inside space-y-1 text-slate-600">
-                {cv.certifications.map((certification, index) => (
-                  <li key={index}>{certification.name} ({certification.year || certification.date})</li>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
+        </div>
 
-          {cv.languages && cv.languages.length > 0 && (
-            <div className="mt-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Languages</h3>
-              <div className="flex flex-wrap gap-4">
-                {cv.languages.map((language, index) => (
-                  <div key={index} className="flex items-center">
-                    <span className="font-medium text-slate-700">{language.language || language.name}:</span>
-                    <span className="ml-2 text-slate-600">{language.proficiency}</span>
+        {/* Right Content */}
+        <div className="md:col-span-2 p-8">
+          {/* Summary Section */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center">
+              <div className="w-8 h-8 bg-purple-600 rounded-xl flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              Professional Summary
+            </h3>
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200">
+              <p className="text-slate-700 leading-relaxed">{cv.summary}</p>
+            </div>
+          </div>
+          
+          {/* Experience Section */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
+              <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0h2.586a1 1 0 01.707.293L21 8" />
+                </svg>
+              </div>
+              Professional Experience
+            </h3>
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+              
+              <div className="space-y-8">
+                {cv.experience.map((exp, index) => (
+                  <div key={index} className="relative ml-10">
+                    {/* Timeline dot */}
+                    <div className="absolute -left-7 top-2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg"></div>
+                    
+                    <div className="bg-white rounded-xl p-6 shadow-md border border-slate-200 hover:shadow-lg transition-shadow">
+                      <div className="flex flex-wrap justify-between items-start mb-3">
+                        <div>
+                          <h4 className="text-lg font-semibold text-slate-900">{exp.position}</h4>
+                          <p className="text-blue-600 font-medium">{exp.company}</p>
+                        </div>
+                        <span className="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
+                          {exp.startDate} - {exp.endDate || 'Present'}
+                        </span>
+                      </div>
+                      <p className="text-slate-600 leading-relaxed">{exp.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Education Section */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
+              <div className="w-8 h-8 bg-emerald-600 rounded-xl flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                </svg>
+              </div>
+              Education
+            </h3>
+            <div className="space-y-4">
+              {cv.education.map((edu, index) => (
+                <div key={index} className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-6 border border-emerald-200">
+                  <div className="flex flex-wrap justify-between items-start mb-2">
+                    <div>
+                      <h4 className="text-lg font-semibold text-slate-900">{edu.degree}</h4>
+                      <p className="text-emerald-700 font-medium">{edu.institution}</p>
+                      {edu.location && <p className="text-sm text-slate-600">{edu.location}</p>}
+                    </div>
+                    <span className="text-sm text-slate-500 bg-white px-3 py-1 rounded-full">
+                      {edu.startDate} - {edu.endDate}
+                    </span>
+                  </div>
+                  {edu.description && (
+                    <p className="text-slate-600 text-sm mt-2">{edu.description}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Certifications */}
+          {cv.certifications && cv.certifications.length > 0 && (
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center">
+                <div className="w-8 h-8 bg-amber-600 rounded-xl flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+                Certifications
+              </h3>
+              <div className="grid gap-3">
+                {cv.certifications.map((certification, index) => (
+                  <div key={index} className="bg-amber-50 rounded-lg p-4 border border-amber-200">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium text-slate-900">{certification.name}</span>
+                      <span className="text-sm text-amber-700 bg-amber-100 px-2 py-1 rounded-full">
+                        {certification.year || certification.date}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
