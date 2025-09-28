@@ -25,10 +25,11 @@ const Publications = () => {
   const [publications] = useState<Publication[]>([
     {
       id: 1,
-      title: "Enhancing Time Series Forecasting with On-the-Fly Data Augmentation",
+      title:
+        "Enhancing Time Series Forecasting with On-the-Fly Data Augmentation",
       journal:
-        "International Journal of Mechanical Engineering and Robotics Research (IJMERR), Presented at IEEE ICMRE 2024, Milan, Italy.",
-      date: "February 28, 2024",
+        "Lamarr Institute for Machine Learning and Artificial Intelligence, Dortmund",
+      date: "Mars 2024",
       description:
         "Time series forecasting is pivotal across domains such as banking, healthcare, and energy systems, where accurate predictions enable proactive decision-making and optimal resource allocation. However, forecasting remains challenging due to complex temporal dependencies, seasonal patterns, and inherent uncertainties in data, even with advancements in machine learning. This work investigates the efficacy of innovative preprocessing techniques and deep learning architectures in enhancing the predictive performance of time series models. Through comprehensive experiments across diverse domains, we demonstrate how these methods address key forecasting challenges, offering robust and scalable solutions applicable to real-world scenarios.",
       tags: [
@@ -184,7 +185,11 @@ const Publications = () => {
                         size="sm"
                         className="bg-green-600 hover:bg-green-700 text-white"
                         onClick={() => {
-                          window.open(publication.pdfUrl, '_blank', 'noopener,noreferrer');
+                          window.open(
+                            publication.pdfUrl,
+                            "_blank",
+                            "noopener,noreferrer",
+                          );
                         }}
                       >
                         <FileText className="w-4 h-4 mr-2" />
