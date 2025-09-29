@@ -1,48 +1,39 @@
-name: Deploy to GitHub Pages
+
+name: Deploy frontend to GitHub Pages
 on:
   push:
-    branches: [ "main" ]
-
+    branches: [ main ]
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: "pages"
-  cancel-in-progress: true
-
-env:
-  FRONTEND_DIR: client
-
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      - name: Install deps
-        working-directory: ${{ env.FRONTEND_DIR }}
-        run: npm ci
-
-      - name: Build
-        working-directory: ${{ env.FRONTEND_DIR }}
-        run: npm run build
-
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      - name: Install client dependencies
+        run: |
+          cd client
+          npm ci
+      - name: Build frontend
+        run: |
+          cd client
+          npm run build
       - name: SPA 404 fallback
-        run: cp ${{ env.FRONTEND_DIR }}/dist/index.html ${{ env.FRONTEND_DIR }}/dist/404.html || true
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        run: cp "client/dist/index.html" "client/dist/404.html"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.FRONTEND_DIR }}/dist
-
+          path: client/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -50,6 +41,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
