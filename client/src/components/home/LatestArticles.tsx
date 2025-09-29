@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
+import { useArticles } from "@/hooks/useStaticAPI";
 import ArticleCard from "../blog/ArticleCard";
 import { Button } from "@/components/ui/button";
 import { Article } from "@shared/schema";
@@ -8,9 +8,8 @@ import { useLanguage } from "@/lib/languageContext";
 
 const LatestArticles = () => {
   const { t, language } = useLanguage();
-  const { data: articles, isLoading } = useQuery<Article[]>({
-    queryKey: ["/api/articles?limit=3", language],
-  });
+  const { data: allArticles, isLoading } = useArticles();
+  const articles = allArticles?.slice(0, 3) || [];
 
   return (
     <section className="py-16 bg-white">
@@ -21,7 +20,7 @@ const LatestArticles = () => {
             {t('home.latestArticles.subtitle')}
           </p>
         </div>
-        
+
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(3)].map((_, i) => (
@@ -48,7 +47,7 @@ const LatestArticles = () => {
             ))}
           </div>
         )}
-        
+
         <div className="mt-12 text-center">
           <Link href="/blog">
             <Button size="lg" className="inline-flex items-center">

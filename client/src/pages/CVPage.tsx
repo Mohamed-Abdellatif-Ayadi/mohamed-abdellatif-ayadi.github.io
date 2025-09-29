@@ -9,20 +9,14 @@ import { useLanguage } from "@/lib/languageContext";
 // Import ExtendedCV type from CVDisplay for API data compatibility
 import type { ExtendedCV } from "@/components/cv/CVDisplay";
 
+// Import the new hook for static data fetching
+import { useCV } from "@/hooks/useStaticAPI";
+
 const CVPage = () => {
   const { t, language } = useLanguage();
-  
-  // Use the ExtendedCV type to match the API response structure
-  const { data: cv, isLoading } = useQuery({
-    queryKey: ["/api/cv", language],
-    queryFn: async () => {
-      const response = await fetch(`/api/cv?language=${language}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch CV data');
-      }
-      return response.json();
-    }
-  });
+
+  // Use the new useCV hook which handles both static and API data
+  const { data: cv, isLoading, error } = useCV();
 
   const handlePrint = () => {
     window.print();
@@ -93,14 +87,14 @@ const CVPage = () => {
                   <Skeleton className="h-6 w-32 mx-auto mb-2" />
                   <Skeleton className="h-5 w-24 mx-auto" />
                 </div>
-                
+
                 <div className="p-8 w-full">
                   <div className="mb-6">
                     <Skeleton className="h-6 w-24 mb-2" />
                     <Skeleton className="h-4 w-full" />
                     <Skeleton className="h-4 w-5/6 mt-2" />
                   </div>
-                  
+
                   <div className="mb-6">
                     <Skeleton className="h-6 w-20 mb-2" />
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -109,7 +103,7 @@ const CVPage = () => {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div className="mb-6">
                     <Skeleton className="h-6 w-28 mb-4" />
                     <div className="space-y-6">
@@ -125,7 +119,7 @@ const CVPage = () => {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div>
                     <Skeleton className="h-6 w-28 mb-4" />
                     <div className="space-y-6">
@@ -148,9 +142,14 @@ const CVPage = () => {
             <div className="max-w-4xl mx-auto cv-container">
               <CVDisplay cv={cv} />
             </div>
-          ) : (
+          ) : error ? (
             <div className="text-center">
               <p>Failed to load CV data. Please try again later.</p>
+              <pre>{error.message}</pre>
+            </div>
+          ) : (
+            <div className="text-center">
+              <p>No CV data available.</p>
             </div>
           )}
         </div>

@@ -28,6 +28,11 @@ jobs:
         run: |
           cd client
           npm run build
+      - name: Copy images to dist
+        run: |
+          mkdir -p client/dist/images
+          cp -r client/public/images/* client/dist/images/ || true
+          cp -r public/images/* client/dist/images/ || true
       - name: SPA 404 fallback
         run: cp "client/dist/index.html" "client/dist/404.html"
       - uses: actions/configure-pages@v5
