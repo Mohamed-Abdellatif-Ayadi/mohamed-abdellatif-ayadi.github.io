@@ -28,15 +28,30 @@ jobs:
         run: |
           cd client
           npm run build
-      - name: Copy all static assets
+      - name: List directories for debugging
         run: |
-          # Copy client/public contents to dist (Vite should handle this but ensure it's done)
-          if [ -d "client/public" ]; then
-            cp -r client/public/* client/dist/ 2>/dev/null || true
+          echo "=== Directory structure after build ==="
+          ls -la client/
+          if [ -d "client/dist" ]; then
+            echo "=== Contents of client/dist ==="
+            ls -la client/dist/
           fi
-          # Copy root public contents to dist  
+          if [ -d "client/public" ]; then
+            echo "=== Contents of client/public ==="
+            ls -la client/public/
+          fi
           if [ -d "public" ]; then
-            cp -r public/* client/dist/ 2>/dev/null || true
+            echo "=== Contents of root public ==="
+            ls -la public/
+          fi
+      - name: Copy additional assets
+        run: |
+          # Ensure dist directory exists
+          mkdir -p client/dist
+          # Copy root public assets if they exist
+          if [ -d "public" ] && [ "$(ls -A public)" ]; then
+            echo "Copying from root public directory..."
+            cp -r public/* client/dist/ || echo "No files to copy from public/"
           fi
       - name: SPA 404 fallback
         run: cp "client/dist/index.html" "client/dist/404.html"
