@@ -28,27 +28,15 @@ jobs:
         run: |
           cd client
           npm run build
-      - name: Setup dist directory structure
+      - name: Copy all static assets
         run: |
-          mkdir -p client/dist/images
-          mkdir -p client/dist/publications
-      - name: Copy all assets to dist
-        run: |
-          # Copy images from client/public/images
-          if [ -d "client/public/images" ]; then
-            cp -r client/public/images/* client/dist/images/
+          # Copy client/public contents to dist (Vite should handle this but ensure it's done)
+          if [ -d "client/public" ]; then
+            cp -r client/public/* client/dist/ 2>/dev/null || true
           fi
-          # Copy images from root public/images  
-          if [ -d "public/images" ]; then
-            cp -r public/images/* client/dist/images/
-          fi
-          # Copy publications
-          if [ -d "public/publications" ]; then
-            cp -r public/publications/* client/dist/publications/
-          fi
-          # Copy PDF files from client/public
-          if [ -f "client/public/Lebenslauf-Ayadi.pdf" ]; then
-            cp client/public/*.pdf client/dist/
+          # Copy root public contents to dist  
+          if [ -d "public" ]; then
+            cp -r public/* client/dist/ 2>/dev/null || true
           fi
       - name: SPA 404 fallback
         run: cp "client/dist/index.html" "client/dist/404.html"

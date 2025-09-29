@@ -9,6 +9,11 @@ export default defineConfig({
     outDir: "dist",
     assetsDir: "assets",
     copyPublicDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
   plugins: [
     react(),
