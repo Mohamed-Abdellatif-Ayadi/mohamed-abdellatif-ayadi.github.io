@@ -28,11 +28,28 @@ jobs:
         run: |
           cd client
           npm run build
-      - name: Copy images to dist
+      - name: Setup dist directory structure
         run: |
           mkdir -p client/dist/images
-          cp -r client/public/images/* client/dist/images/ || true
-          cp -r public/images/* client/dist/images/ || true
+          mkdir -p client/dist/publications
+      - name: Copy all assets to dist
+        run: |
+          # Copy images from client/public/images
+          if [ -d "client/public/images" ]; then
+            cp -r client/public/images/* client/dist/images/
+          fi
+          # Copy images from root public/images  
+          if [ -d "public/images" ]; then
+            cp -r public/images/* client/dist/images/
+          fi
+          # Copy publications
+          if [ -d "public/publications" ]; then
+            cp -r public/publications/* client/dist/publications/
+          fi
+          # Copy PDF files from client/public
+          if [ -f "client/public/Lebenslauf-Ayadi.pdf" ]; then
+            cp client/public/*.pdf client/dist/
+          fi
       - name: SPA 404 fallback
         run: cp "client/dist/index.html" "client/dist/404.html"
       - uses: actions/configure-pages@v5

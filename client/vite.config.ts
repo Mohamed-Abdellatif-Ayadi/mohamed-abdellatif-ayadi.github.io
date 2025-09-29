@@ -5,6 +5,11 @@ import path from "path";
 
 export default defineConfig({
   base: "./",
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+    copyPublicDir: true,
+  },
   plugins: [
     react(),
     themePlugin(),

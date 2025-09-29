@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { staticCV, staticArticles } from '../data/staticData';
 
-const isGitHubPages = window.location.hostname.includes('github.io');
+const isGitHubPages = window.location.hostname.includes('github.io') || window.location.hostname === 'mohamed-abdellatif-ayadi.github.io';
 
 export function useCV() {
   const [cv, setCv] = useState(null);
