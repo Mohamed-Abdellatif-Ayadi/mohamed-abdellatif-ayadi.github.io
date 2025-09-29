@@ -7,6 +7,7 @@ export default defineConfig({
   base: "./",
   build: {
     outDir: "dist",
+    emptyOutDir: true,
     assetsDir: "assets",
     copyPublicDir: true,
     rollupOptions: {
@@ -24,10 +25,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
       "@shared": path.resolve(__dirname, "..", "shared"),
     },
-  },
-  build: {
-    outDir: "dist",
-    emptyOutDir: true,
-    assetsDir: "assets",
   },
 });
