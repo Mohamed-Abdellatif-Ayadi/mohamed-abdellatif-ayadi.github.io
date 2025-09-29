@@ -1,3 +1,114 @@
+<<<<<<< HEAD
+{
+  "name": "Default",
+  "tokens": {
+    "colors": {
+      "background": "0 0% 100%",
+      "foreground": "222.2 84% 4.9%",
+      "primary": "222.2 47.4% 11.2%",
+      "primary-foreground": "210 40% 98%",
+      "secondary": "210 40% 96.1%",
+      "secondary-foreground": "222.2 47.4% 11.2%"
+=======
+<<<<<<< HEAD
+Last login: Mon Apr 21 16:20:52 on ttys000
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % cal
+     April 2025       
+Su Mo Tu We Th Fr Sa  
+       1  2  3  4  5  
+ 6  7  8  9 10 11 12  
+13 14 15 16 17 18 19  
+20 21 22 23 24 25 26  
+27 28 29 30           
+                      
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % wc
+wc asba
+
+^C
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % find capture
+find: capture: No such file or directory
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % date
+Sun Apr 27 17:31:39 CEST 2025
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % sort
+^C
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % 
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % wall
+'
+^C
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % $ gcc -Wall -o test test.c
+zsh: command not found: $
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % ls
+Applications
+CPlusPlusProjects
+Celsius
+Creative Cloud Files Personal Account Mayedi499@gmail.com 0CA32FB55F5EC7FC0A495C88@AdobeID
+Desktop
+Documents
+Downloads
+GR PC im Kinderzimmer.pdf
+IdeaProjects
+Library
+Mohamed
+Mohamed Ayadi's Blog
+Movies
+Music
+Operator
+Pictures
+Praktikum 5 swt
+Praktikum 5 swt.zip
+Public
+Screenshots
+Sumofsquare 
+Untitled-1.cpp
+anaconda  info.pdf
+eclipse
+eclipse-workspace
+exercise-fixed-point-arithmetic-ES-CPSF
+get-pip.py
+go
+my website Ayadi Blogs 
+my-hugo-blog
+praktikum 4 sw
+praktikum 4 sw.zip
+praktikum 4 swt
+vhdl_praktikum
+website Ayadi.code-workspace
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % \b
+zsh: command not found: b
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % 
+  [Restauré 8 mai 2025 à 10:14:53 PM]
+Last login: Thu May  8 22:14:23 on console
+(base) mohamedayedi@MacBookPro ~ % 
+  [Restauré 29 sept. 2025 à 8:39:33 PM]
+Last login: Tue Aug  5 17:17:08 on console
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % 
+(base) mohamedayedi@MacBook-Pro-de-Mohamed ~ % mkdir -p client
+nano client/theme.json
+
+
+  UW PICO 5.09                File: client/theme.json                 Modified  
+
+>>>>>>> 987a1a0 (fix: use .cjs for postcss/tailwind configs under ESM)
+    },
+    "radius": { "sm": "0.25rem", "md": "0.5rem", "lg": "0.75rem", "xl": "1rem" }
+  }
+}
+<<<<<<< HEAD
+=======
+      
+      
+    
+      
+      
+      
+      
+     
+   
+ 
+
+^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Pg   ^K Cut Text  ^C Cur Pos   
+^X Exit      ^J Justify   ^W Where is  ^V Next Pg   ^U UnCut Text^T To Spell  
+=======
 {
   "name": "Default",
   "tokens": {
@@ -12,3 +123,5 @@
     "radius": { "sm": "0.25rem", "md": "0.5rem", "lg": "0.75rem", "xl": "1rem" }
   }
 }
+>>>>>>> 135a472 (add theme.json for vite plugin)
+>>>>>>> 987a1a0 (fix: use .cjs for postcss/tailwind configs under ESM)
