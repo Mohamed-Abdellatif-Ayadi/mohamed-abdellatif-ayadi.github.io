@@ -12,6 +12,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  FRONTEND_DIR: client
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,27 +25,23 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      # ⬇️ Build only the client
       - name: Install deps
-        working-directory: ./client
+        working-directory: ${{ env.FRONTEND_DIR }}
         run: npm ci
 
       - name: Build
-        working-directory: ./client
+        working-directory: ${{ env.FRONTEND_DIR }}
         run: npm run build
 
-      # ⬇️ SPA routing: make 404.html = index.html
-      - name: Copy 404 for SPA
-        working-directory: ./client/dist
-        run: cp index.html 404.html || true
+      - name: SPA 404 fallback
+        run: cp ${{ env.FRONTEND_DIR }}/dist/index.html ${{ env.FRONTEND_DIR }}/dist/404.html || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # change to ./client/build if you use CRA
-          path: ./client/dist
+          path: ${{ env.FRONTEND_DIR }}/dist
 
   deploy:
     needs: build
