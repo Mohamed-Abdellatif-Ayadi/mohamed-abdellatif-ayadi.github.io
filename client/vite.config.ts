@@ -4,7 +4,7 @@ import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
 import path from "path";
 
 export default defineConfig({
-  base: "/",
+  base: "./",
   plugins: [
     react(),
     themePlugin(),
